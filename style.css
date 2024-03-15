@@ -24,21 +24,23 @@ body {
   background-color: var(--color-background);
   font-size: var(--font-size-content);
   font-family: var(--font-family-content);
-  position: relative;
 }
 
 header {
-  min-height: 300px;
-  background-image: url("/images/elephants-279505_1280.jpg");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* filter: brightness(0.8); */
+    min-height: 300px;
+    background-image: url("/images/elephants-279505_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    /* filter: brightness(0.8); */
 }
 
 nav {
+    border: #d44613 1px solid;
   position: absolute;
   top: 0;
   left: 0;
@@ -48,7 +50,13 @@ nav {
   align-items: center;
   width: 100%;
   font-weight: bold;
-  margin: 1rem;
+padding:  1rem;
+
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(2.1px);
+/* -webkit-backdrop-filter: blur(2.1px); */
+border: 1px solid rgba(225, 192, 192, 0.31);
+
 }
 
 nav a {
@@ -57,14 +65,13 @@ nav a {
   text-decoration: none;
 }
 
-#logo{
-    border: 0.3rem solid var(--color-call-to-action);
-    border-radius: 50%;
-    background-color: var(--color-background);
-    color: var(--color-font);
-    font-family: var(--font-family-title);
-    font-size: var(--font-size-h2);
-
+#logo {
+  border: 0.3rem solid var(--color-call-to-action);
+  border-radius: 50%;
+  background-color: var(--color-background);
+  color: var(--color-font);
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-h2);
 }
 
 h1 {
@@ -85,10 +92,16 @@ footer p {
   margin: 0;
 }
 
+footer a {
+  color: var(--color-background);
+  text-decoration: none;
+}
+
 .contact {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   text-align: center;
   padding: 1rem;
 }
