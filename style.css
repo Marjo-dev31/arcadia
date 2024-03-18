@@ -57,10 +57,20 @@ nav {
 
 }
 
-nav a {
-  padding: 1rem;
+a {
+  padding: 0.8rem;
   color: var(--color-background);
   text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  /* text-decoration: var(--color-call-to-action) underline; */
+  /* background-color: var(--color-call-to-action); */
+  color: var(--color-call-to-action);
+  box-shadow: 0 0 5px var(--color-call-to-action);
+  border-radius: 20px;
+
 }
 
 #logo {
@@ -88,16 +98,12 @@ footer p {
   margin: 0;
 }
 
-footer a {
-  color: var(--color-background);
-  text-decoration: none;
-}
-
 .contact {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   text-align: center;
+  align-items: center;
   padding: 1rem;
 }
 
