@@ -27,7 +27,7 @@ body {
 }
 
 header {
-    min-height: 300px;
+    min-height: 400px;
     background-image: url("/images/elephants-279505_1280.jpg");
     background-size: cover;
     background-position: center;
@@ -35,27 +35,25 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
-
-    /* filter: brightness(0.8); */
 }
 
 nav {
-    border: #d44613 1px solid;
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  min-height: 50px;
+  display: grid;
+  grid-template-columns:  repeat(auto-fit, minmax(200px, 1fr));
   justify-items: center;
   align-items: center;
-  width: 100%;
+  gap: 1rem;
   font-weight: bold;
-padding:  1rem;
+  padding:  1rem;
+  background: rgba(0, 0, 0, 0.2);
+  /* -webkit-backdrop-filter: blur(2px); */
+  backdrop-filter: blur(2px);
 
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(2.1px);
-/* -webkit-backdrop-filter: blur(2.1px); */
-border: 1px solid rgba(225, 192, 192, 0.31);
 
 }
 
@@ -78,8 +76,6 @@ h1 {
   font-family: var(--font-family-title);
   font-size: var(--font-size-big-title-h1);
   color: var(--color-background);
-  text-align: center;
-  margin: 0;
 }
 
 footer {
@@ -99,9 +95,8 @@ footer a {
 
 .contact {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  /* justify-content: space-around; */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
   text-align: center;
   padding: 1rem;
 }
