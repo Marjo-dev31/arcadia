@@ -5,6 +5,7 @@
 html {
   --font-family-title: "Neucha", "sans-serif";
   --font-family-content: "Roboto", "sans-serif";
+  --font-family-signature: "Dancing Script", "cursive";
 
   --font-size-big-title-h1: 3.75rem;
   --font-size-h2: 2rem;
@@ -24,7 +25,10 @@ body {
   background-color: var(--color-background);
   font-size: var(--font-size-content);
   font-family: var(--font-family-content);
+  color: var(--color-font);
 }
+
+/* header style */
 
 header {
     min-height: 400px;
@@ -42,19 +46,17 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 50px;
+  /* min-height: 30px; */
   display: grid;
   grid-template-columns:  repeat(auto-fit, minmax(200px, 1fr));
   justify-items: center;
   align-items: center;
+  text-align: center;
   gap: 1rem;
   font-weight: bold;
   padding:  1rem;
   background: rgba(0, 0, 0, 0.2);
-  /* -webkit-backdrop-filter: blur(2px); */
   backdrop-filter: blur(2px);
-
-
 }
 
 a {
@@ -88,6 +90,8 @@ h1 {
   color: var(--color-background);
 }
 
+/* footer style */
+
 footer {
   background-color: var(--color-primary);
   color: var(--color-background);
@@ -109,4 +113,46 @@ footer p {
 
 #copyright {
   text-align: center;
+}
+
+
+/* section welcome style */
+
+h2 {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-h2);
+  text-align: center;
+}
+
+p {
+  text-align: justify;
+}
+
+#signature{
+  font-family: var(--font-family-signature);
+  text-align: end;
+}
+
+.welcome {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: center;
+  justify-items: center;  
+}
+
+.text-presentation {
+  padding: 1rem;
+}
+
+img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+
+@media (min-width: 600px) {
+  .text-presentation {
+    padding-left: 40%;
+  }
 }
