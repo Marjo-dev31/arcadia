@@ -43,6 +43,25 @@ a:hover {
   border-radius: 20px;
 }
 
+h1 {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-big-title-h1);
+  color: var(--color-background);
+}
+
+h2 {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-h2);
+  text-align: center;
+}
+
+h3 {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-h3);
+  font-weight: normal;
+  text-align: center;
+}
+
 /* header style */
 
 header {
@@ -83,11 +102,6 @@ nav {
   font-size: var(--font-size-h2);
 }
 
-h1 {
-  font-family: var(--font-family-title);
-  font-size: var(--font-size-big-title-h1);
-  color: var(--color-background);
-}
 
 /* footer style */
 
@@ -116,12 +130,6 @@ footer p {
 }
 
 /* section welcome style */
-
-h2 {
-  font-family: var(--font-family-title);
-  font-size: var(--font-size-h2);
-  text-align: center;
-}
 
 p {
   text-align: justify;
@@ -164,6 +172,7 @@ p {
   justify-content: center;
   overflow: hidden;
   margin: auto;
+  /* background-color: var(--color-primary); */
 }
 
 .accordion-content {
@@ -186,4 +195,64 @@ p {
 
 .accordion-content:hover{
   width: 150%;
+}
+
+/* container style */
+
+
+.container {
+  height: 400px;
+  background-color: var(--color-primary);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+  align-items: center;
+  padding: 0 10%;
+}
+
+.stork {
+  position: relative;
+  background-image: url('/images/storks-6519599_1280.jpg');
+  width: 350px;
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  border: 0.5rem solid var(--color-call-to-action);
+  color: var(--color-font);
+}
+
+.visit {
+  position: relative;
+  background-image: url('/images/tour-guide-6816049_1280.jpg');
+  width: 350px;
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  border: 0.5rem solid var(--color-call-to-action);
+  color: var(--color-font);
+}
+
+.stork h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin: 0;
+  text-align: center;
+  background-color: rgb(255, 252, 239, 0.8);
+  padding: 0.8rem;
+}
+
+
+.visit h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin: 0;
+  text-align: center;
+  background-color:rgb(255, 252, 239, 0.8);
+  padding: 0.8rem;
 }
