@@ -60,6 +60,7 @@ h3 {
   font-size: var(--font-size-h3);
   font-weight: normal;
   text-align: center;
+  padding-bottom: 1.5rem;
 }
 
 /* header style */
@@ -145,11 +146,14 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   align-items: center;
   justify-items: center;
+  
 }
 
 .text-presentation {
   padding: 1rem;
 }
+
+
 
 /* img {
   width: 100px;
@@ -157,21 +161,16 @@ p {
   object-fit: cover;
 } */
 
-@media (min-width: 600px) {
-  .text-presentation {
-    padding-left: 40%;
-  }
-}
+
 
 /* accordion style */
 
 .accordion {
-  min-width: 500px;
+  width: 500px;
   height: 400px;
   display: flex;
   justify-content: center;
   overflow: hidden;
-  margin: auto;
   /* background-color: var(--color-primary); */
 }
 
@@ -190,24 +189,37 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* transition: all 1s ease; */
+  transition: all 1s ease;
 }
 
 .accordion-content:hover{
   width: 150%;
 }
 
-/* container style */
+/* discovery-section style */
 
+.discovery-section {
+position: relative;
 
+}
+
+.bird-img {
+  width: 300px;
+  position: absolute;
+  top:0;
+  left: 0;
+  transform: translate(0, -80%);
+  z-index:-1;
+}
 .container {
-  height: 400px;
+  min-height: 400px;
   background-color: var(--color-primary);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
   justify-items: center;
   align-items: center;
-  padding: 0 10%;
+  padding: 1rem 10%;
 }
 
 .stork {
@@ -255,4 +267,71 @@ p {
   text-align: center;
   background-color:rgb(255, 252, 239, 0.8);
   padding: 0.8rem;
+}
+
+
+/* reviews-section style */
+
+.reviews-section {
+  background-image: url('/images/little-egret-2591578_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-end;
+  color: var(--color-background);
+}
+
+.reviews {
+ background-color: rgb(70, 46, 1, 0.6);
+}
+
+.review {
+  text-align: center;
+  background-color: var(--color-primary);
+  max-width: 400px;
+  min-height: 200px;
+  margin: auto;
+  border: 0.1rem solid var(--color-background);
+  border-radius: 2rem;
+}
+
+.review p {
+  margin: 0;
+}
+
+.review-content {
+  text-align: justify;
+  padding: 1.5rem;
+}
+
+.review-name,
+.review-date  {
+  text-align: end;
+  padding-right: 1.5rem;
+ 
+}
+
+.more-review {
+  text-align: center;
+  padding: 0.8rem;
+}
+
+
+@media (min-width: 600px) {
+  .text-presentation {
+    padding-left: 40%;
+  }
+}
+
+@media (max-width: 600px) {
+  .accordion {
+    width: 300px;   
+  }
+  
+  .accordion-img {
+        object-position: right;
+      }
+
 }
