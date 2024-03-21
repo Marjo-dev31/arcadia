@@ -228,7 +228,7 @@ p {
   height: 400px;
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: auto;
   /* background-color: var(--color-primary); */
 }
 
@@ -251,7 +251,7 @@ p {
 }
 
 .accordion-content:hover {
-  width: 150%;
+  width: 200%;
 }
 
 /* discovery-section style */
@@ -395,8 +395,19 @@ p {
   }
   .accordion {
     width: 300px;
+    scroll-snap-type: x mandatory;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .accordion-content {
+    flex:  0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
   .accordion-img {
     object-position: right;
   }
+
+ 
 }
