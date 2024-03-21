@@ -35,7 +35,7 @@ a {
   transition: 0.3s;
 }
 
-a:hover{
+a:hover {
   /* text-decoration: var(--color-call-to-action) underline; */
   /* background-color: var(--color-call-to-action); */
   color: var(--color-call-to-action);
@@ -164,7 +164,7 @@ header {
 }
 
 #side-drawer li {
-margin: 1rem 0;
+  margin: 1rem 0;
 }
 
 /* footer style */
@@ -258,6 +258,7 @@ p {
 
 .discovery-section {
   position: relative;
+  z-index: -2;
 }
 
 .bird-img {
@@ -266,7 +267,7 @@ p {
   top: 0;
   left: 0;
   transform: translate(0, -75%);
-  z-index: -1;
+  z-index: -3;
 }
 .container {
   min-height: 400px;
@@ -331,7 +332,7 @@ p {
   background-image: url("/images/little-egret-2591578_1280.jpg");
   background-size: cover;
   background-position: center;
-  height: 650px;
+  min-height: 650px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -348,8 +349,8 @@ p {
   max-width: 350px;
   min-height: 200px;
   margin: auto;
-  border: 0.1rem solid var(--color-background);
-  border-radius: 2rem;
+  border: 2px solid var(--color-font);
+  border-radius: 20px;
 }
 
 .review p {
@@ -371,6 +372,55 @@ p {
 .more-review {
   text-align: center;
   padding: 0.8rem;
+}
+
+.form-review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 3rem auto;
+  background-color: rgb(255, 252, 239, 0.2);
+  backdrop-filter: blur(2px);
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.new-review {
+display: none;
+}
+
+#new-review:target {
+  display: block;
+}
+
+.form-review > * {
+  margin: 0.5rem;
+}
+
+.form-review-btn {
+  width: 100px;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: #025e19;
+  color: var(--color-background);
+}
+
+.leaf {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: -1;
+  width: 400px;
+  /* Parallax ne fonctionne pas sur safari et firefox */
+  animation: parallax linear;
+  animation-timeline: scroll(); 
+}
+
+@keyframes parallax {
+  to {
+    transform: translateY(400px);
+  }
 }
 
 @media (min-width: 600px) {
@@ -401,13 +451,11 @@ p {
   }
 
   .accordion-content {
-    flex:  0 0 100%;
+    flex: 0 0 100%;
     scroll-snap-align: start;
     scroll-snap-stop: normal;
   }
   .accordion-img {
     object-position: right;
   }
-
- 
 }
