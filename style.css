@@ -47,6 +47,7 @@ h1 {
   font-family: var(--font-family-title);
   font-size: var(--font-size-big-title-h1);
   color: var(--color-background);
+  text-shadow: 3px 3px 4px var(--color-font);
 }
 
 h2 {
@@ -78,6 +79,12 @@ header {
   position: relative;
 }
 
+#logo {
+  padding: 0;
+  box-shadow: 5px 0 15px 5px var(--color-background);
+  border-radius: 50%;
+}
+
 .links {
   position: absolute;
   top: 0;
@@ -94,15 +101,6 @@ header {
   background: rgba(0, 0, 0, 0.2);
   border-bottom: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(2px);
-}
-
-#logo {
-  border: 0.3rem solid var(--color-call-to-action);
-  border-radius: 50%;
-  background-color: var(--color-background);
-  color: var(--color-font);
-  font-family: var(--font-family-title);
-  font-size: var(--font-size-h2);
 }
 
 .navbar {
@@ -453,7 +451,7 @@ display: none;
   .accordion-content {
     flex: 0 0 100%;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
   }
   .accordion-img {
     object-position: right;
