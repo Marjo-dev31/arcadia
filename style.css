@@ -35,7 +35,7 @@ a {
   transition: 0.3s;
 }
 
-a:hover {
+a:hover{
   /* text-decoration: var(--color-call-to-action) underline; */
   /* background-color: var(--color-call-to-action); */
   color: var(--color-call-to-action);
@@ -146,6 +146,12 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 99;
+  display: none;
+}
+
+#side-drawer:target {
+  display: block;
 }
 
 #side-drawer ul {
