@@ -1,0 +1,53 @@
+body {
+  background-image: url("/images/feuilles\ volantes.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 20%;
+}
+
+header {
+  background-image: url("/images/panneau.jpg");
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 50px;
+  padding: 2rem;
+  background-color: rgba(70, 46, 1, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.contact-form > * {
+  margin: 1rem;
+  border: none;
+  border-bottom: 2px solid var(--color-font);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0 0.5rem;
+  background-color: rgba(70, 46, 1, 0);
+}
+
+.contact-form input {
+    height: 50px;
+}
+
+.contact-form button {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  width: 50%;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+::placeholder {
+  font-family: var(--font-family-content);
+  color: var(--color-font);
+  transform: translateY(100%);
+}
