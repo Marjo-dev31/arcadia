@@ -13,7 +13,8 @@
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Neucha&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/signin.css"/>
   </head>
   <body>
     <header>
@@ -32,7 +33,7 @@
           <span></span>
           <span></span>
         </a>
-        <a class="connection-btn" href="/Connexion">Connexion</a>
+        <a class="connection-btn" href="/views/connexion.html">Connexion</a>
       </div>
       <div class="hero-scene">
         <h1>Connexion</h1>
@@ -45,7 +46,7 @@
           <li><a href="/Habitats">Habitats</a></li>
           <li><a href="/Services">Services</a></li>
           <li><a href="/Contact">Contact</a></li>
-          <li><a href="">Connexion</a></li>
+          <li><a href="/views/connexion.html">Connexion</a></li>
         </ul>
       </nav>
     </aside>
@@ -54,16 +55,22 @@
             <h2>Espace Privé</h2>
             <h3>(Réservé à la direction, aux vétérinaires et aux employés)</h3>
         </div>
-        <div>
-            <form action="">
-                <label for="email">Email :</label>
+
+            <form class="signin-form" action="">
+                <p>Connexion</p>
+                <div>
+                  <label for="email">Email :</label>
                 <input type="text" id="email" name="email">
-                <label for="password">Mot de passe :</label>
+                </div>
+                <div>
+                  <label for="password">Mot de passe :</label>
                 <input type="text" id="password" name="password">
+                </div>
+                <button>Se connecter</button>
             </form>
-        </div>   
+           
         <div>
-            <h3>Pour toutes questions, rendez-vous sur la page <a href="">Contact</a></h3>
+            <h3>Pour toutes questions, rendez-vous sur la page <a href="" id="contact-link">Contact</a></h3>
         </div>
     </main>
     <footer>
