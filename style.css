@@ -33,6 +33,7 @@ a {
   color: var(--color-background);
   text-decoration: none;
   transition: 0.3s;
+  text-shadow: 3px 3px 4px var(--color-font);
 }
 
 a:hover {
@@ -81,7 +82,7 @@ header {
 
 #logo {
   padding: 0;
-  box-shadow: 5px 0 15px 5px var(--color-background);
+  box-shadow: 3px 0 15px 3px var(--color-call-to-action);
   border-radius: 50%;
 }
 
@@ -207,10 +208,12 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   align-items: center;
   justify-items: center;
+  
 }
 
 .text-presentation {
   padding: 1rem;
+  z-index: 1;
 }
 
 /* img {
@@ -227,6 +230,7 @@ p {
   display: flex;
   justify-content: center;
   overflow: auto;
+  z-index: 1;
   /* background-color: var(--color-primary); */
 }
 
@@ -256,7 +260,7 @@ p {
 
 .discovery-section {
   position: relative;
-  z-index: -2;
+
 }
 
 .bird-img {
@@ -265,7 +269,7 @@ p {
   top: 0;
   left: 0;
   transform: translate(0, -75%);
-  z-index: -3;
+  z-index: -1;
 }
 .container {
   min-height: 400px;
@@ -288,6 +292,7 @@ p {
   border-radius: 50%;
   border: 0.5rem solid var(--color-call-to-action);
   color: var(--color-font);
+  
 }
 
 .visit {
@@ -406,9 +411,8 @@ display: none;
 
 .leaf {
   position: absolute;
-  top: 50%;
+  top: 30%;
   right: 0;
-  z-index: -1;
   width: 400px;
   /* Parallax ne fonctionne pas sur safari et firefox */
   animation: parallax linear;
