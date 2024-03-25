@@ -40,6 +40,11 @@ header {
     transform: translateX(50%);
 }
 
+button:hover {
+    background-color: var(--color-call-to-action);
+    color: var(--color-font);
+  }
+
 .password-forgot {
     display: flex;
     justify-content: center;

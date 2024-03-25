@@ -41,6 +41,7 @@ header {
 .contact-form button {
   background-color: var(--color-primary);
   color: var(--color-background);
+  font-family: var(--font-family-title);
   width: 50%;
   padding: 0.5rem 1rem;
   border-radius: 20px;
