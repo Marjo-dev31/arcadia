@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 800px;
+    width: fit-content;
     margin: auto;
 }
 
@@ -12,17 +12,22 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items:center;
-    box-sizing: border-box;
     border: 0.5rem solid var(--color-primary);
     width: 100%;
+    
 }
 
 .habitat-img {
-    max-width: 50%;
+    max-width: 350px;
     overflow: hidden;
+    /* height: 100%; */
+    /* object-fit: ; */
 }
 
 .habitat-content {
-    /* max-width: 50%; */
-    padding: 1rem;
+    /* box-sizing: border-box; */
+    max-width: 350px;
+    height: 100%;
+overflow: hidden;
+    /* padding: 1rem; */
 }
