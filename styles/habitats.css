@@ -1,0 +1,28 @@
+.habitats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+.habitat-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items:center;
+    box-sizing: border-box;
+    border: 0.5rem solid var(--color-primary);
+    width: 100%;
+}
+
+.habitat-img {
+    max-width: 50%;
+    overflow: hidden;
+}
+
+.habitat-content {
+    /* max-width: 50%; */
+    padding: 1rem;
+}
