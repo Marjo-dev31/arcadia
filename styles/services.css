@@ -32,6 +32,7 @@ header {
     color: var(--color-background);
     border-radius: 15px;
     overflow: hidden;
+    
 }
 
 .service-img {
