@@ -30,7 +30,7 @@ header {
     margin-bottom: 4rem;
     background-color: var(--color-primary);
     color: var(--color-background);
-    border-radius: 15px;
+    border-radius: 50% 20% / 10% 40%;
     overflow: hidden;
     
 }
