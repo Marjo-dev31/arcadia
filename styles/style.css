@@ -228,7 +228,7 @@ p {
   width: 500px;
   height: 400px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   overflow: auto;
   z-index: 1;
   /* background-color: var(--color-primary); */
@@ -243,6 +243,7 @@ p {
 }
 
 .accordion-img {
+  border-radius: 50px;
   position: absolute;
   top: 0;
   left: 0;
