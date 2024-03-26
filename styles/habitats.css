@@ -1,33 +1,45 @@
 .habitats {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: fit-content;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto;
 }
 
 .habitat-item {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items:center;
-    border: 0.5rem solid var(--color-primary);
-    width: 100%;
-    
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(70, 46, 1, 0.2);
+  margin-bottom: 4rem;
 }
 
 .habitat-img {
-    max-width: 350px;
-    overflow: hidden;
-    /* height: 100%; */
-    /* object-fit: ; */
+  width: 325px;
+  height: auto;
+  object-fit: cover;
+  object-position: right;
+  overflow: hidden;
 }
 
 .habitat-content {
-    /* box-sizing: border-box; */
-    max-width: 350px;
-    height: 100%;
-overflow: hidden;
-    /* padding: 1rem; */
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  width: 325px;
+}
+
+.habitat-content > * {
+  margin: 0;
+  padding: 0.5rem;
+}
+
+@media screen and (max-width:700px ){
+    .habitat-item {
+        width: 325px;
+    }
 }

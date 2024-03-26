@@ -13,11 +13,11 @@ html {
   --font-size-content: 1rem;
   --font-size-footer: 0.75rem;
 
-  --color-primary: #025e19;
-  --color-font: #033b29;
-  --color-background: #fffcef;
-  --color-call-to-action: #2eff04;
-  --color-secondary: #462e01;
+  --color-primary: rgb(2, 94, 25);
+  --color-font: rgb(3, 59, 41);
+  --color-background: rgb(255, 252, 239);
+  --color-call-to-action: rgb(46, 255, 4);
+  --color-secondary: rgb(70, 46, 1);
 }
 
 body {
