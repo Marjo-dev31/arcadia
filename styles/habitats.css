@@ -1,3 +1,5 @@
+/* style habitat card */
+
 .habitats {
   display: flex;
   flex-direction: column;
@@ -38,8 +40,43 @@
   padding: 0.5rem;
 }
 
+
+/* style ID card animal */
+
+.id-card-animal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    width: 100%;
+    margin-bottom: 4rem;
+    padding: 2rem;
+}
+.id-card-animal img {
+    width: 400px;
+    clip-path: circle();
+    overflow: hidden;
+    
+}
+
+.id-card-animal-content>* {
+    text-align: center;
+    max-width: 400px;
+}
+
+
+
+
+
+/* responsive */
+
 @media screen and (max-width:700px ){
     .habitat-item {
         width: 325px;
     }
+}
+
+.links {
 }
