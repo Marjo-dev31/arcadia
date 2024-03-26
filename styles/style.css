@@ -370,8 +370,13 @@ p {
 }
 
 .more-review {
-  text-align: center;
-  padding: 0.8rem;
+  width: 50%;
+  border-radius: 15px;
+  padding: 0.5rem;
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-family: var(--font-family-title);
+  margin: 1rem;
 }
 
 .form-review {
@@ -386,12 +391,12 @@ p {
   padding: 1rem;
 }
 
-.new-review {
-  display: none;
-}
-
 #new-review:target {
   display: block;
+}
+
+.new-review {
+  display: none;
 }
 
 .form-review > * {
