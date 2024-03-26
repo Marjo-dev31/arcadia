@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-/* style habitat cards */
-=======
 /* style habitat card */
->>>>>>> Stashed changes
 
 .habitats {
   display: flex;
@@ -44,34 +40,37 @@
   padding: 0.5rem;
 }
 
-<<<<<<< Updated upstream
+
 /* style ID card animal */
 
-
 .id-card-animal {
-background-color: var(--color-primary);
-color: var(--color-background);
-width: 100%;
-margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    width: 100%;
+    margin-bottom: 4rem;
+    padding: 2rem;
 }
-
 .id-card-animal img {
     width: 400px;
     clip-path: circle();
-    object-position:left;
+    overflow: hidden;
     
 }
-=======
 
-/* style ID card animal */
-
+.id-card-animal-content>* {
+    text-align: center;
+    max-width: 400px;
+}
 
 
 
 
 
 /* responsive */
->>>>>>> Stashed changes
 
 @media screen and (max-width:700px ){
     .habitat-item {
