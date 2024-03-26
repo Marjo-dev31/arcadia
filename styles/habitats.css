@@ -1,3 +1,5 @@
+/* style habitat cards */
+
 .habitats {
   display: flex;
   flex-direction: column;
@@ -36,6 +38,23 @@
 .habitat-content > * {
   margin: 0;
   padding: 0.5rem;
+}
+
+/* style ID card animal */
+
+
+.id-card-animal {
+background-color: var(--color-primary);
+color: var(--color-background);
+width: 100%;
+margin-bottom: 4rem;
+}
+
+.id-card-animal img {
+    width: 400px;
+    clip-path: circle();
+    object-position:left;
+    
 }
 
 @media screen and (max-width:700px ){
