@@ -17,22 +17,22 @@
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 3px 6px rgba(70, 46, 1, 0.2);
-  margin-bottom: 4rem;
+  margin: 4rem 0;
 }
 
 .habitat-img {
-  width: 325px;
+  max-width: 325px;
   height: auto;
   object-fit: cover;
   object-position: right;
-  overflow: hidden;
 }
 
 .habitat-content {
   display: flex;
   flex-direction: column;
   text-align: justify;
-  width: 325px;
+  max-width: 325px;
+  overflow: hidden;
 }
 
 .habitat-content > * {
@@ -54,8 +54,12 @@
     margin-bottom: 4rem;
     padding: 2rem;
 }
+
+.id-card-animal>* {
+  max-width: 400px;
+}
+
 .id-card-animal img {
-    width: 400px;
     clip-path: circle();
     overflow: hidden;
     
@@ -63,7 +67,6 @@
 
 .id-card-animal-content>* {
     text-align: center;
-    max-width: 400px;
 }
 
 
