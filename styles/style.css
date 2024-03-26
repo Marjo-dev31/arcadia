@@ -101,8 +101,9 @@ header {
   text-align: center;
   font-weight: bold;
   padding-top: 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(2px);
+  background: linear-gradient(180deg, rgba(2,94,25,.9) 10%, rgba(255,255,255,0)) ;
+  
+  /* backdrop-filter: blur(1px); */
 }
 
 .navbar {
@@ -170,9 +171,12 @@ header {
 /* footer style */
 
 footer {
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
+  background: linear-gradient(360deg, rgba(2,94,25,1) 25%, rgba(255,252,239,0)) ;
+
   color: var(--color-background);
   font-size: var(--font-size-footer);
+  /* min-height: 150px; */
 }
 
 footer p {

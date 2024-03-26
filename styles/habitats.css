@@ -1,0 +1,45 @@
+.habitats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto;
+}
+
+.habitat-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(70, 46, 1, 0.2);
+  margin-bottom: 4rem;
+}
+
+.habitat-img {
+  width: 325px;
+  height: auto;
+  object-fit: cover;
+  object-position: right;
+  overflow: hidden;
+}
+
+.habitat-content {
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  width: 325px;
+}
+
+.habitat-content > * {
+  margin: 0;
+  padding: 0.5rem;
+}
+
+@media screen and (max-width:700px ){
+    .habitat-item {
+        width: 325px;
+    }
+}
