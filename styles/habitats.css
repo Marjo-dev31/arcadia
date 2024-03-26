@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 /* style habitat cards */
+=======
+/* style habitat card */
+>>>>>>> Stashed changes
 
 .habitats {
   display: flex;
@@ -40,6 +44,7 @@
   padding: 0.5rem;
 }
 
+<<<<<<< Updated upstream
 /* style ID card animal */
 
 
@@ -56,9 +61,23 @@ margin-bottom: 4rem;
     object-position:left;
     
 }
+=======
+
+/* style ID card animal */
+
+
+
+
+
+
+/* responsive */
+>>>>>>> Stashed changes
 
 @media screen and (max-width:700px ){
     .habitat-item {
         width: 325px;
     }
+}
+
+.links {
 }
