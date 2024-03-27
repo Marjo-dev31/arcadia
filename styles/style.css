@@ -199,7 +199,7 @@ footer p {
 
 /* section welcome style */
 
-p {
+.text-presentation p {
   text-align: justify;
 }
 
@@ -337,7 +337,6 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  color: var(--color-background);
 }
 
 .reviews {
@@ -345,6 +344,7 @@ p {
 }
 
 .review {
+  color: var(--color-background);
   text-align: center;
   background-color: var(--color-primary);
   max-width: 350px;
