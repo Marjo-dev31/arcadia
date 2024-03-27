@@ -38,3 +38,23 @@ section {
     width: 300px;
     align-items: center;
 }
+
+.account-creation-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    align-items: center;
+    align-content: center;
+    margin: auto;
+    border: 0.3rem solid var(--color-font);
+    border-radius: 20px ;
+    padding: 1rem;
+}
+
+.account-creation-form>* {
+    padding: 0.5rem;
+}
+
+.account-creation-form input {
+    border-radius: 15px;
+}
