@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.2"
+  },
+  "name": "arcadia",
+  "description": "ecf",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Marjo-dev31/arcadia.git"
+  },
+  "author": "marjory bravo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marjo-dev31/arcadia/issues"
+  },
+  "homepage": "https://github.com/Marjo-dev31/arcadia#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
