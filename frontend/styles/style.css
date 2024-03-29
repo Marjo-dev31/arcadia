@@ -70,7 +70,7 @@ h3 {
 header {
   min-height: 400px;
   width: 100%;
-  background-image: url("/images/elephants-279505_1280.jpg");
+  background-image: url("/frontend/images/elephants-279505_1280.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -281,7 +281,7 @@ footer p {
 
 .stork {
   position: relative;
-  background-image: url("/images/storks-6519599_1280.jpg");
+  background-image: url("/frontend/images/storks-6519599_1280.jpg");
   width: 350px;
   height: 350px;
   background-position: center;
@@ -294,7 +294,7 @@ footer p {
 
 .visit {
   position: relative;
-  background-image: url("/images/tour-guide-6816049_1280.jpg");
+  background-image: url("/frontend/images/tour-guide-6816049_1280.jpg");
   width: 350px;
   height: 350px;
   background-position: center;
@@ -330,7 +330,7 @@ footer p {
 /* reviews-section style */
 
 .reviews-section {
-  background-image: url("/images/little-egret-2591578_1280.jpg");
+  background-image: url("/frontend/images/little-egret-2591578_1280.jpg");
   background-size: cover;
   background-position: center;
   min-height: 650px;
