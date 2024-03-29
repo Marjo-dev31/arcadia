@@ -1,0 +1,127 @@
+import { Component, OnInit, inject } from '@angular/core';
+import { ServiceService } from './service/service.service';
+import { JsonPipe } from '@angular/common';
+
+@Component({
+  selector: 'app-services',
+  imports: [JsonPipe],
+  standalone: true,
+  template: `
+    <main>
+      <section>
+        <h2>
+          Nous vous proposons une multitude de services afin de rendre votre
+          séjour plus agréable !
+        </h2>
+        <div class="schedule">
+          <p>Nous vous accueillons du Lundi au Dimanche</p>
+          <p>De 9h00 à 19h00</p>
+          <p>
+            Tous les jours de l'année
+            <span id="exception">(sauf cas exceptionnel)</span>
+          </p>
+        </div>
+      </section>
+      <section class="services">
+        <div class="service-item">
+          <img
+            class="service-img"
+            src="assets/images/tour-guide-6816049_1280.jpg"
+            alt="Guide accompagnant un groupe de visiteurs"
+          />
+          <div class="service-content">
+            <h3>Visite guidée avec Manu</h3>
+            <p>
+              Manu vous propose ses services afin de vous faire découvrir plus
+              en détails l'habitat de votre choix. Il vous expliquera la vie au
+              sein de celui-ci et décryptera pour vous la faune et la flore.
+              Pensez à vous positionner dès votre arrivée au parc, les places
+              sont limitées. Service gratuit
+            </p>
+          </div>
+        </div>
+        <div class="service-item">
+          <img
+            class="service-img"
+            src="assets/images/tour-guide-6816049_1280.jpg"
+            alt="Guide accompagnant un groupe de visiteurs"
+          />
+          <div class="service-content">
+            <h3>Visite guidée avec Manu</h3>
+            <p>
+              Manu vous propose ses services afin de vous faire découvrir plus
+              en détails l'habitat de votre choix. Il vous expliquera la vie au
+              sein de celui-ci et décryptera pour vous la faune et la flore.
+              Pensez à vous positionner dès votre arrivée au parc, les places
+              sont limitées. Service gratuit
+            </p>
+          </div>
+        </div>
+        {{todo|json}}
+      </section>
+    </main>
+  `,
+  styles: `
+
+
+.schedule p {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-h3);
+    text-align: center;
+    margin: 0;
+}
+
+.services {
+    width: 100%;
+    background-color: var(--color-secondary);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    margin-bottom: 8rem;
+}
+
+.service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    min-height: 500px;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border-radius: 50% 20% / 10% 40%;
+    overflow: hidden;
+    
+}
+
+.service-img {
+    width: 100%;
+    object-fit: cover; 
+}
+
+.service-content p {
+    text-align: justify;
+    padding: 0 2rem;
+}
+
+#exception {
+    font-size: var(--font-size-footer);
+    font-style: italic;
+}
+  `
+})
+export class ServicesComponent implements OnInit {
+  todo:any
+  private readonly serviceService = inject(ServiceService)
+  
+
+  ngOnInit() {
+  this.serviceService.getServices().then(response => {
+    console.log(response)
+    this.todo = response
+  })
+
+  }
+}

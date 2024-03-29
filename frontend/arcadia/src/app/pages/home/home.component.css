@@ -1,0 +1,271 @@
+
+  
+
+  /* footer style */
+  
+
+  
+  /* section welcome style */
+  
+  .text-presentation p {
+    text-align: justify;
+  }
+  
+  #signature {
+    font-family: var(--font-family-signature);
+    text-align: end;
+  }
+  
+  .welcome {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: center;
+    justify-items: center;
+  }
+  
+  .text-presentation {
+    padding: 1rem;
+    z-index: 1;
+  }
+  
+  /* accordion style */
+  
+  .accordion {
+    width: 500px;
+    height: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    overflow: auto;
+    z-index: 1;
+    /* background-color: var(--color-primary); */
+  }
+  
+  .accordion-content {
+    position: relative;
+    width: 20%;
+    height: inherit;
+    cursor: pointer;
+    transition: all 2s ease;
+  }
+  
+  .accordion-img {
+    border-radius: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .accordion-content:hover {
+    width: 200%;
+  }
+  
+  /* discovery-section style */
+  
+  .discovery-section {
+    position: relative;
+  }
+  
+  .bird-img {
+    max-width: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(0, -75%);
+    z-index: -1;
+  }
+  .container {
+    min-height: 400px;
+    background-color: var(--color-primary);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    padding: 1rem 10%;
+  }
+  
+  .stork {
+    position: relative;
+    background-image: url("/assets/images/storks-6519599_1280.jpg");
+    width: 350px;
+    height: 350px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    border: 0.5rem solid var(--color-call-to-action);
+    color: var(--color-font);
+    text-shadow: none;
+  }
+  
+  .visit {
+    position: relative;
+    background-image: url("/assets/images/tour-guide-6816049_1280.jpg");
+    width: 350px;
+    height: 350px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    border: 0.5rem solid var(--color-call-to-action);
+    color: var(--color-font);
+    text-shadow: none;
+  }
+  
+  .stork h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    text-align: center;
+    background-color: rgb(255, 252, 239, 0.8);
+    padding: 0.8rem;
+  }
+  
+  .visit h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    text-align: center;
+    background-color: rgb(255, 252, 239, 0.8);
+    padding: 0.8rem;
+  }
+  
+  /* reviews-section style */
+  
+  .reviews-section {
+    background-image: url("/assets/images/little-egret-2591578_1280.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: var(--color-background);
+  }
+  
+  .reviews {
+    background-color: rgb(70, 46, 1, 0.6);
+  }
+  
+  .review {
+    text-align: center;
+    background-color: var(--color-primary);
+    max-width: 350px;
+    min-height: 200px;
+    margin: auto;
+    border: 2px solid var(--color-font);
+    border-radius: 20px;
+  }
+  
+  .review p {
+    margin: 0;
+  }
+  
+  .review-content {
+    text-align: justify;
+    padding: 1.5rem;
+    padding-top: 2rem;
+  }
+  
+  .review-name,
+  .review-date {
+    text-align: end;
+    padding-right: 1.5rem;
+  }
+  
+  .more-review {
+    width: 50%;
+    border-radius: 15px;
+    padding: 0.5rem;
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    font-family: var(--font-family-title);
+    margin: 1rem;
+  }
+  
+  .form-review {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 350px;
+    margin: 3rem auto;
+    background-color: rgb(255, 252, 239, 0.2);
+    backdrop-filter: blur(2px);
+    border-radius: 20px;
+    padding: 1rem;
+  }
+  
+  #new-review:target {
+    display: block;
+  }
+  
+  .new-review {
+    display: none;
+  }
+  
+  .form-review > * {
+    margin: 0.5rem;
+  }
+  
+  .form-review-btn {
+    width: 50%;
+    border-radius: 15px;
+    padding: 0.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    font-family: var(--font-family-title);
+  }
+  
+  button:hover {
+    background-color: var(--color-call-to-action);
+    color: var(--color-font);
+  }
+  
+  .leaf {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    width: 400px;
+    /* Parallax ne fonctionne pas sur safari et firefox */
+    animation: parallax linear;
+    animation-timeline: scroll();
+  }
+  
+  @keyframes parallax {
+    to {
+      transform: translateY(400px);
+    }
+  }
+  
+  @media (min-width: 600px) {
+    .text-presentation {
+      padding-left: 40%;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .bird-img {
+      display: none;
+    }
+    .accordion {
+      width: 300px;
+      scroll-snap-type: x mandatory;
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+  
+    .accordion-content {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    .accordion-img {
+      object-position: right;
+    }
+  }
+  

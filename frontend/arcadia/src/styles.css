@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+  }
+  
+  html {
+    --font-family-title: "Neucha", "sans-serif";
+    --font-family-content: "Roboto", "sans-serif";
+    --font-family-signature: "Dancing Script", "cursive";
+  
+    --font-size-big-title-h1: 3.75rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.5rem;
+    --font-size-content: 1rem;
+    --font-size-footer: 0.75rem;
+  
+    --color-primary: rgb(2, 94, 25);
+    --color-font: rgb(3, 59, 41);
+    --color-background: rgb(255, 252, 239);
+    --color-call-to-action: rgb(46, 255, 4);
+    --color-secondary: rgb(70, 46, 1);
+  }
+  
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    font-size: var(--font-size-content);
+    font-family: var(--font-family-content);
+    color: var(--color-font);
+  }
+  
+  a {
+    padding: 0.8rem;
+    color: var(--color-background);
+    text-decoration: none;
+    transition: 0.3s;
+    text-shadow: 3px 3px 4px var(--color-font);
+  }
+  
+  a:hover {
+    /* text-decoration: var(--color-call-to-action) underline; */
+    /* background-color: var(--color-call-to-action); */
+    color: var(--color-call-to-action);
+    box-shadow: 0 0 5px var(--color-call-to-action);
+    border-radius: 20px;
+  }
+  
+  h1 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-big-title-h1);
+    color: var(--color-background);
+    text-shadow: 3px 3px 4px var(--color-font);
+  }
+  
+  h2 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-h2);
+    text-align: center;
+  }
+  
+  h3 {
+    font-family: var(--font-family-title);
+    font-size: var(--font-size-h3);
+    font-weight: normal;
+    text-align: center;
+    /* padding-bottom: 1.5rem; */
+  }

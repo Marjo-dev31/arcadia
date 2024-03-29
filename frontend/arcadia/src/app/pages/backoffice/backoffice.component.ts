@@ -1,0 +1,249 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-backoffice',
+  template: `
+    <main>
+      <section>
+        <h2>Horaires</h2>
+        <p>De 9h00 à 19h00</p>
+        <p>Du Lundi au Dimanche</p>
+        <div>
+          <button class="btn">Modifier</button>
+          <button class="btn">Supprimer</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Services</h2>
+        <div class="service-item">
+          <img
+            class="service-img"
+            src="assets/images/tour-guide-6816049_1280.jpg"
+            alt="Guide accompagnant un groupe de visiteurs"
+          />
+          <div class="service-content">
+            <h3>Visite guidée avec Manu</h3>
+            <p>
+              Manu vous propose ses services afin de vous faire découvrir plus
+              en détails l'habitat de votre choix. Il vous expliquera la vie au
+              sein de celui-ci et décryptera pour vous la faune et la flore.
+              Pensez à vous positionner dès votre arrivée au parc, les places
+              sont limitées. Service gratuit
+            </p>
+          </div>
+          <div>
+            <button class="btn reverse-color-btn">Modifier</button>
+            <button class="btn reverse-color-btn">Supprimer</button>
+          </div>
+        </div>
+        <div>
+          <button class="add-btn">+</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Habitats</h2>
+        <div class="habitat-item">
+          <img src="assets/images/tigre.jpg" alt="" class="habitat-img" />
+          <div class="habitat-content">
+            <h3>La Savane</h3>
+            <p>
+              description Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Sunt commodi aliquam consequatur, quo veritatis nulla iure,
+              dolorum praesentium dolor tempore exercitationem non totam
+              expedita! Et quisquam quos nesciunt dignissimos neque?
+            </p>
+            <ul>
+              <li><a href="">animal1</a></li>
+              <li><a href="">animal2</a></li>
+            </ul>
+          </div>
+          <div>
+            <button class="btn">Modifier</button>
+            <button class="btn">Supprimer</button>
+          </div>
+        </div>
+        <div>
+          <button class="add-btn">+</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Animaux</h2>
+        <p>choix animal</p>
+        <div class="id-card-animal">
+          <img src="assets/images/tigre.jpg" alt="" />
+          <div class="id-card-animal-content">
+            <p>prenom animal</p>
+            <p>race</p>
+            <p>habitat</p>
+          </div>
+          <div>
+            <button class="btn reverse-color-btn">Modifier</button>
+            <button class="btn reverse-color-btn">Supprimer</button>
+          </div>
+        </div>
+        <div>
+          <button class="add-btn">+</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Compte-rendu Vétérinaire</h2>
+        <div>filtre</div>
+        <div>
+          <div>animalId</div>
+          <div>Etat</div>
+          <div>nourriture</div>
+          <div>grammage</div>
+          <div>date de passage</div>
+          <div>detail de l animal optionnel</div>
+          <button class="btn">Modifier</button>
+          <button class="btn">Supprimer</button>
+        </div>
+        <div>
+          <button class="add-btn">+</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Commentaire habitats</h2>
+        <div>
+          <p>commentaire sur habitat faire for each</p>
+          <button class="btn">Modifier</button>
+          <button class="btn">Supprimer</button>
+          <button class="add-btn">+</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Compte-rendu Employé</h2>
+        <div>
+          <p>choix animal</p>
+          <div>
+            <p>date</p>
+            <p>heure</p>
+            <p>nourriture donnée</p>
+            <p>quantité donnée</p>
+            <div>
+              <button class="btn">Modifier</button>
+              <button class="btn">Supprimer</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="add-btn">+</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Modulation des avis</h2>
+        <div class="review">
+          <p class="review-content">
+            Nous avons passé un agréable moment à Arcadia, un zoo familial et
+            les animaux sont en excellente forme. Je recommande vivement.
+          </p>
+          <p class="review-name">Manon</p>
+          <p class="review-date">12/03/2024</p>
+          <button class="btn reverse-color-btn">Autoriser</button>
+          <button class="btn reverse-color-btn">Refuser</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Création de compte</h2>
+        <div>
+          <form class="account-creation-form" action="">
+            <label for="email">Email/Identifiant :</label>
+            <input type="email" />
+            <label for="lastname">Nom :</label>
+            <input type="text" />
+            <label for="firstname">Prénom :</label>
+            <input type="text" />
+            <label for="role">Rôle :</label>
+            <input type="text" />
+            <label for="password">Mot de passe :</label>
+            <input type="password" />
+            <button class="btn">Valider</button>
+          </form>
+        </div>
+      </section>
+
+      <section>
+        <h2>Compteur de clic</h2>
+        <div>
+          <p>animal</p>
+          <p>nombre de clic</p>
+        </div>
+      </section>
+    </main>
+  `,
+  styles: `
+  body {
+  text-align: center;
+}
+
+section {
+  border-bottom: solid 1rem var(--color-secondary);
+  padding: 4rem;
+}
+
+.btn {
+  width: 100px;
+  border-radius: 15px;
+  padding: 0.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  font-family: var(--font-family-title);
+  margin: 1rem ;
+}
+
+.add-btn {
+  width: 100px;
+  clip-path: circle();
+  font-size: var(--font-size-big-title-h1);
+  border: none;
+  color: var(--color-background);
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.reverse-color-btn {
+    color: var(--color-primary);
+    background-color: var(--color-background);
+}
+
+.habitat-item {
+    width: 300px;
+    align-items: center;
+}
+
+.account-creation-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    align-items: center;
+    align-content: center;
+    margin: auto;
+    border: 0.3rem solid var(--color-font);
+    border-radius: 20px ;
+    padding: 1rem;
+}
+
+.account-creation-form>* {
+    padding: 0.5rem;
+}
+
+.account-creation-form input {
+    border-radius: 15px;
+}
+  `
+})
+export class BackofficeComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit() {}
+}
