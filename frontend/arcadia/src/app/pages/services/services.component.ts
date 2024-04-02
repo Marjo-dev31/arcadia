@@ -4,7 +4,7 @@ import { CommonModule, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-services',
-  imports: [JsonPipe, CommonModule],
+  imports: [JsonPipe],
   standalone: true,
   template: `
     <main>
@@ -23,7 +23,8 @@ import { CommonModule, JsonPipe } from '@angular/common';
         </div>
       </section>
       <section class="services">
-        <div class="service-item" *ngFor="let service of services">
+        @for (service of services; track service) {
+        <div class="service-item" >
           <img
             class="service-img"
             src={{service.image}}
@@ -33,7 +34,7 @@ import { CommonModule, JsonPipe } from '@angular/common';
             <h3 >{{service.title}}</h3>
             <p>{{service.description}}</p>
           </div>
-        </div>
+        </div>}
       </section>
     </main>
   `,

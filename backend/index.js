@@ -6,7 +6,7 @@ const PORT = 8000;
 
 app.use(cors());
 
-const service = [{
+const services = [{
   title: "Visite guidée avec Manu",
   description:
     "Manu vous propose ses services afin de vous faire découvrir plus en détails l'habitat de votre choix. Il vous expliquera la vie ausein de celui-ci et décryptera pour vous la faune et la flore. Pensez à vous positionner dès votre arrivée au parc, les places sont limitées. Service gratuit",
@@ -20,7 +20,24 @@ const service = [{
 ];
 
 app.get("/service", (req, res) => {
-  res.json(service);
+  res.json(services);
 });
+
+const habitats = [{
+  title: "La Savane",
+  description: "lieu aride lorem ipsum",
+  image: "assets/images/zoo-1692079_1280.jpg"
+},
+{
+title: "Les Marais",
+description: "lei humide à souhait",
+image: "little-egret-2591578_1280.jpg"
+}
+];
+
+app.get("/habitats", (req, res) => {
+  res.json(habitats)
+})
+
 
 app.listen(PORT, () => console.log(`It's alive on port ${PORT}`));
