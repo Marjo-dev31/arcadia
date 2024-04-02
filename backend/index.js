@@ -19,19 +19,20 @@ const services = [{
 }
 ];
 
-app.get("/service", (req, res) => {
+app.get("/services", (req, res) => {
   res.json(services);
 });
 
-const habitats = [{
+const habitats = [
+  {
   title: "La Savane",
   description: "lieu aride lorem ipsum",
   image: "assets/images/zoo-1692079_1280.jpg"
 },
 {
 title: "Les Marais",
-description: "lei humide à souhait",
-image: "little-egret-2591578_1280.jpg"
+description: "lieu humide à souhait",
+image: "assets/images/little-egret-2591578_1280.jpg"
 }
 ];
 
@@ -39,5 +40,23 @@ app.get("/habitats", (req, res) => {
   res.json(habitats)
 })
 
+
+const animals = [
+  {
+    name: "animal1",
+    race: "gazelle",
+    condition: "bon"
+},
+{
+  name: "animal2",
+  race: "lion",
+  condition: "mauvais",
+  rapport: "chichi"
+}
+]
+
+app.get("/animaux", (req,res) =>{
+  res.json(animals)
+})
 
 app.listen(PORT, () => console.log(`It's alive on port ${PORT}`));

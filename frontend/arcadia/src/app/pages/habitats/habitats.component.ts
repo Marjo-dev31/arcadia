@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { HabitatsService } from './services/habitat.service';
+import { AnimalService } from './services/animal.service';
 
 @Component({
   selector: 'app-habitats',
+  standalone: true,
   template: `
     <main>
       <h2>
@@ -9,33 +12,37 @@ import { Component, OnInit } from '@angular/core';
         pour le bien-être de nos animaux.
       </h2>
       <section class="habitats">
+        @for (habitat of habitats; track habitat) {
         <div class="habitat-item">
-          <img src="assets/images/tigre.jpg" alt="" class="habitat-img" />
+          <img src={{habitat.image}} alt="" class="habitat-img" />
           <div class="habitat-content">
-            <h3>La Savane</h3>
-            <p>
-              description Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Sunt commodi aliquam consequatur, quo veritatis nulla iure,
-              dolorum praesentium dolor tempore exercitationem non totam
-              expedita! Et quisquam quos nesciunt dignissimos neque?
-            </p>
-            <ul>
-              <li><a href="">animal1</a></li>
-              <li><a href="">animal2</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="id-card-animal">
-          <img src="assets/images/tigre.jpg" alt="" />
-          <div class="id-card-animal-content">
-            <p>prenom animal</p>
-            <p>race</p>
+            <h3>{{ habitat.title }}</h3>
             <div>
-              <p>etat</p>
-              <p>detail de l etat optionnel</p>
+              <p>{{ habitat.description }}</p>
+              <ul>
+                @for (animal of animals; track animal) {
+                <li>{{ animal.name }}</li>
+                }
+              </ul>
             </div>
           </div>
         </div>
+        } @for (animal of animals; track animal) {
+        <div class="id-card-animal">
+          <img src="assets/images/tigre.jpg" alt="" />
+
+          <div class="id-card-animal-content">
+            <p>{{ animal.name }}</p>
+            <p>{{ animal.race }}</p>
+            <div>
+              <p>{{ animal.condition }}</p>
+              @if(animal.rapport) {
+              <p>{{ animal.rapport }}</p>
+              }
+            </div>
+          </div>
+        </div>
+        }
       </section>
     </main>
   `,
@@ -117,10 +124,22 @@ import { Component, OnInit } from '@angular/core';
         width: 325px;
     }
 }
-  `
+  `,
 })
 export class HabitatsComponent implements OnInit {
-  constructor() {}
+  habitats: any;
+  private readonly habitatService = inject(HabitatsService);
 
-  ngOnInit() {}
+  animals: any;
+  private readonly animalsService = inject(AnimalService);
+
+  ngOnInit() {
+    this.habitatService.getHabitats().then((response) => {
+      this.habitats = response;
+    });
+
+    this.animalsService.getAnimals().then((response) => {
+      this.animals = response;
+    });
+  }
 }

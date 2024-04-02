@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ServiceService } from './service/service.service';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-services',
