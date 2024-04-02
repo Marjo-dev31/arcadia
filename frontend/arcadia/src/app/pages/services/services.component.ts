@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ServiceService } from './service/service.service';
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-services',
-  imports: [JsonPipe],
+  imports: [JsonPipe, CommonModule],
   standalone: true,
   template: `
     <main>
@@ -23,15 +23,15 @@ import { JsonPipe } from '@angular/common';
         </div>
       </section>
       <section class="services">
-        <div class="service-item">
+        <div class="service-item" *ngFor="let service of services">
           <img
             class="service-img"
-            src="assets/images/tour-guide-6816049_1280.jpg"
+            src={{service.image}}
             alt="Guide accompagnant un groupe de visiteurs"
           />
-          <div class="service-content" *ngFor="let item of todo">
-            <h3 >{{item.title}}</h3>
-            <p>{{item.description}}</p>
+          <div class="service-content" >
+            <h3 >{{service.title}}</h3>
+            <p>{{service.description}}</p>
           </div>
         </div>
       </section>
@@ -86,13 +86,13 @@ import { JsonPipe } from '@angular/common';
   `
 })
 export class ServicesComponent implements OnInit {
-  todo:any
+  services:any
   private readonly serviceService = inject(ServiceService);
   
   
   ngOnInit() {
     this.serviceService.getServices().then(response => {
-      this.todo = response
+      this.services = response
       console.log(response, 'toto')
   })
   }
