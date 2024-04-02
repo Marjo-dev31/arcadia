@@ -8,8 +8,7 @@ import { RouterLink } from '@angular/router';
   template: `
     <header>
       <div class="links">
-        <a [routerLink]="['/']" id="logo"
-          >
+        <a [routerLink]="['/']" id="logo">
           <img src="assets/images/logo L.png" alt="logo Arcadia">
         </a>
         <nav class="navbar">
@@ -20,14 +19,13 @@ import { RouterLink } from '@angular/router';
             <li><a [routerLink]="['/contact']">Contact</a></li>
           </ul>
         </nav>
+        <a class="connection-btn" [routerLink]="['/connexion']">Connexion</a>
         <a href="#side-drawer" class="menu-btn">
           <span></span>
           <span></span>
           <span></span>
         </a>
-        <a class="connection-btn" [routerLink]="['/connexion']">Connexion</a>
       </div>
-
       <div class="hero-scene">
         <h1>ARCADIA</h1>
       </div>

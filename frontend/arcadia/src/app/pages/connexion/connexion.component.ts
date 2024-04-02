@@ -76,7 +76,7 @@ import { Component, OnInit } from '@angular/core';
     transform: translateX(50%);
 }
 
-button:hover {
+.signin-form button:hover {
     background-color: var(--color-call-to-action);
     color: var(--color-font);
   }

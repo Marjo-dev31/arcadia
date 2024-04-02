@@ -29,41 +29,15 @@ import { JsonPipe } from '@angular/common';
             src="assets/images/tour-guide-6816049_1280.jpg"
             alt="Guide accompagnant un groupe de visiteurs"
           />
-          <div class="service-content">
-            <h3>Visite guidée avec Manu</h3>
-            <p>
-              Manu vous propose ses services afin de vous faire découvrir plus
-              en détails l'habitat de votre choix. Il vous expliquera la vie au
-              sein de celui-ci et décryptera pour vous la faune et la flore.
-              Pensez à vous positionner dès votre arrivée au parc, les places
-              sont limitées. Service gratuit
-            </p>
+          <div class="service-content" *ngFor="let item of todo">
+            <h3 >{{item.title}}</h3>
+            <p>{{item.description}}</p>
           </div>
         </div>
-        <div class="service-item">
-          <img
-            class="service-img"
-            src="assets/images/tour-guide-6816049_1280.jpg"
-            alt="Guide accompagnant un groupe de visiteurs"
-          />
-          <div class="service-content">
-            <h3>Visite guidée avec Manu</h3>
-            <p>
-              Manu vous propose ses services afin de vous faire découvrir plus
-              en détails l'habitat de votre choix. Il vous expliquera la vie au
-              sein de celui-ci et décryptera pour vous la faune et la flore.
-              Pensez à vous positionner dès votre arrivée au parc, les places
-              sont limitées. Service gratuit
-            </p>
-          </div>
-        </div>
-        {{todo|json}}
       </section>
     </main>
   `,
   styles: `
-
-
 .schedule p {
     font-family: var(--font-family-title);
     font-size: var(--font-size-h3);
@@ -93,7 +67,6 @@ import { JsonPipe } from '@angular/common';
     color: var(--color-background);
     border-radius: 50% 20% / 10% 40%;
     overflow: hidden;
-    
 }
 
 .service-img {
@@ -114,14 +87,13 @@ import { JsonPipe } from '@angular/common';
 })
 export class ServicesComponent implements OnInit {
   todo:any
-  private readonly serviceService = inject(ServiceService)
+  private readonly serviceService = inject(ServiceService);
   
-
+  
   ngOnInit() {
-  this.serviceService.getServices().then(response => {
-    console.log(response)
-    this.todo = response
+    this.serviceService.getServices().then(response => {
+      this.todo = response
+      console.log(response, 'toto')
   })
-
   }
 }

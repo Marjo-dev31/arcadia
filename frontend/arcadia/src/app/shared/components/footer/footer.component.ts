@@ -30,7 +30,6 @@ import { RouterLink } from '@angular/router';
     background-color: var(--color-primary);
     color: var(--color-background);
     font-size: var(--font-size-footer);
-  
   }
   
   footer p {

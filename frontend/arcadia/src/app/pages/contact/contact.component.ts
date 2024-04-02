@@ -73,7 +73,7 @@ import { Component, OnInit } from '@angular/core';
   border-radius: 15px;
 }
 
-button:hover {
+.contact-form button:hover {
   background-color: var(--color-call-to-action);
   color: var(--color-font);
 }
