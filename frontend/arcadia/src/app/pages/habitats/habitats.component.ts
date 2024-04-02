@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HabitatsService } from './services/habitat.service';
 import { AnimalService } from './services/animal.service';
+import { Habitats } from '../../shared/models';
 
 @Component({
   selector: 'app-habitats',
@@ -13,21 +14,22 @@ import { AnimalService } from './services/animal.service';
       </h2>
       <section class="habitats">
         @for (habitat of habitats; track habitat) {
-        <div class="habitat-item">
-          <img src={{habitat.image}} alt="" class="habitat-img" />
+        <div class="habitat-item" (click)="toggleDetails(habitat.id)">
+          <img [src]="habitat.image" alt="" class="habitat-img" />
           <div class="habitat-content">
-            <h3>{{ habitat.title }}</h3>
-            <div>
-              <p>{{ habitat.description }}</p>
-              <ul>
-                @for (animal of animals; track animal) {
-                <li>{{ animal.name }}</li>
-                }
-              </ul>
-            </div>
+            <h3>{{habitat.title }}</h3>
+            @if (showDetails == habitat.id) {
+            <p>{{ habitat.description}}</p>
+            <ul>
+              @for (animal of habitat.animals; track animal) {
+              <li>{{ animal.firstname }}</li>
+              }
+            </ul>
+            }
           </div>
         </div>
-        } @for (animal of animals; track animal) {
+        }
+        <!-- @for (animal of animals; track animal) {
         <div class="id-card-animal">
           <img src="assets/images/tigre.jpg" alt="" />
 
@@ -42,104 +44,35 @@ import { AnimalService } from './services/animal.service';
             </div>
           </div>
         </div>
-        }
+        } -->
       </section>
     </main>
   `,
-  styles: `
-  /* style habitat card */
-
-.habitats {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: auto;
-}
-
-.habitat-item {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(70, 46, 1, 0.2);
-  margin: 4rem 0;
-}
-
-.habitat-img {
-  max-width: 325px;
-  height: auto;
-  object-fit: cover;
-  object-position: right;
-}
-
-.habitat-content {
-  display: flex;
-  flex-direction: column;
-  text-align: justify;
-  max-width: 325px;
-  overflow: hidden;
-}
-
-.habitat-content > * {
-  margin: 0;
-  padding: 0.5rem;
-}
-
-/* style ID card animal */
-
-.id-card-animal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: var(--color-primary);
-    color: var(--color-background);
-    width: 100%;
-    margin-bottom: 4rem;
-    padding: 2rem;
-}
-
-.id-card-animal>* {
-  max-width: 400px;
-}
-
-.id-card-animal img {
-    clip-path: circle();
-    overflow: hidden;
-    
-}
-
-.id-card-animal-content>* {
-    text-align: center;
-}
-
-/* responsive */
-
-@media screen and (max-width:700px ){
-    .habitat-item {
-        width: 325px;
-    }
-}
-  `,
+  styleUrl: `./habitat.component.css`,
 })
 export class HabitatsComponent implements OnInit {
-  habitats: any;
+  habitats!: Habitats [];
   private readonly habitatService = inject(HabitatsService);
 
-  animals: any;
-  private readonly animalsService = inject(AnimalService);
+  // animals: any;
+  // private readonly animalsService = inject(AnimalService);
+
+  showDetails :number | undefined = undefined
+
+ 
 
   ngOnInit() {
     this.habitatService.getHabitats().then((response) => {
       this.habitats = response;
+
     });
 
-    this.animalsService.getAnimals().then((response) => {
-      this.animals = response;
-    });
+    // this.animalsService.getAnimals().then((response) => {
+    //   this.animals = response;
+    // });
+  }
+  toggleDetails(id: number) {
+    console.log(id)
+   this.showDetails = id
   }
 }
