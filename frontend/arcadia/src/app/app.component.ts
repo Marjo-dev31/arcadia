@@ -4,7 +4,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { ServiceService } from './pages/services/service/service.service';
 import { HabitatsService } from './pages/habitats/services/habitat.service';
-import { AnimalService } from './pages/habitats/services/animal.service';
+import { AnimalService } from './pages/animals/services/animal.service';
 
 
 @Component({

@@ -85,7 +85,7 @@ const animals = [
   },
 ];
 
-app.get("/animaux", (req, res) => {
+app.get("/animal", (req, res) => {
   res.json(animals);
 });
 

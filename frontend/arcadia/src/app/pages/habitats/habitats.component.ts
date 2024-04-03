@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HabitatsService } from './services/habitat.service';
-import { AnimalService } from './services/animal.service';
 import { Habitats } from '../../shared/models';
 
 @Component({
@@ -22,29 +21,13 @@ import { Habitats } from '../../shared/models';
             <p>{{ habitat.description}}</p>
             <ul>
               @for (animal of habitat.animals; track animal) {
-              <li>{{ animal.firstname }}</li>
+              <li (click)="toggleAnimalDetails()">{{ animal.firstname }}</li>
               }
             </ul>
             }
           </div>
         </div>
         }
-        <!-- @for (animal of animals; track animal) {
-        <div class="id-card-animal">
-          <img src="assets/images/tigre.jpg" alt="" />
-
-          <div class="id-card-animal-content">
-            <p>{{ animal.name }}</p>
-            <p>{{ animal.race }}</p>
-            <div>
-              <p>{{ animal.condition }}</p>
-              @if(animal.rapport) {
-              <p>{{ animal.rapport }}</p>
-              }
-            </div>
-          </div>
-        </div>
-        } -->
       </section>
     </main>
   `,
@@ -54,8 +37,7 @@ export class HabitatsComponent implements OnInit {
   habitats!: Habitats [];
   private readonly habitatService = inject(HabitatsService);
 
-  // animals: any;
-  // private readonly animalsService = inject(AnimalService);
+
 
   showDetails :number | undefined = undefined
 
@@ -67,12 +49,13 @@ export class HabitatsComponent implements OnInit {
 
     });
 
-    // this.animalsService.getAnimals().then((response) => {
-    //   this.animals = response;
-    // });
+    
   }
   toggleDetails(id: number) {
-    console.log(id)
    this.showDetails = id
+  }
+
+  toggleAnimalDetails() {
+    alert('you have click')
   }
 }

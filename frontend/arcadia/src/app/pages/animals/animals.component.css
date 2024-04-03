@@ -1,0 +1,27 @@
+  /* style ID card animal */
+  
+  .id-card-animal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    width: 100%;
+    margin-bottom: 4rem;
+    padding: 2rem;
+}
+
+.id-card-animal>* {
+  max-width: 400px;
+}
+
+.id-card-animal img {
+    clip-path: circle();
+    overflow: hidden;
+    
+}
+
+.id-card-animal-content>* {
+    text-align: center;
+}
