@@ -25,6 +25,7 @@ import { Animals } from '../../shared/models';
       }
     </main>
   `,
+  styleUrl: `./animals.component.css`,
 })
 export class AnimalsComponent implements OnInit {
   constructor() {}

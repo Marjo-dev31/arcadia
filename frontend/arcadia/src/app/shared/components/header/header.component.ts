@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
             <li><a [routerLink]="['/habitats']">Habitats</a></li>
             <li><a [routerLink]="['/services']">Services</a></li>
             <li><a [routerLink]="['/contact']">Contact</a></li>
+            <li><a [routerLink]="['/espacepersonnel']">Espace Personnel</a></li>
           </ul>
         </nav>
         <a class="connection-btn" [routerLink]="['/connexion']">Connexion</a>
@@ -37,6 +38,7 @@ import { RouterLink } from '@angular/router';
           <li><a [routerLink]="['/habitats']">Habitats</a></li>
           <li><a [routerLink]="['/services']">Services</a></li>
           <li><a [routerLink]="['/contact']">Contact</a></li>
+          <li><a [routerLink]="['/espacepersonnel']">Espace Personnel</a></li>
           <li><a [routerLink]="['/connexion']">Connexion</a></li>
         </ul>
       </nav>

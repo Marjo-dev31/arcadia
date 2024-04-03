@@ -13,6 +13,6 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'habitats', component: HabitatsComponent },
     { path: 'connexion', component: ConnexionComponent },
-    { path: 'backoffice', component: BackofficeComponent },
+    { path: 'espacepersonnel', component: BackofficeComponent },
 
 ];
