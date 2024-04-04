@@ -1,10 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HabitatsService } from './services/habitat.service';
 import { Habitats } from '../../shared/models';
+import { AnimalsComponent } from '../animals/animals.component';
+import {
+  MatDialog,
+  MatDialogModule,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-habitats',
   standalone: true,
+  imports: [MatDialogModule],
   template: `
     <main>
       <h2>
@@ -16,12 +22,12 @@ import { Habitats } from '../../shared/models';
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img [src]="habitat.image" alt="" class="habitat-img" />
           <div class="habitat-content">
-            <h3>{{habitat.title }}</h3>
+            <h3>{{ habitat.title }}</h3>
             @if (showDetails == habitat.id) {
-            <p>{{ habitat.description}}</p>
+            <p>{{ habitat.description }}</p>
             <ul>
               @for (animal of habitat.animals; track animal) {
-              <li (click)="toggleAnimalDetails()">{{ animal.firstname }}</li>
+              <li (click)="openDialog()">{{ animal.firstname }}</li>
               }
             </ul>
             }
@@ -34,28 +40,25 @@ import { Habitats } from '../../shared/models';
   styleUrl: `./habitat.component.css`,
 })
 export class HabitatsComponent implements OnInit {
-  habitats!: Habitats [];
+  habitats!: Habitats[];
   private readonly habitatService = inject(HabitatsService);
 
+  showDetails: number | undefined = undefined;
 
-
-  showDetails :number | undefined = undefined
-
- 
+  constructor(private matdialog: MatDialog) {}
 
   ngOnInit() {
     this.habitatService.getHabitats().then((response) => {
       this.habitats = response;
-
     });
-
-    
   }
   toggleDetails(id: number) {
-   this.showDetails = id
+    this.showDetails = id;
   }
-
-  toggleAnimalDetails() {
-    alert('you have click')
+  openDialog(): void {
+    console.log('toto', AnimalsComponent);
+    const dialogRef = this.matdialog.open(AnimalsComponent, {
+      width: '250px',
+    });
   }
 }

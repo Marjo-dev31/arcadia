@@ -5,13 +5,15 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { ServiceService } from './pages/services/service/service.service';
 import { HabitatsService } from './pages/habitats/services/habitat.service';
 import { AnimalService } from './pages/animals/services/animal.service';
+import { MatDialogModule } from "@angular/material/dialog";
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   providers: [ServiceService, HabitatsService, AnimalService],
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
