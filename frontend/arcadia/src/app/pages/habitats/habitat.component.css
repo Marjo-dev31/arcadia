@@ -41,7 +41,10 @@
     padding: 0.5rem;
   }
   
-
+  li {
+    list-style: none;
+    padding: 0.5rem;
+  }
   
   /* responsive */
   

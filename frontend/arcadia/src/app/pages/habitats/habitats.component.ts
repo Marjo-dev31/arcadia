@@ -56,9 +56,10 @@ export class HabitatsComponent implements OnInit {
     this.showDetails = id;
   }
   openDialog(): void {
-    console.log('toto', AnimalsComponent);
+    console.log('toto');
     const dialogRef = this.matdialog.open(AnimalsComponent, {
-      width: '250px',
+      width: '400px',
+      data: { }
     });
   }
 }

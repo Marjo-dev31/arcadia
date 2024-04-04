@@ -11,7 +11,7 @@ import { MatDialogClose } from '@angular/material/dialog';
   imports: [MatDialogClose],
   template: `
     <main>
-      <p>Hello</p>
+      
       <div mat-dialog-content>
       @for (animal of animals; track animal) {
       <div class="id-card-animal">
@@ -40,8 +40,30 @@ import { MatDialogClose } from '@angular/material/dialog';
 export class AnimalsComponent implements OnInit {
   constructor() {}
 
-  animals!: Animals[];
+  animalss!: Animals[];
   // private readonly animalsService = inject(AnimalService);
+
+animals = [
+    {
+      id: 1,
+      firstname: "animal1",
+      condition: "bon",
+      race: "gazelle",
+      image: "",
+      veterinarycomments: [],
+      employedcomments: []
+    },
+    {
+      id:2,
+      firstname: "animal2",
+      condition: "mauvais",
+      race: "lion",
+      rapport: "chichi",
+      image: "",
+      veterinarycomments: [],
+      employedcomments: []
+    },
+  ];
 
   ngOnInit() {
     // this.animalsService.getAnimals().then((response) => {
