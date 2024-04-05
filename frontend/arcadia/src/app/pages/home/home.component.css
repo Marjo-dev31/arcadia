@@ -95,7 +95,7 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
-    border: 0.5rem solid var(--color-call-to-action);
+    border: 0.5rem solid var(--color-secondary);
     color: var(--color-font);
     text-shadow: none;
   }
@@ -108,11 +108,16 @@
     background-position: center;
     background-size: cover;
     border-radius: 50%;
-    border: 0.5rem solid var(--color-call-to-action);
+    border: 0.5rem solid var(--color-secondary);
     color: var(--color-font);
     text-shadow: none;
   }
   
+  .stork:hover,
+  .visit:hover {
+    border: 0.5rem solid var(--color-call-to-action);
+  }
+
   .stork h3 {
     position: absolute;
     top: 50%;

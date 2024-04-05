@@ -15,9 +15,15 @@
   
   #logo {
     padding: 0;
-    box-shadow: 3px 0 15px 3px var(--color-call-to-action);
+    box-shadow: 3px 0 15px 3px var(--color-secondary);
     border-radius: 50%;
   }
+
+  #logo:hover {
+    box-shadow: 3px 0 15px 3px var(--color-call-to-action);
+  }
+  
+
   
   .links {
     position: absolute;

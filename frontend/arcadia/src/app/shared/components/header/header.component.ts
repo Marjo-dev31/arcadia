@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
     <header>
       <div class="links">
         <a [routerLink]="['/']" id="logo">
-          <img src="assets/images/logo L.png" alt="logo Arcadia">
+          <img  src="assets/images/logo L.png" alt="logo Arcadia">
         </a>
         <nav class="navbar">
           <ul class="links-pages">
