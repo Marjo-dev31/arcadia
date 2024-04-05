@@ -16,7 +16,7 @@ import { DialogRef } from '@angular/cdk/dialog';
     <main class="id-card-animal">
       <div mat-dialog-content >
         @for (animal of animals; track animal) { @if(animal.id ===
-        this.data.idclicked){
+        this.data.id){
         <div>
           <img src="assets/images/tigre.jpg" alt="" />
 
@@ -41,7 +41,7 @@ import { DialogRef } from '@angular/cdk/dialog';
   styleUrl: `./animals.component.css`,
 })
 export class AnimalsComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { idclicked: number }) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number }) {}
 
   animalss!: Animals[];
   // private readonly animalsService = inject(AnimalService);
@@ -69,7 +69,6 @@ export class AnimalsComponent implements OnInit {
   ];
 
   ngOnInit() {
-    console.log('tata', this.data.idclicked);
     // this.animalsService.getAnimals().then((response) => {
     //   this.animals = response;
     // });
