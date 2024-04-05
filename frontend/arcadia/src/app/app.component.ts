@@ -19,5 +19,5 @@ import { ReviewsService } from './pages/home/services/reviews.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'arcadia';
+title = 'arcadia';
 }

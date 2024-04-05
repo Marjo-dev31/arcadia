@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, Inject, OnInit, inject } from '@angular/core';
+
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports:[RouterLink] ,
+  imports: [RouterLink],
   standalone: true,
   template: `
     <header>
       <div class="links">
         <a [routerLink]="['/']" id="logo">
-          <img  src="assets/images/logo L.png" alt="logo Arcadia">
+          <img src="assets/images/logo L.png" alt="logo Arcadia" />
         </a>
         <nav class="navbar">
           <ul class="links-pages">
@@ -28,7 +30,7 @@ import { RouterLink } from '@angular/router';
         </a>
       </div>
       <div class="hero-scene">
-        <h1>ARCADIA</h1>
+        <h1>Arcadia</h1>
       </div>
     </header>
     <aside id="side-drawer">
@@ -47,7 +49,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  title!: string;
+  constructor(public route: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.route.url);
+    this.title = this.route.url
+  }
 }
