@@ -89,4 +89,29 @@ app.get("/animal", (req, res) => {
   res.json(animals);
 });
 
+const reviews = [
+  {
+    id: 1,
+    pseudo: 'Manon',
+    content: 'Agreable moment en famille',
+    date: '12/03/2023'
+  },
+  {
+    id: 2,
+    pseudo: 'Vanessa',
+    content: 'Animaux heureux',
+    date: '08/06/2023'
+  },
+  {
+    id: 3,
+    pseudo: 'Laurie',
+    content: 'De belles prestations',
+    date: '05/04/2024'
+  }
+];
+
+app.get("/avis", (req,res)=> {
+  res.json(reviews)
+})
+
 app.listen(PORT, () => console.log(`It's alive on port ${PORT}`));

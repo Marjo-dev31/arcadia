@@ -6,13 +6,14 @@ import { ServiceService } from './pages/services/service/service.service';
 import { HabitatsService } from './pages/habitats/services/habitat.service';
 import { AnimalService } from './pages/animals/services/animal.service';
 import { MatDialogModule } from "@angular/material/dialog";
+import { ReviewsService } from './pages/home/services/reviews.service';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  providers: [ServiceService, HabitatsService, AnimalService],
+  providers: [ServiceService, HabitatsService, AnimalService, ReviewsService],
   imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Reviews } from '../../shared/models/reviews.interface';
+import { ReviewsService } from './services/reviews.service';
 
 @Component({
   selector: 'app-home',
@@ -9,33 +11,20 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   constructor() {}
 
-  reviews = [
-    {
-      id: 1,
-      pseudo: 'Manon',
-      content: 'Agreable moment en famille',
-      date: '12/03/2023'
-    },
-    {
-      id: 2,
-      pseudo: 'Vanessa',
-      content: 'Animaux heureux',
-      date: '08/06/2023'
-    },
-    {
-      id: 3,
-      pseudo: 'Laurie',
-      content: 'De belles prestations',
-      date: '05/04/2024'
-    }
-  ];
+  reviews!: Reviews[];
 
-  result:number = 1 
+  private readonly reviewService = inject(ReviewsService)
+  result: number = 1;
 
-  ngOnInit() {console.log('toto',this.result)}
 
-  moreReview(min: number, max: number): number { 
-  return this.result = Math.floor(Math.random() * (max-min + 1) + min)
+  ngOnInit() {
+    this.reviewService.getReviews().then((response) => {
+      this.reviews = response;
+    });
+    console.log('toto', this.result, this.reviews);
   }
-  
+
+  moreReview(min: number, max: number): number {
+    return (this.result = Math.floor(Math.random() * (max - min + 1) + min));
+  }
 }

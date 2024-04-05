@@ -72,19 +72,16 @@
   <section class="reviews-section">
     <div class="reviews">
       <h3>Découvrez ce que nos visiteurs ont pensé de leurs séjours :</h3>
+      <div class="review">
       @for(review of reviews; track review){ 
-            @if(review.id == this.result){
-                <div class="review">
-        
-            <p class="review-content">
-            {{review.content}}
-            </p>
+            @if(review.id === this.result){
+            <p class="review-content">{{review.content}}</p>
             <p class="review-name">{{review.pseudo}}</p>
             <p class="review-date">{{review.date}}</p>
            
+        } }
         <button class="more-review-btn" (click)="moreReview(1, reviews.length)">+ d'avis</button>
-      </div> }
-        }
+    </div>
       <h3>Laissez nous votre avis en <a href="#new-review">cliquant ici</a></h3>
       <div class="new-review" id="new-review">
         <form class="form-review">
