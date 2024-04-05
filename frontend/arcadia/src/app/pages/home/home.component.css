@@ -178,13 +178,9 @@
     padding-right: 1.5rem;
   }
   
-  .more-review {
-    width: 50%;
-    border-radius: 15px;
-    padding: 0.5rem;
+  .more-review-btn {
     background-color: var(--color-background);
     color: var(--color-primary);
-    font-family: var(--font-family-title);
     margin: 1rem;
   }
   
@@ -210,15 +206,6 @@
   
   .form-review > * {
     margin: 0.5rem;
-  }
-  
-  .form-review-btn {
-    width: 50%;
-    border-radius: 15px;
-    padding: 0.5rem;
-    background-color: var(--color-primary);
-    color: var(--color-background);
-    font-family: var(--font-family-title);
   }
   
   button:hover {

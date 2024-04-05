@@ -44,7 +44,7 @@ import { Component, OnInit } from '@angular/core';
     max-width: 300px;
     align-items: center;
     align-content: center;
-    margin: auto;
+    margin: 3rem auto 0;
     border: 0.3rem solid var(--color-font);
     border-radius: 20px ;
     padding: 2rem;
@@ -68,11 +68,6 @@ import { Component, OnInit } from '@angular/core';
 
 .signin-form button {
     margin-top: 1rem;
-    border-radius: 15px;
-    background-color: var(--color-primary);
-    color: var(--color-background);
-    font-family: var(--font-family-title);
-    padding: 0.5rem 1rem;
     transform: translateX(50%);
 }
 
@@ -94,10 +89,6 @@ import { Component, OnInit } from '@angular/core';
     color: var(--color-font);
     padding: 0.5rem;
     text-shadow: none;
-}
-
-h3 {
-    margin-bottom: 3rem;
 }
     `,
 })

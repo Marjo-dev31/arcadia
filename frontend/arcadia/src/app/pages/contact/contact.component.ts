@@ -64,15 +64,6 @@ import { Component, OnInit } from '@angular/core';
     height: 50px;
 }
 
-.contact-form button {
-  background-color: var(--color-primary);
-  color: var(--color-background);
-  font-family: var(--font-family-title);
-  width: 50%;
-  padding: 0.5rem;
-  border-radius: 15px;
-}
-
 .contact-form button:hover {
   background-color: var(--color-call-to-action);
   color: var(--color-font);

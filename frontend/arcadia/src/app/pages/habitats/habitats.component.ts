@@ -4,7 +4,7 @@ import { Habitats } from '../../shared/models';
 import { AnimalsComponent } from '../animals/animals.component';
 import {
   MatDialog,
-  MatDialogModule,
+  MatDialogModule, MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 
 @Component({
@@ -27,7 +27,7 @@ import {
             <p>{{ habitat.description }}</p>
             <ul>
               @for (animal of habitat.animals; track animal) {
-              <li (click)="openDialog()">{{ animal.firstname }}</li>
+              <li (click)="openDialog(animal.id)">{{ animal.firstname }}</li>
               }
             </ul>
             }
@@ -55,11 +55,12 @@ export class HabitatsComponent implements OnInit {
   toggleDetails(id: number) {
     this.showDetails = id;
   }
-  openDialog(): void {
-    console.log('toto');
+  openDialog(id: number): void {
+    console.log('toto', id);
     const dialogRef = this.matdialog.open(AnimalsComponent, {
       width: '400px',
-      data: { }
+      data: {idclicked: id},
     });
+    console.log('titi', dialogRef);
   }
 }

@@ -89,7 +89,7 @@ import { Component, OnInit } from '@angular/core';
             </p>
             <p class="review-name">Manon</p>
             <p class="review-date">12/03/2024</p>
-            <button class="more-review">+ d'avis</button>
+            <button class="more-review-btn">+ d'avis</button>
           </div>
           <h3>
             Laissez nous votre avis en <a href="#new-review">cliquant ici</a>

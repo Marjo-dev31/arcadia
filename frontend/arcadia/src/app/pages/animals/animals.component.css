@@ -8,20 +8,33 @@
     background-color: var(--color-primary);
     color: var(--color-background);
     width: 100%;
-    margin-bottom: 4rem;
-    padding: 2rem;
-}
-
-.id-card-animal>* {
-  max-width: 400px;
+    padding-bottom: 2rem;
+    /* padding: 2rem; */
 }
 
 .id-card-animal img {
-    clip-path: circle();
-    overflow: hidden;
-    
+  /* clip-path: circle(); */
+  overflow: hidden;
+  max-height: 300px;
+  max-width: 400px;
 }
 
 .id-card-animal-content>* {
     text-align: center;
+}
+
+.mat-dialog-actions {
+  width: 100%;
+  text-align: center;
+}
+
+.mat-dialog-actions button {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border: none;
+}
+
+.mat-dialog-actions button:hover {
+  background-color: var(--color-call-to-action);
+  color: var(--color-font);
 }
