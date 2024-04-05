@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
     this.reviewService.getReviews().then((response) => {
       this.reviews = response;
     });
-    console.log('toto', this.result, this.reviews);
   }
 
   moreReview(min: number, max: number): number {

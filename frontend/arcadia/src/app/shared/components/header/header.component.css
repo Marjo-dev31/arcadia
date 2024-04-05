@@ -23,8 +23,6 @@
     box-shadow: 3px 0 15px 3px var(--color-call-to-action);
   }
   
-
-  
   .links {
     position: absolute;
     top: 0;
@@ -109,7 +107,7 @@
     margin: 1rem 0;
   }
   
-  @media (min-width: 600px) {
+  @media (min-width: 850px) {
     .links-pages {
       display: flex;
       padding: 0;
