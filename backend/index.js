@@ -120,7 +120,7 @@ app.get("/avis", (req,res)=> {
 
 app.post("/avis", (req, res)=> {
   req.body.id = uuidv4()
-  console.log(req.body, 'toto')
+  // console.log(req.body, 'toto')
   reviews.push(req.body);
   return res.send(req.body)
 })
