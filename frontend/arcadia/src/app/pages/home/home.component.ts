@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Reviews } from '../../shared/models/reviews.interface';
+import { Review, ReviewPost } from '../../shared/models/reviews.interface';
 import { ReviewsService } from './services/reviews.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { ReviewsService } from './services/reviews.service';
 export class HomeComponent implements OnInit {
   constructor() {}
 
-  reviews!: Reviews[];
+  reviews!: Review[];
+  newReview!: ReviewPost;
 
   private readonly reviewService = inject(ReviewsService)
   result: number = 1;
@@ -26,4 +27,6 @@ export class HomeComponent implements OnInit {
   moreReview(min: number, max: number): number {
     return (this.result = Math.floor(Math.random() * (max - min + 1) + min));
   }
+
+
 }

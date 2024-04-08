@@ -114,4 +114,14 @@ app.get("/avis", (req,res)=> {
   res.json(reviews)
 })
 
+
+app.post("/avis"), (req, res)=> {
+  
+}
+
+
+
+
+
+
 app.listen(PORT, () => console.log(`It's alive on port ${PORT}`));

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HabitatsService } from './services/habitat.service';
-import { Habitats } from '../../shared/models';
+import { Habitat } from '../../shared/models';
 import { AnimalsComponent } from '../animals/animals.component';
 import {
   MatDialog,
@@ -40,7 +40,7 @@ import {
   styleUrl: `./habitat.component.css`,
 })
 export class HabitatsComponent implements OnInit {
-  habitats!: Habitats[];
+  habitats!: Habitat[];
   private readonly habitatService = inject(HabitatsService);
 
   showDetails: number | undefined = undefined;

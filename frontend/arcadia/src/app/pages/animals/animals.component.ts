@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { AnimalService } from './services/animal.service';
-import { Animals } from '../../shared/models';
+import { Animal } from '../../shared/models';
 import {
   MAT_DIALOG_DATA,
   MatDialogClose,
@@ -43,7 +43,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 export class AnimalsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number }) {}
 
-  animalss!: Animals[];
+  animalss!: Animal[];
   // private readonly animalsService = inject(AnimalService);
 
   animals = [

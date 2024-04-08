@@ -1,4 +1,4 @@
-export interface Animals {
+export interface Animal {
     id: number,
     firstname: string,
     condition: string,
