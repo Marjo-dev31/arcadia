@@ -5,6 +5,7 @@ const cors = require("cors");
 const PORT = 8000;
 
 app.use(cors());
+app.use(require('body-parser').json());
 
 const services = [
   {
@@ -115,9 +116,10 @@ app.get("/avis", (req,res)=> {
 })
 
 
-app.post("/avis"), (req, res)=> {
-  
-}
+app.post("/avis", (req, res)=> {
+  reviews.push(req.body)
+  return res.send(req.body)
+})
 
 
 

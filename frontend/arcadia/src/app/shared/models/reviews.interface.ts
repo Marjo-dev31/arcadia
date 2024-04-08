@@ -7,5 +7,6 @@ export interface Review {
 
 export interface ReviewPost {
     pseudo: string,
-    content: string
+    content: string,
+    date: string
 }

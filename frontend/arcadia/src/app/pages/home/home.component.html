@@ -73,28 +73,38 @@
     <div class="reviews">
       <h3>Découvrez ce que nos visiteurs ont pensé de leurs séjours :</h3>
       <div class="review">
-      @for(review of reviews; track review){ 
-            @if(review.id === this.result){
-            <p class="review-content">{{review.content}}</p>
-            <p class="review-name">{{review.pseudo}}</p>
-            <p class="review-date">{{review.date}}</p>
-           
-        } }
-        <button class="more-review-btn" (click)="moreReview(1, reviews.length)">+ d'avis</button>
-    </div>
+        @for(review of reviews; track review){ @if(review.id === this.result){
+        <p class="review-content">{{ review.content }}</p>
+        <p class="review-name">{{ review.pseudo }}</p>
+        <p class="review-date">{{ review.date }}</p>
+        }
+      }
+        <button class="more-review-btn" (click)="moreReview(1, reviews.length)">
+          + d'avis
+        </button>
+      </div>
       <h3>Laissez nous votre avis en <a href="#new-review">cliquant ici</a></h3>
       <div class="new-review" id="new-review">
-        <form class="form-review">
+        <form class="form-review" #f="ngForm" name="reviewform" (ngSubmit)="onSubmit()">
           <div>
-            <label for="name">Pseudo :</label>
-            <input type="text" name="name" id="name" />
+            <label for="name">Pseudo : </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              [(ngModel)]="newReview.pseudo"
+              #pseudo="ngModel"
+            />
           </div>
+          <div>{{newReview.pseudo}}</div>
           <textarea
-            name=""
+            name="content"
             id=""
             cols="30"
             rows="10"
             placeholder="Ecrivez votre avis ici..."
+            [(ngModel)]="newReview.content"
+            #content="ngModel"
           ></textarea>
           <button class="form-review-btn" action="">Envoyer</button>
         </form>
