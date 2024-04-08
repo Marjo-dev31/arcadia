@@ -43,7 +43,8 @@ export class ConnexionComponent implements OnInit {
 
   user: User = {
     email: '',
-    password: ''
+    password: '',
+    role: ''
   }
 
 
@@ -52,6 +53,6 @@ export class ConnexionComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.user)
-    
+
   }
 }
