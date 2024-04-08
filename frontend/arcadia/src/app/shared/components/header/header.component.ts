@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { Component, Inject, OnInit, inject } from '@angular/core';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -5,7 +6,7 @@ import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, NgStyle],
   standalone: true,
   template: `
     <header>
@@ -23,7 +24,7 @@ import { tap } from 'rxjs';
           </ul>
         </nav>
         <a class="connection-btn" [routerLink]="['/connexion']">Connexion</a>
-        <a href="#side-drawer" class="menu-btn">
+        <a class="menu-btn" (click)="toggleSideDrawer()">
           <span></span>
           <span></span>
           <span></span>
@@ -33,7 +34,9 @@ import { tap } from 'rxjs';
         <h1>Arcadia</h1>
       </div>
     </header>
-    <aside id="side-drawer">
+    <aside id="side-drawer"
+    [ngStyle]="{'display': showSideDrawer ? 'block' : 'none' }"
+    (click)="toggleSideDrawer()">
       <nav>
         <ul>
           <li><a [routerLink]="['/']">Accueil</a></li>
@@ -49,11 +52,19 @@ import { tap } from 'rxjs';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
+  showSideDrawer = false;
   title!: string;
   constructor(public route: Router) {}
 
   ngOnInit() {
-    console.log(this.route.url);
-    this.title = this.route.url
+    // console.log(this.route.url);
+    // this.title = this.route.url
+    // console.log(this.showSideDrawer)
   }
+
+  toggleSideDrawer(){
+    this.showSideDrawer = !this.showSideDrawer;
+  }
+  
+
 }
