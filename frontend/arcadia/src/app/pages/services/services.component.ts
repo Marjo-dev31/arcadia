@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ServiceService } from './service/service.service';
 import { JsonPipe } from '@angular/common';
+import { Service } from '../../shared/models/service.interface';
 
 @Component({
   selector: 'app-services',
@@ -87,7 +88,7 @@ import { JsonPipe } from '@angular/common';
   `
 })
 export class ServicesComponent implements OnInit {
-  services:any
+  services!:Service[]
   private readonly serviceService = inject(ServiceService);
   
   
