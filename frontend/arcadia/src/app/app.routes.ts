@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { ConnexionComponent } from './pages/connexion/connexion.component';
+import { ConnexionComponent } from './pages/connection/connection.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { HabitatsComponent } from './pages/habitats/habitats.component';

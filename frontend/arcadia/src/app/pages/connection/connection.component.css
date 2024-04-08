@@ -1,0 +1,50 @@
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    align-items: center;
+    align-content: center;
+    margin: 3rem auto 0;
+    border: 0.3rem solid var(--color-font);
+    border-radius: 20px ;
+    padding: 2rem;  
+}
+
+.signin-form > * {
+    padding: 0.5rem;
+}
+
+.signin-form p {
+    margin: 0;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.signin-form input {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.signin-form button {
+    margin-top: 1rem;
+    transform: translateX(50%);
+}
+
+.signin-form button:hover {
+    background-color: var(--color-call-to-action);
+    color: var(--color-font);
+  }
+
+.password-forgot {
+    display: flex;
+    justify-content: center;
+    font-size: var(--font-size-footer);
+    transform: translateX(5%);
+}
+
+#password-forgot-link,
+#contact-link {
+    color: var(--color-font);
+    padding: 0.5rem;
+    text-shadow: none;
+}
