@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const {v4: uuidv4} = require('uuid');
 
 const PORT = 8000;
 
 app.use(cors());
 app.use(require('body-parser').json());
+
 
 const services = [
   {
@@ -117,7 +119,9 @@ app.get("/avis", (req,res)=> {
 
 
 app.post("/avis", (req, res)=> {
-  reviews.push(req.body)
+  req.body.id = uuidv4()
+  console.log(req.body, 'toto')
+  reviews.push(req.body);
   return res.send(req.body)
 })
 

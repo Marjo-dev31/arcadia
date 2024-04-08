@@ -6,6 +6,7 @@ export interface Review {
 }
 
 export interface ReviewPost {
+    // id: number,
     pseudo: string,
     content: string,
     date: string

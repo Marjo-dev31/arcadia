@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   reviews!: Review[];
   newReview: ReviewPost = {
+    // id: 0,
     pseudo: '',
     content: '',
     date: '12/03/2024'
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.newReview)
+    // console.log(this.newReview)
     this.reviewService.addReview(this.newReview).subscribe();
     this.newReview.pseudo = '';
     this.newReview.content = '';
