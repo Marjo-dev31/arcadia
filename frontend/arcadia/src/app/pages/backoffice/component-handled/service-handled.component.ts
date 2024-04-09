@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule} from '@angular/material/table';
 import { Service } from '../../../shared/models/service.interface';
 import { ServiceService } from '../../services/service/service.service';
 

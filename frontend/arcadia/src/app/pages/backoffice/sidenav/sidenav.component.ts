@@ -3,13 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ServiceHandledComponent } from '../component-handled/service-handled.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle, ServiceHandledComponent, RouterLink, RouterOutlet],
+  imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle, RouterLink, RouterOutlet],
   template: `
     <mat-sidenav-container autosize>
       <mat-sidenav #drawer mode="side" class="sidenav" opened>
@@ -17,7 +16,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         <ul>
           <li><a href="">Horaires</a></li>
           <li><a [routerLink]="['/espacepersonnel/services']">Services</a></li>
-          <li><a href="">Habitats</a></li>
+          <li><a [routerLink]="['/espacepersonnel/habitats']">Habitats</a></li>
           <li><a href="">Animaux</a></li>
           <li><a href="">Compte-rendu vétérinaire</a></li>
           <li><a href="">Compte-rendu employé</a></li>
