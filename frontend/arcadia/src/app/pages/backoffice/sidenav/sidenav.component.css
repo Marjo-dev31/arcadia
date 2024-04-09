@@ -1,0 +1,31 @@
+mat-sidenav-container {
+  height: 100vh;
+}
+
+mat-sidenav {
+  background-color: var(--color-primary);
+  width: 300px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  padding: 1rem;
+  list-style: none;
+}
+
+li:hover {
+  background-color: var(--color-background);
+  border-radius: 6px;
+  color: var(--color-font);
+}
+
+a:hover {
+  color: var(--color-font);
+  box-shadow: none;
+  border-radius: O;
+  text-shadow: none;
+}
+

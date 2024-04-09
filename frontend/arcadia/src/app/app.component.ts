@@ -9,6 +9,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { ReviewsService } from './pages/home/services/reviews.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 
 
@@ -16,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-root',
   standalone: true,
   providers: [ServiceService, HabitatsService, AnimalService, ReviewsService],
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule, FormsModule, HttpClientModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule, FormsModule, HttpClientModule, MatSidenavModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
