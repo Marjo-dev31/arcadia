@@ -10,7 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle],
   template: `
     <mat-sidenav-container autosize>
-      <mat-sidenav #drawer mode="side" class="sidenav">
+      <mat-sidenav #drawer mode="side" class="sidenav" opened>
         <h3>Bonjour user</h3>
         <ul>
           <li><a href="">Horaires</a></li>
@@ -30,6 +30,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
             <mat-icon>menu</mat-icon>
           </button>
         </mat-toolbar>
+        <h3>Bienvenue dans votre espace personnel</h3>
       </mat-sidenav-content>
     </mat-sidenav-container>
   `,
