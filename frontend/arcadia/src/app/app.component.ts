@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -19,7 +20,7 @@ import { MatIconModule } from "@angular/material/icon";
   selector: 'app-root',
   standalone: true,
   providers: [ServiceService, HabitatsService, AnimalService, ReviewsService],
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule, FormsModule, HttpClientModule, MatSidenavModule, MatToolbarModule, MatIconModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule, FormsModule, HttpClientModule, MatSidenavModule, MatToolbarModule, MatIconModule, MatTableModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
