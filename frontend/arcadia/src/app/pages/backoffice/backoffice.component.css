@@ -1,0 +1,60 @@
+body {
+    text-align: center;
+  }
+  
+  section {
+    border-bottom: solid 1rem var(--color-secondary);
+    padding: 4rem;
+  }
+  
+  .btn {
+    width: 100px;
+    border-radius: 15px;
+    padding: 0.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    font-family: var(--font-family-title);
+    margin: 1rem ;
+  }
+  
+  .add-btn {
+    width: 100px;
+    clip-path: circle();
+    font-size: var(--font-size-big-title-h1);
+    border: none;
+    color: var(--color-background);
+    background-color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  .reverse-color-btn {
+      color: var(--color-primary);
+      background-color: var(--color-background);
+  }
+  
+  .habitat-item {
+      width: 300px;
+      align-items: center;
+  }
+  
+  .account-creation-form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      align-items: center;
+      align-content: center;
+      margin: auto;
+      border: 0.3rem solid var(--color-font);
+      border-radius: 20px ;
+      padding: 1rem;
+  }
+  
+  .account-creation-form>* {
+      padding: 0.5rem;
+  }
+  
+  .account-creation-form input {
+      border-radius: 15px;
+  }
