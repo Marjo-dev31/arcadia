@@ -10,6 +10,8 @@ import { ReviewsService } from './pages/home/services/reviews.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
 
 
 
@@ -17,7 +19,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
   selector: 'app-root',
   standalone: true,
   providers: [ServiceService, HabitatsService, AnimalService, ReviewsService],
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule, FormsModule, HttpClientModule, MatSidenavModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, MatDialogModule, FormsModule, HttpClientModule, MatSidenavModule, MatToolbarModule, MatIconModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

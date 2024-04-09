@@ -4,10 +4,11 @@ mat-sidenav-container {
 
 mat-sidenav {
   background-color: var(--color-primary);
-  width: 300px;
+  max-width: 300px;
 }
 
 ul {
+margin-top: 3rem;
   padding: 0;
 }
 
@@ -19,13 +20,25 @@ li {
 li:hover {
   background-color: var(--color-background);
   border-radius: 6px;
-  color: var(--color-font);
+}
+
+a {
+    text-shadow: none;
 }
 
 a:hover {
   color: var(--color-font);
   box-shadow: none;
   border-radius: O;
-  text-shadow: none;
 }
 
+mat-toolbar {
+    padding: 0;
+}
+
+.icon-btn {
+border-radius: 0;
+width: 50px;
+position: absolute;
+top: 0;
+}

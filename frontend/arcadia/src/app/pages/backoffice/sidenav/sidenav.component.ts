@@ -1,13 +1,17 @@
+import { NgStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule],
+  imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle],
   template: `
     <mat-sidenav-container autosize>
-      <mat-sidenav [opened]="true" mode="side" class="sidenav">
+      <mat-sidenav #drawer mode="side" class="sidenav">
+        <h3>Bonjour user</h3>
         <ul>
           <li><a href="">Horaires</a></li>
           <li><a href="">Services</a></li>
@@ -20,7 +24,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
           <li><a href="">Popularité des animaux</a></li>
         </ul>
       </mat-sidenav>
-      <mat-sidenav-content>main content</mat-sidenav-content>
+      <mat-sidenav-content>
+        <mat-toolbar>
+          <button mat-icon-button class="icon-btn" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </mat-toolbar>
+      </mat-sidenav-content>
     </mat-sidenav-container>
   `,
   styleUrl: `./sidenav.component.css`,
@@ -28,5 +38,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 export class SidenavComponent implements OnInit {
   constructor() {}
 
+  sidenavState = false;
   ngOnInit() {}
 }
