@@ -5,14 +5,14 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { HabitatsComponent } from './pages/habitats/habitats.component';
 import { BackofficeComponent } from './pages/backoffice/backoffice.component';
-
+import { ServiceHandledComponent } from './pages/backoffice/component-handled/service-handled.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'services', component: ServicesComponent },
-    { path: 'contact', component: ContactComponent },
-    { path: 'habitats', component: HabitatsComponent },
-    { path: 'connexion', component: ConnexionComponent },
-    { path: 'espacepersonnel', component: BackofficeComponent },
-
+  { path: '', component: HomeComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'habitats', component: HabitatsComponent },
+  { path: 'connexion', component: ConnexionComponent },
+  { path: 'espacepersonnel', component: BackofficeComponent, children: [{path: 'services', component: ServiceHandledComponent}]},
+  
 ];

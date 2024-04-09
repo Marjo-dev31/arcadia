@@ -4,18 +4,19 @@ import { MatIcon } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ServiceHandledComponent } from '../component-handled/service-handled.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle, ServiceHandledComponent],
+  imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle, ServiceHandledComponent, RouterLink, RouterOutlet],
   template: `
     <mat-sidenav-container autosize>
       <mat-sidenav #drawer mode="side" class="sidenav" opened>
         <h3>Bonjour user</h3>
         <ul>
           <li><a href="">Horaires</a></li>
-          <li><a href="">Services</a></li>
+          <li><a [routerLink]="['/espacepersonnel/services']">Services</a></li>
           <li><a href="">Habitats</a></li>
           <li><a href="">Animaux</a></li>
           <li><a href="">Compte-rendu vétérinaire</a></li>
@@ -33,7 +34,8 @@ import { ServiceHandledComponent } from '../component-handled/service-handled.co
             <mat-icon>menu</mat-icon>
           </button>
         </mat-toolbar>
-        <app-service-handled></app-service-handled>
+        <router-outlet></router-outlet>
+        
       </mat-sidenav-content>
     </mat-sidenav-container>
   `,
