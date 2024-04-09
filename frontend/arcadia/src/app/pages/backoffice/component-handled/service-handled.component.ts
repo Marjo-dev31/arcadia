@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import { Service } from '../../../shared/models/service.interface';
+import { ServiceService } from '../../services/service/service.service';
 
 @Component({
     selector: 'app-service-handled',
@@ -24,7 +26,7 @@ import {MatTableModule} from '@angular/material/table';
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Action</th>
             <td mat-cell *matCellDef>
-                <mat-icon>edit square</mat-icon>
+                <mat-icon>edit</mat-icon>
                 <mat-icon>delete</mat-icon>
             </td>
         </ng-container>
@@ -53,21 +55,17 @@ import {MatTableModule} from '@angular/material/table';
 })
 
 export class ServiceHandledComponent implements OnInit {
-    constructor() { }
+    constructor() {}
+
 displayColums: string[] = ['title', 'description', 'image', 'actions'];
-datasource = [
-    {
-      title: "Visite guidée avec Manu",
-      description:
-        "Manu vous propose ses services afin de vous faire découvrir plus en détails l'habitat de votre choix. Il vous expliquera la vie ausein de celui-ci et décryptera pour vous la faune et la flore. Pensez à vous positionner dès votre arrivée au parc, les places sont limitées. Service gratuit",
-      image: "assets/images/tour-guide-6816049_1280.jpg",
-    },
-    {
-      title: "Petit Train",
-      description: "Faites le tour du zoo à bord du petit train touristique",
-      image: "assets/images/panneau.jpg",
-    },
-  ]
-    ngOnInit() { }
+
+datasource! :Service[];
+private readonly serviceService = inject(ServiceService);
+
+    ngOnInit() { 
+        this.serviceService.getServices().then(response => {
+            this.datasource = response
+        })
+    }
 
 }
