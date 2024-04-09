@@ -1,0 +1,16 @@
+img {
+    width: 100px
+}
+
+mat-icon {
+margin: 0 1rem;
+display : inline;
+}
+
+.add-icon {
+    display: flex;
+    margin: auto;
+    margin-top: 2rem;
+    color: var(--color-primary);
+    transform: scale(2);
+}

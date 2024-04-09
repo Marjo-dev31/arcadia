@@ -26,7 +26,7 @@ import { ServiceService } from '../../services/service/service.service';
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Action</th>
             <td mat-cell *matCellDef>
-                <mat-icon>edit</mat-icon>
+                <mat-icon>create</mat-icon>
                 <mat-icon>delete</mat-icon>
             </td>
         </ng-container>
@@ -34,24 +34,9 @@ import { ServiceService } from '../../services/service/service.service';
     <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
     <tr mat-row *matRowDef="let row; columns: displayColums;"></tr>
     </table>
-    <button class="add-btn">+</button>
+    <mat-icon class="add-icon">add_circle_outline</mat-icon>
     `,
-    styles: `
-    img {
-        width: 100px
-    }
-    .add-btn {
-    width: 50px;
-    text-align: center;
-    clip-path: circle();
-    font-size: var(--font-size-big-title-h1);
-    color: var(--color-background);
-    background-color: var(--color-primary);
-    display: flex;
-    justify-content: center;
-    margin: auto;
-  }
-    `
+    styleUrl: `./component-handled.component.css`,
 })
 
 export class ServiceHandledComponent implements OnInit {

@@ -8,6 +8,7 @@ import { BackofficeComponent } from './pages/backoffice/backoffice.component';
 import { ServiceHandledComponent } from './pages/backoffice/component-handled/service-handled.component';
 import { HabitatHandledComponent } from './pages/backoffice/component-handled/habitat-handled.component';
 import { AnimalHandledComponent } from './pages/backoffice/component-handled/animal-handled.component';
+import { ReviewHandledComponent } from './pages/backoffice/component-handled/review-handled.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +22,8 @@ export const routes: Routes = [
     children: [
       { path: 'services', component: ServiceHandledComponent },
       { path: 'habitats', component: HabitatHandledComponent },
-      { path: 'animaux', component: AnimalHandledComponent}
+      { path: 'animaux', component: AnimalHandledComponent},
+      { path: 'avis', component: ReviewHandledComponent}
     ],
   },
 ];
