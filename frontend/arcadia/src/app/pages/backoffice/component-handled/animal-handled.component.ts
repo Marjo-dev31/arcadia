@@ -10,7 +10,7 @@ import { AnimalService } from '../../animals/services/animal.service';
   standalone: true,
   imports: [MatTableModule, MatIconModule],
   template: `
-    <h3>Habitats</h3>
+    <h3>Animaux</h3>
     <table mat-table [dataSource]="datasource">
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef>Prénom</th>
