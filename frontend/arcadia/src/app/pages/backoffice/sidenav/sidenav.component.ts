@@ -21,13 +21,13 @@ import { RouterLink, RouterOutlet } from '@angular/router';
           <li><a >Compte-rendu vétérinaire</a></li>
           <li><a href="">Compte-rendu employé</a></li>
           <li><a [routerLink]="['/espacepersonnel/avis']">Modulation des avis</a></li>
-          <li><a href="">Création de compte</a></li>
+          <li><a [routerLink]="['/espacepersonnel/creationdecompte']">Création de compte</a></li>
           <li><a href="">Popularité des animaux</a></li>
         </ul>
       </mat-sidenav>
       
       <mat-sidenav-content>
-        <h3>Bienvenue dans votre espace personnel</h3>
+        <h2>Bienvenue dans votre espace personnel</h2>
         <mat-toolbar>
           <button mat-icon-button class="icon-btn" (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>

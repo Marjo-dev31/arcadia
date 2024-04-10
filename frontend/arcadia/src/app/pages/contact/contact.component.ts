@@ -64,11 +64,6 @@ import { Component, OnInit } from '@angular/core';
     height: 50px;
 }
 
-.contact-form button:hover {
-  background-color: var(--color-call-to-action);
-  color: var(--color-font);
-}
-
 ::placeholder {
   font-family: var(--font-family-content);
   color: var(--color-font);

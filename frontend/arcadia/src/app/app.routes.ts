@@ -9,6 +9,7 @@ import { ServiceHandledComponent } from './pages/backoffice/component-handled/se
 import { HabitatHandledComponent } from './pages/backoffice/component-handled/habitat-handled.component';
 import { AnimalHandledComponent } from './pages/backoffice/component-handled/animal-handled.component';
 import { ReviewHandledComponent } from './pages/backoffice/component-handled/review-handled.component';
+import { AccountHandledComponent } from './pages/backoffice/component-handled/account-handled.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,7 +24,8 @@ export const routes: Routes = [
       { path: 'services', component: ServiceHandledComponent },
       { path: 'habitats', component: HabitatHandledComponent },
       { path: 'animaux', component: AnimalHandledComponent},
-      { path: 'avis', component: ReviewHandledComponent}
+      { path: 'avis', component: ReviewHandledComponent},
+      { path: 'creationdecompte', component: AccountHandledComponent}
     ],
   },
 ];

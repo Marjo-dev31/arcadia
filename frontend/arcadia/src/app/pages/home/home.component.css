@@ -212,12 +212,7 @@
   .form-review > * {
     margin: 0.5rem;
   }
-  
-  button:hover {
-    background-color: var(--color-call-to-action);
-    color: var(--color-font);
-  }
-  
+
   .leaf {
     position: absolute;
     top: 30%;

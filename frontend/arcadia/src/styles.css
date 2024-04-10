@@ -86,3 +86,8 @@ button {
   padding: 0.5rem;
   border-radius: 15px;
 }
+
+button:hover {
+  background-color: var(--color-call-to-action);
+  color: var(--color-font);
+}

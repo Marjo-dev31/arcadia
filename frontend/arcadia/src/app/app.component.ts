@@ -13,6 +13,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { SidenavComponent } from './pages/backoffice/sidenav/sidenav.component';
 
 @Component({
@@ -30,7 +33,9 @@ import { SidenavComponent } from './pages/backoffice/sidenav/sidenav.component';
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
-    SidenavComponent
+    SidenavComponent,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
