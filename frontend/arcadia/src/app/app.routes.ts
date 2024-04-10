@@ -5,11 +5,12 @@ import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { HabitatsComponent } from './pages/habitats/habitats.component';
 import { BackofficeComponent } from './pages/backoffice/backoffice.component';
-import { ServiceHandledComponent } from './pages/backoffice/component-handled/service-handled.component';
-import { HabitatHandledComponent } from './pages/backoffice/component-handled/habitat-handled.component';
-import { AnimalHandledComponent } from './pages/backoffice/component-handled/animal-handled.component';
-import { ReviewHandledComponent } from './pages/backoffice/component-handled/review-handled.component';
-import { AccountHandledComponent } from './pages/backoffice/component-handled/account-handled.component';
+import { ServiceHandledComponent } from './pages/backoffice/component-handled/admin/service-handled.component';
+import { HabitatHandledComponent } from './pages/backoffice/component-handled/admin/habitat-handled.component';
+import { AnimalHandledComponent } from './pages/backoffice/component-handled/admin/animal-handled.component';
+import { ReviewHandledComponent } from './pages/backoffice/component-handled/employed/review-handled.component';
+import { AccountHandledComponent } from './pages/backoffice/component-handled/admin/account-handled.component';
+import { VeterinarianReportHandledComponent } from './pages/backoffice/component-handled/veterinarian/veterinarian-report-handled.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +26,8 @@ export const routes: Routes = [
       { path: 'habitats', component: HabitatHandledComponent },
       { path: 'animaux', component: AnimalHandledComponent},
       { path: 'avis', component: ReviewHandledComponent},
-      { path: 'creationdecompte', component: AccountHandledComponent}
+      { path: 'creationdecompte', component: AccountHandledComponent},
+      { path: 'rapportveterinaire', component: VeterinarianReportHandledComponent},
     ],
   },
 ];

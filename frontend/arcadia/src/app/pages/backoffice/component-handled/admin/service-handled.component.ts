@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule} from '@angular/material/table';
-import { Service } from '../../../shared/models/service.interface';
-import { ServiceService } from '../../services/service/service.service';
+import { Service } from '../../../../shared/models/service.interface';
+import { ServiceService } from '../../../services/service/service.service';
 
 @Component({
     selector: 'app-service-handled',
@@ -36,7 +36,7 @@ import { ServiceService } from '../../services/service/service.service';
     </table>
     <mat-icon class="add-icon">add_circle_outline</mat-icon>
     `,
-    styleUrl: `./component-handled.component.css`,
+    styleUrl: `../component-handled.component.css`,
 })
 
 export class ServiceHandledComponent implements OnInit {

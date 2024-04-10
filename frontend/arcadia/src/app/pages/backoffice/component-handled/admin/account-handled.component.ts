@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../../shared/models/user.interface';
+import { User } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -64,7 +64,7 @@ import { CommonModule } from '@angular/common';
       </form>
     </div>
   `,
-  styleUrl: `./component-handled.component.css`,
+  styleUrl: `../component-handled.component.css`,
 })
 export class AccountHandledComponent implements OnInit {
   constructor() {}

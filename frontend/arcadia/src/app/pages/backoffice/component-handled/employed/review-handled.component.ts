@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Review } from '../../../shared/models';
-import { ReviewsService } from '../../home/services/reviews.service';
+import { Review } from '../../../../shared/models';
+import { ReviewsService } from '../../../home/services/reviews.service';
 
 @Component({
   selector: 'app-review-handled',
@@ -36,7 +36,7 @@ import { ReviewsService } from '../../home/services/reviews.service';
       <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
   `,
-  styleUrl: `./component-handled.component.css`,
+  styleUrl: `../component-handled.component.css`,
 })
 export class ReviewHandledComponent implements OnInit {
   constructor() {}

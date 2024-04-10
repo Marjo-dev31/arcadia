@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Animal } from '../../../shared/models';
-import { AnimalService } from '../../animals/services/animal.service';
+import { Animal } from '../../../../shared/models';
+import { AnimalService } from '../../../animals/services/animal.service';
 
 @Component({
   selector: 'app-animal-handled',
@@ -44,7 +44,7 @@ import { AnimalService } from '../../animals/services/animal.service';
     </table>
     <mat-icon class="add-icon">add_circle_outline</mat-icon>
   `,
-  styleUrl: `./component-handled.component.css`,
+  styleUrl: `../component-handled.component.css`,
 })
 export class AnimalHandledComponent implements OnInit {
   constructor() {}

@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Habitat } from '../../../shared/models';
-import { HabitatsService } from '../../habitats/services/habitat.service';
+import { Habitat } from '../../../../shared/models';
+import { HabitatsService } from '../../../habitats/services/habitat.service';
 
 @Component({
   selector: 'app-habitat-handled',
@@ -46,7 +46,7 @@ import { HabitatsService } from '../../habitats/services/habitat.service';
     </table>
     <mat-icon class="add-icon">add_circle_outline</mat-icon>
   `,
-  styleUrl: `./component-handled.component.css`,
+  styleUrl: `../component-handled.component.css`,
 })
 export class HabitatHandledComponent implements OnInit {
   constructor() {}
@@ -56,7 +56,7 @@ export class HabitatHandledComponent implements OnInit {
     'description',
     'animals',
     'image',
-    'actions',
+    'actions'
   ];
 
   datasource!: Habitat[];
