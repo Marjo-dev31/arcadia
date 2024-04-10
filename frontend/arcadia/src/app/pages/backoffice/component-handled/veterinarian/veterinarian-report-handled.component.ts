@@ -19,10 +19,6 @@ import { VeterinarianAnimalReportHandledComponent } from './veterinarian-animal-
 export class VeterinarianReportHandledComponent implements OnInit {
   constructor() {}
 
-
- 
-
-
   ngOnInit() {
   
   }
