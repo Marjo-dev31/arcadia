@@ -29,7 +29,9 @@ export const routes: Routes = [
       { path: 'avis', component: ReviewHandledComponent},
       { path: 'creationdecompte', component: AccountHandledComponent},
       { path: 'rapportveterinaire', component: VeterinarianReportHandledComponent},
-      { path: 'rapportemploye', component: EmployedReportHandledComponent}
+      { path: 'rapportemploye', component: EmployedReportHandledComponent},
+      // { path: 'horaire'},
+      // { path: 'popularite'}
     ],
   },
 ];
