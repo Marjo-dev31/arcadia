@@ -58,7 +58,7 @@ import { CommonModule } from '@angular/common';
         <input type="password" name="comfirm-password" id="comfirm-password" />
 
         <div class="btn-section">
-          <button class="btn">Annuler</button>
+          <button type="reset" class="btn">Annuler</button>
           <button class="btn">Valider</button>
         </div>
       </form>
