@@ -11,9 +11,8 @@ import { AnimalService } from '../../../animals/services/animal.service';
   standalone: true,
   imports: [MatTableModule, MatIconModule, CommonModule, FormsModule],
   template: `
-    <section class="animals-section">
-      <h3>Section animaux</h3>
-      <form ngForm name="animalchoice">
+      <h3>Rapport employé</h3>
+      <form ngForm name="animalchoice" class="animal-choice">
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
           <option *ngFor="let animal of animals" [ngValue]="animal.id">
@@ -28,20 +27,12 @@ import { AnimalService } from '../../../animals/services/animal.service';
           <th mat-header-cell *matHeaderCellDef>Date de visite</th>
           <td mat-cell *matCellDef></td>
         </ng-container>
-        <ng-container matColumnDef="healthcondition">
-          <th mat-header-cell *matHeaderCellDef>Etat de santé</th>
-          <td mat-cell *matCellDef></td>
-        </ng-container>
         <ng-container matColumnDef="food">
-          <th mat-header-cell *matHeaderCellDef>Nourriture recommandée</th>
+          <th mat-header-cell *matHeaderCellDef>Nourriture donnée</th>
           <td mat-cell *matCellDef></td>
         </ng-container>
         <ng-container matColumnDef="grammage">
-          <th mat-header-cell *matHeaderCellDef>Grammage recommandé</th>
-          <td mat-cell *matCellDef></td>
-        </ng-container>
-        <ng-container matColumnDef="healthconditiondetails">
-          <th mat-header-cell *matHeaderCellDef>Détails de l'état de santé</th>
+          <th mat-header-cell *matHeaderCellDef>Grammage donnée</th>
           <td mat-cell *matCellDef></td>
         </ng-container>
         <ng-container matColumnDef="actions">
@@ -59,19 +50,16 @@ import { AnimalService } from '../../../animals/services/animal.service';
       </table>
       <mat-icon class="add-icon">add_circle_outline</mat-icon>
       }}
-    </section>
   `,
   styleUrl: `../component-handled.component.css`,
 })
-export class VeterinarianAnimalReportHandledComponent implements OnInit {
+export class EmployedReportHandledComponent implements OnInit {
   constructor() {}
 
   displayColums: string[] = [
     'date',
-    'healthcondition',
     'food',
     'grammage',
-    'healthconditiondetails',
     'actions',
   ];
 

@@ -11,6 +11,7 @@ import { AnimalHandledComponent } from './pages/backoffice/component-handled/adm
 import { ReviewHandledComponent } from './pages/backoffice/component-handled/employed/review-handled.component';
 import { AccountHandledComponent } from './pages/backoffice/component-handled/admin/account-handled.component';
 import { VeterinarianReportHandledComponent } from './pages/backoffice/component-handled/veterinarian/veterinarian-report-handled.component';
+import { EmployedReportHandledComponent } from './pages/backoffice/component-handled/employed/employed-animal-report-handled.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ export const routes: Routes = [
       { path: 'avis', component: ReviewHandledComponent},
       { path: 'creationdecompte', component: AccountHandledComponent},
       { path: 'rapportveterinaire', component: VeterinarianReportHandledComponent},
+      { path: 'rapportemploye', component: EmployedReportHandledComponent}
     ],
   },
 ];

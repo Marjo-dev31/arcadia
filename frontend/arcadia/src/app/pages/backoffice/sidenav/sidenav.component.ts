@@ -19,7 +19,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
           <li><a [routerLink]="['/espacepersonnel/habitats']">Habitats</a></li>
           <li><a [routerLink]="['/espacepersonnel/animaux']">Animaux</a></li>
           <li><a [routerLink]="['/espacepersonnel/rapportveterinaire']">Compte-rendu vétérinaire</a></li>
-          <li><a href="">Compte-rendu employé</a></li>
+          <li><a [routerLink]="['/espacepersonnel/rapportemploye']">Compte-rendu employé</a></li>
           <li><a [routerLink]="['/espacepersonnel/avis']">Modulation des avis</a></li>
           <li><a [routerLink]="['/espacepersonnel/creationdecompte']">Création de compte</a></li>
           <li><a href="">Popularité des animaux</a></li>

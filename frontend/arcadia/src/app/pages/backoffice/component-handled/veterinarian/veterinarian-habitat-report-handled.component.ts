@@ -29,8 +29,8 @@ import { Habitat } from '../../../../shared/models';
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayColumsHabitatsComment"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayColumsHabitatsComment"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
     <mat-icon class="add-icon">add_circle_outline</mat-icon>
   </section>
@@ -40,7 +40,7 @@ import { Habitat } from '../../../../shared/models';
 export class VeterinarianHabitatReportHandledComponent implements OnInit {
   constructor() {}
 
-  displayColumsHabitatsComment: string[] = [
+  displayColums: string[] = [
   'habitat',
   'comment',
   'actions'
