@@ -10,6 +10,7 @@ display : inline;
 .add-icon {
     display: flex;
     margin: auto;
+    margin-bottom: 2rem;
     margin-top: 2rem;
     color: var(--color-primary);
     transform: scale(2);
@@ -47,4 +48,10 @@ select {
 
 .btn {
     width: 100px
+}
+
+.animals-section {
+    border-bottom: solid 1rem var(--color-secondary);
+    border-top: solid 1rem var(--color-secondary);
+    padding-bottom: 2rem;
 }

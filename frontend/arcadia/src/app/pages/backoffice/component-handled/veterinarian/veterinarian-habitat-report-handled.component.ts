@@ -10,7 +10,8 @@ import { Habitat } from '../../../../shared/models';
   standalone: true,
   imports: [MatTableModule, MatIconModule],
   template: `
-  <section>
+  <section class="habitats-section">
+    <h3>Section habitats</h3>
     <table mat-table [dataSource]="datasource">
       <ng-container matColumnDef="habitat">
         <th mat-header-cell *matHeaderCellDef>Habitat</th>

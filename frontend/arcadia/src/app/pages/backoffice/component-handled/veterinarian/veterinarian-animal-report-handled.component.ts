@@ -11,7 +11,8 @@ import { AnimalService } from '../../../animals/services/animal.service';
   standalone: true,
   imports: [MatTableModule, MatIconModule, CommonModule, FormsModule],
   template: `
-    <section>
+    <section class="animals-section">
+      <h3>Section animaux</h3>
       <form ngForm name="animalchoose">
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
@@ -77,8 +78,8 @@ export class VeterinarianAnimalReportHandledComponent implements OnInit {
   animals!: Animal[];
   private readonly animalService = inject(AnimalService);
 
-  datasource!: [];
   selectedAnimalOption!: number;
+  datasource!: [];
 
   ngOnInit() {
     this.animalService.getAnimals().then((response) => {
