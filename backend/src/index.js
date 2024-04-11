@@ -4,7 +4,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const {v4: uuidv4} = require('uuid');
 const Response = require('./domain/response.js');
-const logger = require('./util/logger.js')
+const hhtpStatus = require('./controller/service.controller.js')
+const logger = require('./util/logger.js');
+const httpStatus = require("./controller/service.controller.js");
 
 dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
@@ -133,7 +135,7 @@ app.post("/avis", (req, res)=> {
 
 
 
-app.get('/test', (req, res)=> res.send(new Response(200, 'OK', 'Test API, all Systems Go')));
+app.get('/test', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
 
 
 app.listen(PORT, () => logger.info(`It's alive on: ${ip.address()}: ${PORT}`));
