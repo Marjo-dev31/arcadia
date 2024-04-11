@@ -13,6 +13,8 @@ const httpStatus = {
     INTERNAL_SERVER_ERROR: { code: 500, status: 'INTERNAL_SERVER_ERROR' },
 }
 
-
+export const getService = (req, res) => {
+    
+}
 
 module.exports = httpStatus;
