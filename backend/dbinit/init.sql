@@ -26,16 +26,17 @@ CREATE TABLE animals (
     FOREIGN KEY (id_race) REFERENCES races(race_uuid)
 );
 
-
 CREATE TABLE services (
     service_uuid VARCHAR(36) PRIMARY KEY NOT NULL,
     title VARCHAR(255) NOT NULL,
     description VARCHAR(500) NOT NULL
 );
+
 CREATE TABLE roles (
     role_uuid VARCHAR(36) PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL UNIQUE
 );
+
 CREATE TABLE users (
     user_uuid VARCHAR(36) PRIMARY KEY NOT NULL,
     firstname VARCHAR(255) NOT NULL,
@@ -45,8 +46,6 @@ CREATE TABLE users (
     id_role VARCHAR(36),
     FOREIGN KEY (id_role) REFERENCES roles(role_uuid)
 );
-
-
 
 CREATE TABLE employee_report (
     employee_report_uuid VARCHAR(36) PRIMARY KEY NOT NULL,
