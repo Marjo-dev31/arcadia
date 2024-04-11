@@ -1,11 +1,15 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
+const ip = require('ip');
+const dotenv = require('dotenv');
+const cors = require('cors');
 const {v4: uuidv4} = require('uuid');
 
+dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
+const app = express();
 
 app.use(cors());
+app.use(express.json());
 app.use(require('body-parser').json());
 
 
@@ -130,4 +134,4 @@ app.post("/avis", (req, res)=> {
 
 
 
-app.listen(PORT, () => console.log(`It's alive on port ${PORT}`));
+app.listen(PORT, () => console.log(`It's alive on: ${ip.address()}: ${PORT}`));
