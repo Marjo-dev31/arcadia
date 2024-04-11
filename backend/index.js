@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const {v4: uuidv4} = require('uuid');
 
-const PORT = 8000;
+const PORT = process.env.SERVER_PORT || 8000;
 
 app.use(cors());
 app.use(require('body-parser').json());
