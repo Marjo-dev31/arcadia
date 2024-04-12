@@ -12,18 +12,18 @@ CREATE TABLE habitats (
     comment VARCHAR(500) DEFAULT NULL
 );
 
-CREATE TABLE races (
+CREATE TABLE breeds (
     id VARCHAR(36) PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE animals (
     id VARCHAR(36) PRIMARY KEY NOT NULL,
-    firstname VARCHAR(255) NOT NULL UNIQUE,
+    firstname VARCHAR(50) NOT NULL UNIQUE,
     id_habitat VARCHAR(36),
-    id_race VARCHAR(36),
+    id_breed VARCHAR(36),
     FOREIGN KEY (id_habitat) REFERENCES habitats(id),
-    FOREIGN KEY (id_race) REFERENCES races(id)
+    FOREIGN KEY (id_breed) REFERENCES breeds(id)
 );
 
 CREATE TABLE services (
@@ -34,7 +34,7 @@ CREATE TABLE services (
 
 CREATE TABLE roles (
     id VARCHAR(36) PRIMARY KEY NOT NULL,
-    name VARCHAR(255) NOT NULL UNIQUE
+    name VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE users (
