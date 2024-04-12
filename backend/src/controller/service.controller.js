@@ -44,7 +44,7 @@ export const getServices = (req, res) => {
 export const getService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching service`);
     database.query(QUERY.SELECT_SERVICE, [req.params.id], (error, results) => {
-      if (!results[0]) {
+      if (!results) {
         res
           .status(httpStatus.NOT_FOUND.code)
           .send(
