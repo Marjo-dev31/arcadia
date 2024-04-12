@@ -1,11 +1,11 @@
-import { express } from "express";
-import 'dotenv/config';
-import { ip } from 'ip';
-import { cors } from 'cors';
-import { uuidv4 } from 'uuid';
-import { Response } from './domain/response.js';
-import { httpStatus } from './controller/service.controller.js';
-import { logger } from './util/logger.js';
+import express from "express";
+import dotenv from "dotenv";
+import ip from 'ip';
+import cors from 'cors';
+import uuidv4 from 'uuidv4';
+import Response from './domain/response.js';
+import httpStatus from './controller/service.controller.js';
+import logger from './util/logger.js';
 
 
 dotenv.config();
@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(require('body-parser').json());
+// app.use(require('body-parser').json());
 
 
 const services = [
