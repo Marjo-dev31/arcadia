@@ -86,7 +86,9 @@ export const addService = (req, res) => {
             )
           );
       } else {
+        req.body.id = uuidv4()
         const service = { ...req.body };
+
         res
           .status(httpStatus.CREATED.code)
           .send(
@@ -100,5 +102,75 @@ export const addService = (req, res) => {
       }
     });
   };
+
+
+  export const updateService = (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, fetching service`);
+    database.query(QUERY.SELECT_SERVICE, [req.params.id], (error, results) => {
+      if (!results[0]) {
+        res
+          .status(httpStatus.NOT_FOUND.code)
+          .send(
+            new Response(
+              httpStatus.NOT_FOUND.code,
+              httpStatus.NOT_FOUND.status,
+              `Service by id ${req.params.id} was not found !`
+            )
+          );
+      } else {
+    logger.info(`${req.method} ${req.originalUrl}, updating service`);
+    database.query(QUERY.UPDATE_SERVICE, [...Object.values(req.body),req.params.id], (error, results) => {
+        if(!error) {
+            res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Service updated`,
+              {id: req.params.id, ...req.body}))
+        } else {
+            logger.error(error.message)
+            res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
+            .send(
+              new Response(
+                httpStatus.INTERNAL_SERVER_ERROR.code,
+                httpStatus.INTERNAL_SERVER_ERROR.status,
+                `Error occured`
+              )
+            );
+        }   
+      })
+  }})};
+
+
+  export const deleteService = (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, deleting service`);
+    database.query(QUERY.DELETE_SERVICE, [req.params.id], (error, results) => {
+      if (results.affectedRows > 0) { 
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Service deleted`,
+              results[0]
+            )
+          );
+      } else {
+        res
+          .status(httpStatus.NOT_FOUND.code)
+          .send(
+            new Response(
+              httpStatus.NOT_FOUND.code,
+              httpStatus.NOT_FOUND.status,
+              `Service by id ${req.params.id} was not found !`
+            )
+          );
+      }
+    });
+  };
+
 
 export default httpStatus;
