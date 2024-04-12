@@ -54,7 +54,7 @@ export class AnimalsComponent implements OnInit {
       race: 'gazelle',
       image: '',
       veterinarycomments: [],
-      employedcomments: [],
+      employeecomments: [],
     },
     {
       id: 2,
@@ -64,7 +64,7 @@ export class AnimalsComponent implements OnInit {
       rapport: 'chichi',
       image: '',
       veterinarycomments: [],
-      employedcomments: [],
+      employeecomments: [],
     },
   ];
 

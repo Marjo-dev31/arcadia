@@ -5,6 +5,6 @@ export interface Animal {
     race: string,
     image: string [],
     veterinarycomments: unknown [],
-    employedcomments: unknown [],
+    employeecomments: unknown [],
     rapport?: string
 }

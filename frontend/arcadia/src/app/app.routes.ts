@@ -8,10 +8,10 @@ import { BackofficeComponent } from './pages/backoffice/backoffice.component';
 import { ServiceHandledComponent } from './pages/backoffice/component-handled/admin/service-handled.component';
 import { HabitatHandledComponent } from './pages/backoffice/component-handled/admin/habitat-handled.component';
 import { AnimalHandledComponent } from './pages/backoffice/component-handled/admin/animal-handled.component';
-import { ReviewHandledComponent } from './pages/backoffice/component-handled/employed/review-handled.component';
+import { ReviewHandledComponent } from './pages/backoffice/component-handled/employee/review-handled.component';
 import { AccountHandledComponent } from './pages/backoffice/component-handled/admin/account-handled.component';
-import { VeterinarianReportHandledComponent } from './pages/backoffice/component-handled/veterinarian/veterinarian-report-handled.component';
-import { EmployedReportHandledComponent } from './pages/backoffice/component-handled/employed/employed-animal-report-handled.component';
+import { VeterinaryReportHandledComponent } from './pages/backoffice/component-handled/veterinary/veterinary-report-handled.component';
+import { EmployeeReportHandledComponent } from './pages/backoffice/component-handled/employee/employee-animal-report-handled.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,8 +28,8 @@ export const routes: Routes = [
       { path: 'animaux', component: AnimalHandledComponent},
       { path: 'avis', component: ReviewHandledComponent},
       { path: 'creationdecompte', component: AccountHandledComponent},
-      { path: 'rapportveterinaire', component: VeterinarianReportHandledComponent},
-      { path: 'rapportemploye', component: EmployedReportHandledComponent},
+      { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent},
+      { path: 'rapportemploye', component: EmployeeReportHandledComponent},
       // { path: 'horaire'},
       // { path: 'popularite'}
     ],

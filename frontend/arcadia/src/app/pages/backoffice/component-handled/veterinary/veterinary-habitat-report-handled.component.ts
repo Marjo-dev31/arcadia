@@ -6,7 +6,7 @@ import { Habitat } from '../../../../shared/models';
 
 
 @Component({
-  selector: 'app-veterinarian-habitat-report-handled',
+  selector: 'app-veterinary-habitat-report-handled',
   standalone: true,
   imports: [MatTableModule, MatIconModule],
   template: `
@@ -37,7 +37,7 @@ import { Habitat } from '../../../../shared/models';
   `,
   styleUrl: `../component-handled.component.css`,
 })
-export class VeterinarianHabitatReportHandledComponent implements OnInit {
+export class VeterinaryHabitatReportHandledComponent implements OnInit {
   constructor() {}
 
   displayColums: string[] = [

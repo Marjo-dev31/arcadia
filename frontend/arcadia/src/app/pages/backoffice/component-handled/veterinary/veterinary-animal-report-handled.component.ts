@@ -8,7 +8,7 @@ import { AnimalService } from '../../../animals/services/animal.service';
 import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
 
 @Component({
-  selector: 'app-veterinarian-animal-report-handled',
+  selector: 'app-veterinary-animal-report-handled',
   standalone: true,
   imports: [
     MatTableModule,
@@ -73,7 +73,7 @@ import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
   `,
   styleUrl: `../component-handled.component.css`,
 })
-export class VeterinarianAnimalReportHandledComponent implements OnInit {
+export class VeterinaryAnimalReportHandledComponent implements OnInit {
   constructor() {}
 
   displayColums: string[] = [

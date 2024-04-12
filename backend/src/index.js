@@ -39,103 +39,103 @@ app.use('/services', serviceRoutes)
 //   res.json(services);
 // });
 
-// const habitats = [
-//   {
-//     id: 1,
-//     title: "La Savane",
-//     description: "lieu aride lorem ipsum",
-//     image: "assets/images/zoo-1692079_1280.jpg",
-//     animals: []
-//   },
-//   {
-//     id: 2,
-//     title: "Les Marais",
-//     description: "lieu humide à souhait",
-//     image: "assets/images/little-egret-2591578_1280.jpg",
-//     animals: [  {
-//       id: 1,
-//       firstname: "animal1",
-//       condition: "bon",
-//       race: "gazelle",
-//       image: "",
-//       veterinarycomments: [],
-//       employedcomments: []
-//     },
-//     {
-//       id:2,
-//       firstname: "animal2",
-//       condition: "mauvais",
-//       race: "lion",
-//       rapport: "chichi",
-//       image: "",
-//       veterinarycomments: [],
-//       employedcomments: []
-//     },]
-//   },
-// ];
+const habitats = [
+  {
+    id: 1,
+    title: "La Savane",
+    description: "lieu aride lorem ipsum",
+    image: "assets/images/zoo-1692079_1280.jpg",
+    animals: []
+  },
+  {
+    id: 2,
+    title: "Les Marais",
+    description: "lieu humide à souhait",
+    image: "assets/images/little-egret-2591578_1280.jpg",
+    animals: [  {
+      id: 1,
+      firstname: "animal1",
+      condition: "bon",
+      race: "gazelle",
+      image: "",
+      veterinarycomments: [],
+      employeecomments: []
+    },
+    {
+      id:2,
+      firstname: "animal2",
+      condition: "mauvais",
+      race: "lion",
+      rapport: "chichi",
+      image: "",
+      veterinarycomments: [],
+      employeecomments: []
+    },]
+  },
+];
 
-// app.get("/habitats", (req, res) => {
-//   res.json(habitats);
-// });
+app.get("/habitats", (req, res) => {
+  res.json(habitats);
+});
 
-// const animals = [
-//   {
-//     id: 1,
-//     firstname: "animal1",
-//     condition: "bon",
-//     race: "gazelle",
-//     image: "",
-//     veterinarycomments: [],
-//     employedcomments: []
-//   },
-//   {
-//     id:2,
-//     firstname: "animal2",
-//     condition: "mauvais",
-//     race: "lion",
-//     rapport: "chichi",
-//     image: "",
-//     veterinarycomments: [],
-//     employedcomments: []
-//   },
-// ];
+const animals = [
+  {
+    id: 1,
+    firstname: "animal1",
+    condition: "bon",
+    race: "gazelle",
+    image: "",
+    veterinarycomments: [],
+    employeecomments: []
+  },
+  {
+    id:2,
+    firstname: "animal2",
+    condition: "mauvais",
+    race: "lion",
+    rapport: "chichi",
+    image: "",
+    veterinarycomments: [],
+    employeecomments: []
+  },
+];
 
-// app.get("/animal", (req, res) => {
-//   res.json(animals);
-// });
+app.get("/animal", (req, res) => {
+  res.json(animals);
+});
 
-// const reviews = [
-//   {
-//     id: 1,
-//     pseudo: 'Manon',
-//     content: 'Agreable moment en famille',
-//     date: '12/03/2023'
-//   },
-//   {
-//     id: 2,
-//     pseudo: 'Vanessa',
-//     content: 'Animaux heureux',
-//     date: '08/06/2023'
-//   },
-//   {
-//     id: 3,
-//     pseudo: 'Laurie',
-//     content: 'De belles prestations',
-//     date: '05/04/2024'
-//   }
-// ];
+const reviews = [
+  {
+    id: 1,
+    pseudo: 'Manon',
+    content: 'Agreable moment en famille',
+    date: '12/03/2023'
+  },
+  {
+    id: 2,
+    pseudo: 'Vanessa',
+    content: 'Animaux heureux',
+    date: '08/06/2023'
+  },
+  {
+    id: 3,
+    pseudo: 'Laurie',
+    content: 'De belles prestations',
+    date: '05/04/2024'
+  }
+];
 
-// app.get("/avis", (req,res)=> {
-//   res.json(reviews)
-// })
+app.get("/avis", (req,res)=> {
+  res.json(reviews)
+})
 
 
-// app.post("/avis", (req, res)=> {
-//   req.body.id = uuidv4()
-//   // console.log(req.body, 'toto')
-//   reviews.push(req.body);
-//   return res.send(req.body)
-// })
+app.post("/avis", (req, res)=> {
+  req.body.id = uuidv4()
+  // console.log(req.body, 'toto')
+  reviews.push(req.body);
+  return res.send(req.body)
+})
 
 
 

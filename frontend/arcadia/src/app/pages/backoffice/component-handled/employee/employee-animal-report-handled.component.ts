@@ -7,7 +7,7 @@ import { Animal } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 
 @Component({
-  selector: 'app-veterinarian-animal-report-handled',
+  selector: 'app-veterinary-animal-report-handled',
   standalone: true,
   imports: [MatTableModule, MatIconModule, CommonModule, FormsModule],
   template: `
@@ -53,7 +53,7 @@ import { AnimalService } from '../../../animals/services/animal.service';
   `,
   styleUrl: `../component-handled.component.css`,
 })
-export class EmployedReportHandledComponent implements OnInit {
+export class EmployeeReportHandledComponent implements OnInit {
   constructor() {}
 
   displayColums: string[] = [
