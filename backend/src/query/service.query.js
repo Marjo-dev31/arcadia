@@ -6,4 +6,4 @@ const QUERY = {
     DELETE_PATIENT: 'DELETE FROM services WHERE service_uuid = ?'
 }
 
-module.exports = QUERY
+export default QUERY;

@@ -1,7 +1,7 @@
-const database = require('../config/mysql.config.js');
-const Response = require('../domain/response.js');
-const logger = require('../util/logger.js');
-const QUERY = require('../query/service.query.js');
+import { database } from '../config/mysql.config.js';
+import { Response } from '../domain/response.js';
+import { logger } from '../util/logger.js';
+import { QUERY } from '../query/service.query.js';
 
 
 const httpStatus = {
@@ -13,8 +13,8 @@ const httpStatus = {
     INTERNAL_SERVER_ERROR: { code: 500, status: 'INTERNAL_SERVER_ERROR' },
 }
 
-export const getService = (req, res) => {
-    
-}
+//  export default getService = (req, res) => {
 
-module.exports = httpStatus;
+// }
+
+export default httpStatus;

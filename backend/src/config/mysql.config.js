@@ -1,5 +1,5 @@
-const mysql =require('mysql');
-const dotenv = require('dotenv');
+import { mysql } from 'mysql';
+import { dotenv } from 'dotenv';
 
 dotenv.config();
 
@@ -15,5 +15,4 @@ const pool = mysql.createPool({
     connectionLimit: process.env.DB_CONNECTION_LIMIT,
 });
 
-
-module.exports = pool;
+export default pool;

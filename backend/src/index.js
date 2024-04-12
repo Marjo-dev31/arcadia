@@ -1,12 +1,12 @@
-const express = require("express");
-const ip = require('ip');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const {v4: uuidv4} = require('uuid');
-const Response = require('./domain/response.js');
-const hhtpStatus = require('./controller/service.controller.js')
-const logger = require('./util/logger.js');
-const httpStatus = require("./controller/service.controller.js");
+import { express } from "express";
+import 'dotenv/config';
+import { ip } from 'ip';
+import { cors } from 'cors';
+import { uuidv4 } from 'uuid';
+import { Response } from './domain/response.js';
+import { httpStatus } from './controller/service.controller.js';
+import { logger } from './util/logger.js';
+
 
 dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
