@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // console.log(this.newReview)
+    console.log(this.newReview)
     this.reviewService.addReview(this.newReview).subscribe();
     this.newReview.pseudo = '';
     this.newReview.content = '';

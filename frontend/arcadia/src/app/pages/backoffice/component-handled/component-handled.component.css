@@ -1,69 +1,83 @@
 img {
-    width: 100px
+  width: 100px;
 }
 
 mat-icon {
-margin: 0 1rem;
-display : inline;
+  margin: 0 1rem;
+  display: inline;
+}
+
+.add-btn {
+  display: flex;
+  margin: auto;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  background-color: var(--color-background);
+  border: none;
+  width: fit-content;
 }
 
 .add-icon {
+  color: var(--color-primary);
+  transform: scale(2);
+}
+
+.add-icon:hover {
+  color: var(--color-call-to-action);
+}
+
+form {
     display: flex;
-    margin: auto;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-    color: var(--color-primary);
-    transform: scale(2);
+    flex-direction: column;
+    margin-top: 3rem;
+    align-items: center;
+    
 }
 
 /* style account creation form */
 
 .account-creation-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    align-items: center;
-    align-content: center;
-    margin: auto;
-    border: 0.3rem solid var(--color-font);
-    border-radius: 20px ;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  align-items: center;
+  align-content: center;
+  margin: auto;
+  border: 0.3rem solid var(--color-font);
+  border-radius: 20px;
+  padding: 1rem;
 }
 
 .account-creation-form input,
 select {
-    border-radius: 15px;
-    width: 300px;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
+  border-radius: 15px;
+  width: 300px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
 }
 
 .btn-section {
-    width: 300px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 2rem;
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 2rem;
 }
 
 .btn {
-    width: 100px
+  width: 100px;
 }
-
 
 /* veterinary section */
 
-
 .animals-section {
-    border-bottom: solid 0.5rem var(--color-secondary);
-    border-top: solid 0.5rem var(--color-secondary);
-    padding-bottom: 2rem;
+  border-bottom: solid 0.5rem var(--color-secondary);
+  border-top: solid 0.5rem var(--color-secondary);
+  padding-bottom: 2rem;
 }
-
 
 /* employee section */
 
-
 .animal-choice {
-    margin-left: 2rem;
+  margin-left: 2rem;
 }
