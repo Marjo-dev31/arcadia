@@ -1,0 +1,24 @@
+get http://localhost:8000/
+
+###
+
+get  http://localhost:8000/test
+
+###
+
+get http://localhost:8000/services
+
+###
+
+get http://localhost:8000/services/2
+
+
+###
+
+post http://localhost:8000/services
+Content-Type: application/json
+
+{
+ "title" : "visite guidée",
+ "description" : "service gratuit"
+}

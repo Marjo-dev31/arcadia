@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS arcadiadb;
--- if arcadiabd exists, change the name or delete with DROP DATABASE IS EXISTS arcadiadb  
+-- if arcadiabd exists, change the name or delete with DROP DATABASE IF EXISTS arcadiadb  
 
 USE arcadiadb;
 
