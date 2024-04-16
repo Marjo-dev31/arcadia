@@ -27,7 +27,7 @@ CREATE TABLE animals (
 );
 
 CREATE TABLE services (
-    id VARCHAR(36) PRIMARY KEY NOT NULL,
+    id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     title VARCHAR(255) NOT NULL,
     description VARCHAR(500) NOT NULL
 );

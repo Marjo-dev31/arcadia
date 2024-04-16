@@ -73,6 +73,7 @@ export const getService = (req, res) => {
 
 export const addService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating service`);
+    console.log(req.body, 'toto');
     database.query(QUERY.CREATE_SERVICE, Object.values(req.body),(error, results) => {
       if (!results) {
         logger.error(error.message);
@@ -86,9 +87,7 @@ export const addService = (req, res) => {
             )
           );
       } else {
-        req.body.id = uuidv4()
-        const service = { ...req.body };
-
+        const service = {id: insertId, ...req.body};
         res
           .status(httpStatus.CREATED.code)
           .send(
