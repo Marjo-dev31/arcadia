@@ -138,9 +138,9 @@ app.post("/avis", (req, res)=> {
   return res.send(req.body)
 })
 
-app.get('/', ()=> console.log(process.env))
 
-app.get('/test', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
+
+app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
 app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
 
 

@@ -73,7 +73,6 @@ export const getService = (req, res) => {
 
 export const addService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating service`);
-    console.log(req.body, 'toto');
     database.query(QUERY.CREATE_SERVICE, Object.values(req.body),(error, results) => {
       if (!results) {
         logger.error(error.message);
@@ -87,7 +86,7 @@ export const addService = (req, res) => {
             )
           );
       } else {
-        const service = {id: insertId, ...req.body};
+        const service = {...req.body};
         res
           .status(httpStatus.CREATED.code)
           .send(
@@ -108,17 +107,18 @@ export const addService = (req, res) => {
     database.query(QUERY.SELECT_SERVICE, [req.params.id], (error, results) => {
       if (!results[0]) {
         res
-          .status(httpStatus.NOT_FOUND.code)
-          .send(
-            new Response(
-              httpStatus.NOT_FOUND.code,
-              httpStatus.NOT_FOUND.status,
-              `Service by id ${req.params.id} was not found !`
-            )
-          );
+        .status(httpStatus.NOT_FOUND.code)
+        .send(
+          new Response(
+            httpStatus.NOT_FOUND.code,
+            httpStatus.NOT_FOUND.status,
+            `Service by id ${req.params.id} was not found !`
+          )
+        );
       } else {
-    logger.info(`${req.method} ${req.originalUrl}, updating service`);
-    database.query(QUERY.UPDATE_SERVICE, [...Object.values(req.body),req.params.id], (error, results) => {
+        logger.info(`${req.method} ${req.originalUrl}, updating service`);
+        console.log(req.body, req.params.id, 'toto');
+    database.query(QUERY.UPDATE_SERVICE, [...Object.values(req.body), req.params.id], (error, results) => {
         if(!error) {
             res
           .status(httpStatus.OK.code)

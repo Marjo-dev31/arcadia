@@ -1,6 +1,3 @@
-get http://localhost:8000/
-
-###
 
 get  http://localhost:8000/test
 
@@ -10,7 +7,7 @@ get http://localhost:8000/services
 
 ###
 
-get http://localhost:8000/services/2
+get http://localhost:8000/services/1
 
 
 ###
@@ -19,6 +16,21 @@ post http://localhost:8000/services
 Content-Type: application/json
 
 {
- "title" : "visite guidée",
- "description" : "service gratuit"
+ "title" : "petit train",
+ "description" : "tour du zoo"
 }
+
+###
+
+put http://localhost:8000/services/1
+Content-Type: application/json
+
+{
+    "title": "Petit train touristique 3",
+    "description": "Tour du zooparc"
+}
+
+
+###
+
+delete http://localhost:8000/services/37fcf945-fcbd-11ee-915c-0242ac140002
