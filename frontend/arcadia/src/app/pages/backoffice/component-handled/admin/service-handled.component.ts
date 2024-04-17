@@ -20,12 +20,12 @@ import { FormsModule } from '@angular/forms';
         <th mat-header-cell *matHeaderCellDef>Description</th>
         <td mat-cell *matCellDef="let service">{{ service.description }}</td>
       </ng-container>
-      <ng-container matColumnDef="image">
+      <!-- <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>
         <td mat-cell *matCellDef="let service">
           <img src="{{ service.image }}" alt="" />
         </td>
-      </ng-container>
+      </ng-container> -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef>
@@ -57,20 +57,23 @@ export class ServiceHandledComponent implements OnInit {
 
   private readonly serviceService = inject(ServiceService);
 
-  displayColums: string[] = ['title', 'description', 'image', 'actions'];
+  displayColums: string[] = ['title', 'description', 'actions'];
 
   datasource!: Service[];
   newService: Service = {
-    // id: '',
+    id: '',
     title: '',
     description: '',
-    image: 'toto.jpg',
+    // image: 'toto.jpg',
   };
 
 
   ngOnInit() {
     this.serviceService.getServices().then((response) => {
+      console.log(response, 'toto')
       this.datasource = response;
+
+    console.log(this.datasource, 'tata')
     });
   }
 

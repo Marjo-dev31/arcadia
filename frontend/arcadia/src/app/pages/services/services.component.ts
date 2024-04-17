@@ -28,7 +28,7 @@ import { Service } from '../../shared/models/service.interface';
         <div class="service-item" >
           <img
             class="service-img"
-            src={{service.image}}
+            src= ""
             alt="Guide accompagnant un groupe de visiteurs"
           />
           <div class="service-content" >
