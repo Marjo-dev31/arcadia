@@ -16,8 +16,8 @@ post http://localhost:8000/services
 Content-Type: application/json
 
 {
- "title" : "petit train",
- "description" : "tour du zoo"
+ "title" : "Visite guidée avec Manu",
+ "description" : "Service gratuit"
 }
 
 ###
@@ -33,4 +33,4 @@ Content-Type: application/json
 
 ###
 
-delete http://localhost:8000/services/37fcf945-fcbd-11ee-915c-0242ac140002
+delete http://localhost:8000/services/9dfdf93d-fcc4-11ee-8026-0242ac140002
