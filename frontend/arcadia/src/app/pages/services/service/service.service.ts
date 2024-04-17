@@ -9,10 +9,10 @@ export class ServiceService {
   url = 'http://localhost:8000/services';
   constructor( private http: HttpClient) {}
 
-  async getServices(): Promise<Service[]> {
+  async getServices(): Promise<any> {
     const servicesList = await fetch(this.url).then((response) => response.json());
-    // console.log(servicesList)
-    return servicesList
+    console.log( servicesList, 'titi')
+    return servicesList.data.services
   }
 
   addService(service: Service): Observable<any> {
