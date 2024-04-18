@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Service } from '../../../shared/models/service.interface';
+import { Service, ServiceCreate } from '../../../shared/models/service.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,11 +11,12 @@ export class ServiceService {
 
   async getServices(): Promise<any> {
     const servicesList = await fetch(this.url).then((response) => response.json());
-    console.log( servicesList, 'titi')
+    // console.log( servicesList, 'titi')
     return servicesList.data.services
   }
 
-  addService(service: Service): Observable<any> {
+  addService(service: ServiceCreate): Observable<any> {
+    console.log(service)
     return this.http.post(this.url, service)
 }
 
