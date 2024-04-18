@@ -73,7 +73,7 @@ import { Title } from '@angular/platform-browser';
         <form
           class="update-form"
           [formGroup]="serviceForm"
-          (ngSubmit)="updateService()">
+          (ngSubmit)="updateService(serviceForm.value)">
           <input
             type="text"
             formControlName="title"
@@ -96,6 +96,7 @@ export class ServiceHandledComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.serviceForm = this.fb.group({
+    id: new FormControl(''),
     title: new FormControl(''),
     description: new FormControl('')
     })}
@@ -138,11 +139,11 @@ export class ServiceHandledComponent implements OnInit {
     this.updateFormIsDisplay = true;
     const serviceToUpdate = this.datasource.find((el)=> el.id === id)
     console.log(serviceToUpdate)
-    this.serviceForm.patchValue({title : serviceToUpdate?.title, description : serviceToUpdate?.description })
+    this.serviceForm.patchValue({id: serviceToUpdate?.id, title : serviceToUpdate?.title, description : serviceToUpdate?.description })
     console.log(this.serviceForm.value)
   }
 
-  updateService() {
+  updateService(id: string) {
     
   }
 
