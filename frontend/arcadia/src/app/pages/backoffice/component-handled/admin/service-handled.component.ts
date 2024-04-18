@@ -51,7 +51,7 @@ import { NgStyle } from "@angular/common";
         [(ngModel)]="newService.description"
         #description="ngModel"></textarea>
       <input type="file" value=""/>
-      <button class="add-btn"></button>
+      <button class="add-btn">Enregistrer</button>
     </form>
   </section>
   <section>
