@@ -1,4 +1,4 @@
-const QUERY = {
+const QUERYSERVICES = {
     SELECT_SERVICES: 'SELECT * FROM services',
     SELECT_SERVICE: 'SELECT * FROM services WHERE id = ?',
     CREATE_SERVICE: 'INSERT INTO services(id, title, description) VALUES ( DEFAULT, ?, ?)',
@@ -6,4 +6,4 @@ const QUERY = {
     DELETE_SERVICE: 'DELETE FROM services WHERE id = ?'
 }
 
-export default QUERY;
+export default QUERYSERVICES;
