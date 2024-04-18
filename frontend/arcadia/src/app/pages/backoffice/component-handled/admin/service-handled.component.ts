@@ -3,65 +3,102 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Service, ServiceCreate } from '../../../../shared/models/service.interface';
 import { ServiceService } from '../../../services/service/service.service';
-import { FormsModule } from '@angular/forms';
-import { NgStyle } from "@angular/common";
+import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
+import { NgStyle } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-service-handled',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, FormsModule, NgStyle],
+  imports: [MatTableModule, MatIconModule, ReactiveFormsModule, NgStyle, FormsModule],
   template: `
     <h3>Services</h3>
     <section>
-    <table mat-table [dataSource]="datasource">
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef>Titre</th>
-        <td mat-cell *matCellDef="let service">{{ service.title }}</td>
-      </ng-container>
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Description</th>
-        <td mat-cell *matCellDef="let service">{{ service.description }}</td>
-      </ng-container>
-      <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef>Photo</th>
-        <td mat-cell *matCellDef="let service">
-          <img src="{{ service.image }}" alt="" />
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef>
-          <mat-icon>create</mat-icon>
-          <mat-icon>delete</mat-icon>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
-    </table>
-    <mat-icon class="add-icon" (click)="toggleAddForm()">add_circle_outline</mat-icon>
-
-    <section [ngStyle]="{'display': isToggle ? 'block' : 'none' }">
-    <form  class="add-form" #form="ngForm" name="serviceform" (ngSubmit)="onSubmit()" >
-      <input type="text" placeholder="Titre" name="title" [(ngModel)]="newService.title" #title="ngModel"/>
-      <textarea
-        name="description"
-        placeholder="Description"
-        cols="30"
-        rows="10"
-        [(ngModel)]="newService.description"
-        #description="ngModel"></textarea>
-      <input type="file" value=""/>
-      <button class="add-btn">Enregistrer</button>
-    </form>
-  </section>
-  <section>
-    <form class="update-form"></form>
-  </section>
+      <table mat-table [dataSource]="datasource">
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Titre</th>
+          <td mat-cell *matCellDef="let service">{{ service.title }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let service">{{ service.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>Photo</th>
+          <td mat-cell *matCellDef="let service">
+            <img src="{{ service.image }}" alt="" />
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let service">
+            <mat-icon (click)="editService(service.id)">create</mat-icon>
+            <mat-icon (click)="deleteService(service.id)" >delete</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
+      </table>
+      <mat-icon class="add-icon" (click)="toggleAddForm()"
+        >add_circle_outline</mat-icon
+      >
+</section>
+      <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <form
+          class="add-form"
+          #form="ngForm"
+          name="addform"
+          (ngSubmit)="onSubmit()"
+        >
+          <input
+            type="text"
+            placeholder="Titre"
+            name="title"
+            [(ngModel)]="newService.title"
+            #title="ngModel"
+          />
+          <textarea
+            name="description"
+            placeholder="Description"
+            cols="30"
+            rows="10"
+            [(ngModel)]="newService.description"
+            #description="ngModel"
+          ></textarea>
+          <input type="file" value="" />
+          <button class="add-btn">Enregistrer nouveau service</button>
+        </form>
+      </section>
+      <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
+        <form
+          class="update-form"
+          [formGroup]="serviceForm"
+          (ngSubmit)="updateService()">
+          <input
+            type="text"
+            formControlName="title"
+            />
+          <textarea
+            formControlName="description"
+            cols="30"
+            rows="10"></textarea>
+          <input type="file" value="" />
+          <button class="add-btn">Modifier service</button>
+        </form>
+      </section>
+    
   `,
   styleUrl: `../component-handled.component.css`,
 })
 export class ServiceHandledComponent implements OnInit {
-  constructor() {}
+
+ public serviceForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.serviceForm = this.fb.group({
+    title: new FormControl(''),
+    description: new FormControl('')
+    })}
 
   private readonly serviceService = inject(ServiceService);
 
@@ -69,32 +106,47 @@ export class ServiceHandledComponent implements OnInit {
 
   datasource!: Service[];
 
-  isToggle:boolean = false;
+  addFormIsDisplay: boolean = false;
+  updateFormIsDisplay: boolean = false;
 
   newService: ServiceCreate = {
     title: '',
     description: '',
   };
 
-
+  
 
   ngOnInit() {
     this.serviceService.getServices().then((response) => {
       // console.log(response, 'toto')
       this.datasource = response;
-
-    // console.log(this.datasource, 'tata')
+      // console.log(this.datasource, 'tata')
     });
   }
 
   toggleAddForm() {
-    this.isToggle = !this.isToggle
-    console.log(this.isToggle)
+    this.addFormIsDisplay = !this.addFormIsDisplay;
+    console.log(this.addFormIsDisplay);
   }
-
+  
   onSubmit(): void {
     this.serviceService.addService(this.newService).subscribe();
     // console.log(this.newService);
+  }
 
+  editService(id: string) {
+    this.updateFormIsDisplay = true;
+    const serviceToUpdate = this.datasource.find((el)=> el.id === id)
+    console.log(serviceToUpdate)
+    this.serviceForm.patchValue({title : serviceToUpdate?.title, description : serviceToUpdate?.description })
+    console.log(this.serviceForm.value)
+  }
+
+  updateService() {
+    
+  }
+
+  deleteService(id:string) {
+    console.log(id)
   }
 }

@@ -7,7 +7,7 @@ import { HabitatsService } from './pages/habitats/services/habitat.service';
 import { AnimalService } from './pages/animals/services/animal.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReviewsService } from './pages/home/services/reviews.service';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -35,7 +35,7 @@ import { SidenavComponent } from './pages/backoffice/sidenav/sidenav.component';
     MatTableModule,
     SidenavComponent,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
