@@ -20,17 +20,17 @@ mat-icon {
   color: var(--color-call-to-action);
 }
 
-.add-form {
+form {
   display: flex;
   flex-direction: column;
   margin-top: 3rem;
   max-width: 300px;
   margin: auto;
-    align-items: center;
-  }
-  
-form >* {
-  margin: 1rem;   
+  align-items: center;
+}
+
+form > * {
+  margin: 1rem;
 }
 
 /* style account creation form */
