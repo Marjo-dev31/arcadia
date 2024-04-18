@@ -1,20 +1,13 @@
 import database from "../config/mysql.config.js";
 import Response from "../domain/response.js";
 import logger from "../util/logger.js";
-import QUERY from "../query/service.query.js";
+import QUERYSERVICES from "../query/service.query.js";
+import httpStatus from "../domain/httpstatus.js";
 
-const httpStatus = {
-  OK: { code: 200, status: "OK" },
-  CREATED: { code: 201, status: "CREATED" },
-  NO_CONTENT: { code: 204, status: "NO_CONTENT" },
-  BAD_REQUEST: { code: 400, status: "BAD_REQUEST" },
-  NOT_FOUND: { code: 404, status: "NOT_FOUND" },
-  INTERNAL_SERVER_ERROR: { code: 500, status: "INTERNAL_SERVER_ERROR" },
-};
 
 export const getServices = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching services`);
-  database.query(QUERY.SELECT_SERVICES, (error, results) => {
+  database.query(QUERYSERVICES.SELECT_SERVICES, (error, results) => {
     if (!results) {
       res
         .status(httpStatus.OK.code)
@@ -43,7 +36,7 @@ export const getServices = (req, res) => {
 
 export const getService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching service`);
-    database.query(QUERY.SELECT_SERVICE, [req.params.id], (error, results) => {
+    database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
       if (!results) {
         res
           .status(httpStatus.NOT_FOUND.code)
@@ -73,7 +66,7 @@ export const getService = (req, res) => {
 
 export const addService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating service`);
-    database.query(QUERY.CREATE_SERVICE, Object.values(req.body),(error, results) => {
+    database.query(QUERYSERVICES.CREATE_SERVICE, Object.values(req.body),(error, results) => {
       if (!results) {
         logger.error(error.message);
         res
@@ -104,7 +97,7 @@ export const addService = (req, res) => {
 
   export const updateService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching service`);
-    database.query(QUERY.SELECT_SERVICE, [req.params.id], (error, results) => {
+    database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
       if (!results[0]) {
         res
         .status(httpStatus.NOT_FOUND.code)
@@ -118,7 +111,7 @@ export const addService = (req, res) => {
       } else {
         logger.info(`${req.method} ${req.originalUrl}, updating service`);
         console.log(req.body, req.params.id, 'toto');
-    database.query(QUERY.UPDATE_SERVICE, [...Object.values(req.body), req.params.id], (error, results) => {
+    database.query(QUERYSERVICES.UPDATE_SERVICE, [...Object.values(req.body), req.params.id], (error, results) => {
         if(!error) {
             res
           .status(httpStatus.OK.code)
@@ -145,7 +138,7 @@ export const addService = (req, res) => {
 
   export const deleteService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, deleting service`);
-    database.query(QUERY.DELETE_SERVICE, [req.params.id], (error, results) => {
+    database.query(QUERYSERVICES.DELETE_SERVICE, [req.params.id], (error, results) => {
       if (results.affectedRows > 0) { 
         res
           .status(httpStatus.OK.code)
