@@ -43,7 +43,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 export class AnimalsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number }) {}
 
-  animalss!: Animal[];
+  animalsList!: Animal[];
   // private readonly animalsService = inject(AnimalService);
 
   animals = [
