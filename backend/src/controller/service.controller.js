@@ -110,7 +110,7 @@ export const addService = (req, res) => {
         );
       } else {
         logger.info(`${req.method} ${req.originalUrl}, updating service`);
-        console.log(req.body, req.params.id, 'toto');
+        // console.log(req.body, req.params.id, 'toto');
     database.query(QUERYSERVICES.UPDATE_SERVICE, [...Object.values(req.body), req.params.id], (error, results) => {
         if(!error) {
             res
