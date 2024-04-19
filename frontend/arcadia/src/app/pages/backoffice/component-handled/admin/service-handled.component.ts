@@ -5,6 +5,7 @@ import { Service, ServiceCreate } from '../../../../shared/models/service.interf
 import { ServiceService } from '../../../services/service/service.service';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { NgStyle } from '@angular/common';
+import { tap } from 'rxjs';
 
 
 @Component({
@@ -118,7 +119,11 @@ export class ServiceHandledComponent implements OnInit {
   
 
   ngOnInit() {
-    this.serviceService.getServices().then((response) => {
+    this.getServices();  
+  }
+
+  getServices() {
+      this.serviceService.getServices().then((response) => {
       // console.log(response, 'toto')
       this.datasource = response;
       // console.log(this.datasource, 'tata')
@@ -144,11 +149,13 @@ export class ServiceHandledComponent implements OnInit {
   }
 
   updateService() {
-    this.serviceService.updateService(this.serviceForm.value).subscribe()
+    this.serviceService.updateService(this.serviceForm.value).pipe(tap(()=>{this.getServices();})).subscribe();
     // console.log(this.serviceForm.value)
+    
   }
 
   deleteService(id:string) {
-    this.serviceService.deleteService(id).subscribe()
+    this.serviceService.deleteService(id).pipe(tap(()=>{this.getServices();})).subscribe();
+    this.getServices();
   }
 }
