@@ -95,7 +95,7 @@ export class ServicesComponent implements OnInit {
   ngOnInit() {
     this.serviceService.getServices().then(response => {
       this.services = response
-      console.log(response, 'toto')
+      // console.log(response, 'toto')
   })
   }
 }

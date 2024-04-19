@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class ServiceService {
   url = 'http://localhost:8000/services';
+
+
   constructor( private http: HttpClient) {}
 
   async getServices(): Promise<any> {
@@ -20,6 +22,12 @@ export class ServiceService {
     return this.http.post(this.url, service)
 }
 
+  updateService(service: Service): Observable<any> {
+    return this.http.put(this.url +'/'+ service.id, service)
+  }
 
+  deleteService(id: string): Observable<any> {
+    return this.http.delete(this.url +'/'+ id)
+  }
 
 }
