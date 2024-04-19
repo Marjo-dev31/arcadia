@@ -5,7 +5,7 @@ import { Service, ServiceCreate } from '../../../../shared/models/service.interf
 import { ServiceService } from '../../../services/service/service.service';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { NgStyle } from '@angular/common';
-import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-service-handled',
@@ -73,7 +73,7 @@ import { Title } from '@angular/platform-browser';
         <form
           class="update-form"
           [formGroup]="serviceForm"
-          (ngSubmit)="updateService(serviceForm.value)">
+          (ngSubmit)="updateService()">
           <input
             type="text"
             formControlName="title"
@@ -96,9 +96,9 @@ export class ServiceHandledComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.serviceForm = this.fb.group({
-    id: new FormControl(''),
-    title: new FormControl(''),
-    description: new FormControl('')
+      title: new FormControl(''),
+      description: new FormControl(''),
+      id: new FormControl('')
     })}
 
   private readonly serviceService = inject(ServiceService);
@@ -138,16 +138,17 @@ export class ServiceHandledComponent implements OnInit {
   editService(id: string) {
     this.updateFormIsDisplay = true;
     const serviceToUpdate = this.datasource.find((el)=> el.id === id)
-    console.log(serviceToUpdate)
-    this.serviceForm.patchValue({id: serviceToUpdate?.id, title : serviceToUpdate?.title, description : serviceToUpdate?.description })
+    // console.log(serviceToUpdate)
+    this.serviceForm.patchValue({id: serviceToUpdate?.id , title : serviceToUpdate?.title, description : serviceToUpdate?.description })
     console.log(this.serviceForm.value)
   }
 
-  updateService(id: string) {
-    
+  updateService() {
+    this.serviceService.updateService(this.serviceForm.value).subscribe()
+    // console.log(this.serviceForm.value)
   }
 
   deleteService(id:string) {
-    console.log(id)
+    this.serviceService.deleteService(id).subscribe()
   }
 }

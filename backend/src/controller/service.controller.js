@@ -6,7 +6,7 @@ import httpStatus from "../domain/httpstatus.js";
 
 
 export const getServices = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching services`);
+  logger.info(`${req.method} ${req.originalUrl}, fetching services get`);
   database.query(QUERYSERVICES.SELECT_SERVICES, (error, results) => {
     if (!results) {
       res
@@ -35,7 +35,7 @@ export const getServices = (req, res) => {
 
 
 export const getService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching service`);
+    logger.info(`${req.method} ${req.originalUrl}, fetching service get`);
     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
       if (!results) {
         res
@@ -65,7 +65,7 @@ export const getService = (req, res) => {
 
 
 export const addService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, creating service`);
+    logger.info(`${req.method} ${req.originalUrl}, creating service post`);
     database.query(QUERYSERVICES.CREATE_SERVICE, Object.values(req.body),(error, results) => {
       if (!results) {
         logger.error(error.message);
@@ -96,7 +96,7 @@ export const addService = (req, res) => {
 
 
   export const updateService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching service`);
+    logger.info(`${req.method} ${req.originalUrl}, fetching service put`);
     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
       if (!results[0]) {
         res
@@ -110,9 +110,9 @@ export const addService = (req, res) => {
         );
       } else {
         logger.info(`${req.method} ${req.originalUrl}, updating service`);
-        // console.log(req.body, req.params.id, 'toto');
-    database.query(QUERYSERVICES.UPDATE_SERVICE, [...Object.values(req.body), req.params.id], (error, results) => {
-        if(!error) {
+        database.query(QUERYSERVICES.UPDATE_SERVICE, [...Object.values(req.body), req.params.id], (error, results) => {
+    
+      if(!error) {
             res
           .status(httpStatus.OK.code)
           .send(
@@ -120,7 +120,7 @@ export const addService = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Service updated`,
-              {id: req.params.id, ...req.body}))
+              {...req.body}))
         } else {
             logger.error(error.message)
             res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
@@ -137,7 +137,7 @@ export const addService = (req, res) => {
 
 
   export const deleteService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, deleting service`);
+    logger.info(`${req.method} ${req.originalUrl}, deleting service delete`);
     database.query(QUERYSERVICES.DELETE_SERVICE, [req.params.id], (error, results) => {
       if (results.affectedRows > 0) { 
         res
