@@ -41,6 +41,12 @@ post http://localhost:8000/images
 Content-Type: application/json
 
  {
-    "image_url": "./imagetest.jpg"
-
+    "image_url": "./imagetest6.jpg",
+    "service_id": "1"
  }
+
+
+###
+
+
+get http://localhost:8000/images
