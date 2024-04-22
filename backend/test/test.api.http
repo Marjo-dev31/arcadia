@@ -34,3 +34,13 @@ Content-Type: application/json
 ###
 
 delete http://localhost:8000/services/9dfdf93d-fcc4-11ee-8026-0242ac140002
+
+###
+
+post http://localhost:8000/images
+Content-Type: application/json
+
+ {
+    "image_url": "./imagetest.jpg"
+
+ }

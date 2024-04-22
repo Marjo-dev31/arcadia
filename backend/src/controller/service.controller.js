@@ -86,7 +86,7 @@ export const addService = (req, res) => {
             new Response(
               httpStatus.CREATED.code,
               httpStatus.CREATED.status,
-              `Services created`,
+              `Service created`,
               { service }
             )
           );

@@ -6,6 +6,8 @@ import { ServiceService } from '../../../services/service/service.service';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 import { NgStyle } from '@angular/common';
 import { tap } from 'rxjs';
+import { ImageService } from '../../../home/services/image.service';
+import { Image, ImageCreate } from '../../../../shared/models/image.interface';
 
 
 @Component({
@@ -27,15 +29,19 @@ import { tap } from 'rxjs';
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Photo</th>
           <td mat-cell *matCellDef="let service">
-            <img src="{{ service.image }}" alt="" />
+            <!-- <img src="{{ service.image }}" alt="" /> -->
+            <input type="file" class="file-input" (change)="onFileChange($event)">
+            <!-- <div> {{filename || "Il n'y a pas encore de photo"}}</div> -->
+            <button mat-mini-fab color="primary" class="upload-btn" (click)="addImage()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
           </td>
         </ng-container>
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let service">
             <mat-icon (click)="editService(service.id)">create</mat-icon>
             <mat-icon (click)="deleteService(service.id)" >delete</mat-icon>
-          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
@@ -43,7 +49,7 @@ import { tap } from 'rxjs';
       <mat-icon class="add-icon" (click)="toggleAddForm()"
         >add_circle_outline</mat-icon
       >
-</section>
+    </section>
       <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
         <form
           class="add-form"
@@ -66,7 +72,7 @@ import { tap } from 'rxjs';
             [(ngModel)]="newService.description"
             #description="ngModel"
           ></textarea>
-          <input type="file" value="" />
+          
           <button class="add-btn">Enregistrer nouveau service</button>
         </form>
       </section>
@@ -103,8 +109,10 @@ export class ServiceHandledComponent implements OnInit {
     })}
 
   private readonly serviceService = inject(ServiceService);
+  private readonly imageService = inject(ImageService);
 
-  displayColums: string[] = ['title', 'description', 'image', 'actions'];
+
+  displayColums: string[] = ['title', 'description', 'actions', 'image'];
 
   datasource!: Service[];
 
@@ -116,7 +124,7 @@ export class ServiceHandledComponent implements OnInit {
     description: '',
   };
 
-  
+  file!: File;
 
   ngOnInit() {
     this.getServices();  
@@ -132,12 +140,12 @@ export class ServiceHandledComponent implements OnInit {
 
   toggleAddForm() {
     this.addFormIsDisplay = !this.addFormIsDisplay;
-    console.log(this.addFormIsDisplay);
+    // console.log(this.addFormIsDisplay);
   }
   
   onSubmit(): void {
     this.serviceService.addService(this.newService).subscribe();
-    // console.log(this.newService);
+    console.log(this.newService.title);
   }
 
   editService(id: string) {
@@ -158,4 +166,15 @@ export class ServiceHandledComponent implements OnInit {
     this.serviceService.deleteService(id).pipe(tap(()=>{this.getServices();})).subscribe();
     this.getServices();
   }
+
+  onFileChange(event: any) {
+    console.log(event.target.files[0])
+    this.file = event.target.files[0]
+  }
+
+  addImage() {
+    this.imageService.addImage(this.file).subscribe(res => {console.log('titi', res)})
+  }
+
+
 }
