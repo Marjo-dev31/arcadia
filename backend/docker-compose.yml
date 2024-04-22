@@ -27,9 +27,9 @@ services:
     build: .
     image: nodeapp:v1
     ports:
-      - 8000:8000
+      - 8001:8001
     expose:
-      - 8000
+      - 8001
     depends_on:
       - mysqldb
     environment:
@@ -41,7 +41,7 @@ services:
       DB_CONNECTION_LIMIT: 20
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappservice
-      SERVICE_PORT: 8000
+      SERVICE_PORT: 8001
     networks:
       - internalnet
 

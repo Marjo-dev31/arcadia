@@ -74,12 +74,12 @@ CREATE TABLE veterinary_report (
 CREATE TABLE images (
     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     image_url VARCHAR(255) NOT NULL,
-    id_animal VARCHAR(36) DEFAULT NULL,
-    id_habitat VARCHAR(36) DEFAULT NULL,
-    id_service VARCHAR(36) DEFAULT NULL,
+    id_animal VARCHAR(36)  NULL,
+    id_habitat VARCHAR(36)  NULL,
+    id_service VARCHAR(36) NULL,
     FOREIGN KEY (id_animal) REFERENCES animals(id),
     FOREIGN KEY (id_habitat) REFERENCES habitats(id),
-    FOREIGN KEY (id_service) REFERENCES serviceS(id)
+    FOREIGN KEY (id_service) REFERENCES services(id)
 );
 
 CREATE TABLE reviews (
