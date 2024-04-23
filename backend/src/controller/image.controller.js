@@ -2,7 +2,7 @@ import database from "../config/mysql.config.js";
 import QUERYIMAGES from "../query/image.query.js";
 import logger from "../util/logger.js";
 import Response from "../domain/response.js";
-import httpStatus from "./service.controller.js";
+import httpStatus from "../domain/httpstatus.js";
 
 export const getServicesImages = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching images list `);
@@ -34,7 +34,21 @@ export const getServicesImages = (req, res) => {
 
 export const addServiceImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-  console.log(req.files)
+
+  console.log(req.files.myImg)
+const file = req.files.myImg;
+const uploadPath = '../images.upload/' + file.name;
+
+console.log(file, uploadPath)
+
+file.mv(uploadPath, function(err) {
+  if(err){
+    return exports.status(500).send(err);
+  } else {
+    res.send('File uploaded')
+  }
+})
+
 
   logger.info(req.params.id)
 
