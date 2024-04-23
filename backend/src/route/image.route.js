@@ -9,10 +9,11 @@ imageRoutes.route('/')
 
 imageRoutes.route('/services')
 .get(getServicesImages)
-.post(addServiceImage)
+
 
 imageRoutes.route('/service/:id')
 .put(updateServiceImage)
+.post(addServiceImage)
 
 imageRoutes.route('/:id')
 .get(getImage)
