@@ -1,3 +1,6 @@
+// import dirname from "path";
+import path from "path";
+import url from "url";
 import database from "../config/mysql.config.js";
 import QUERYIMAGES from "../query/image.query.js";
 import logger from "../util/logger.js";
@@ -33,17 +36,23 @@ export const getServicesImages = (req, res) => {
 };
 
 export const addServiceImage = (req, res) => {
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-
   console.log(req.files.myImg)
-const file = req.files.myImg;
-const uploadPath = '../images.upload/' + file.name;
+  const file = req.files.myImg;
+  console.log(file.name)
+  const dirPath = path.join(__dirname, '../images/');
+  console.log(dirPath)
 
-console.log(file, uploadPath)
+const pathT = dirPath + file.name
 
-file.mv(uploadPath, function(err) {
+
+file.mv(pathT, function(err) {
   if(err){
-    return exports.status(500).send(err);
+    console.log(err)
+    return res.status(500).send(err);
   } else {
     res.send('File uploaded')
   }
