@@ -29,7 +29,7 @@ import { Image, ImageCreate } from '../../../../shared/models/image.interface';
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Photo</th>
           <td mat-cell *matCellDef="let service">
-            <input type="file" class="file-input" (change)="onFileChange($event, service.id)">
+            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" name="uploaded">
             
             <!-- <div>{{fileName || "Il n'y a pas de photo choisie"}}</div> -->
             <!-- <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
