@@ -37,16 +37,40 @@ delete http://localhost:8000/services/9dfdf93d-fcc4-11ee-8026-0242ac140002
 
 ###
 
-post http://localhost:8000/images
+post http://localhost:8000/images/services
 Content-Type: application/json
 
  {
-    "image_url": "./imagetest6.jpg",
-    "service_id": "1"
+    "image_url": "./imagetest7.jpg",
+    "service_id": "5096717e-fd68-11ee-a19d-0242ac140002"
  }
 
 
 ###
 
 
-get http://localhost:8000/images
+get http://localhost:8000/images/services
+
+
+###
+
+put http://localhost:8000/images/service/1306c828-00c7-11ef-aaa5-0242ac180002
+Content-Type: application/json
+
+{
+    "image_url": "/imageupdate3",
+    "service_id": "5096717e-fd68-11ee-a19d-0242ac140002"
+}
+
+
+###
+
+get http://localhost:8000/images/1306c828-00c7-11ef-aaa5-0242ac180002
+
+###
+
+get http://localhost:8000/images/
+
+###
+
+
