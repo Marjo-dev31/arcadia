@@ -1,12 +1,18 @@
 import express from "express";
-import { addImage, getImage, getImages } from "../controller/image.controller.js";
+import { addServiceImage, getImage, getImages, getServicesImages, updateServiceImage } from "../controller/image.controller.js";
 
 
 const imageRoutes = express.Router();
 
 imageRoutes.route('/')
 .get(getImages)
-.post(addImage);
+
+imageRoutes.route('/services')
+.get(getServicesImages)
+.post(addServiceImage)
+
+imageRoutes.route('/service/:id')
+.put(updateServiceImage)
 
 imageRoutes.route('/:id')
 .get(getImage)
