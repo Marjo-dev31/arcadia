@@ -29,12 +29,12 @@ import { Image, ImageCreate } from '../../../../shared/models/image.interface';
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Photo</th>
           <td mat-cell *matCellDef="let service">
-            <!-- <img src="{{ service.image }}" alt="" /> -->
-            <input type="file" class="file-input" (change)="onFileChange($event)">
-            <!-- <div> {{filename || "Il n'y a pas encore de photo"}}</div> -->
-            <button mat-mini-fab color="primary" class="upload-btn" (click)="addImage()">
+            <input type="file" class="file-input" (change)="onFileChange($event, service.id)">
+            
+            <!-- <div>{{fileName || "Il n'y a pas de photo choisie"}}</div> -->
+            <!-- <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
               <mat-icon>attach_file</mat-icon>
-            </button>
+            </button> -->
           </td>
         </ng-container>
         <ng-container matColumnDef="actions">
@@ -123,8 +123,7 @@ export class ServiceHandledComponent implements OnInit {
     title: '',
     description: '',
   };
-
-  file!: File;
+  
 
   ngOnInit() {
     this.getServices();  
@@ -132,49 +131,39 @@ export class ServiceHandledComponent implements OnInit {
 
   getServices() {
       this.serviceService.getServices().then((response) => {
-      // console.log(response, 'toto')
       this.datasource = response;
-      // console.log(this.datasource, 'tata')
     });
-  }
+  };
 
   toggleAddForm() {
     this.addFormIsDisplay = !this.addFormIsDisplay;
-    // console.log(this.addFormIsDisplay);
-  }
+  };
   
   onSubmit(): void {
     this.serviceService.addService(this.newService).subscribe();
-    console.log(this.newService.title);
-  }
+  };
 
   editService(id: string) {
     this.updateFormIsDisplay = true;
-    const serviceToUpdate = this.datasource.find((el)=> el.id === id)
-    // console.log(serviceToUpdate)
-    this.serviceForm.patchValue({id: serviceToUpdate?.id , title : serviceToUpdate?.title, description : serviceToUpdate?.description })
-    console.log(this.serviceForm.value)
-  }
+    const serviceToUpdate = this.datasource.find((el)=> el.id === id);
+    this.serviceForm.patchValue({id: serviceToUpdate?.id , title : serviceToUpdate?.title, description : serviceToUpdate?.description });
+  };
 
   updateService() {
     this.serviceService.updateService(this.serviceForm.value).pipe(tap(()=>{this.getServices();})).subscribe();
-    // console.log(this.serviceForm.value)
-    
-  }
+  };
 
   deleteService(id:string) {
     this.serviceService.deleteService(id).pipe(tap(()=>{this.getServices();})).subscribe();
     this.getServices();
-  }
+  };
 
-  onFileChange(event: any) {
-    console.log(event.target.files[0])
-    this.file = event.target.files[0]
-  }
-
-  addImage() {
-    this.imageService.addImage(this.file).subscribe(res => {console.log('titi', res)})
-  }
-
+  onFileChange(event: any, id:string) {
+    const file: File = event.target.files[0]
+    const formData = new FormData()
+    formData.append("myImg", file)
+   
+    this.imageService.addImage(formData, id).subscribe()
+  };
 
 }
