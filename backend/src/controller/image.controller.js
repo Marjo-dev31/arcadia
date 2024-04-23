@@ -34,36 +34,40 @@ export const getServicesImages = (req, res) => {
 
 export const addServiceImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-  database.query(
-    QUERYIMAGES.CREATE_IMAGE_SERVICE,
-    Object.values(req.body),
-    (error, results) => {
-      if (!results) {
-        logger.error(error.message);
-        res
-          .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-          .send(
-            new Response(
-              httpStatus.INTERNAL_SERVER_ERROR.code,
-              httpStatus.INTERNAL_SERVER_ERROR.status,
-              `Error occured`
-            )
-          );
-      } else {
-        const image = { ...req.body };
-        res
-          .status(httpStatus.CREATED.code)
-          .send(
-            new Response(
-              httpStatus.CREATED.code,
-              httpStatus.CREATED.status,
-              `Image created`,
-              { image }
-            )
-          );
-      }
-    }
-  );
+  console.log(req.files)
+
+  logger.info(req.params.id)
+
+  // database.query(
+  //   QUERYIMAGES.CREATE_IMAGE_SERVICE,
+  //   Object.values(req.body),
+  //   (error, results) => {
+  //     if (!results) {
+  //       logger.error(error.message);
+  //       res
+  //         .status(httpStatus.INTERNAL_SERVER_ERROR.code)
+  //         .send(
+  //           new Response(
+  //             httpStatus.INTERNAL_SERVER_ERROR.code,
+  //             httpStatus.INTERNAL_SERVER_ERROR.status,
+  //             `Error occured`
+  //           )
+  //         );
+  //     } else {
+  //       const image = { ...req.body };
+  //       res
+  //         .status(httpStatus.CREATED.code)
+  //         .send(
+  //           new Response(
+  //             httpStatus.CREATED.code,
+  //             httpStatus.CREATED.status,
+  //             `Image created`,
+  //             { image }
+  //           )
+  //         );
+  //     }
+  //   }
+  // );
 };
 
 export const updateServiceImage = (req, res) => {

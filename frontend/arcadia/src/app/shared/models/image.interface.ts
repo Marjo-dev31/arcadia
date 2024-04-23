@@ -7,7 +7,7 @@ export interface Image {
 }
 
 export interface ImageCreate {
-    image_url: string,
+    image_url: FormData,
     service_id?: string,
     habitat_id?: string,
     animal_id?: string

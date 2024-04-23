@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import ip from 'ip';
 import cors from 'cors';
 import uuidv4 from 'uuidv4';
+import fileUpload from 'express-fileupload';
 import Response from './domain/response.js';
 import httpStatus from './controller/service.controller.js';
 import serviceRoutes from "./route/service.route.js";
@@ -17,6 +18,7 @@ const app = express();
 
 app.use(cors({ origin: '*'}));
 app.use(express.json());
+app.use(fileUpload());
 
 
 app.use('/services', serviceRoutes);
