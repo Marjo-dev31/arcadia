@@ -28,8 +28,8 @@ import { Service } from '../../shared/models/service.interface';
         <div class="service-item" >
           <img
             class="service-img"
-            src= ""
-            alt="Guide accompagnant un groupe de visiteurs"
+            [src]= "'http://localhost:8000/services/' + service.image_url"
+            alt="photo representative du service"
           />
           <div class="service-content" >
             <h3 >{{service.title}}</h3>
@@ -72,7 +72,7 @@ import { Service } from '../../shared/models/service.interface';
 }
 
 .service-img {
-    width: 100%;
+    width: 300px;
     object-fit: cover; 
 }
 
@@ -95,7 +95,7 @@ export class ServicesComponent implements OnInit {
   ngOnInit() {
     this.serviceService.getServices().then(response => {
       this.services = response
-      // console.log(response, 'toto')
+      console.log(response, 'toto')
   })
   }
 }
