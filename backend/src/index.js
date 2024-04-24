@@ -20,7 +20,6 @@ app.use(cors({ origin: '*'}));
 app.use(express.json());
 app.use(fileUpload());
 
-
 app.use('/services', serviceRoutes);
 app.use('/images', imageRoutes);
 
