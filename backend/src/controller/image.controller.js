@@ -1,11 +1,9 @@
-// import dirname from "path";
-import path from "path";
-import url from "url";
 import database from "../config/mysql.config.js";
 import QUERYIMAGES from "../query/image.query.js";
 import logger from "../util/logger.js";
 import Response from "../domain/response.js";
 import httpStatus from "../domain/httpstatus.js";
+import fileupload from "../middleware/fileupload.js";
 
 export const getServicesImages = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching images list `);
@@ -36,61 +34,44 @@ export const getServicesImages = (req, res) => {
 };
 
 export const addServiceImage = (req, res) => {
-
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-  console.log(req.files.myImg)
-  const file = req.files.myImg;
-  console.log(file.name)
-  const dirPath = path.join(__dirname, '../images/');
-  console.log(dirPath)
-
-const pathT = dirPath + file.name
-
-
-file.mv(pathT, function(err) {
-  if(err){
-    console.log(err)
-    return res.status(500).send(err);
-  } else {
-    res.send('File uploaded')
-  }
-})
-
-
-  logger.info(req.params.id)
-
-  // database.query(
-  //   QUERYIMAGES.CREATE_IMAGE_SERVICE,
-  //   Object.values(req.body),
-  //   (error, results) => {
-  //     if (!results) {
-  //       logger.error(error.message);
-  //       res
-  //         .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-  //         .send(
-  //           new Response(
-  //             httpStatus.INTERNAL_SERVER_ERROR.code,
-  //             httpStatus.INTERNAL_SERVER_ERROR.status,
-  //             `Error occured`
-  //           )
-  //         );
-  //     } else {
-  //       const image = { ...req.body };
-  //       res
-  //         .status(httpStatus.CREATED.code)
-  //         .send(
-  //           new Response(
-  //             httpStatus.CREATED.code,
-  //             httpStatus.CREATED.status,
-  //             `Image created`,
-  //             { image }
-  //           )
-  //         );
-  //     }
-  //   }
-  // );
+  console.log(req.files.myImg, req.params.id);
+  fileupload(req);
+  const file = req.files.myImg
+  const filename = file.name
+  database.query(
+    QUERYIMAGES.CREATE_IMAGE_SERVICE,
+    [filename, req.params.id],
+    (error, results) => {
+      if (!results) {
+        logger.error(error.message);
+        res
+          .status(httpStatus.INTERNAL_SERVER_ERROR.code)
+          .send(
+            new Response(
+              httpStatus.INTERNAL_SERVER_ERROR.code,
+              httpStatus.INTERNAL_SERVER_ERROR.status,
+              `Error occured`
+            )
+          );
+      } else {
+        const image = { 
+          imageName: filename,
+          serviceId: req.params.id
+         };
+        res
+          .status(httpStatus.CREATED.code)
+          .send(
+            new Response(
+              httpStatus.CREATED.code,
+              httpStatus.CREATED.status,
+              `Image created`,
+              { image }
+            )
+          );
+      }
+    }
+  );
 };
 
 export const updateServiceImage = (req, res) => {
