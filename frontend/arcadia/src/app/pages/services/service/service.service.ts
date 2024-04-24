@@ -13,12 +13,10 @@ export class ServiceService {
 
   async getServices(): Promise<any> {
     const servicesList = await fetch(this.url).then((response) => response.json());
-    // console.log( servicesList, 'titi')
     return servicesList.data.services
   }
 
   addService(service: ServiceCreate): Observable<any> {
-    console.log(service)
     return this.http.post(this.url, service)
 }
 
