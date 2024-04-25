@@ -1,5 +1,6 @@
 import express from 'express';
 import {getHabitats, addHabitat, getHabitat, updateHabitat, deleteHabitat} from '../controller/habitat.controller.js';
+import { addComment } from '../controller/habitat.controller.js';
 
 const habitatRoutes = express.Router();
 
@@ -10,6 +11,7 @@ habitatRoutes.route('/')
 habitatRoutes.route('/:id')
 .get(getHabitat)
 .put(updateHabitat)
-.delete(deleteHabitat);
+.delete(deleteHabitat)
+.post(addComment);
 
 export default habitatRoutes;
