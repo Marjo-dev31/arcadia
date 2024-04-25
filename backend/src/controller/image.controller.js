@@ -193,3 +193,33 @@ export const updateServiceImage = (req, res) => {
     }
   );
 };
+
+// read images-habitats
+
+export const getHabitatsImages = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching images list `);
+  database.query(QUERYIMAGES.SELECT_HABITATS_IMAGES, (error, results) => {
+    if (!results[0]) {
+      res
+        .status(httpStatus.OK.code)
+        .send(
+          new Response(
+            httpStatus.OK.code,
+            httpStatus.OK.status,
+            `No images found`
+          )
+        );
+    } else {
+      res
+        .status(httpStatus.OK.code)
+        .send(
+          new Response(
+            httpStatus.OK.code,
+            httpStatus.OK.status,
+            `Images retrieved`,
+            { images: results }
+          )
+        );
+    }
+  });
+};

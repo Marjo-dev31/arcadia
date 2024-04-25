@@ -20,7 +20,7 @@ import {
       <section class="habitats">
         @for (habitat of habitats; track habitat) {
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
-          <img [src]="habitat.image" alt="" class="habitat-img" />
+          <img [src]="'http://localhost:8000/upload/' + habitat.image" alt="photo représentative de l'habitat" class="habitat-img" />
           <div class="habitat-content">
             <h3>{{ habitat.title }}</h3>
             @if (showDetails == habitat.id) {
