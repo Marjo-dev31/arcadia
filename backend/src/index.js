@@ -11,7 +11,6 @@ import logger from './util/logger.js';
 import imageRoutes from "./route/image.route.js";
 
 
-
 dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
 const app = express();
@@ -19,6 +18,9 @@ const app = express();
 app.use(cors({ origin: '*'}));
 app.use(express.json());
 app.use(fileUpload());
+
+app.use('/upload', express.static('src/upload'))
+
 
 app.use('/services', serviceRoutes);
 app.use('/images', imageRoutes);
@@ -127,7 +129,7 @@ app.post("/avis", (req, res)=> {
 
 
 app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
-app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
+// app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
 
 
 app.listen(PORT, () => logger.info(`It's alive on: ${ip.address()}: ${PORT}`));
