@@ -6,6 +6,9 @@ import { HabitatsService } from '../../../habitats/services/habitat.service';
 import { tap } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgStyle } from '@angular/common';
+import { ImageService } from '../../../home/services/image.service';
+
+
 
 @Component({
   selector: 'app-habitat-handled',
@@ -33,7 +36,7 @@ import { NgStyle } from '@angular/common';
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>
         <td mat-cell *matCellDef="let habitat">
-          <img src="{{ habitat.image }}" alt="" />
+          <div>{{ habitat.image }}</div>
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
@@ -41,14 +44,14 @@ import { NgStyle } from '@angular/common';
         <td mat-cell *matCellDef="let habitat">
           <mat-icon (click)="editHabitat(habitat.id)">create</mat-icon>
           <mat-icon (click)="deleteHabitat(habitat.id)">delete</mat-icon>
-          <!-- <input type="file" class="file-input" (change)="onFileChange($event, habitat.id)" > -->
+          <input type="file" class="file-input" (change)="onFileChange($event, habitat.id)" >
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
       <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
-    <mat-icon class="add-icon" (click)="toggleAddForm()"  >add_circle_outline</mat-icon>
+    <mat-icon class="add-icon" (click)="toggleAddForm()" >add_circle_outline</mat-icon>
   </section>
   <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
         <form
@@ -108,6 +111,8 @@ export class HabitatHandledComponent implements OnInit {
     })};
 
   private readonly habitatService = inject(HabitatsService);
+  private readonly imageService = inject(ImageService);
+
 
   displayColums: string[] = [
     'title',
@@ -158,7 +163,13 @@ export class HabitatHandledComponent implements OnInit {
 
   deleteHabitat(id:string) {
   this.habitatService.deleteHabitat(id).pipe(tap(()=>{this.getHabitats()})).subscribe();
-
 };
-}
 
+onFileChange(event: any, id:string) {
+  const file: File = event.target.files[0];
+  const formData = new FormData();
+  formData.append("myImg", file);
+  this.imageService.addHabitatImage(formData, id).subscribe()
+};
+
+}

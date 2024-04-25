@@ -157,8 +157,7 @@ export class ServiceHandledComponent implements OnInit {
     const file: File = event.target.files[0]
     const formData = new FormData()
     formData.append("myImg", file)
-   
-    this.imageService.addImage(formData, id).subscribe()
+    this.imageService.addServiceImage(formData, id).subscribe()
   };
 
 }
