@@ -29,10 +29,6 @@ import { ImageService } from '../../../home/services/image.service';
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Photo</th>
           <td mat-cell *matCellDef="let service">
-            <!-- <div>{{fileName || "Il n'y a pas de photo choisie"}}</div> -->
-            <!-- <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
-              <mat-icon>attach_file</mat-icon>
-            </button> -->
             <div>{{ service.image_url }}</div>
           </td>
         </ng-container>
@@ -41,7 +37,7 @@ import { ImageService } from '../../../home/services/image.service';
           <td mat-cell *matCellDef="let service">
             <mat-icon (click)="editService(service.id)">create</mat-icon>
             <mat-icon (click)="deleteService(service.id)" >delete</mat-icon>
-            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" name="uploaded">
+            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" >
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
@@ -51,7 +47,7 @@ import { ImageService } from '../../../home/services/image.service';
         >add_circle_outline</mat-icon
       >
     </section>
-      <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+    <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
         <form
           class="add-form"
           #form="ngForm"
@@ -76,8 +72,8 @@ import { ImageService } from '../../../home/services/image.service';
           
           <button class="add-btn">Enregistrer nouveau service</button>
         </form>
-      </section>
-      <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
+    </section>
+    <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
         <form
           class="update-form"
           [formGroup]="serviceForm"
@@ -92,7 +88,7 @@ import { ImageService } from '../../../home/services/image.service';
             rows="10"></textarea>
           <button class="add-btn">Modifier service</button>
         </form>
-      </section>
+    </section>
     
   `,
   styleUrl: `../component-handled.component.css`,
@@ -150,12 +146,11 @@ export class ServiceHandledComponent implements OnInit {
   };
 
   updateService() {
-    this.serviceService.updateService(this.serviceForm.value).pipe(tap(()=>{this.getServices();})).subscribe();
+    this.serviceService.updateService(this.serviceForm.value).pipe(tap(()=>{this.getServices()})).subscribe();
   };
 
   deleteService(id:string) {
-    this.serviceService.deleteService(id).pipe(tap(()=>{this.getServices();})).subscribe();
-    this.getServices();
+    this.serviceService.deleteService(id).pipe(tap(()=>{this.getServices()})).subscribe();
   };
 
   onFileChange(event: any, id:string) {

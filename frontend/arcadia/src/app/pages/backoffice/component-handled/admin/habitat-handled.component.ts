@@ -1,15 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Habitat } from '../../../../shared/models';
+import { Habitat, HabitatCreate } from '../../../../shared/models';
 import { HabitatsService } from '../../../habitats/services/habitat.service';
+import { tap } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-habitat-handled',
   standalone: true,
-  imports: [MatTableModule, MatIconModule],
+  imports: [MatTableModule, MatIconModule, ReactiveFormsModule, NgStyle, FormsModule],
   template: `
-    <h3>Habitats</h3>
+  <h3>Habitats</h3>
+  <section>
     <table mat-table [dataSource]="datasource">
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef>Titre</th>
@@ -19,7 +23,6 @@ import { HabitatsService } from '../../../habitats/services/habitat.service';
         <th mat-header-cell *matHeaderCellDef>Description</th>
         <td mat-cell *matCellDef="let habitat">{{ habitat.description }}</td>
       </ng-container>
-
       <ng-container matColumnDef="animals">
         <th mat-header-cell *matHeaderCellDef>Animaux</th>
         <td mat-cell *matCellDef="let habitat">
@@ -34,22 +37,77 @@ import { HabitatsService } from '../../../habitats/services/habitat.service';
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef>
-          <mat-icon>create</mat-icon>
-          <mat-icon>delete</mat-icon>
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let habitat">
+          <mat-icon (click)="editHabitat(habitat.id)">create</mat-icon>
+          <mat-icon (click)="deleteHabitat(habitat.id)">delete</mat-icon>
+          <!-- <input type="file" class="file-input" (change)="onFileChange($event, habitat.id)" > -->
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
       <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
-    <mat-icon class="add-icon">add_circle_outline</mat-icon>
+    <mat-icon class="add-icon" (click)="toggleAddForm()"  >add_circle_outline</mat-icon>
+  </section>
+  <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <form
+          class="add-form"
+          #form="ngForm"
+          name="addform"
+          (ngSubmit)="onSubmit()"
+        >
+          <input
+            type="text"
+            placeholder="Titre"
+            name="title"
+            [(ngModel)]="newHabitat.title"
+            #title="ngModel"
+          />
+          <textarea
+            name="description"
+            placeholder="Description"
+            cols="30"
+            rows="10"
+            [(ngModel)]="newHabitat.description"
+            #description="ngModel"
+          ></textarea>
+          
+          <button class="add-btn">Enregistrer nouveau service</button>
+        </form>
+  </section>
+  <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
+        <form
+          class="update-form"
+          [formGroup]="habitatForm"
+          (ngSubmit)="updateHabitat()"
+            >
+            <input
+            type="text"
+            formControlName="title"
+            />
+          <textarea
+            formControlName="description"
+            cols="30"
+            rows="10"></textarea>
+          <button class="add-btn">Modifier habitat</button>
+        </form>
+  </section>
   `,
   styleUrl: `../component-handled.component.css`,
 })
 export class HabitatHandledComponent implements OnInit {
-  constructor() {}
+
+  public habitatForm: FormGroup
+
+  constructor(private fb: FormBuilder) {
+    this.habitatForm = this.fb.group({
+      title: new FormControl(''),
+      description: new FormControl(''),
+      id: new FormControl('')
+    })};
+
+  private readonly habitatService = inject(HabitatsService);
 
   displayColums: string[] = [
     'title',
@@ -60,11 +118,47 @@ export class HabitatHandledComponent implements OnInit {
   ];
 
   datasource!: Habitat[];
-  private readonly habitatService = inject(HabitatsService);
+
+  newHabitat: HabitatCreate = {
+    title: '',
+    description: ''
+  };
+
+  addFormIsDisplay: boolean = false
+  updateFormIsDisplay: boolean = false
 
   ngOnInit() {
-    this.habitatService.getHabitats().then((response) => {
+   this.getHabitats();
+  }
+
+  getHabitats() {
+     this.habitatService.getHabitats().then((response) => {
       this.datasource = response;
     });
   }
+  
+  editHabitat(id: string){
+    this.updateFormIsDisplay = true;
+    const habitatToUpdate = this.datasource.find((el)=> el.id === id);
+    this.habitatForm.patchValue({id: habitatToUpdate?.id, title: habitatToUpdate?.title, description: habitatToUpdate?.description})
+  };
+
+  updateHabitat() {
+   this.habitatService.updateHabitat(this.habitatForm.value).pipe(tap(()=>{this.getHabitats()})).subscribe() 
+  }
+
+  toggleAddForm(){
+    this.addFormIsDisplay = !this.addFormIsDisplay
+  }
+
+  onSubmit() {
+    this.habitatService.addHabitat(this.newHabitat).pipe(tap(()=>{this.getHabitats()})).subscribe();
+  };
+
+
+  deleteHabitat(id:string) {
+  this.habitatService.deleteHabitat(id).pipe(tap(()=>{this.getHabitats()})).subscribe();
+
+};
 }
+
