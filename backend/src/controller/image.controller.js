@@ -41,7 +41,7 @@ export const addServiceImage = (req, res) => {
   const filename = file.name
   database.query(
     QUERYIMAGES.CREATE_IMAGE_SERVICE,
-    [filename, req.params.id],
+    [image_url, req.params.id],
     (error, results) => {
       if (!results) {
         logger.error(error.message);
@@ -179,7 +179,7 @@ export const getImage = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Image retrieved`,
-              results[0]
+              results
             )
           );
       }

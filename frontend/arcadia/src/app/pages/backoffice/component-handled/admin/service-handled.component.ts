@@ -7,7 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder }
 import { NgStyle } from '@angular/common';
 import { tap } from 'rxjs';
 import { ImageService } from '../../../home/services/image.service';
-import { Image, ImageCreate } from '../../../../shared/models/image.interface';
+
 
 
 @Component({
@@ -29,12 +29,11 @@ import { Image, ImageCreate } from '../../../../shared/models/image.interface';
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Photo</th>
           <td mat-cell *matCellDef="let service">
-            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" name="uploaded">
-            
             <!-- <div>{{fileName || "Il n'y a pas de photo choisie"}}</div> -->
             <!-- <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
               <mat-icon>attach_file</mat-icon>
             </button> -->
+            <div>{{ service.image_url }}</div>
           </td>
         </ng-container>
         <ng-container matColumnDef="actions">
@@ -42,6 +41,8 @@ import { Image, ImageCreate } from '../../../../shared/models/image.interface';
           <td mat-cell *matCellDef="let service">
             <mat-icon (click)="editService(service.id)">create</mat-icon>
             <mat-icon (click)="deleteService(service.id)" >delete</mat-icon>
+            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" name="uploaded">
+          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
@@ -89,7 +90,6 @@ import { Image, ImageCreate } from '../../../../shared/models/image.interface';
             formControlName="description"
             cols="30"
             rows="10"></textarea>
-          <input type="file" value="" />
           <button class="add-btn">Modifier service</button>
         </form>
       </section>
