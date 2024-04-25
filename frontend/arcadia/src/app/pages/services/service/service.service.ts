@@ -11,7 +11,7 @@ export class ServiceService {
 
   constructor( private http: HttpClient) {}
 
-  async getServices(): Promise<any> {
+  async getServices(): Promise<Service[]> {
     const servicesList = await fetch(this.url).then((response) => response.json());
     return servicesList.data.services
   }

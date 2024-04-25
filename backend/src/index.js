@@ -26,6 +26,7 @@ app.use('/upload', express.static('src/upload'))
 app.use('/services', serviceRoutes);
 app.use('/images', imageRoutes);
 app.use('/habitats', habitatRoutes);
+
 // app.use(require('body-parser').json());
 
 
@@ -92,7 +93,7 @@ app.post("/avis", (req, res)=> {
 
 
 app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
-// app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
+app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
 
 
 app.listen(PORT, () => logger.info(`It's alive on: ${ip.address()}: ${PORT}`));
