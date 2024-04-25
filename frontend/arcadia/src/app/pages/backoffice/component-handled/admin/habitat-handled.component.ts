@@ -36,7 +36,7 @@ import { ImageService } from '../../../home/services/image.service';
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>
         <td mat-cell *matCellDef="let habitat">
-          <div>{{ habitat.image }}</div>
+          <div>{{ habitat.image_url }}</div>
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
