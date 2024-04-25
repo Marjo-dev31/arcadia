@@ -9,6 +9,7 @@ import httpStatus from './domain/httpstatus.js';
 import serviceRoutes from "./route/service.route.js";
 import logger from './util/logger.js';
 import imageRoutes from "./route/image.route.js";
+import habitatRoutes from "./route/habitat.route.js";
 
 
 dotenv.config();
@@ -24,7 +25,7 @@ app.use('/upload', express.static('src/upload'))
 
 app.use('/services', serviceRoutes);
 app.use('/images', imageRoutes);
-
+app.use('/habitats', habitatRoutes);
 // app.use(require('body-parser').json());
 
 // const habitats = [
