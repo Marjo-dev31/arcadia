@@ -65,7 +65,7 @@ Content-Type: application/json
 
 ###
 
-get http://localhost:8000/images/1306c828-00c7-11ef-aaa5-0242ac180002
+get http://localhost:8000/images/45
 
 ###
 
@@ -73,4 +73,42 @@ get http://localhost:8000/images/
 
 ###
 
+get http://localhost:8000/habitats/
 
+###
+
+get http://localhost:8000/habitats/35
+
+###
+
+post http://localhost:8000/habitats
+Content-Type: application/json
+
+{
+    "title": "savane",
+    "description": "lieu aride et sauvage"
+}
+
+
+###
+
+post http://localhost:8000/habitats/532ee94b-02ff-11ef-ae74-0242ac180002
+Content-Type: application/json
+
+{
+    "comment": "un arbre est cassé"
+}
+
+###
+
+put http://localhost:8000/habitats/532ee94b-02ff-11ef-ae74-0242ac180002
+Content-Type: application/json
+
+{
+    "title" : "la savane ",
+    "description": "lieu aride , sauvage et malgré tout riche en faune"
+}
+
+###
+
+delete http://localhost:8000/habitats/532ee94b-02ff-11ef-ae74-0242ac180002

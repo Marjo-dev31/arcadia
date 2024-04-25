@@ -5,10 +5,77 @@ import Response from "../domain/response.js";
 import httpStatus from "../domain/httpstatus.js";
 import fileupload from "../middleware/fileupload.js";
 
+
+
+// read images
+
+export const getImages = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching images `);
+  database.query(QUERYIMAGES.SELECT_IMAGES, (error, results) => {
+    if (!results[0]) {
+      res
+        .status(httpStatus.OK.code)
+        .send(
+          new Response(
+            httpStatus.OK.code,
+            httpStatus.OK.status,
+            `No images found`
+          )
+        );
+    } else {
+      res
+        .status(httpStatus.OK.code)
+        .send(
+          new Response(
+            httpStatus.OK.code,
+            httpStatus.OK.status,
+            `Images retrieved`,
+            { images: results }
+          )
+        );
+    }
+  });
+};
+
+export const getImage = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching image `);
+  database.query(
+    QUERYIMAGES.SELECT_IMAGE,
+    [req.params.id],
+    (error, results) => {
+      if (!results[0]) {
+        res
+          .status(httpStatus.NOT_FOUND.code)
+          .send(
+            new Response(
+              httpStatus.NOT_FOUND.code,
+              httpStatus.NOT_FOUND.status,
+              `Image by id ${req.params.id} was not found !`
+            )
+          );
+      } else {
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Image retrieved`,
+              results
+            )
+          );
+      }
+    }
+  );
+};
+
+
+// create, update, read images-services
+
 export const getServicesImages = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching images list `);
   database.query(QUERYIMAGES.SELECT_SERVICES_IMAGES, (error, results) => {
-    if (!results) {
+    if (!results[0]) {
       res
         .status(httpStatus.OK.code)
         .send(
@@ -122,66 +189,6 @@ export const updateServiceImage = (req, res) => {
             }
           }
         );
-      }
-    }
-  );
-};
-
-export const getImages = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching images `);
-  database.query(QUERYIMAGES.SELECT_IMAGES, (error, results) => {
-    if (!results) {
-      res
-        .status(httpStatus.OK.code)
-        .send(
-          new Response(
-            httpStatus.OK.code,
-            httpStatus.OK.status,
-            `No images found`
-          )
-        );
-    } else {
-      res
-        .status(httpStatus.OK.code)
-        .send(
-          new Response(
-            httpStatus.OK.code,
-            httpStatus.OK.status,
-            `Images retrieved`,
-            { images: results }
-          )
-        );
-    }
-  });
-};
-
-export const getImage = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching image `);
-  database.query(
-    QUERYIMAGES.SELECT_IMAGE,
-    [req.params.id],
-    (error, results) => {
-      if (!results) {
-        res
-          .status(httpStatus.NOT_FOUND.code)
-          .send(
-            new Response(
-              httpStatus.NOT_FOUND.code,
-              httpStatus.NOT_FOUND.status,
-              `Image by id ${req.params.id} was not found !`
-            )
-          );
-      } else {
-        res
-          .status(httpStatus.OK.code)
-          .send(
-            new Response(
-              httpStatus.OK.code,
-              httpStatus.OK.status,
-              `Image retrieved`,
-              results
-            )
-          );
       }
     }
   );
