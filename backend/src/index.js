@@ -28,44 +28,6 @@ app.use('/images', imageRoutes);
 app.use('/habitats', habitatRoutes);
 // app.use(require('body-parser').json());
 
-// const habitats = [
-//   {
-//     id: 1,
-//     title: "La Savane",
-//     description: "lieu aride lorem ipsum",
-//     image: "assets/images/zoo-1692079_1280.jpg",
-//     animals: []
-//   },
-//   {
-//     id: 2,
-//     title: "Les Marais",
-//     description: "lieu humide à souhait",
-//     image: "assets/images/little-egret-2591578_1280.jpg",
-//     animals: [  {
-//       id: 1,
-//       firstname: "animal1",
-//       condition: "bon",
-//       race: "gazelle",
-//       image: "",
-//       veterinarycomments: [],
-//       employeecomments: []
-//     },
-//     {
-//       id:2,
-//       firstname: "animal2",
-//       condition: "mauvais",
-//       race: "lion",
-//       rapport: "chichi",
-//       image: "",
-//       veterinarycomments: [],
-//       employeecomments: []
-//     },]
-//   },
-// ];
-
-// app.get("/habitats", (req, res) => {
-//   res.json(habitats);
-// });
 
 // const animals = [
 //   {
