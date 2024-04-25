@@ -1,0 +1,9 @@
+const QUERYHABITATS = {
+    SELECT_HABITATS: '',
+    SELECT_HABITAT: '',
+    CREATE_HABITAT: '',
+    UPDATE_HABITAT: '',
+    DELETE_HABITAT: ''
+}
+
+export default QUERYHABITATS;
