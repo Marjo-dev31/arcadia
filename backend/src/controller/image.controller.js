@@ -102,7 +102,6 @@ export const getServicesImages = (req, res) => {
 
 export const addServiceImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-  console.log(req.files.myImg, req.params.id);
   fileupload(req);
   const file = req.files.myImg
   const filename = file.name
@@ -194,7 +193,7 @@ export const updateServiceImage = (req, res) => {
   );
 };
 
-// read images-habitats
+// read, create images-habitats
 
 export const getHabitatsImages = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching images list `);
@@ -223,3 +222,43 @@ export const getHabitatsImages = (req, res) => {
     }
   });
 };
+
+export const addHabitatImage = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, creating image `);
+  fileupload(req);
+  const file = req.files.myImg
+  const filename = file.name
+  database.query(
+    QUERYIMAGES.CREATE_IMAGE_HABITAT,
+    [filename, req.params.id],
+    (error, results) => {
+      if (!results) {
+        logger.error(error.message);
+        res
+          .status(httpStatus.INTERNAL_SERVER_ERROR.code)
+          .send(
+            new Response(
+              httpStatus.INTERNAL_SERVER_ERROR.code,
+              httpStatus.INTERNAL_SERVER_ERROR.status,
+              `Error occured`
+            )
+          );
+      } else {
+        const image = { 
+          imageName: filename,
+          serviceId: req.params.id
+         };
+        res
+          .status(httpStatus.CREATED.code)
+          .send(
+            new Response(
+              httpStatus.CREATED.code,
+              httpStatus.CREATED.status,
+              `Image created`,
+              { image }
+            )
+          );
+      }
+    }
+  );
+}
