@@ -43,7 +43,7 @@ export class HabitatsComponent implements OnInit {
   habitats!: Habitat[];
   private readonly habitatService = inject(HabitatsService);
 
-  showDetails: number | undefined = undefined;
+  showDetails: string | undefined = undefined;
 
   constructor(private matdialog: MatDialog) {}
 
@@ -52,7 +52,7 @@ export class HabitatsComponent implements OnInit {
       this.habitats = response;
     });
   }
-  toggleDetails(id: number) {
+  toggleDetails(id: string) {
     this.showDetails = id;
   }
   openDialog(id: number): void {
