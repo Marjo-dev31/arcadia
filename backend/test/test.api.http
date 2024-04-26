@@ -112,3 +112,30 @@ Content-Type: application/json
 ###
 
 delete http://localhost:8000/habitats/532ee94b-02ff-11ef-ae74-0242ac180002
+
+
+###
+
+get http://localhost:8000/reviews/
+
+###
+
+post http://localhost:8000/reviews/
+Content-Type: application/json
+
+{
+    "pseudo": "toto",
+    "content": "tres bien"
+}
+
+###
+
+get http://localhost:8000/reviews/99f7d6dc-03ac-11ef-8c2c-0242ac180002
+###
+
+put http://localhost:8000/reviews/99f7d6dc-03ac-11ef-8c2c-0242ac180002
+Content-Type: application/json
+
+{
+    "status": true
+}
