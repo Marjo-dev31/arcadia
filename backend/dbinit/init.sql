@@ -77,9 +77,9 @@ CREATE TABLE images (
     id_animal VARCHAR(36)  NULL,
     id_habitat VARCHAR(36)  NULL,
     id_service VARCHAR(36) NULL,
-    FOREIGN KEY (id_animal) REFERENCES animals(id),
-    FOREIGN KEY (id_habitat) REFERENCES habitats(id),
-    FOREIGN KEY (id_service) REFERENCES services(id)
+    FOREIGN KEY (id_animal) REFERENCES animals(id) DELETE ON CASCADE,
+    FOREIGN KEY (id_habitat) REFERENCES habitats(id) DELETE ON CASCADE,
+    FOREIGN KEY (id_service) REFERENCES services(id) DELETE ON CASCADE
 );
 
 CREATE TABLE reviews (
