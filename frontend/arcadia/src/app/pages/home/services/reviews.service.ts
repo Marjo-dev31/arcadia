@@ -19,7 +19,6 @@ export class ReviewsService {
     }
 
     updateReview(review: Review){
-        console.log(review)
         return this.http.put(this.url + '/' + review.id, review)
     }
 }
