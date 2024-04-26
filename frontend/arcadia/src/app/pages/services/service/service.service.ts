@@ -12,8 +12,12 @@ export class ServiceService {
   constructor( private http: HttpClient) {}
 
   async getServices(): Promise<Service[]> {
+    try {
     const servicesList = await fetch(this.url).then((response) => response.json());
-    return servicesList.data.services
+    return servicesList.data.services }
+    catch (error) {
+      return []
+    }
   }
 
   addService(service: ServiceCreate): Observable<any> {
