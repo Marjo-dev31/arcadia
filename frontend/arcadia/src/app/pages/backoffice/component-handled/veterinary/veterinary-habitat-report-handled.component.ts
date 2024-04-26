@@ -28,11 +28,19 @@ import { Habitat } from '../../../../shared/models';
           <mat-icon>delete</mat-icon>
         </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
       <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
     <mat-icon class="add-icon">add_circle_outline</mat-icon>
+  </section>
+  <section>
+    <form>
+      <select name="habitats" id="habitat-select">
+        @for(habitat of datasource; track habitat){
+        <option value="{{habitat.id}}">{{habitat.title}}</option>}
+      </select>
+    <textarea name="" id="" cols="30" rows="5" placeholder="Ajouter votre commentaire ici"></textarea>
+    </form>
   </section>
   `,
   styleUrl: `../component-handled.component.css`,
@@ -57,4 +65,6 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
       this.datasource = response;
     });
   }
+
+
 }
