@@ -18,6 +18,7 @@ import {
         pour le bien-être de nos animaux.
       </h2>
       <section class="habitats">
+        @if(habitats && habitats.length) {
         @for (habitat of habitats; track habitat) {
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img [src]="'http://localhost:8000/upload/' + habitat.image_url" alt="photo représentative de l'habitat" class="habitat-img" />
@@ -33,6 +34,8 @@ import {
             }
           </div>
         </div>
+        }} @else {
+          <h3>Il n'y a pas d'habitat visible</h3>
         }
       </section>
     </main>
@@ -40,6 +43,7 @@ import {
   styleUrl: `./habitat.component.css`,
 })
 export class HabitatsComponent implements OnInit {
+
   habitats!: Habitat[];
   private readonly habitatService = inject(HabitatsService);
 
@@ -51,7 +55,8 @@ export class HabitatsComponent implements OnInit {
     this.habitatService.getHabitats().then((response) => {
       this.habitats = response;
     });
-  }
+  };
+
   toggleDetails(id: string) {
     this.showDetails = id;
   }

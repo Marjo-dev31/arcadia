@@ -10,8 +10,12 @@ export class HabitatsService {
     constructor(private http: HttpClient) {}
 
     async getHabitats(): Promise<Habitat[]> {
+        try {
         const habitatsList = await fetch(this.url).then((response)=> response.json());
-        return habitatsList.data.habitats
+        return habitatsList.data.habitats }
+        catch (error){
+            return []
+        }
     }
  
     addHabitat(habitat: HabitatCreate): Observable<any> {

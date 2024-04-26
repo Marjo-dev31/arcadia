@@ -14,7 +14,7 @@ export const getHabitats = (req, res) => {
           new Response(
             httpStatus.OK.code,
             httpStatus.OK.status,
-            `No habitats found`
+            `No habitats found`,
           )
         );
     } else {
@@ -32,6 +32,7 @@ export const getHabitats = (req, res) => {
     }
   });
 };
+
 
 export const getHabitat = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching habitat`);
