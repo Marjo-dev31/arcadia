@@ -130,12 +130,10 @@ Content-Type: application/json
 
 ###
 
-get http://localhost:8000/reviews/99f7d6dc-03ac-11ef-8c2c-0242ac180002
-###
 
 put http://localhost:8000/reviews/99f7d6dc-03ac-11ef-8c2c-0242ac180002
 Content-Type: application/json
 
 {
-    "status": true
+    "status": false
 }

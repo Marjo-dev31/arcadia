@@ -79,7 +79,7 @@ export const updateReview = (req, res) => {
       );
     } else {
       logger.info(`${req.method} ${req.originalUrl}, updating review`);
-      database.query(QUERYREVIEWS.UPDATE_REVIEW_STATUS, [...Object.values(req.body), req.params.id], (error, results) => {
+      database.query(QUERYREVIEWS.UPDATE_REVIEW_STATUS, [req.body.status, req.params.id], (error, results) => {
     if(!error) {
           res
         .status(httpStatus.OK.code)
@@ -89,7 +89,6 @@ export const updateReview = (req, res) => {
             httpStatus.OK.status,
             `Review updated`,
             {result: req.body}))
-            console.log(req.body)
       } else {
           logger.error(error.message)
           res.status(httpStatus.INTERNAL_SERVER_ERROR.code)

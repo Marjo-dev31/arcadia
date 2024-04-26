@@ -26,7 +26,7 @@ import { ReviewsService } from '../../../home/services/reviews.service';
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Etat actuel</th>
         <td mat-cell *matCellDef="let review">
-          @if(review.status === true){
+          @if(review.status == true){
           <div>Publié</div>
           } @else {
           <div>Refusé</div>
@@ -56,7 +56,11 @@ export class ReviewHandledComponent implements OnInit {
   private readonly reviewService = inject(ReviewsService);
 
   ngOnInit() {
-    this.reviewService.getReviews().then((response) => {
+   this.getReviews()
+  }
+
+  getReviews() {
+     this.reviewService.getReviews().then((response) => {
       this.datasource = response;
     });
   }
@@ -64,14 +68,15 @@ export class ReviewHandledComponent implements OnInit {
   publishReview(id: string) {
     const reviewToPublish = this.datasource.find((el) => el.id === id);
     if(reviewToPublish) {
-    reviewToPublish.status = true;}
-    this.reviewService.updateReview(reviewToPublish).subscribe()
+      reviewToPublish.status = true
+    this.reviewService.updateReview(reviewToPublish).subscribe()}
   }
 
   unpublishReview(id: string) {
     const reviewToPublish = this.datasource.find((el) => el.id === id);
     if (reviewToPublish) {
       reviewToPublish.status = false;
+      this.reviewService.updateReview(reviewToPublish).subscribe()
     }
   }
 }
