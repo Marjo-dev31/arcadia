@@ -89,6 +89,6 @@ CREATE TABLE reviews (
     date DATE NOT NULL,
     status BOOLEAN NOT NULL,
     id_employee VARCHAR(36) NOT NULL,
-    FOREIGN KEY (id_employee) REFERENCES users(id)
+    FOREIGN KEY (id_employee) REFERENCES users(id) DELETE ON CASCADE
 );
 
