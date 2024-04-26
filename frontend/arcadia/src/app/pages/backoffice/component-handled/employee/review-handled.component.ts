@@ -21,18 +21,23 @@ import { ReviewsService } from '../../../home/services/reviews.service';
       </ng-container>
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>Date</th>
-        <td mat-cell *matCellDef="let review">{{review.date}}</td>
+        <td mat-cell *matCellDef="let review">{{ review.date }}</td>
       </ng-container>
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Etat actuel</th>
-        <td mat-cell *matCellDef="let review">Publié/Refusé</td>
+        <td mat-cell *matCellDef="let review">
+          @if(review.status === true){
+          <div>Publié</div>
+          } @else {
+          <div>Refusé</div>
+          }
+        </td>
       </ng-container>
-
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef>
-          <mat-icon>cloud_done</mat-icon>
-          <mat-icon>cloud_off</mat-icon>
+        <td mat-cell *matCellDef="let review">
+          <mat-icon (click)="publishReview(review.id)">cloud_done</mat-icon>
+          <mat-icon (click)="unpublishReview(review.id)">cloud_off</mat-icon>
         </td>
       </ng-container>
 
@@ -45,9 +50,7 @@ import { ReviewsService } from '../../../home/services/reviews.service';
 export class ReviewHandledComponent implements OnInit {
   constructor() {}
 
-  displayColums: string[] = [
-    'pseudo', 'content', 'date', 'actions', 'status'
-  ];
+  displayColums: string[] = ['pseudo', 'content', 'date', 'actions', 'status'];
 
   datasource!: Review[];
   private readonly reviewService = inject(ReviewsService);
@@ -56,5 +59,19 @@ export class ReviewHandledComponent implements OnInit {
     this.reviewService.getReviews().then((response) => {
       this.datasource = response;
     });
+  }
+
+  publishReview(id: string) {
+    const reviewToPublish = this.datasource.find((el) => el.id === id);
+    if(reviewToPublish) {
+    reviewToPublish.status = true;}
+    this.reviewService.updateReview(reviewToPublish).subscribe()
+  }
+
+  unpublishReview(id: string) {
+    const reviewToPublish = this.datasource.find((el) => el.id === id);
+    if (reviewToPublish) {
+      reviewToPublish.status = false;
+    }
   }
 }

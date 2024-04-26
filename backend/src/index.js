@@ -6,10 +6,11 @@ import uuidv4 from 'uuidv4';
 import fileUpload from 'express-fileupload';
 import Response from './domain/response.js';
 import httpStatus from './domain/httpstatus.js';
-import serviceRoutes from "./route/service.route.js";
 import logger from './util/logger.js';
+import serviceRoutes from "./route/service.route.js";
 import imageRoutes from "./route/image.route.js";
 import habitatRoutes from "./route/habitat.route.js";
+import reviewRoutes from "./route/review.route.js"
 
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use('/upload', express.static('src/upload'))
 app.use('/services', serviceRoutes);
 app.use('/images', imageRoutes);
 app.use('/habitats', habitatRoutes);
+app.use('/reviews', reviewRoutes)
 
 // app.use(require('body-parser').json());
 
@@ -56,44 +58,10 @@ app.use('/habitats', habitatRoutes);
 //   res.json(animals);
 // });
 
-// const reviews = [
-//   {
-//     id: 1,
-//     pseudo: 'Manon',
-//     content: 'Agreable moment en famille',
-//     date: '12/03/2023'
-//   },
-//   {
-//     id: 2,
-//     pseudo: 'Vanessa',
-//     content: 'Animaux heureux',
-//     date: '08/06/2023'
-//   },
-//   {
-//     id: 3,
-//     pseudo: 'Laurie',
-//     content: 'De belles prestations',
-//     date: '05/04/2024'
-//   }
-// ];
-
-// app.get("/avis", (req,res)=> {
-//   res.json(reviews)
-// })
-
-
-app.post("/avis", (req, res)=> {
-  req.body.id = uuidv4()
-  reviews.push(req.body);
-  return res.send(req.body)
-})
-
-
-
 
 
 app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
-app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
+// app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
 
 
 app.listen(PORT, () => logger.info(`It's alive on: ${ip.address()}: ${PORT}`));

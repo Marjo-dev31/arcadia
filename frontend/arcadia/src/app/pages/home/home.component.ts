@@ -17,10 +17,9 @@ export class HomeComponent implements OnInit {
 
   reviews!: Review[];
   newReview: ReviewPost = {
-    // id: 0,
     pseudo: '',
     content: '',
-    date: '12/03/2024'
+    date: new Date()
   };
 
   result: number = 1;
@@ -32,6 +31,7 @@ export class HomeComponent implements OnInit {
   getReviews() {
     this.reviewService.getReviews().then((response) => {
       this.reviews = response;
+      console.log(this.reviews)
     });
   }
 
@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit {
     return (this.result = Math.floor(Math.random() * (max - min + 1) + min));
   }
 
+
+  
   onSubmit(): void {
     console.log(this.newReview)
     this.reviewService.addReview(this.newReview).subscribe();

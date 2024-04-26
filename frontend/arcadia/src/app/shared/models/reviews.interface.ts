@@ -1,13 +1,13 @@
 export interface Review {
-    id: number,
+    id: string,
     pseudo: string,
     content: string,
-    date: string
+    date: Date,
+    status: boolean
 }
 
 export interface ReviewPost {
-    // id: number,
     pseudo: string,
     content: string,
-    date: string
+    date: Date
 }

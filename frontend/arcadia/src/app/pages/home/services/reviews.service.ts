@@ -6,18 +6,16 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ReviewsService {
-    url = 'http://localhost:8000/avis';
+    url = 'http://localhost:8000/reviews';
     constructor(private http: HttpClient) {}
 
     async getReviews(): Promise<Review []> {
         const reviewsList = await fetch(this.url).then((response)=> response.json());
-        return reviewsList
+        return reviewsList.data.reviews
     }
     
+
     addReview(review: ReviewPost): Observable<any> {
-        // const headers = {'content-type': 'application/json'};
-        // const body = JSON.stringify(review)
-        // console.log(review)
         return this.http.post(this.url, review)
     }
 }
