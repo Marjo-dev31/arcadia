@@ -24,6 +24,7 @@ import { Service } from '../../shared/models/service.interface';
         </div>
       </section>
       <section class="services">
+        @if(services && services.length) {
         @for (service of services; track service) {
         <div class="service-item" >
           <img
@@ -35,7 +36,10 @@ import { Service } from '../../shared/models/service.interface';
             <h3 >{{service.title}}</h3>
             <p>{{service.description}}</p>
           </div>
-        </div>}
+        </div>
+      }} @else {
+        <h3>Il n'y a pas de service disponible</h3>
+      }
       </section>
     </main>
   `,
