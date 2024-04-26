@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
   getReviews() {
     this.reviewService.getReviews().then((response) => {
       this.reviews = response;
-      console.log(this.reviews)
     });
   }
 
@@ -42,7 +41,6 @@ export class HomeComponent implements OnInit {
 
   
   onSubmit(): void {
-    console.log(this.newReview)
     this.reviewService.addReview(this.newReview).subscribe();
     this.newReview.pseudo = '';
     this.newReview.content = '';
