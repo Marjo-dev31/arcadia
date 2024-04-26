@@ -14,8 +14,12 @@ export class ReviewsService {
         return reviewsList.data.reviews
     }
     
-
     addReview(review: ReviewPost): Observable<any> {
         return this.http.post(this.url, review)
+    }
+
+    updateReview(review: Review){
+        console.log(review)
+        return this.http.put(this.url + '/' + review.id, review)
     }
 }
