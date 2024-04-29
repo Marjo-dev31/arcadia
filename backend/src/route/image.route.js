@@ -1,5 +1,5 @@
 import express from "express";
-import { addHabitatImage, addServiceImage, getHabitatsImages, getImage, getImages, getServicesImages, updateServiceImage } from "../controller/image.controller.js";
+import { addHabitatImage, addServiceImage, getHabitatsImages, getImage, getImages, getServicesImages, updateServiceImage, deleteImage } from "../controller/image.controller.js";
 
 
 
@@ -7,7 +7,6 @@ const imageRoutes = express.Router();
 
 imageRoutes.route('/')
 .get(getImages)
-
 
 imageRoutes.route('/services')
 .get(getServicesImages)
@@ -24,5 +23,6 @@ imageRoutes.route('/habitat/:id')
 
 imageRoutes.route('/:id')
 .get(getImage)
+.delete(deleteImage)
 
 export default imageRoutes

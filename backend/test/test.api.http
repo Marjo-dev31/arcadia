@@ -73,6 +73,10 @@ get http://localhost:8000/images/
 
 ###
 
+delete http://localhost:8000/images/41698211-05fa-11ef-b1c1-0242ac180002
+
+###
+
 get http://localhost:8000/habitats/
 
 ###
