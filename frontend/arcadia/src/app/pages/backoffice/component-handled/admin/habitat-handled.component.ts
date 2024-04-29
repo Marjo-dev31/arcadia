@@ -36,10 +36,13 @@ import { ImageService } from '../../../home/services/image.service';
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>
         <td mat-cell *matCellDef="let habitat">
+        @if(habitat.image_url) {
           <div class="delete-img">
             <div>{{ habitat.image_url }}</div>
-            <mat-icon class="mat-icon-clear">clear</mat-icon>
-          </div>
+            <mat-icon class="mat-icon-clear" (click)="deleteImage(habitat.image_id)">clear</mat-icon>
+          </div>} @else {
+            <p>Il n'y a pas encore de photo associé à cet habitat</p>
+          }
           <input type="file" class="file-input" (change)="onFileChange($event, habitat.id)" >
         </td>
       </ng-container>
@@ -148,7 +151,7 @@ export class HabitatHandledComponent implements OnInit {
   editHabitat(id: string){
     this.updateFormIsDisplay = true;
     const habitatToUpdate = this.datasource.find((el)=> el.id === id);
-    this.habitatForm.patchValue({id: habitatToUpdate?.id, title: habitatToUpdate?.title, description: habitatToUpdate?.description, image_url: habitatToUpdate?.image_url})
+    this.habitatForm.patchValue({id: habitatToUpdate?.id, title: habitatToUpdate?.title, description: habitatToUpdate?.description})
   };
 
   updateHabitat() {
@@ -174,5 +177,9 @@ export class HabitatHandledComponent implements OnInit {
     formData.append("myImg", file);
     this.imageService.addHabitatImage(formData, id).pipe(tap(()=>{this.getHabitats()})).subscribe()
 };
+
+  deleteImage(id: string) {
+    this.imageService.deleteImage(id).pipe(tap(()=>{this.getHabitats()})).subscribe()
+  }
 
 }

@@ -19,4 +19,8 @@ addHabitatImage(image: any, id: string): Observable<any> {
   return this.http.post(`${this.url}/habitat/${id}`, image )
 };
 
+deleteImage(id: string): Observable<any> {
+  return this.http.delete(`${this.url}/${id}`)
+}
+
 }
