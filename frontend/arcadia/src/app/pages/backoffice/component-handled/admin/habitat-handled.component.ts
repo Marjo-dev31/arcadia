@@ -36,15 +36,18 @@ import { ImageService } from '../../../home/services/image.service';
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>
         <td mat-cell *matCellDef="let habitat">
-          <div>{{ habitat.image_url }}</div>
+          <div class="delete-img">
+            <div>{{ habitat.image_url }}</div>
+            <mat-icon class="mat-icon-clear">clear</mat-icon>
+          </div>
+          <input type="file" class="file-input" (change)="onFileChange($event, habitat.id)" >
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let habitat">
           <mat-icon (click)="editHabitat(habitat.id)">create</mat-icon>
-          <mat-icon (click)="deleteHabitat(habitat.id)">delete</mat-icon>
-          <input type="file" class="file-input" (change)="onFileChange($event, habitat.id)" >
+          <mat-icon (click)="deleteHabitat(habitat.id)">delete</mat-icon>  
         </td>
       </ng-container>
 
@@ -76,7 +79,7 @@ import { ImageService } from '../../../home/services/image.service';
             #description="ngModel"
           ></textarea>
           
-          <button class="add-btn">Enregistrer nouveau service</button>
+          <button class="add-btn">Enregistrer nouvel habitat</button>
         </form>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
@@ -118,8 +121,8 @@ export class HabitatHandledComponent implements OnInit {
     'title',
     'description',
     'animals',
-    'image',
-    'actions'
+    'actions',
+    'image'
   ];
 
   datasource!: Habitat[];
@@ -145,7 +148,7 @@ export class HabitatHandledComponent implements OnInit {
   editHabitat(id: string){
     this.updateFormIsDisplay = true;
     const habitatToUpdate = this.datasource.find((el)=> el.id === id);
-    this.habitatForm.patchValue({id: habitatToUpdate?.id, title: habitatToUpdate?.title, description: habitatToUpdate?.description})
+    this.habitatForm.patchValue({id: habitatToUpdate?.id, title: habitatToUpdate?.title, description: habitatToUpdate?.description, image_url: habitatToUpdate?.image_url})
   };
 
   updateHabitat() {
@@ -165,11 +168,11 @@ export class HabitatHandledComponent implements OnInit {
   this.habitatService.deleteHabitat(id).pipe(tap(()=>{this.getHabitats()})).subscribe();
 };
 
-onFileChange(event: any, id:string) {
-  const file: File = event.target.files[0];
-  const formData = new FormData();
-  formData.append("myImg", file);
-  this.imageService.addHabitatImage(formData, id).subscribe()
+  onFileChange(event: any, id:string) {
+    const file: File = event.target.files[0];
+    const formData = new FormData();
+    formData.append("myImg", file);
+    this.imageService.addHabitatImage(formData, id).pipe(tap(()=>{this.getHabitats()})).subscribe()
 };
 
 }

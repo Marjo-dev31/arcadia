@@ -33,6 +33,15 @@ form > * {
   margin: 1rem;
 }
 
+.delete-img {
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon-clear {
+  color: var(--color-secondary);
+}
+
 /* style account creation form */
 
 .account-creation-form {

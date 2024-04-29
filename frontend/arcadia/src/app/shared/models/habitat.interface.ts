@@ -6,7 +6,7 @@ export interface Habitat {
     title: string,
     description: string,
     animals: Animal [],
-    image_url: string,
+    image_url: string [],
     comment?: string,
 }
 
