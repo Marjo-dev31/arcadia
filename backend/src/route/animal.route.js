@@ -1,10 +1,14 @@
 import express from 'express';
-import { addAnimal, getAnimals } from '../controller/animal.controller.js';
+import { addAnimal, deleteAnimal, getAnimals } from '../controller/animal.controller.js';
 
 const animalsRoutes = express.Router();
 
 animalsRoutes.route('/')
 .get(getAnimals)
 .post(addAnimal)
+
+animalsRoutes.route('/:id')
+.delete(deleteAnimal)
+.put(updateAnimal)
 
 export default animalsRoutes
