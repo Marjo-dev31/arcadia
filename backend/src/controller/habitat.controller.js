@@ -33,7 +33,6 @@ export const getHabitats = (req, res) => {
   });
 };
 
-
 export const getHabitat = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching habitat`);
     database.query(QUERYHABITATS.SELECT_HABITAT, [req.params.id], (error, results) => {
@@ -201,4 +200,32 @@ export const addComment = (req, res) => {
         }   
       })
   }})
+}
+
+export const deleteComment = (req, res)=> {
+  logger.info(`${req.method} ${req.originalUrl}, deleting, comment`);
+    database.query(QUERYHABITATS.DELETE_COMMENT_HABITAT, [req.params.id], (error, results) => {
+      if (results.affectedRows > 0) { 
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Comment deleted`,
+              results[0]
+            )
+          );
+      } else {
+        res
+          .status(httpStatus.NOT_FOUND.code)
+          .send(
+            new Response(
+              httpStatus.NOT_FOUND.code,
+              httpStatus.NOT_FOUND.status,
+              `Habitat by id ${req.params.id} was not found !`
+            )
+          );
+      }
+    });
 }
