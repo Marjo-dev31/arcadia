@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Animal } from '../../../shared/models';
+import { Animal, AnimalCreate } from '../../../shared/models';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -17,4 +17,17 @@ export class AnimalService {
             return []
         }
     }
+
+    addAnimal(animal: AnimalCreate): Observable<any> {
+        return this.http.post(this.url, animal)
+    }
+
+    updateAnimal(animal: Animal): Observable<any> {
+        return this.http.put(`${this.url}/${animal.id}`, animal)
+    }
+
+    deleteAnimal(id: string): Observable<any> {
+      return this.http.delete(`${this.url}/${id}`)
+    }
+
 }
