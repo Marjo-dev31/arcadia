@@ -29,7 +29,14 @@ import { ImageService } from '../../../home/services/image.service';
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Photo</th>
           <td mat-cell *matCellDef="let service">
-            <div>{{ service.image_url }}</div>
+          @if( service.image_url){
+            <div class="delete-img">
+              <div>{{ service.image_url }}</div>
+              <mat-icon class="mat-icon-clear" (click)="deleteImage(service.image_id)">clear</mat-icon>
+            </div>} @else {
+              <p>Il n'y a pas encore de photo associé à cet habitat</p>
+            }
+            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" >
           </td>
         </ng-container>
         <ng-container matColumnDef="actions">
@@ -37,7 +44,7 @@ import { ImageService } from '../../../home/services/image.service';
           <td mat-cell *matCellDef="let service">
             <mat-icon (click)="editService(service.id)">create</mat-icon>
             <mat-icon (click)="deleteService(service.id)" >delete</mat-icon>
-            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" >
+            
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
@@ -136,7 +143,10 @@ export class ServiceHandledComponent implements OnInit {
   };
   
   onSubmit(): void {
-    this.serviceService.addService(this.newService).subscribe();
+    this.serviceService.addService(this.newService).pipe(tap(()=>{this.getServices()})).subscribe();
+    this.newService.title = '';
+    this.newService.description = '';
+    this.addFormIsDisplay = !this.addFormIsDisplay;
   };
 
   editService(id: string) {
@@ -147,6 +157,8 @@ export class ServiceHandledComponent implements OnInit {
 
   updateService() {
     this.serviceService.updateService(this.serviceForm.value).pipe(tap(()=>{this.getServices()})).subscribe();
+    this.serviceForm.reset();
+    this.updateFormIsDisplay = !this.updateFormIsDisplay;
   };
 
   deleteService(id:string) {
@@ -157,7 +169,11 @@ export class ServiceHandledComponent implements OnInit {
     const file: File = event.target.files[0]
     const formData = new FormData()
     formData.append("myImg", file)
-    this.imageService.addServiceImage(formData, id).subscribe()
+    this.imageService.addServiceImage(formData, id).pipe(tap(()=>{this.getServices()})).subscribe()
   };
 
+  deleteImage(id: string){
+    this.imageService.deleteImage(id).pipe(tap(()=>{this.getServices()})).subscribe()
+
+  }
 }
