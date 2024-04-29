@@ -131,7 +131,8 @@ export class AnimalHandledComponent implements OnInit {
     this.updateForm = this.fb.group({
       firstname: new FormControl(''),
       habitat: new FormControl(''),
-      breed: new FormControl('')
+      breed: new FormControl(''),
+      id: new FormControl('')
     })
   };
 
@@ -194,12 +195,14 @@ export class AnimalHandledComponent implements OnInit {
   }
 
   editAnimal(id: string) {
-  this.updateFormIsDisplay= true;
-  const animalToUpdate = this.datasource.find((el)=> el.id === id);
-  this.updateForm.patchValue({firstname: animalToUpdate?.firstname, habitat: animalToUpdate?.id_habitat, breed: animalToUpdate?.id_breed })
+    this.updateFormIsDisplay= true;
+    const animalToUpdate = this.datasource.find((el)=> el.id === id);
+    this.updateForm.patchValue({firstname: animalToUpdate?.firstname, habitat: animalToUpdate?.id_habitat, breed: animalToUpdate?.id_breed, id: animalToUpdate?.id })
 }
 
   updateAnimal() {
-    this.animalService.updateAnimal(this.updateForm.value).subscribe()
+    this.animalService.updateAnimal(this.updateForm.value).pipe(tap(()=>{this.getAnimals()})).subscribe()
+    this.updateForm.reset();
+    this.updateFormIsDisplay = !this.updateFormIsDisplay
   }
 }
