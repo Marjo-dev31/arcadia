@@ -1,10 +1,10 @@
 export interface Animal {
-    id: number,
+    id: string,
     firstname: string,
-    condition: string,
+    habitat: string,
     breed: string,
-    image: string [],
-    veterinarycomments: unknown [],
-    employeecomments: unknown [],
-    report?: string
+    image?: string [],
+    veterinary_report?: unknown [],
+    employee_report?: unknown [],
 }
+

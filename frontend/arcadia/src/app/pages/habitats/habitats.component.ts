@@ -60,7 +60,7 @@ export class HabitatsComponent implements OnInit {
   toggleDetails(id: string) {
     this.showDetails = id;
   }
-  openDialog(id: number): void {
+  openDialog(id: string): void {
     const dialogRef = this.matdialog.open(AnimalsComponent, {
       width: '400px',
       data: {id: id},
