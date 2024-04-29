@@ -148,18 +148,18 @@ get http://localhost:8000/animals
 
 ###
 
-post http://localhost:8000/animals/
+post http://localhost:8000/animals
 Content-Type: application/json
 
 {
-    "firstname": "toto",
+    "firstname": "toto3",
     "habitat": "4ea618eb-05fa-11ef-b1c1-0242ac180002",
     "breed": "037b2b98-0633-11ef-b1c1-0242ac180002"
 }
 
 ###
 
-post http://localhost:8000/images/animal/
+post http://localhost:8000/images/animal
 Content-Type: application/json
 
  {
