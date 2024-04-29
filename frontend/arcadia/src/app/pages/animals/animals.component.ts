@@ -15,19 +15,16 @@ import { DialogRef } from '@angular/cdk/dialog';
   template: `
     <main class="id-card-animal">
       <div mat-dialog-content >
-        @for (animal of animals; track animal) { @if(animal.id ===
+        @for (animal of animalsList; track animal) { @if(animal.id ===
         this.data.id){
         <div>
           <img src="assets/images/tigre.jpg" alt="" />
 
           <div class="id-card-animal-content">
             <p>{{ animal.firstname }}</p>
-            <p>{{ animal.race }}</p>
+            <p>{{ animal.breed }}</p>
             <div>
-              <p>{{ animal.condition }}</p>
-              @if(animal.rapport) {
-              <p>{{ animal.rapport }}</p>
-              }
+              <p>{{ animal.veterinary_report }}</p>
             </div>
           </div>
         </div>
@@ -41,32 +38,10 @@ import { DialogRef } from '@angular/cdk/dialog';
   styleUrl: `./animals.component.css`,
 })
 export class AnimalsComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number }) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string }) {}
 
   animalsList!: Animal[];
   // private readonly animalsService = inject(AnimalService);
-
-  animals = [
-    {
-      id: 1,
-      firstname: 'animal1',
-      condition: 'bon',
-      race: 'gazelle',
-      image: '',
-      veterinarycomments: [],
-      employeecomments: [],
-    },
-    {
-      id: 2,
-      firstname: 'animal2',
-      condition: 'mauvais',
-      race: 'lion',
-      rapport: 'chichi',
-      image: '',
-      veterinarycomments: [],
-      employeecomments: [],
-    },
-  ];
 
   ngOnInit() {
     // this.animalsService.getAnimals().then((response) => {

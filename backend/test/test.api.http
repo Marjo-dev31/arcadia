@@ -144,3 +144,25 @@ Content-Type: application/json
 
 ###
 
+get http://localhost:8000/animals
+
+###
+
+post http://localhost:8000/animals/
+Content-Type: application/json
+
+{
+    "firstname": "toto",
+    "habitat": "4ea618eb-05fa-11ef-b1c1-0242ac180002",
+    "breed": "037b2b98-0633-11ef-b1c1-0242ac180002"
+}
+
+###
+
+post http://localhost:8000/images/animal/
+Content-Type: application/json
+
+ {
+    "image_url": "./imagetest7.jpg",
+    "service_id": "5096717e-fd68-11ee-a19d-0242ac140002"
+ }
