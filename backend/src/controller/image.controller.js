@@ -7,7 +7,7 @@ import fileupload from "../middleware/fileupload.js";
 
 
 
-// read images
+// read delete images
 
 export const getImages = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching images `);
@@ -68,6 +68,34 @@ export const getImage = (req, res) => {
     }
   );
 };
+
+export const deleteImage = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, deleting image`);
+    database.query(QUERYIMAGES.DELETE_IMAGE, [req.params.id], (error, results) => {
+      if (results.affectedRows > 0) { 
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Image deleted`,
+              results[0]
+            )
+          );
+      } else {
+        res
+          .status(httpStatus.NOT_FOUND.code)
+          .send(
+            new Response(
+              httpStatus.NOT_FOUND.code,
+              httpStatus.NOT_FOUND.status,
+              `Image by id ${req.params.id} was not found !`
+            )
+          );
+      }
+    });
+}
 
 
 // create, update, read images-services
