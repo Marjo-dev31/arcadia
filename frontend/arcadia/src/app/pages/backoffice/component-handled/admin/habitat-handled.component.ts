@@ -155,7 +155,9 @@ export class HabitatHandledComponent implements OnInit {
   };
 
   updateHabitat() {
-   this.habitatService.updateHabitat(this.habitatForm.value).pipe(tap(()=>{this.getHabitats()})).subscribe() 
+   this.habitatService.updateHabitat(this.habitatForm.value).pipe(tap(()=>{this.getHabitats()})).subscribe();
+   this.habitatForm.reset();
+   this.updateFormIsDisplay = !this.updateFormIsDisplay
   }
 
   toggleAddForm(){
@@ -164,6 +166,9 @@ export class HabitatHandledComponent implements OnInit {
 
   onSubmit() {
     this.habitatService.addHabitat(this.newHabitat).pipe(tap(()=>{this.getHabitats()})).subscribe();
+    this.newHabitat.description = '';
+    this.newHabitat.title = '';
+    this.addFormIsDisplay = !this.addFormIsDisplay
   };
 
 
