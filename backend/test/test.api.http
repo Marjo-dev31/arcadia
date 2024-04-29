@@ -96,11 +96,11 @@ Content-Type: application/json
 
 ###
 
-post http://localhost:8000/habitats/532ee94b-02ff-11ef-ae74-0242ac180002
+post http://localhost:8000/habitats/47d4a89a-0604-11ef-b1c1-0242ac180002
 Content-Type: application/json
 
 {
-    "comment": "un arbre est cassé"
+    "comment": "deux arbres sont cassés"
 }
 
 ###
@@ -141,3 +141,6 @@ Content-Type: application/json
 {
     "status": false
 }
+
+###
+

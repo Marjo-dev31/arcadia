@@ -11,7 +11,7 @@ import { VeterinaryAnimalReportHandledComponent } from './veterinary-animal-repo
   imports: [MatTableModule, MatIconModule, VeterinaryAnimalReportHandledComponent, VeterinaryHabitatReportHandledComponent],
   template: `
     <h3>Compte-rendu vétérinaire</h3>
-    <app-veterinary-animal-report-handled></app-veterinary-animal-report-handled>
+    <!-- <app-veterinary-animal-report-handled></app-veterinary-animal-report-handled> -->
     <app-veterinary-habitat-report-handled></app-veterinary-habitat-report-handled>
   `,
   styleUrl: `../component-handled.component.css`,

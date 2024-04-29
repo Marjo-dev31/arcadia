@@ -26,8 +26,15 @@ export class HabitatsService {
         return this.http.put(this.url + '/' + habitat.id, habitat)
     };
 
-    
     deleteHabitat(id: string): Observable<any> {
         return this.http.delete(this.url + '/' + id)
+    }
+
+    addComment(habitat: Habitat, id: string): Observable<any> {
+        return this.http.put(this.url + '/' + id + '/comment', habitat)
+    }
+
+    deleteComment(id:string){
+        return this.http.delete(this.url + '/' + id + '/comment');
     }
 }
