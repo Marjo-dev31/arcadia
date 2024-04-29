@@ -12,7 +12,7 @@ export class AnimalService {
     async getAnimals(): Promise<Animal[]> {
         try {
         const animalsList = await fetch(this.url).then((response)=> response.json());
-        return animalsList.data.habitats }
+        return animalsList.data.animals }
         catch (error){
             return []
         }
