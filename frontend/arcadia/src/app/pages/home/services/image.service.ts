@@ -19,8 +19,15 @@ addHabitatImage(image: any, id: string): Observable<any> {
   return this.http.post(`${this.url}/habitat/${id}`, image )
 };
 
+addAnimalImage(image: any, id: string): Observable<any> {
+  console.log(image)
+  return this.http.post(`${this.url}/animal/${id}`, image )
+}
+
 deleteImage(id: string): Observable<any> {
   return this.http.delete(`${this.url}/${id}`)
 }
+
+
 
 }

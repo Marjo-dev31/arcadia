@@ -1,5 +1,5 @@
 import express from "express";
-import { addHabitatImage, addServiceImage, getHabitatsImages, getImage, getImages, getServicesImages, updateServiceImage, deleteImage } from "../controller/image.controller.js";
+import { addHabitatImage, addServiceImage, getImage, getImages, deleteImage, addAnimalImage } from "../controller/image.controller.js";
 
 
 
@@ -8,18 +8,24 @@ const imageRoutes = express.Router();
 imageRoutes.route('/')
 .get(getImages)
 
-imageRoutes.route('/services')
-.get(getServicesImages)
+// imageRoutes.route('/services')
+// .get(getServicesImages)
 
 imageRoutes.route('/service/:id')
-.put(updateServiceImage)
+// .put(updateServiceImage)
 .post(addServiceImage)
 
-imageRoutes.route('/habitats')
-.get(getHabitatsImages)
+// imageRoutes.route('/habitats')
+// .get(getHabitatsImages)
 
 imageRoutes.route('/habitat/:id')
 .post(addHabitatImage)
+
+// imageRoutes.route('/animals')
+// .get(getAnimalsImages)
+
+imageRoutes.route('/animal/:id')
+.post(addAnimalImage)
 
 imageRoutes.route('/:id')
 .get(getImage)

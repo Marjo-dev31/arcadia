@@ -66,12 +66,12 @@ export class EmployeeReportHandledComponent implements OnInit {
   animals!: Animal[];
   private readonly animalService = inject(AnimalService);
 
-  selectedAnimalOption!: number;
+  selectedAnimalOption!: string;
   datasource!: [];
 
   ngOnInit() {
-    this.animalService.getAnimals().then((response) => {
-      this.animals = response;
-    });
+    // this.animalService.getAnimals().then((response) => {
+    //   this.animals = response;
+    // });
   }
 }

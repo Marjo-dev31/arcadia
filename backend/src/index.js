@@ -10,7 +10,9 @@ import logger from './util/logger.js';
 import serviceRoutes from "./route/service.route.js";
 import imageRoutes from "./route/image.route.js";
 import habitatRoutes from "./route/habitat.route.js";
-import reviewRoutes from "./route/review.route.js"
+import reviewRoutes from "./route/review.route.js";
+import animalsRoutes from "./route/animal.route.js";
+
 
 
 dotenv.config();
@@ -27,7 +29,8 @@ app.use('/upload', express.static('src/upload'))
 app.use('/services', serviceRoutes);
 app.use('/images', imageRoutes);
 app.use('/habitats', habitatRoutes);
-app.use('/reviews', reviewRoutes)
+app.use('/reviews', reviewRoutes);
+app.use('/animals', animalsRoutes);
 
 // app.use(require('body-parser').json());
 

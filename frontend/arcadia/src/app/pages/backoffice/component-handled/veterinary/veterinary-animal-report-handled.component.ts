@@ -111,9 +111,9 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.animalService.getAnimals().then((response) => {
-      this.animals = response;
-    });
+    // this.animalService.getAnimals().then((response) => {
+    //   this.animals = response;
+    // });
   }
   onSubmit() {
     console.log(this.selectedAnimalOption, this.reports);
