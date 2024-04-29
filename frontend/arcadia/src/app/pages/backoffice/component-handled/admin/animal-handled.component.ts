@@ -42,7 +42,7 @@ import { tap } from 'rxjs';
             > -->
           </div>
           } @else {
-          <p>Il n'y a pas encore de photo associé à cet habitat {{animal.id}}</p>
+          <p>Il n'y a pas encore de photo associé à cet habitat</p>
           }
           <input
             type="file"
@@ -83,14 +83,14 @@ export class AnimalHandledComponent implements OnInit {
   private readonly imageService = inject(ImageService);
 
   ngOnInit() {
-    this.animalService.getAnimals().then((response) => {
-      this.datasource = response;
-    });
+    this.getAnimals()
   }
 
   getAnimals() {
-    this.animalService.getAnimals();
-
+    this.animalService.getAnimals().then((response) => {
+      console.log(response, 'toto')
+      this.datasource = response;
+    });
   }
 
   onFileChange(event: any, id: string) {
