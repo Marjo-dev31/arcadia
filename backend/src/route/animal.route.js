@@ -1,5 +1,5 @@
 import express from 'express';
-import { addAnimal, deleteAnimal, getAnimals } from '../controller/animal.controller.js';
+import { addAnimal, deleteAnimal, getAnimals, updateAnimal } from '../controller/animal.controller.js';
 
 const animalsRoutes = express.Router();
 
