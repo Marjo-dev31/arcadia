@@ -28,9 +28,12 @@ import { AnimalService } from '../animals/services/animal.service';
             @if (showDetails == habitat.id) {
             <p>{{ habitat.description }}</p>
             <ul>
-              @for (animal of habitat.animals; track animal) {
+              @for (animal of animals; track animal) {
+                @if(animal) {
               <li (click)="openDialog(animal.id)">{{ animal.firstname }}</li>
-              }
+              } @else {
+                <p>Il n'y a pas encore d'animaux dans cet habitat</p>
+              }}
             </ul>
             }
           </div>
@@ -65,7 +68,9 @@ export class HabitatsComponent implements OnInit {
   }
 
   getAnimalsByHabitat(id: string) {
-    this.animalService.getAnimalsByHabitat(id).subscribe()
+    this.animalService.getAnimalsByHabitat(id).subscribe((response)=> {
+      this.animals = response.data.animals
+    })
   }
 
   toggleDetails(id: string) {
