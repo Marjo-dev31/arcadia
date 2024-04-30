@@ -19,11 +19,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SidenavComponent } from './pages/backoffice/sidenav/sidenav.component';
 import { ImageService } from './pages/home/services/image.service';
 import { BreedService } from './pages/animals/services/breed.service';
+import { VeterinaryService } from './pages/animals/services/veterinary.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  providers: [ServiceService, HabitatsService, AnimalService, ReviewsService, ImageService, BreedService],
+  providers: [ServiceService, HabitatsService, AnimalService, ReviewsService, ImageService, BreedService, VeterinaryService],
   imports: [
     RouterOutlet,
     HeaderComponent,

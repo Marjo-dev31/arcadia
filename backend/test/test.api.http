@@ -176,3 +176,22 @@ get http://localhost:8000/breeds
 
 
 get http://localhost:8000/animals/habitats/4ea618eb-05fa-11ef-b1c1-0242ac180002
+
+
+###
+
+get http://localhost:8000/veterinaries
+
+###
+
+post http://localhost:8000/veterinaries
+Content-Type: application/json
+
+{
+    "food":"herbe",
+    "grammage": 1700,
+    "health":"bon",
+    "details_condition":"ras",
+    "id_user":"8b9d927f-070a-11ef-bc53-0242ac180002",
+    "id_animal":"b3a2ba43-0652-11ef-b1c1-0242ac180002"
+}

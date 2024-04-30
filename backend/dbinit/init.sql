@@ -47,7 +47,7 @@ CREATE TABLE users (
     FOREIGN KEY (id_role) REFERENCES roles(id)
 );
 
-CREATE TABLE employee_report (
+CREATE TABLE employee_reports (
     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     food VARCHAR(255) NOT NULL,
     grammage INT NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE employee_report (
     FOREIGN KEY (id_animal) REFERENCES animals(id)
 );
 
-CREATE TABLE veterinary_report (
+CREATE TABLE veterinary_reports (
     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     food VARCHAR(255) NOT NULL,
     grammage INT NOT NULL,
