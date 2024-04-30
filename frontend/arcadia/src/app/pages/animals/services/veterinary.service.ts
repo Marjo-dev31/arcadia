@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { VeterinaryReportCreate } from "../../../shared/models/veterinaryreport.interface";
+import { VeterinaryReport, VeterinaryReportCreate } from "../../../shared/models/veterinaryreport.interface";
 
 @Injectable()
 export class VeterinaryService {
@@ -15,6 +15,10 @@ export class VeterinaryService {
 
     addVeterinaryReport(report: VeterinaryReportCreate): Observable<any> {
         return this.http.post(this.url, report)
+    }
+
+    updateReport(report: VeterinaryReport): Observable<any> {
+        return this.http.put(`${this.url}/${report.id}`, report)
     }
 
     deleteReport(id: string): Observable<any> {
