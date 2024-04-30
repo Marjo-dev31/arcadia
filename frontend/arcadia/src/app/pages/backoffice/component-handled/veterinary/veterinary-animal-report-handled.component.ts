@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild, inject, viewChild } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Animal } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
-import { VeterinaryReport } from '../../../../shared/models/veterinaryreport.interface';
+import { VeterinaryReport, VeterinaryReportCreate } from '../../../../shared/models/veterinaryreport.interface';
 import { VeterinaryService } from '../../../animals/services/veterinary.service';
+import { tap } from 'rxjs';
+import { User } from '../../../../shared/models/user.interface';
+import { UsersService } from '../../../connection/service/user.service';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
@@ -56,9 +59,9 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
         </ng-container>
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef>
+          <td mat-cell *matCellDef="let report">
             <mat-icon>create</mat-icon>
-            <mat-icon>delete</mat-icon>
+            <mat-icon (click)="deleteReport(report.id)">delete</mat-icon>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
@@ -68,10 +71,49 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
         ></tr>
       </table>
     }}
-      <mat-icon class="add-icon">add_circle_outline</mat-icon>
-   
+      <mat-icon class="add-icon" (click)="toggleAddForm()">add_circle_outline</mat-icon>
     </section>
+    <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <form
+          class="add-form"
+          #form="ngForm"
+          name="addform"
+          (ngSubmit)="onSubmit()"
+        >
+          <input
+            type="text"
+            placeholder="Aliments recommandés"
+            name="food"
+            [(ngModel)]="newReport.food"
+            #food="ngModel"
+          />
+          <input type="text" placeholder="Grammage recommandé" name="grammage" [(ngModel)]="newReport.grammage" #grammage="ngModel">
+          <input type="text" placeholder="Etat de santé actuel" name="health" [(ngModel)]="newReport.health" #health="ngModel">
+          <textarea
+            name="details_condition"
+            placeholder="Détails de la condition physique(optionnel)"
+            name="details_condition"
+            cols="30"
+            rows="10"
+            [(ngModel)]="newReport.details_condition"
+            #details_condition="ngModel"
+          ></textarea>
+          <label for="animal">Sélectionner un animal : </label>
+          <select name="animal" id="animal" [(ngModel)]="newReport.id_animal">
+            @for(animal of animals; track animal) {
+              <option [ngValue]="animal.id">{{ animal.firstname }}</option>}
+          </select>
+          <label for="user">Sélectionner un rapporteur : </label>
+          <select name="user" id="user" [(ngModel)]="newReport.id_user">
+            @for(user of users; track user) {
+              <option [ngValue]="user.id">{{ user.firstname }}</option>}
+          </select>
+          
+          <button class="add-btn">Enregistrer nouveau rapport</button>
+        </form>
+  </section>
   `,
+
   styleUrl: `../component-handled.component.css`,
 })
 
@@ -90,27 +132,57 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   animals!: Animal[];
   veterinaryReports!: VeterinaryReport[];
   selectedAnimalOption!: string;
+  users!: User[]
+
+  addFormIsDisplay: boolean = false;
+
+  newReport: VeterinaryReportCreate = {
+    food: '',
+    grammage: 0,
+    health: '',
+    details_condition: '',
+    id_user: '',
+    id_animal: ''
+  }
 
 
   private readonly animalService = inject(AnimalService);
   private readonly veterinaryService = inject(VeterinaryService)
+  private readonly userService = inject(UsersService)
 
   ngOnInit() {
-    this.getAnimals()
+    this.getAnimals();
+    this.getUsers();
   }
 
   getAnimals(){
     this.animalService.getAnimals().then((response)=> {
-      this.animals = response
+    this.animals = response
+    })
+  }
+
+  getUsers(){
+    this.userService.getUsers().subscribe((response)=> {
+      this.users = response.data.users
     })
   }
 
   getVeterinaryReports(id: string){
     this.veterinaryService.getVeterinaryReports(id).subscribe((response)=> {
-    this.veterinaryReports = response.data.reports
-    });
+    this.veterinaryReports = response.data.reports;
+    })};
+
+  deleteReport(id: string){
+    this.veterinaryService.deleteReport(id).pipe(tap(()=>{this.getVeterinaryReports(id)})).subscribe()
   }
 
-  sortData(){
+  toggleAddForm() {
+    this.addFormIsDisplay = !this.addFormIsDisplay
   }
+
+  onSubmit(){
+    this.veterinaryService.addVeterinaryReport(this.newReport).subscribe()
+
+  };
+
 }
