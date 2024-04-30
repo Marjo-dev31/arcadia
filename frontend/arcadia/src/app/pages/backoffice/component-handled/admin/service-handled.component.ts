@@ -94,6 +94,7 @@ import { ImageService } from '../../../home/services/image.service';
             cols="30"
             rows="10"></textarea>
           <button class="add-btn">Modifier service</button>
+          <button>Annuler</button>
         </form>
     </section>
     
