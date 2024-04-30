@@ -170,3 +170,9 @@ Content-Type: application/json
 ###
 
 get http://localhost:8000/breeds
+
+
+###
+
+
+get http://localhost:8000/animals/habitats/4ea618eb-05fa-11ef-b1c1-0242ac180002
