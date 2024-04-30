@@ -6,7 +6,7 @@ import { AnimalService } from '../../../animals/services/animal.service';
 import { ImageService } from '../../../home/services/image.service';
 import { tap } from 'rxjs';
 import { NgStyle } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { HabitatsService } from '../../../habitats/services/habitat.service';
 import { BreedService } from '../../../animals/services/breed.service';
 import { Breed } from '../../../../shared/models/breed.interface';
@@ -74,7 +74,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
           class="add-form"
           #form="ngForm"
           name="addform"
-          (ngSubmit)="onSubmit(selectedBreed.value, selectedHabitat.value)"
+          (ngSubmit)="onSubmit(form)"
         >
           <input
             type="text"
@@ -84,12 +84,12 @@ import { Breed } from '../../../../shared/models/breed.interface';
             #title="ngModel"
           />
           <select name="selected-breed" [(ngModel)]="newAnimal.breed">
-            <option value="null">--Choissisez une race</option>
+            <option value="null">--Choissisez une race--</option>
             @for(breed of breeds; track breed) {
             <option [value]="breed.id">{{ breed.name }}</option>}
           </select>
           <select name="selected-habitat" [(ngModel)]="newAnimal.habitat">
-            <option value="null">--Choissisez un habitat</option>
+            <option value="null">--Choissisez un habitat--</option>
             @for(habitat of habitats; track habitat) {
             <option [value]="habitat.id">{{ habitat.title }}</option>
           }
@@ -197,11 +197,10 @@ export class AnimalHandledComponent implements OnInit {
     this.addFormIsDisplay = !this.addFormIsDisplay
   }
 
-  onSubmit(selectedBreed: string, selectedHabitat: string) {
+  onSubmit(form: NgForm) {
     this.animalService.addAnimal(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe()
     this.addFormIsDisplay = !this.addFormIsDisplay;
-    this.newAnimal.firstname = '';
-    
+    form.reset();
   }
 
   editAnimal(id: string) {
@@ -218,13 +217,13 @@ export class AnimalHandledComponent implements OnInit {
 
   getBreed(){
     this.breedService.getBreeds().subscribe((response)=> {
-      this.breeds = response.data.breeds
+      this.breeds = response.data.breeds;
     } )
   }
 
   getHabitat(){
     this.habitatService.getHabitats().then((response) => {
-    this.habitats = response
+    this.habitats = response;
     })
   }
 }
