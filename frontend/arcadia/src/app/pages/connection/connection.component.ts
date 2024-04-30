@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../shared/models/user.interface';
+import { UserConnect } from '../../shared/models/user.interface';
 
 @Component({
   selector: 'app-connexion',
@@ -41,7 +41,7 @@ import { User } from '../../shared/models/user.interface';
 export class ConnexionComponent implements OnInit {
   constructor() {}
 
-  user: User = {
+  user: UserConnect = {
     email: '',
     lastname: '',
     firstname: '',

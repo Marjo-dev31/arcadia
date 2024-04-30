@@ -137,7 +137,7 @@ export const addService = (req, res) => {
 
 
   export const deleteService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, deleting service delete`);
+    logger.info(`${req.method} ${req.originalUrl}, deleting service`);
     database.query(QUERYSERVICES.DELETE_SERVICE, [req.params.id], (error, results) => {
       if (results.affectedRows > 0) { 
         res
