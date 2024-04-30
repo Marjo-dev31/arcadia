@@ -30,7 +30,7 @@ import { AnimalService } from '../animals/services/animal.service';
             <ul>
               @for (animal of animals; track animal) {
                 @if(animal) {
-              <li (click)="openDialog(animal.id)">{{ animal.firstname }}</li>
+              <li (click)="openDialog(animal)">{{ animal.firstname }}</li>
               } @else {
                 <p>Il n'y a pas encore d'animaux dans cet habitat</p>
               }}
@@ -69,7 +69,8 @@ export class HabitatsComponent implements OnInit {
 
   getAnimalsByHabitat(id: string) {
     this.animalService.getAnimalsByHabitat(id).subscribe((response)=> {
-      this.animals = response.data.animals
+    this.animals = response.data.animals
+    
     })
   }
 
@@ -78,10 +79,11 @@ export class HabitatsComponent implements OnInit {
     this.getAnimalsByHabitat(id)
   }
 
-  openDialog(id: string): void {
+  openDialog(animal: Animal): void {
     const dialogRef = this.matdialog.open(AnimalsComponent, {
       width: '400px',
-      data: {id: id},
+      data: {animal: animal},
     });
+
   }
 }
