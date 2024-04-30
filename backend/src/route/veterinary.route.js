@@ -4,8 +4,9 @@ import { addVeterinaryReport, getVeterinaryReports } from '../controller/veterin
 const veterinaryRoutes = express.Router()
 
 veterinaryRoutes.route('/')
-.get(getVeterinaryReports)
 .post(addVeterinaryReport)
 
+veterinaryRoutes.route('/animal/:id')
+.get(getVeterinaryReports)
 
 export default veterinaryRoutes
