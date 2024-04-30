@@ -6,6 +6,8 @@ import { MatTableModule } from '@angular/material/table';
 import { Animal } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
+import { VeterinaryReport } from '../../../../shared/models/veterinaryreport.interface';
+import { VeterinaryService } from '../../../animals/services/veterinary.service';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
@@ -24,15 +26,18 @@ import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
       <form ngForm name="animalchoice" (ngSubmit)="onSubmit()">
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
-          <option *ngFor="let animal of animals" [ngValue]="animal.id">
-            {{ animal.firstname }}
-          </option>
+        @for(animal of animals; track animal) {
+          <option [ngValue]="animal.id">{{ animal.firstname }}</option>}
         </select>
       </form>
-      <!-- @for(report of reports; track report) { -->
-        
-        @if (selectedAnimalOption === 1) {
-        <table mat-table [dataSource]="reports"  matSort matSortActive="date" matSortDisableClear matSortDirection="desc" >
+    </section>
+      
+    <section>
+      @for(veterinaryreport of veterinaryReports; track veterinaryreport) {
+
+      }
+        <!-- @if (selectedAnimalOption === ) {
+        <table mat-table [dataSource]="animals"  matSort matSortActive="date" matSortDisableClear matSortDirection="desc" >
          <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de visite</th>
           <td mat-cell *matCellDef="let report">{{ report.date }}</td>
@@ -69,10 +74,11 @@ import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
     }
       <mat-icon class="add-icon">add_circle_outline</mat-icon>
    
-    </section>
+    </section> -->
   `,
   styleUrl: `../component-handled.component.css`,
 })
+
 export class VeterinaryAnimalReportHandledComponent implements OnInit {
   constructor() {}
 
@@ -86,37 +92,29 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   ];
 
   animals!: Animal[];
+  veterinaryReports!: VeterinaryReport[];
+  selectedAnimalOption!: string;
+
+
   private readonly animalService = inject(AnimalService);
-
-  selectedAnimalOption!: number;
-
-
-  reports = [
-    {
-      animalid: 1,
-      date: '12/12/2012',
-      condition: 'bon',
-      food: 'herbe',
-      grammage: '1000',
-      conditiondetails: '',
-    },
-    {
-      animalid: 2,
-      date: '04/05/2023',
-      condition: 'mauvais',
-      food: 'carcasse',
-      grammage: '2000',
-      conditiondetails: 'faible',
-    },
-  ];
+  private readonly veterinaryService = inject(VeterinaryService)
 
   ngOnInit() {
-    // this.animalService.getAnimals().then((response) => {
-    //   this.animals = response;
-    // });
+    this.getAnimals()
   }
+
+  getAnimals(){
+    this.animalService.getAnimals().then((response)=> {
+      this.animals = response
+    })
+  }
+
+  getVeterinaryReports(){
+    this.veterinaryService.getVeterinaryReports().subscribe()
+  }
+
   onSubmit() {
-    console.log(this.selectedAnimalOption, this.reports);
+  
   }
 
   sortData(){
