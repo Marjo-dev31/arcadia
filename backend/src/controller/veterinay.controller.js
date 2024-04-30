@@ -5,8 +5,9 @@ import QUERYVETERINARIES from "../query/veterinary.query.js";
 import httpStatus from "../domain/httpstatus.js";
 
 export const getVeterinaryReports = (req, res)=> {
-    logger.info(`${req.method} ${req.originalUrl}, fetching reports`);
-    database.query(QUERYVETERINARIES.SELECT_REPORTS, (error, results) => {
+  console.log(req.params.id)
+    logger.info(`${req.method} ${req.originalUrl}, fetching reports by animal`);
+    database.query(QUERYVETERINARIES.SELECT_REPORTS, [req.params.id], (error, results) => {
       if (!results) {
         res
           .status(httpStatus.OK.code)
@@ -27,7 +28,6 @@ export const getVeterinaryReports = (req, res)=> {
               `Reports retrieved`,
               { reports: results }
             )
-            
           );
       }
     });

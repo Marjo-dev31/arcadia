@@ -8,8 +8,8 @@ export class VeterinaryService {
 
     constructor(private http: HttpClient){}
 
-    getVeterinaryReports(): Observable<any>{
-        return this.http.get(this.url)
+    getVeterinaryReports(id: string): Observable<any> {
+        return this.http.get(`${this.url}/animal/${id}`)
     }
 
 }
