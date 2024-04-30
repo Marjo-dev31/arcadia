@@ -130,4 +130,33 @@ export const updateAnimal = (req, res) => {
       }   
     })
 }})
+};
+
+export const getAnimalsByHabitat = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
+    database.query(QUERYANIMALS.SELECT_ANIMALS_HABITAT, [req.params.id], (error, results) => {
+      if (!results) {
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `No animals found`,
+            )
+          );
+      } else {
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Animals retrieved`,
+              { animals: results }
+            )
+            
+          );
+      }
+    });
 }
