@@ -33,6 +33,34 @@ export const getAnimals = (req, res) => {
     });
 }
 
+export const getAnimal = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
+  database.query(QUERYANIMALS.SELECT_ANIMAL, [req.params.id], (error, results) => {
+    if (!results[0]) {
+      res
+        .status(httpStatus.NOT_FOUND.code)
+        .send(
+          new Response(
+            httpStatus.NOT_FOUND.code,
+            httpStatus.NOT_FOUND.status,
+            `Animal by id ${req.params.id} was not found !`
+          )
+        );
+    } else {
+      res
+        .status(httpStatus.OK.code)
+        .send(
+          new Response(
+            httpStatus.OK.code,
+            httpStatus.OK.status,
+            `Animal retrieved`,
+            results[0]
+          )
+        );
+    }
+  });
+};
+
 export const addAnimal = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating animal`);
     database.query(QUERYANIMALS.CREATE_ANIMAL, Object.values(req.body),(error, results) => {
@@ -133,7 +161,7 @@ export const updateAnimal = (req, res) => {
 };
 
 export const getAnimalsByHabitat = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
+  logger.info(`${req.method} ${req.originalUrl}, fetching animals by habitat`);
     database.query(QUERYANIMALS.SELECT_ANIMALS_HABITAT, [req.params.id], (error, results) => {
       if (!results) {
         res

@@ -1,12 +1,10 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
-import { AnimalService } from './services/animal.service';
 import { Animal } from '../../shared/models';
 import {
   MAT_DIALOG_DATA,
   MatDialogClose,
-  MatDialogRef,
 } from '@angular/material/dialog';
-import { DialogRef } from '@angular/cdk/dialog';
+
 
 @Component({
   selector: 'app-animals',
@@ -15,20 +13,19 @@ import { DialogRef } from '@angular/cdk/dialog';
   template: `
     <main class="id-card-animal">
       <div mat-dialog-content >
-        @for (animal of animalsList; track animal) { @if(animal.id ===
-        this.data.id){
+          @if(animal.id === this.data.animal.id) {
         <div>
-          <img src="assets/images/tigre.jpg" alt="" />
+          <img [src]="'http://localhost:8000/upload/' + animal.image_url" alt="Photo d'un {{animal.breed}}" />
 
           <div class="id-card-animal-content">
-            <p>{{ animal.firstname }}</p>
-            <p>{{ animal.breed }}</p>
+            <p>Son prénom: {{ animal.firstname }}</p>
+            <p>Sa race: {{ animal.breed }}</p>
             <div>
-              <p>{{ animal.veterinary_report }}</p>
+              <p>Son état de santé actuel: {{ animal.veterinary_report }}</p>
             </div>
           </div>
         </div>
-        } }
+        }
       </div>
       <div mat-dialog-actions class="mat-dialog-actions">
         <button mat-dialog-close>Fermer</button>
@@ -38,14 +35,14 @@ import { DialogRef } from '@angular/cdk/dialog';
   styleUrl: `./animals.component.css`,
 })
 export class AnimalsComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string }) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { animal: Animal }) {}
 
-  animalsList!: Animal[];
-  // private readonly animalsService = inject(AnimalService);
+
+  animal: Animal = this.data.animal
+
 
   ngOnInit() {
-    // this.animalsService.getAnimals().then((response) => {
-    //   this.animals = response;
-    // });
+
   }
+
 }

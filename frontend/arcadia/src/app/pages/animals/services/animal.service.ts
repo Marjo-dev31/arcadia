@@ -18,6 +18,10 @@ export class AnimalService {
         }
     }
 
+    getAnimal(id: string): Observable<any> {
+        return this.http.get(`${this.url}/${id}`)
+    }
+
     addAnimal(animal: AnimalCreate): Observable<any> {
         return this.http.post(this.url, animal)
     }

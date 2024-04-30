@@ -1,5 +1,5 @@
 import express from 'express';
-import { addAnimal, deleteAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
+import { addAnimal, deleteAnimal, getAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
 
 const animalsRoutes = express.Router();
 
@@ -8,6 +8,7 @@ animalsRoutes.route('/')
 .post(addAnimal)
 
 animalsRoutes.route('/:id')
+.get(getAnimal)
 .delete(deleteAnimal)
 .put(updateAnimal)
 
