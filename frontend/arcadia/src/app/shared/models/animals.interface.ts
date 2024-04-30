@@ -5,7 +5,7 @@ export interface Animal {
     id_habitat: string,
     breed: string,
     id_breed: string,
-    image?: string [],
+    image_url: string [],
     veterinary_report?: unknown [],
     employee_report?: unknown [],
 }
