@@ -1,12 +1,15 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Animal, AnimalCreate } from '../../../../shared/models';
+import { Animal, AnimalCreate, Habitat } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { ImageService } from '../../../home/services/image.service';
 import { tap } from 'rxjs';
 import { NgStyle } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HabitatsService } from '../../../habitats/services/habitat.service';
+import { BreedService } from '../../../animals/services/breed.service';
+import { Breed } from '../../../../shared/models/breed.interface';
 
 @Component({
   selector: 'app-animal-handled',
@@ -80,16 +83,15 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
             [(ngModel)]="newAnimal.firstname"
             #title="ngModel"
           />
-          <select name="selected-breed" #selectedBreed>
-            <option value="">--Choissisez une race</option>
-            @for(animal of datasource; track animal) {
-            <option [value]="animal.id_breed">{{ animal.breed }}</option>
-          }
+          <select name="selected-breed" [(ngModel)]="newAnimal.breed">
+            <option value="null">--Choissisez une race</option>
+            @for(breed of breeds; track breed) {
+            <option [value]="breed.id">{{ breed.name }}</option>}
           </select>
-          <select name="selected-habitat" #selectedHabitat>
-            <option value="">--Choissisez un habitat</option>
-            @for(animal of datasource; track animal) {
-            <option [value]="animal.id_habitat">{{ animal.habitat }}</option>
+          <select name="selected-habitat" [(ngModel)]="newAnimal.habitat">
+            <option value="null">--Choissisez un habitat</option>
+            @for(habitat of habitats; track habitat) {
+            <option [value]="habitat.id">{{ habitat.title }}</option>
           }
           </select>
 
@@ -147,8 +149,12 @@ export class AnimalHandledComponent implements OnInit {
 
   private readonly animalService = inject(AnimalService);
   private readonly imageService = inject(ImageService);
+  private readonly habitatService = inject(HabitatsService);
+  private readonly breedService = inject(BreedService)
 
   datasource!: Animal[];
+  habitats!: Habitat[];
+  breeds!: Breed[];
 
   newAnimal: AnimalCreate = {
     firstname: '',
@@ -160,7 +166,10 @@ export class AnimalHandledComponent implements OnInit {
   updateFormIsDisplay: boolean = false;
 
   ngOnInit() {
-    this.getAnimals()
+    this.getAnimals();
+    this.getHabitat();
+    this.getBreed();
+   
   }
 
   getAnimals() {
@@ -189,9 +198,10 @@ export class AnimalHandledComponent implements OnInit {
   }
 
   onSubmit(selectedBreed: string, selectedHabitat: string) {
-    this.newAnimal.breed = selectedBreed;
-    this.newAnimal.habitat = selectedHabitat;
     this.animalService.addAnimal(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe()
+    this.addFormIsDisplay = !this.addFormIsDisplay;
+    this.newAnimal.firstname = '';
+    
   }
 
   editAnimal(id: string) {
@@ -204,5 +214,17 @@ export class AnimalHandledComponent implements OnInit {
     this.animalService.updateAnimal(this.updateForm.value).pipe(tap(()=>{this.getAnimals()})).subscribe()
     this.updateForm.reset();
     this.updateFormIsDisplay = !this.updateFormIsDisplay
+  }
+
+  getBreed(){
+    this.breedService.getBreeds().subscribe((response)=> {
+      this.breeds = response.data.breeds
+    } )
+  }
+
+  getHabitat(){
+    this.habitatService.getHabitats().then((response) => {
+    this.habitats = response
+    })
   }
 }
