@@ -63,7 +63,48 @@ export const addVeterinaryReport = (req, res) => {
     });
 };
 
-export const deleteVeterinaryReports = (req, res) => {
+export const updateVeterinaryReport = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching report`);
+    database.query(QUERYVETERINARIES.SELECT_REPORT, [req.params.id], (error, results) => {
+      if (!results[0]) {
+        res
+        .status(httpStatus.NOT_FOUND.code)
+        .send(
+          new Response(
+            httpStatus.NOT_FOUND.code,
+            httpStatus.NOT_FOUND.status,
+            `Report by id ${req.params.id} was not found !`
+          )
+        );
+      } else {
+        logger.info(`${req.method} ${req.originalUrl}, updating report`);
+        database.query(QUERYHABITATS.UPDATE_HABITAT, [...Object.values(req.body), req.params.id], (error, results) => {
+      if(!error) {
+            res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Report updated`,
+              {...req.body}))
+        } else {
+            logger.error(error.message)
+            res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
+            .send(
+              new Response(
+                httpStatus.INTERNAL_SERVER_ERROR.code,
+                httpStatus.INTERNAL_SERVER_ERROR.status,
+                `Error occured`
+              )
+            );
+        }   
+      })
+  }})
+};
+
+
+export const deleteVeterinaryReport = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, deleting report`);
   database.query(QUERYVETERINARIES.DELETE_REPORT, [req.params.id], (error, results) => {
     if (results.affectedRows > 0) { 
