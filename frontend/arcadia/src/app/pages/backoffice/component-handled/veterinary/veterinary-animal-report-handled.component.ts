@@ -31,21 +31,16 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
         </select>
         <button>Filtrer</button>
       </form>
-    </section>
-      
-    <section>
-      @for(veterinaryreport of veterinaryReports; track veterinaryreport) {
-
-      }
-        <!-- @if (selectedAnimalOption === ) {
-        <table mat-table [dataSource]="animals"  matSort matSortActive="date" matSortDisableClear matSortDirection="desc" >
+      @for(animal of animals; track animal){
+        @if (selectedAnimalOption === animal.id) {
+        <table mat-table [dataSource]="veterinaryReports"  matSort matSortActive="date" matSortDisableClear matSortDirection="desc" >
          <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de visite</th>
           <td mat-cell *matCellDef="let report">{{ report.date }}</td>
         </ng-container>
         <ng-container matColumnDef="healthcondition">
           <th mat-header-cell *matHeaderCellDef>Etat de santé</th>
-          <td mat-cell *matCellDef="let report">{{report.condition}}</td>
+          <td mat-cell *matCellDef="let report">{{report.health}}</td>
         </ng-container>
         <ng-container matColumnDef="food">
           <th mat-header-cell *matHeaderCellDef>Nourriture recommandée</th>
@@ -57,7 +52,7 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
         </ng-container>
         <ng-container matColumnDef="healthconditiondetails">
           <th mat-header-cell *matHeaderCellDef>Détails de l'état de santé</th>
-          <td mat-cell *matCellDef="let report">{{report.conditiondetails}}</td>
+          <td mat-cell *matCellDef="let report">{{report.details_condition}}</td>
         </ng-container>
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Action</th>
@@ -72,10 +67,10 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
           *matRowDef="let row; columns: displayColums"
         ></tr>
       </table>
-    }
+    }}
       <mat-icon class="add-icon">add_circle_outline</mat-icon>
    
-    </section> -->
+    </section>
   `,
   styleUrl: `../component-handled.component.css`,
 })
