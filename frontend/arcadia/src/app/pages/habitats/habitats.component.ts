@@ -1,11 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HabitatsService } from './services/habitat.service';
-import { Habitat } from '../../shared/models';
+import { Animal, Habitat } from '../../shared/models';
 import { AnimalsComponent } from '../animals/animals.component';
 import {
   MatDialog,
   MatDialogModule
 } from '@angular/material/dialog';
+import { AnimalService } from '../animals/services/animal.service';
 
 @Component({
   selector: 'app-habitats',
@@ -45,21 +46,33 @@ import {
 export class HabitatsComponent implements OnInit {
 
   habitats!: Habitat[];
+  animals!: Animal[];
   private readonly habitatService = inject(HabitatsService);
+  private readonly animalService = inject(AnimalService)
 
   showDetails: string | undefined = undefined;
 
   constructor(private matdialog: MatDialog) {}
 
   ngOnInit() {
+    this.getHabitats();
+  };
+
+  getHabitats(){
     this.habitatService.getHabitats().then((response) => {
       this.habitats = response;
     });
-  };
+  }
+
+  getAnimalsByHabitat(id: string) {
+    this.animalService.getAnimalsByHabitat(id).subscribe()
+  }
 
   toggleDetails(id: string) {
     this.showDetails = id;
+    this.getAnimalsByHabitat(id)
   }
+
   openDialog(id: string): void {
     const dialogRef = this.matdialog.open(AnimalsComponent, {
       width: '400px',

@@ -3,7 +3,8 @@ const QUERYANIMALS = {
     SELECT_ANIMAL: 'SELECT * FROM animals WHERE id = ?',
     CREATE_ANIMAL: 'INSERT INTO animals VALUES (DEFAULT, ?, ?, ?)',
     UPDATE_ANIMAL: 'UPDATE animals SET firstname = ?, id_habitat = ?, id_breed = ? WHERE id = ?',
-    DELETE_ANIMAL: 'DELETE FROM animals WHERE id = ?'
+    DELETE_ANIMAL: 'DELETE FROM animals WHERE id = ?',
+    SELECT_ANIMALS_HABITAT: 'SELECT * from animals INNER JOIN habitats ON animals.id_habitat = habitats.id WHERE habitats.id = ?'
 }
 
 export default QUERYANIMALS;

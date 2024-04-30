@@ -30,4 +30,7 @@ export class AnimalService {
       return this.http.delete(`${this.url}/${id}`)
     }
 
+    getAnimalsByHabitat(id: string): Observable<any> {
+        return this.http.get(`${this.url}/habitats/${id}`)
+    }
 }

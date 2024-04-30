@@ -1,5 +1,5 @@
 import express from 'express';
-import { addAnimal, deleteAnimal, getAnimals, updateAnimal } from '../controller/animal.controller.js';
+import { addAnimal, deleteAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
 
 const animalsRoutes = express.Router();
 
@@ -10,5 +10,8 @@ animalsRoutes.route('/')
 animalsRoutes.route('/:id')
 .delete(deleteAnimal)
 .put(updateAnimal)
+
+animalsRoutes.route('/habitats/:id')
+.get(getAnimalsByHabitat)
 
 export default animalsRoutes
