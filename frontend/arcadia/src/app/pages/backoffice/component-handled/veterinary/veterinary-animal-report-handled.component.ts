@@ -175,6 +175,8 @@ import { UsersService } from '../../../connection/service/user.service';
           <option [value]="user.id">{{ user.firstname }}</option>
           }
         </select>
+        <button class="add-btn">Modifier rapport</button>
+        <button>Annuler</button>
       </form>
     </section>
   `,
@@ -192,7 +194,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
       health: new FormControl(''),
       details_condition: new FormControl(''),
       id_user: new FormControl(''),
-      id_animal: new FormControl('')
+      id_animal: new FormControl(''),
+      id: new FormControl('')
     })
   }
 
@@ -273,7 +276,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   editReport(id: string){
     this.updateFormIsDisplay = true;
     const reportToUpdate = this.veterinaryReports.find((el)=> el.id === id);
-    this.updateForm.patchValue({food: reportToUpdate?.food, grammage: reportToUpdate?.grammage, health: reportToUpdate?.health, details_condition: reportToUpdate?.details_condition, id_user: reportToUpdate?.id_user, id_animal: reportToUpdate?.id_animal})
+    this.updateForm.patchValue({food: reportToUpdate?.food, grammage: reportToUpdate?.grammage, health: reportToUpdate?.health, details_condition: reportToUpdate?.details_condition, id_user: reportToUpdate?.id_user, id_animal: reportToUpdate?.id_animal, id: reportToUpdate?.id})
   }
 
   updateReport(){

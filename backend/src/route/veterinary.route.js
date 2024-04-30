@@ -1,5 +1,5 @@
 import express from 'express'
-import { addVeterinaryReport, deleteVeterinaryReports, getVeterinaryReports } from '../controller/veterinay.controller.js'
+import { addVeterinaryReport, deleteVeterinaryReport, getVeterinaryReports, updateVeterinaryReport } from '../controller/veterinay.controller.js'
 
 const veterinaryRoutes = express.Router()
 
@@ -10,6 +10,7 @@ veterinaryRoutes.route('/animal/:id')
 .get(getVeterinaryReports)
 
 veterinaryRoutes.route('/:id')
-.delete(deleteVeterinaryReports)
+.delete(deleteVeterinaryReport)
+.put(updateVeterinaryReport)
 
 export default veterinaryRoutes
