@@ -12,6 +12,7 @@ import imageRoutes from "./route/image.route.js";
 import habitatRoutes from "./route/habitat.route.js";
 import reviewRoutes from "./route/review.route.js";
 import animalsRoutes from "./route/animal.route.js";
+import breedRoutes from "./route/breed.route.js";
 
 
 
@@ -31,7 +32,7 @@ app.use('/images', imageRoutes);
 app.use('/habitats', habitatRoutes);
 app.use('/reviews', reviewRoutes);
 app.use('/animals', animalsRoutes);
-
+app.use('/breeds', breedRoutes)
 // app.use(require('body-parser').json());
 
 

@@ -166,3 +166,7 @@ Content-Type: application/json
     "image_url": "./imagetest7.jpg",
     "service_id": "5096717e-fd68-11ee-a19d-0242ac140002"
  }
+
+###
+
+get http://localhost:8000/breeds
