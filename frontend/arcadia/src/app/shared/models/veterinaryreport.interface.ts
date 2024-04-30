@@ -4,7 +4,7 @@ export interface VeterinaryReport {
     grammage: number,
     date: Date,
     health: string,
-    detailsCondition: string,
+    details_condition: string,
     id_animal: string, 
     id_user: string
 }
