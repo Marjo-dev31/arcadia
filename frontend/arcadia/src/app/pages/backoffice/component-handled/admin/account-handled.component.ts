@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../../../shared/models/user.interface';
+import { User, UserCreate } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -71,7 +71,7 @@ export class AccountHandledComponent implements OnInit {
 
   selectedRoleOption!: string;
 
-  user: User = {
+  user: UserCreate = {
     email: '',
     lastname: '',
     firstname: '',
