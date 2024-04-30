@@ -23,12 +23,13 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
   template: `
     <section class="animals-section">
       <h3>Section animaux</h3>
-      <form ngForm name="animalchoice" (ngSubmit)="onSubmit()">
+      <form ngForm name="animalchoice" (ngSubmit)="getVeterinaryReports(selectedAnimalOption)">
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
         @for(animal of animals; track animal) {
           <option [ngValue]="animal.id">{{ animal.firstname }}</option>}
         </select>
+        <button>Filtrer</button>
       </form>
     </section>
       
@@ -109,16 +110,12 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     })
   }
 
-  getVeterinaryReports(){
-    this.veterinaryService.getVeterinaryReports().subscribe()
-  }
-
-  onSubmit() {
-  
+  getVeterinaryReports(id: string){
+    this.veterinaryService.getVeterinaryReports(id).subscribe((response)=> {
+    this.veterinaryReports = response.data.reports
+    });
   }
 
   sortData(){
-
-
   }
 }
