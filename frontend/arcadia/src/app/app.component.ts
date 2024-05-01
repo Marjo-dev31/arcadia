@@ -21,11 +21,12 @@ import { ImageService } from './pages/home/services/image.service';
 import { BreedService } from './pages/animals/services/breed.service';
 import { VeterinaryService } from './pages/animals/services/veterinary.service';
 import { UsersService } from './pages/connection/service/user.service';
+import { EmployeeService } from './pages/animals/services/employee.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  providers: [ServiceService, HabitatsService, AnimalService, ReviewsService, ImageService, BreedService, VeterinaryService, UsersService],
+  providers: [ServiceService, HabitatsService, AnimalService, ReviewsService, ImageService, BreedService, VeterinaryService, UsersService, EmployeeService],
   imports: [
     RouterOutlet,
     HeaderComponent,
