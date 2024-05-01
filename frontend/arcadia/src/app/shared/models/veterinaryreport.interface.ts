@@ -2,7 +2,7 @@ export interface VeterinaryReport {
     id: string,
     food: string,
     grammage: number,
-    date: Date,
+    date: string,
     health: string,
     details_condition?: string,
     id_user: string,

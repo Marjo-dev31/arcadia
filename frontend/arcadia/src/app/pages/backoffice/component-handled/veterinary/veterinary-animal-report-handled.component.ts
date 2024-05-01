@@ -1,15 +1,12 @@
 import { CommonModule, formatPercent } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject, viewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Animal } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
-import {
-  VeterinaryReport,
-  VeterinaryReportCreate,
-} from '../../../../shared/models/veterinaryreport.interface';
+import { VeterinaryReport, VeterinaryReportCreate } from '../../../../shared/models/veterinaryreport.interface';
 import { VeterinaryService } from '../../../animals/services/veterinary.service';
 import { tap } from 'rxjs';
 import { User } from '../../../../shared/models/user.interface';
@@ -47,10 +44,9 @@ import { UsersService } from '../../../connection/service/user.service';
         @if (selectedAnimalOption === animal.id) {
       <table
         mat-table
-        [dataSource]="veterinaryReports"
+        [dataSource]="dataSource"
         matSort
         matSortActive="date"
-        matSortDisableClear
         matSortDirection="desc"
       >
         <ng-container matColumnDef="date">
@@ -209,9 +205,11 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   ];
 
   animals!: Animal[];
-  veterinaryReports!: VeterinaryReport[];
+  veterinaryReports: VeterinaryReport [] = [];
   selectedAnimalOption!: string;
   users!: User[];
+ 
+  dataSource = new MatTableDataSource(this.veterinaryReports);
 
   addFormIsDisplay: boolean = false;
   updateFormIsDisplay: boolean = false;
@@ -229,10 +227,19 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   private readonly veterinaryService = inject(VeterinaryService);
   private readonly userService = inject(UsersService);
 
+ @ViewChild(MatSort) sort!:MatSort;
+
+
   ngOnInit() {
     this.getAnimals();
     this.getUsers();
+    
   }
+
+  ngAfterOnInit(){
+    this.dataSource.sort = this.sort;
+   }
+
 
   getAnimals() {
     this.animalService.getAnimals().then((response) => {
@@ -249,6 +256,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   getVeterinaryReports(id: string) {
     this.veterinaryService.getVeterinaryReports(id).subscribe((response) => {
     this.veterinaryReports = response.data.reports;
+    this.dataSource = new MatTableDataSource(this.veterinaryReports)
+    this.dataSource.sort = this.sort;
     });
   }
 
