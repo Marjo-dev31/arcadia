@@ -12,7 +12,7 @@ import { AnimalService } from '../../../animals/services/animal.service';
   imports: [MatTableModule, MatIconModule, CommonModule, FormsModule],
   template: `
       <h3>Rapport employé</h3>
-      <form ngForm name="animalchoice" class="animal-choice">
+      <form ngForm name="animalchoice" (ngSubmit)="getEmployeeReports(selectedAnimalOption)">
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
           <option *ngFor="let animal of animals" [ngValue]="animal.id">
@@ -70,8 +70,16 @@ export class EmployeeReportHandledComponent implements OnInit {
   datasource!: [];
 
   ngOnInit() {
-    // this.animalService.getAnimals().then((response) => {
-    //   this.animals = response;
-    // });
+    this.getAnimals()
+  }
+
+  getAnimals(){
+    this.animalService.getAnimals().then((response)=>{
+      this.animals = response
+    })
+  }
+
+  getEmployeeReports(id: string) {
+    
   }
 }
