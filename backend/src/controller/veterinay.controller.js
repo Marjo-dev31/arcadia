@@ -66,7 +66,7 @@ export const addVeterinaryReport = (req, res) => {
 export const updateVeterinaryReport = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching report`);
     database.query(QUERYVETERINARIES.SELECT_REPORT, [req.params.id], (error, results) => {
-      if (!results[0]) {
+      if (!results) {
         res
         .status(httpStatus.NOT_FOUND.code)
         .send(
@@ -78,7 +78,8 @@ export const updateVeterinaryReport = (req, res) => {
         );
       } else {
         logger.info(`${req.method} ${req.originalUrl}, updating report`);
-        database.query(QUERYHABITATS.UPDATE_HABITAT, [...Object.values(req.body), req.params.id], (error, results) => {
+        console.log(req.body)
+        database.query(QUERYVETERINARIES.UPDATE_REPORT, [...Object.values(req.body), req.params.id], (error, results) => {
       if(!error) {
             res
           .status(httpStatus.OK.code)

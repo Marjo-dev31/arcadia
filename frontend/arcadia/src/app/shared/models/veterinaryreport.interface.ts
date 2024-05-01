@@ -5,8 +5,8 @@ export interface VeterinaryReport {
     date: Date,
     health: string,
     details_condition?: string,
-    id_animal: string, 
-    id_user: string
+    id_user: string,
+    id_animal: string 
 }
 
 export interface VeterinaryReportCreate {
@@ -14,6 +14,6 @@ export interface VeterinaryReportCreate {
     grammage: number,
     health: string,
     details_condition?: string,
-    id_animal: string,
-    id_user: string
+    id_user: string,
+    id_animal: string
 }
