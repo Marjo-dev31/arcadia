@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { Form, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Form, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Animal } from '../../../../shared/models';
@@ -10,6 +10,7 @@ import { User } from '../../../../shared/models/user.interface';
 import { UsersService } from '../../../connection/service/user.service';
 import { EmployeeReport, EmployeeReportCreate } from '../../../../shared/models/employeereport.interface';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
@@ -46,7 +47,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let report">
             <mat-icon>create</mat-icon>
-            <mat-icon>delete</mat-icon>
+            <mat-icon (click)="deleteReport(report.id)" >delete</mat-icon>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
@@ -164,7 +165,14 @@ export class EmployeeReportHandledComponent implements OnInit {
       this.addFormIsDisplay = !this.addFormIsDisplay;
     };
 
-  onSubmit(form: Form){
+  onSubmit(form: NgForm){
     this.employeeService.addEmployeeReport(this.newReport).subscribe();
+    this.addFormIsDisplay = !this.addFormIsDisplay;
+    form.reset();
     };
-}
+
+  deleteReport(id: string) {
+    this.employeeService.deleteEmployeeReport(id).pipe(tap(() => {this.getEmployeeReports(id)})).subscribe()
+  }
+
+  }

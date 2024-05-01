@@ -62,3 +62,31 @@ export const addEmployeeReport = (req, res) => {
     }
   });
 }
+
+export const deleteEmployeeReport = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, deleting report`);
+  database.query(QUERYEMPLOYEES.DELETE_REPORT, [req.params.id], (error, results) => {
+    if (results.affectedRows > 0) { 
+      res
+        .status(httpStatus.OK.code)
+        .send(
+          new Response(
+            httpStatus.OK.code,
+            httpStatus.OK.status,
+            `Report deleted`,
+            results[0]
+          )
+        );
+    } else {
+      res
+        .status(httpStatus.NOT_FOUND.code)
+        .send(
+          new Response(
+            httpStatus.NOT_FOUND.code,
+            httpStatus.NOT_FOUND.status,
+            `Report by id ${req.params.id} was not found !`
+          )
+        );
+    }
+  });
+}
