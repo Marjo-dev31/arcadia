@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { EmployeeReportCreate } from "../../../shared/models/employeereport.interface";
+import { observableToBeFn } from "rxjs/internal/testing/TestScheduler";
 
 @Injectable()
 
@@ -16,5 +17,9 @@ export class EmployeeService {
 
     addEmployeeReport(report: EmployeeReportCreate): Observable<any> {
         return this.http.post(this.url, report)
+    }
+
+    deleteEmployeeReport(id: string): Observable<any> {
+        return this.http.delete(`${this.url}/${id}`)
     }
 }
