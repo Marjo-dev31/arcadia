@@ -199,3 +199,17 @@ Content-Type: application/json
 ###
 
 get http://localhost:8000/users
+
+###
+
+put http://localhost:8000/veterinaries/5345c0fa-070b-11ef-bc53-0242ac180002
+Content-Type: application/json
+
+{
+    "food":"herbe",
+    "grammage": 1700,
+    "health":"bon",
+    "details_condition":"ras",
+    "id_user":"8b9d927f-070a-11ef-bc53-0242ac180002",
+    "id_animal":"b3a2ba43-0652-11ef-b1c1-0242ac180002"
+}

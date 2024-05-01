@@ -149,7 +149,7 @@ import { UsersService } from '../../../connection/service/user.service';
       <form
         class="add-form"
         [formGroup]="updateForm"
-        (ngSubmit)="onSubmit(form)">
+        (ngSubmit)="updateReport(selectedAnimalOption)">
         <input
           type="text"
           formControlName="food"/>
@@ -242,25 +242,18 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
   getUsers() {
     this.userService.getUsers().subscribe((response) => {
-      this.users = response.data.users;
+    this.users = response.data.users;
     });
   }
 
   getVeterinaryReports(id: string) {
     this.veterinaryService.getVeterinaryReports(id).subscribe((response) => {
-      this.veterinaryReports = response.data.reports;
+    this.veterinaryReports = response.data.reports;
     });
   }
 
   deleteReport(id: string) {
-    this.veterinaryService
-      .deleteReport(id)
-      .pipe(
-        tap(() => {
-          this.getVeterinaryReports(id);
-        })
-      )
-      .subscribe();
+    this.veterinaryService.deleteReport(id).pipe(tap(() => {this.getVeterinaryReports(id)})).subscribe();
   }
 
   toggleAddForm() {
@@ -273,13 +266,15 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     form.reset();
   }
 
-  editReport(id: string){
+  editReport(id: string) {
     this.updateFormIsDisplay = true;
     const reportToUpdate = this.veterinaryReports.find((el)=> el.id === id);
-    this.updateForm.patchValue({food: reportToUpdate?.food, grammage: reportToUpdate?.grammage, health: reportToUpdate?.health, details_condition: reportToUpdate?.details_condition, id_user: reportToUpdate?.id_user, id_animal: reportToUpdate?.id_animal, id: reportToUpdate?.id})
+    this.updateForm.patchValue({food: reportToUpdate?.food, grammage: reportToUpdate?.grammage, health: reportToUpdate?.health, details_condition: reportToUpdate?.details_condition, id_user: reportToUpdate?.id_user, id_animal: reportToUpdate?.id_animal, id: reportToUpdate?.id});
+  }
+  
+  updateReport(id: string) {
+    this.veterinaryService.updateReport(this.updateForm.value).pipe(tap(()=>{this.getVeterinaryReports(id)})).subscribe();
+    this.updateFormIsDisplay = ! this.updateFormIsDisplay;
   }
 
-  updateReport(){
-    this.veterinaryService.updateReport(this.updateForm.value).subscribe()
-  }
 }
