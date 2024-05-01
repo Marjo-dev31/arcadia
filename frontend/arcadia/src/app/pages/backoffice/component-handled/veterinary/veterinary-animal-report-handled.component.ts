@@ -206,8 +206,9 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
   animals!: Animal[];
   veterinaryReports: VeterinaryReport [] = [];
-  selectedAnimalOption!: string;
   users!: User[];
+
+  selectedAnimalOption!: string;
  
   dataSource = new MatTableDataSource(this.veterinaryReports);
 
