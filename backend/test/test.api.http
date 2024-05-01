@@ -213,3 +213,7 @@ Content-Type: application/json
     "id_user":"8b9d927f-070a-11ef-bc53-0242ac180002",
     "id_animal":"b3a2ba43-0652-11ef-b1c1-0242ac180002"
 }
+
+###
+
+get http://localhost:8000/employees
