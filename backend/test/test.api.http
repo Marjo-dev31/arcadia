@@ -234,3 +234,16 @@ Content-Type: application/json
 ###
 
  get http://localhost:8000/roles
+
+###
+
+ post http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "email":"test@test.com",
+    "lastname":"test",
+    "firstname":"tes",
+    "password":"veto",
+    "id_role":"70c0d6f6-085e-11ef-a7f8-0242ac180002"
+}

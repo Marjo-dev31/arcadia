@@ -7,7 +7,7 @@ import { Animal } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { EmployeeService } from '../../../animals/services/employee.service';
 import { User } from '../../../../shared/models/user.interface';
-import { UsersService } from '../../../connection/service/user.service';
+import { UserService } from '../../../connection/service/user.service';
 import { EmployeeReport, EmployeeReportCreate } from '../../../../shared/models/employeereport.interface';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { tap } from 'rxjs';
@@ -156,7 +156,7 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   private readonly animalService = inject(AnimalService);
   private readonly employeeService = inject(EmployeeService)
-  private readonly userService = inject(UsersService)
+  private readonly userService = inject(UserService)
 
 
   addFormIsDisplay: boolean = false;
