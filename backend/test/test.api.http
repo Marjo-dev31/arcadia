@@ -226,6 +226,6 @@ Content-Type: application/json
  {
     "food":"cuisse de boeuf",
     "grammage":"10000",
-    "id_animal":"3ec3c8cf-06cd-11ef-bc53-0242ac180002",
-    "id_user":"8b9d927f-070a-11ef-bc53-0242ac180002"
+    "id_user":"8b9d927f-070a-11ef-bc53-0242ac180002",
+    "id_animal":"3ec3c8cf-06cd-11ef-bc53-0242ac180002"
  }
