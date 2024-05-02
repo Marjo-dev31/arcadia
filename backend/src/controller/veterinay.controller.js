@@ -3,6 +3,7 @@ import Response from "../domain/response.js";
 import logger from "../util/logger.js";
 import QUERYVETERINARIES from "../query/veterinary.query.js";
 import httpStatus from "../domain/httpstatus.js";
+import QUERYEMPLOYEES from "../query/employee.query.js";
 
 export const getVeterinaryReports = (req, res)=> {
   console.log(req.params.id)
@@ -79,7 +80,7 @@ export const updateVeterinaryReport = (req, res) => {
       } else {
         logger.info(`${req.method} ${req.originalUrl}, updating report`);
         console.log(req.body)
-        database.query(QUERYVETERINARIES.UPDATE_REPORT, [...Object.values(req.body), req.params.id], (error, results) => {
+        database.query(QUERYEMPLOYEES.UPDATE_REPORT, [...Object.values(req.body), req.params.id], (error, results) => {
       if(!error) {
             res
           .status(httpStatus.OK.code)
