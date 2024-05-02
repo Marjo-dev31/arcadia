@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { EmployeeReportCreate } from "../../../shared/models/employeereport.interface";
-import { observableToBeFn } from "rxjs/internal/testing/TestScheduler";
+import { EmployeeReport, EmployeeReportCreate } from "../../../shared/models/employeereport.interface";
+
 
 @Injectable()
 
@@ -17,6 +17,10 @@ export class EmployeeService {
 
     addEmployeeReport(report: EmployeeReportCreate): Observable<any> {
         return this.http.post(this.url, report)
+    }
+
+    updateReport(report: EmployeeReport): Observable<any> {
+        return this.http.put(`${this.url}/${report.id}`, report)
     }
 
     deleteEmployeeReport(id: string): Observable<any> {
