@@ -53,14 +53,14 @@ form > * {
   margin: auto;
   border: 0.3rem solid var(--color-font);
   border-radius: 20px;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .account-creation-form input,
-select {
+.account-creation-form select {
   border-radius: 15px;
   width: 300px;
-  margin-bottom: 1rem;
+  margin: 0;
   padding: 0.5rem;
 }
 

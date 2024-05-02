@@ -71,29 +71,19 @@ export class AccountHandledComponent implements OnInit {
 
   selectedRoleOption!: string;
 
-  user: UserCreate = {
+  newUser: UserCreate = {
     email: '',
     lastname: '',
     firstname: '',
     password: '',
-    role: '',
+    id_role: '',
   };
 
-  roles = [
-    { 
-        id: 1, 
-        name: 'veterinaire' }, 
-    {
-        id: 2,
-        name: 'employé'
-    }
-];
+
 
   ngOnInit() {}
 
   onSubmit() {
-    this.user.role = this.selectedRoleOption
-    console.log(this.user);
-    console.log(this.roles)
+    this.newUser.id_role = this.selectedRoleOption
   }
 }
