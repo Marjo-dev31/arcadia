@@ -13,7 +13,6 @@ export interface UserCreate {
     firstname: string,
     password: string,
     id_role: string,
-    confirmPassword: string
 }
 
 export interface UserConnect {
