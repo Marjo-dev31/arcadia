@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { User, UserCreate } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
@@ -26,7 +26,12 @@ import { UserService } from '../../../connection/service/user.service';
           id="email"
           [(ngModel)]="newUser.email"
           #email="ngModel"
+          required
         />
+        @if(email.invalid && (email.dirty || email.touched)){
+          @if(email.errors?.['required']){
+            <div class="alert">Un email est requis</div>
+          }}
         <label for="lastname">Nom :</label>
         <input
           type="text"
@@ -34,7 +39,12 @@ import { UserService } from '../../../connection/service/user.service';
           id="lastname"
           [(ngModel)]="newUser.lastname"
           #lastname="ngModel"
+          required
         />
+        @if(lastname.invalid && (lastname.dirty || lastname.touched)){
+          @if(lastname.errors?.['required']){
+            <div class="alert">Un nom est requis</div>
+          }}
         <label for="firstname">Prénom :</label>
         <input
           type="text"
@@ -42,13 +52,20 @@ import { UserService } from '../../../connection/service/user.service';
           id="firstname"
           [(ngModel)]="newUser.firstname"
           #firstname="ngModel"
+          required
         />
-
+        @if(firstname.invalid && (firstname.dirty || firstname.touched)){
+          @if(firstname.errors?.['required']){
+            <div class="alert">Un prénom est requis</div>
+          }}
         <label for="role">Rôle :</label>
-        <select name="role" id="role" [(ngModel)]= "selectedRoleOption" required>
-          <option *ngFor="let role of roles" [ngValue]="role.id">{{ role.name }}</option>
+        <select name="role" id="role" [(ngModel)]= "selectedRoleOption" #role="ngModel" required>
+          <option *ngFor="let role of roles" [ngValue]="role.id" >{{ role.name }}</option>
         </select>
-
+        @if(role.invalid && (role.dirty || firstname.touched)){
+          @if(role.errors?.['required']){
+            <div class="alert">Un rôle est requis</div>
+          }}
         <label for="password">Mot de passe :</label>
         <input
           type="password"
@@ -71,7 +88,7 @@ import { UserService } from '../../../connection/service/user.service';
           }
         }
         <label for="comfirm-password">Confirmer mot de passe :</label>
-        <input type="password" name="comfirm-password" id="comfirm-password" />
+        <input type="password" name="comfirm-password" id="comfirm-password" required/>
 
         <div class="btn-section">
           <button type="reset" class="btn">Annuler</button>
@@ -79,6 +96,7 @@ import { UserService } from '../../../connection/service/user.service';
         </div>
       </form>
     </div>
+    <div  class="alert-form" id="alert" [ngStyle]="{display: 'none'}">Une erreur est survenue, vérifiez votre saisie.</div>
   `,
   styleUrl: `../component-handled.component.css`,
 })
@@ -99,7 +117,7 @@ export class AccountHandledComponent implements OnInit {
     id_role: '',
   };
 
-
+  @ViewChild('form') form!: NgForm;
 
   ngOnInit() {
     this.getRolesWithoutAdmin();
@@ -112,9 +130,14 @@ export class AccountHandledComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.newUser.id_role = this.selectedRoleOption;
-    console.log(this.newUser)
-    this.userService.addUser(this.newUser).subscribe();
-    form.reset()
+    const alert = document.getElementById('alert');
+      if(this.form.invalid && alert) {
+        console.log(this.form.errors)
+        alert.style.display = "block"
+      } else {
+        this.newUser.id_role = this.selectedRoleOption;
+        this.userService.addUser(this.newUser).subscribe();
+        form.reset()
+    }
   }
 }
