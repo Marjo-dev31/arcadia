@@ -10,7 +10,7 @@ import { VeterinaryReport, VeterinaryReportCreate } from '../../../../shared/mod
 import { VeterinaryService } from '../../../animals/services/veterinary.service';
 import { tap } from 'rxjs';
 import { User } from '../../../../shared/models/user.interface';
-import { UsersService } from '../../../connection/service/user.service';
+import { UserService } from '../../../connection/service/user.service';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
@@ -226,7 +226,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
   private readonly animalService = inject(AnimalService);
   private readonly veterinaryService = inject(VeterinaryService);
-  private readonly userService = inject(UsersService);
+  private readonly userService = inject(UserService);
 
  @ViewChild(MatSort) sort!:MatSort;
 

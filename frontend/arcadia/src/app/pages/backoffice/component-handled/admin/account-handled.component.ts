@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { User, UserCreate } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
+import { RoleService } from '../../../connection/service/role.service';
+import { Role } from '../../../../shared/models/role.interface';
+import { UserService } from '../../../connection/service/user.service';
 
 @Component({
   selector: 'app-account-handled',
@@ -14,14 +17,14 @@ import { CommonModule } from '@angular/common';
         class="account-creation-form"
         #form="ngForm"
         name="accountcreationform"
-        (ngSubmit)="onSubmit()"
+        (ngSubmit)="onSubmit(form)"
       >
         <label for="email">Email/Identifiant :</label>
         <input
           type="email"
           name="email"
           id="email"
-          [(ngModel)]="user.email"
+          [(ngModel)]="newUser.email"
           #email="ngModel"
         />
         <label for="lastname">Nom :</label>
@@ -29,7 +32,7 @@ import { CommonModule } from '@angular/common';
           type="text"
           name="lastname"
           id="lastname"
-          [(ngModel)]="user.lastname"
+          [(ngModel)]="newUser.lastname"
           #lastname="ngModel"
         />
         <label for="firstname">Prénom :</label>
@@ -37,7 +40,7 @@ import { CommonModule } from '@angular/common';
           type="text"
           name="firstname"
           id="firstname"
-          [(ngModel)]="user.firstname"
+          [(ngModel)]="newUser.firstname"
           #firstname="ngModel"
         />
 
@@ -51,7 +54,7 @@ import { CommonModule } from '@angular/common';
           type="password"
           name="password"
           id="password"
-          [(ngModel)]="user.password"
+          [(ngModel)]="newUser.password"
           #password="ngModel"
         />
         <label for="comfirm-password">Confirmer mot de passe :</label>
@@ -69,7 +72,11 @@ import { CommonModule } from '@angular/common';
 export class AccountHandledComponent implements OnInit {
   constructor() {}
 
+  private roleService = inject(RoleService);
+  private userService = inject(UserService);
+
   selectedRoleOption!: string;
+  roles: Role[] = []
 
   newUser: UserCreate = {
     email: '',
@@ -81,9 +88,20 @@ export class AccountHandledComponent implements OnInit {
 
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getRolesWithoutAdmin();
+  }
 
-  onSubmit() {
-    this.newUser.id_role = this.selectedRoleOption
+  getRolesWithoutAdmin() {
+    this.roleService.getRolesWithoutAdmin().subscribe((response)=>{
+      this.roles = response.data.roles
+    })
+  }
+
+  onSubmit(form: NgForm) {
+    this.newUser.id_role = this.selectedRoleOption;
+    console.log(this.newUser)
+    this.userService.addUser(this.newUser).subscribe();
+    form.reset()
   }
 }
