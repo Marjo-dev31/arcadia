@@ -27,7 +27,6 @@ export const getReviews = (req, res) => {
               `Reviews retrieved`,
               { reviews: results }
             )
-            
           );
       }
     });

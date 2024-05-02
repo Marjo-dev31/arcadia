@@ -15,8 +15,7 @@ export interface UserCreate {
     id_role: string,
 }
 
-export interface UserConnect {
+export interface UserLogin {
     email: string,
     password: string,
-    role: string
 }
