@@ -45,7 +45,7 @@ import { UserService } from '../../../connection/service/user.service';
         />
 
         <label for="role">Rôle :</label>
-        <select name="role" id="role" [(ngModel)]= "selectedRoleOption">
+        <select name="role" id="role" [(ngModel)]= "selectedRoleOption" required>
           <option *ngFor="let role of roles" [ngValue]="role.id">{{ role.name }}</option>
         </select>
 
@@ -56,7 +56,20 @@ import { UserService } from '../../../connection/service/user.service';
           id="password"
           [(ngModel)]="newUser.password"
           #password="ngModel"
+          required
+          minlength="8"
         />
+        @if(password.invalid && (password.dirty || password.touched)){
+          @if(password.errors?.['required']){
+            <div class="alert">Un mot de passe est requis</div>
+          }
+          @else if(password.errors?.['minlength']){
+            <div class="alert">Le mot de passe doit contenir au moins 8 caractères</div>
+          }
+          @else {
+            <div class="alert">Une erreur est survenue, vérifiez votre saisie</div>
+          }
+        }
         <label for="comfirm-password">Confirmer mot de passe :</label>
         <input type="password" name="comfirm-password" id="comfirm-password" />
 
