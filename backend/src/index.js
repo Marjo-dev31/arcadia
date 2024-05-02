@@ -16,6 +16,7 @@ import breedRoutes from "./route/breed.route.js";
 import veterinaryRoutes from "./route/veterinary.route.js";
 import userRoutes from "./route/user.route.js";
 import employeeRoutes from "./route/employee.route.js";
+import roleRoutes from "./route/role.route.js";
 
 
 
@@ -38,7 +39,8 @@ app.use('/animals', animalsRoutes);
 app.use('/breeds', breedRoutes);
 app.use('/veterinaries', veterinaryRoutes);
 app.use('/users', userRoutes);
-app.use('/employees', employeeRoutes)
+app.use('/employees', employeeRoutes);
+app.use('/roles', roleRoutes)
 
 // app.use(require('body-parser').json());
 

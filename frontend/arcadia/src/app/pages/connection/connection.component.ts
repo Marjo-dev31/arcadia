@@ -43,8 +43,6 @@ export class ConnexionComponent implements OnInit {
 
   user: UserConnect = {
     email: '',
-    lastname: '',
-    firstname: '',
     password: '',
     role: ''
   }
