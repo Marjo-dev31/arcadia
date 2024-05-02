@@ -61,7 +61,50 @@ export const addEmployeeReport = (req, res) => {
         );
     }
   });
-}
+};
+
+export const updateEmployeeReport = (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, fetching report`);
+      database.query(QUERYEMPLOYEES.SELECT_REPORT, [req.params.id], (error, results) => {
+        if (!results) {
+          res
+          .status(httpStatus.NOT_FOUND.code)
+          .send(
+            new Response(
+              httpStatus.NOT_FOUND.code,
+              httpStatus.NOT_FOUND.status,
+              `Report by id ${req.params.id} was not found !`
+            )
+          );
+        } else {
+          logger.info(`${req.method} ${req.originalUrl}, updating report`);
+          console.log(req.body)
+          database.query(QUERYEMPLOYEES.UPDATE_REPORT, [...Object.values(req.body), req.params.id], (error, results) => {
+        if(!error) {
+              res
+            .status(httpStatus.OK.code)
+            .send(
+              new Response(
+                httpStatus.OK.code,
+                httpStatus.OK.status,
+                `Report updated`,
+                {...req.body}))
+          } else {
+              logger.error(error.message)
+              res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
+              .send(
+                new Response(
+                  httpStatus.INTERNAL_SERVER_ERROR.code,
+                  httpStatus.INTERNAL_SERVER_ERROR.status,
+                  `Error occured`
+                )
+              );
+          }   
+        })
+    }})
+  };
+
+
 
 export const deleteEmployeeReport = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, deleting report`);
