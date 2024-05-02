@@ -19,7 +19,6 @@ import employeeRoutes from "./route/employee.route.js";
 import roleRoutes from "./route/role.route.js";
 
 
-
 dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
 const app = express();
@@ -40,37 +39,9 @@ app.use('/breeds', breedRoutes);
 app.use('/veterinaries', veterinaryRoutes);
 app.use('/users', userRoutes);
 app.use('/employees', employeeRoutes);
-app.use('/roles', roleRoutes)
+app.use('/roles', roleRoutes);
 
 // app.use(require('body-parser').json());
-
-
-// const animals = [
-//   {
-//     id: 1,
-//     firstname: "animal1",
-//     condition: "bon",
-//     race: "gazelle",
-//     image: "",
-//     veterinarycomments: [],
-//     employeecomments: []
-//   },
-//   {
-//     id:2,
-//     firstname: "animal2",
-//     condition: "mauvais",
-//     race: "lion",
-//     rapport: "chichi",
-//     image: "",
-//     veterinarycomments: [],
-//     employeecomments: []
-//   },
-// ];
-
-// app.get("/animal", (req, res) => {
-//   res.json(animals);
-// });
-
 
 
 app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));

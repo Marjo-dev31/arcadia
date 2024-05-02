@@ -31,4 +31,35 @@ export const getUsers = (req, res)=> {
           );
       }
     });
+};
+
+
+export const addUser = (req, res)=> {
+  logger.info(`${req.method} ${req.originalUrl}, creating user`);
+  database.query(QUERYUSERS.CREATE_USER, Object.values(req.body),(error, results) => {
+    if (!results) {
+      logger.error(error.message);
+      res
+        .status(httpStatus.INTERNAL_SERVER_ERROR.code)
+        .send(
+          new Response(
+            httpStatus.INTERNAL_SERVER_ERROR.code,
+            httpStatus.INTERNAL_SERVER_ERROR.status,
+            `Error occured`
+          )
+        );
+    } else {
+      const user = {...req.body};
+      res
+        .status(httpStatus.CREATED.code)
+        .send(
+          new Response(
+            httpStatus.CREATED.code,
+            httpStatus.CREATED.status,
+            `User created`,
+            { user }
+          )
+        );
+    }
+  });
 }
