@@ -122,14 +122,12 @@ export class AccountHandledComponent implements OnInit {
     firstname: '',
     password: '',
     id_role: '',
-    confirmPassword: ''
   };
 
   @ViewChild('form') form!: NgForm;
 
   ngOnInit() {
     this.getRolesWithoutAdmin();
-    console.log(this.newUser.confirmPassword)
   }
 
   getRolesWithoutAdmin() {
