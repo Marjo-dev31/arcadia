@@ -7,7 +7,7 @@ import { Animal } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { EmployeeService } from '../../../animals/services/employee.service';
 import { User } from '../../../../shared/models/user.interface';
-import { UserService } from '../../../connection/service/user.service';
+import { UserService } from '../../../login/service/user.service';
 import { EmployeeReport, EmployeeReportCreate } from '../../../../shared/models/employeereport.interface';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { tap } from 'rxjs';

@@ -23,7 +23,7 @@ import { tap } from 'rxjs';
             <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
           </ul>
         </nav>
-        <a class="connection-btn" [routerLink]="['/connexion']">Connexion</a>
+        <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
         <a class="menu-btn" (click)="toggleSideDrawer()">
           <span></span>
           <span></span>

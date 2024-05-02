@@ -75,7 +75,7 @@
     background-color: var(--color-background);
   }
   
-  .connection-btn {
+  .login-btn {
     display: none;
   }
   
@@ -116,7 +116,7 @@
     .menu-btn {
       display: none;
     }
-    .connection-btn {
+    .login-btn {
       display: block;
     }
   }

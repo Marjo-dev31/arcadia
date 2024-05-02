@@ -20,9 +20,9 @@ import { SidenavComponent } from './pages/backoffice/sidenav/sidenav.component';
 import { ImageService } from './pages/home/services/image.service';
 import { BreedService } from './pages/animals/services/breed.service';
 import { VeterinaryService } from './pages/animals/services/veterinary.service';
-import { UserService } from './pages/connection/service/user.service';
+import { UserService } from './pages/login/service/user.service';
 import { EmployeeService } from './pages/animals/services/employee.service';
-import { RoleService } from './pages/connection/service/role.service';
+import { RoleService } from './pages/login/service/role.service';
 
 @Component({
   selector: 'app-root',
