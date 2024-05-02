@@ -12,7 +12,8 @@ export interface UserCreate {
     lastname: string,
     firstname: string,
     password: string,
-    id_role: string
+    id_role: string,
+    confirmPassword: string
 }
 
 export interface UserConnect {
