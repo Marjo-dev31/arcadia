@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { User, UserCreate } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
-import { RoleService } from '../../../connection/service/role.service';
+import { RoleService } from '../../../login/service/role.service';
 import { Role } from '../../../../shared/models/role.interface';
-import { UserService } from '../../../connection/service/user.service';
+import { UserService } from '../../../login/service/user.service';
 
 @Component({
   selector: 'app-account-handled',

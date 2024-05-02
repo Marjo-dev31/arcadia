@@ -10,7 +10,7 @@ import { VeterinaryReport, VeterinaryReportCreate } from '../../../../shared/mod
 import { VeterinaryService } from '../../../animals/services/veterinary.service';
 import { tap } from 'rxjs';
 import { User } from '../../../../shared/models/user.interface';
-import { UserService } from '../../../connection/service/user.service';
+import { UserService } from '../../../login/service/user.service';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
