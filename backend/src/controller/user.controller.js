@@ -3,6 +3,7 @@ import Response from "../domain/response.js";
 import logger from "../util/logger.js";
 import QUERYUSERS from "../query/user.query.js";
 import httpStatus from "../domain/httpstatus.js";
+import bcrypt from 'bcrypt';
 
 
 export const getUsers = (req, res)=> {
@@ -36,7 +37,8 @@ export const getUsers = (req, res)=> {
 
 export const addUser = (req, res)=> {
   logger.info(`${req.method} ${req.originalUrl}, creating user`);
-  database.query(QUERYUSERS.CREATE_USER, Object.values(req.body),(error, results) => {
+  bcrypt.hash(req.body.password, 10).then((hash)=> {
+  database.query(QUERYUSERS.CREATE_USER, [req.body.firstname, req.body.lastname, req.body.email, hash, req.body.id_role],(error, results) => {
     if (!results) {
       logger.error(error.message);
       res
@@ -61,5 +63,5 @@ export const addUser = (req, res)=> {
           )
         );
     }
-  });
+  })})
 }

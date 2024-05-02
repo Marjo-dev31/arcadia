@@ -117,9 +117,9 @@ export class AccountHandledComponent implements OnInit {
   roles: Role[] = []
 
   newUser: UserCreate = {
-    email: '',
-    lastname: '',
     firstname: '',
+    lastname: '',
+    email: '',
     password: '',
     id_role: '',
   };

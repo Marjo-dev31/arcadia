@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import ip from 'ip';
 import cors from 'cors';
-import uuidv4 from 'uuidv4';
 import fileUpload from 'express-fileupload';
 import Response from './domain/response.js';
 import httpStatus from './domain/httpstatus.js';
