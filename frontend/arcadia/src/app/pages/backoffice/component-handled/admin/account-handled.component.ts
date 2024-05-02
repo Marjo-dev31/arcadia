@@ -43,7 +43,7 @@ import { UserService } from '../../../connection/service/user.service';
         />
         @if(lastname.invalid && (lastname.dirty || lastname.touched)){
           @if(lastname.errors?.['required']){
-            <div class="alert">Un nom est requis</div>
+            <p class="alert">Un nom est requis</p>
           }}
         <label for="firstname">Prénom :</label>
         <input
@@ -56,7 +56,7 @@ import { UserService } from '../../../connection/service/user.service';
         />
         @if(firstname.invalid && (firstname.dirty || firstname.touched)){
           @if(firstname.errors?.['required']){
-            <div class="alert">Un prénom est requis</div>
+            <p class="alert">Un prénom est requis</p>
           }}
         <label for="role">Rôle :</label>
         <select name="role" id="role" [(ngModel)]= "selectedRoleOption" #role="ngModel" required>
@@ -64,7 +64,7 @@ import { UserService } from '../../../connection/service/user.service';
         </select>
         @if(role.invalid && (role.dirty || firstname.touched)){
           @if(role.errors?.['required']){
-            <div class="alert">Un rôle est requis</div>
+            <p class="alert">Un rôle est requis</p>
           }}
         <label for="password">Mot de passe :</label>
         <input
@@ -78,18 +78,25 @@ import { UserService } from '../../../connection/service/user.service';
         />
         @if(password.invalid && (password.dirty || password.touched)){
           @if(password.errors?.['required']){
-            <div class="alert">Un mot de passe est requis</div>
+            <p class="alert">Un mot de passe est requis</p>
           }
           @else if(password.errors?.['minlength']){
-            <div class="alert">Le mot de passe doit contenir au moins 8 caractères</div>
+            <p class="alert">Le mot de passe doit contenir au moins 8 caractères</p>
           }
           @else {
-            <div class="alert">Une erreur est survenue, vérifiez votre saisie</div>
+            <p class="alert">Une erreur est survenue, vérifiez votre saisie</p>
           }
         }
-        <label for="comfirm-password">Confirmer mot de passe :</label>
-        <input type="password" name="comfirm-password" id="comfirm-password" required/>
-
+        <label for="confirmPassword">Confirmer mot de passe :</label>
+        <input type="password" name="confirmPassword" id="confirm-password" [(ngModel)]="confirmPassword"  #confirmPassword="ngModel" required/>
+        @if(confirmPassword.touched){
+          @if(confirmPassword.errors?.['required']){
+            <p class="alert">Un mot de passe est requis</p>
+          }
+          @else if(password.value !== confirmPassword.value) {
+            <p class="alert">Le mot de passe ne correspond pas à la confirmation de mot de passe.</p>
+          }
+        }
         <div class="btn-section">
           <button type="reset" class="btn">Annuler</button>
           <button class="btn">Valider</button>
@@ -115,12 +122,14 @@ export class AccountHandledComponent implements OnInit {
     firstname: '',
     password: '',
     id_role: '',
+    confirmPassword: ''
   };
 
   @ViewChild('form') form!: NgForm;
 
   ngOnInit() {
     this.getRolesWithoutAdmin();
+    console.log(this.newUser.confirmPassword)
   }
 
   getRolesWithoutAdmin() {
@@ -131,13 +140,15 @@ export class AccountHandledComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const alert = document.getElementById('alert');
-      if(this.form.invalid && alert) {
+    if(alert){
+      if(this.form.invalid) {
         console.log(this.form.errors)
         alert.style.display = "block"
       } else {
+        alert.style.display = "none"
         this.newUser.id_role = this.selectedRoleOption;
         this.userService.addUser(this.newUser).subscribe();
         form.reset()
-    }
+    }}
   }
 }
