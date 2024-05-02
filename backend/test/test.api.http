@@ -241,9 +241,9 @@ Content-Type: application/json
 Content-Type: application/json
 
 {
-    "email":"test@test.com",
-    "lastname":"test",
     "firstname":"tes",
+    "lastname":"test",
+    "email":"test@test2.com",
     "password":"veto",
     "id_role":"70c0d6f6-085e-11ef-a7f8-0242ac180002"
 }
