@@ -90,7 +90,7 @@ form > * {
   margin-left: 2rem;
 }
 
-
-/* .file-input {
-  display: none;
-} */
+.alert {
+color: red;
+font-size: var(--font-size-footer);
+}
