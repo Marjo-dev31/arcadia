@@ -1,4 +1,4 @@
-.signin-form {
+.login-form {
     display: flex;
     flex-direction: column;
     max-width: 300px;
@@ -10,22 +10,22 @@
     padding: 2rem;  
 }
 
-.signin-form > * {
+.login-form > * {
     padding: 0.5rem;
 }
 
-.signin-form p {
+.login-form p {
     margin: 0;
     text-decoration: underline;
     font-weight: bold;
 }
 
-.signin-form input {
+.login-form input {
     width: 100%;
     border-radius: 5px;
 }
 
-.signin-form button {
+.login-form button {
     margin-top: 1rem;
     transform: translateX(50%);
 }

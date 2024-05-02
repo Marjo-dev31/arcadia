@@ -16,6 +16,7 @@ import veterinaryRoutes from "./route/veterinary.route.js";
 import userRoutes from "./route/user.route.js";
 import employeeRoutes from "./route/employee.route.js";
 import roleRoutes from "./route/role.route.js";
+import loginRoutes from "./route/login.route.js";
 
 
 dotenv.config();
@@ -39,6 +40,7 @@ app.use('/veterinaries', veterinaryRoutes);
 app.use('/users', userRoutes);
 app.use('/employees', employeeRoutes);
 app.use('/roles', roleRoutes);
+app.use('/login', loginRoutes)
 
 // app.use(require('body-parser').json());
 
