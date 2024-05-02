@@ -4,7 +4,7 @@ export interface User {
     lastname: string,
     firstname: string,
     password: string,
-    role: string
+    id_role: string
 }
 
 export interface UserCreate {
@@ -12,13 +12,11 @@ export interface UserCreate {
     lastname: string,
     firstname: string,
     password: string,
-    role: string
+    id_role: string
 }
 
 export interface UserConnect {
     email: string,
-    lastname: string,
-    firstname: string,
     password: string,
     role: string
 }
