@@ -216,4 +216,16 @@ Content-Type: application/json
 
 ###
 
-get http://localhost:8000/employees
+get http://localhost:8000/employees/3ec3c8cf-06cd-11ef-bc53-0242ac180002
+
+###
+
+put http://localhost:8000/employees/c654af96-07a7-11ef-93fa-0242ac180002
+Content-Type: application/json
+
+ {
+    "food":"cuisse de boeuf",
+    "grammage":"10000",
+    "id_animal":"3ec3c8cf-06cd-11ef-bc53-0242ac180002",
+    "id_user":"8b9d927f-070a-11ef-bc53-0242ac180002"
+ }

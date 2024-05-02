@@ -1,5 +1,5 @@
 import express from "express";
-import { addEmployeeReport, deleteEmployeeReport, getEmployeeReports } from "../controller/employee.controller.js";
+import { addEmployeeReport, deleteEmployeeReport, getEmployeeReports, updateEmployeeReport } from "../controller/employee.controller.js";
 
 const employeeRoutes = express.Router();
 
@@ -9,6 +9,7 @@ employeeRoutes.route('/')
 employeeRoutes.route('/:id')
 .get(getEmployeeReports)
 .delete(deleteEmployeeReport)
+.put(updateEmployeeReport)
 
 
 export default employeeRoutes;
