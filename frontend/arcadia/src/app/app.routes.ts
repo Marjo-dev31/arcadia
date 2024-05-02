@@ -20,8 +20,7 @@ export const routes: Routes = [
   { path: 'habitats', component: HabitatsComponent },
   { path: 'connexion', component: ConnexionComponent },
   {
-    path: 'espacepersonnel',
-    component: BackofficeComponent,
+    path: 'espacepersonnel', component: BackofficeComponent,
     children: [
       { path: 'services', component: ServiceHandledComponent },
       { path: 'habitats', component: HabitatHandledComponent },

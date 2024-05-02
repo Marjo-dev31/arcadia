@@ -247,3 +247,15 @@ Content-Type: application/json
     "password":"veto",
     "id_role":"70c0d6f6-085e-11ef-a7f8-0242ac180002"
 }
+
+
+###
+
+post http://localhost:8000/login
+Content-Type: application/json
+
+{
+    "email":"marjory.bravo@yahoo.fr",
+    "password":"azertyui31"
+}
+

@@ -23,11 +23,12 @@ import { VeterinaryService } from './pages/animals/services/veterinary.service';
 import { UserService } from './pages/login/service/user.service';
 import { EmployeeService } from './pages/animals/services/employee.service';
 import { RoleService } from './pages/login/service/role.service';
+import { LoginService } from './pages/login/service/login.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  providers: [ServiceService, HabitatsService, AnimalService, ReviewsService, ImageService, BreedService, VeterinaryService, UserService, EmployeeService, RoleService],
+  providers: [ServiceService, HabitatsService, AnimalService, ReviewsService, ImageService, BreedService, VeterinaryService, UserService, EmployeeService, RoleService, LoginService],
   imports: [
     RouterOutlet,
     HeaderComponent,

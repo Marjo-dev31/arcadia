@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserConnect } from '../../shared/models/user.interface';
+import { UserLogin } from '../../shared/models/user.interface';
+import { RouterLink } from '@angular/router';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-connexion',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   standalone: true,
   template: `
     <main>
@@ -13,7 +15,7 @@ import { UserConnect } from '../../shared/models/user.interface';
         <h3>(Réservé à la direction, aux vétérinaires et aux employés)</h3>
       </div>
 
-      <form class="signin-form" name="form-conection" #form="ngForm" (ngSubmit)="onSubmit()">
+      <form class="login-form" name="loginForm" #form="ngForm" (ngSubmit)="onSubmit()">
         <p>Connexion</p>
         <div>
           <label for="email" >Email :</label>
@@ -31,7 +33,7 @@ import { UserConnect } from '../../shared/models/user.interface';
       <div>
         <h3>
           Pour toutes questions, rendez-vous
-          <a href="" id="contact-link">ici</a>
+          <a [routerLink]="['/contact']" id="contact-link">ici</a>
         </h3>
       </div>
     </main>
@@ -41,18 +43,16 @@ import { UserConnect } from '../../shared/models/user.interface';
 export class ConnexionComponent implements OnInit {
   constructor() {}
 
-  user: UserConnect = {
+  private loginService = inject(LoginService)
+
+  user: UserLogin = {
     email: '',
     password: '',
-    role: ''
   }
-
-
 
   ngOnInit() {}
 
   onSubmit(): void {
-    console.log(this.user)
-
+   this.loginService.login(this.user).subscribe()
   }
 }
