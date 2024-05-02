@@ -36,7 +36,7 @@ import { UserConnect } from '../../shared/models/user.interface';
       </div>
     </main>
   `,
-  styleUrl: `./connection.component.css`,
+  styleUrl: `./login.component.css`,
 })
 export class ConnexionComponent implements OnInit {
   constructor() {}
