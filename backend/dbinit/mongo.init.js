@@ -1,11 +1,13 @@
+import mongoose from "mongoose";
 
-db = db.getSiblingDB('arcadia');
 
-db.createCollection('animals');
+arcadia = db.getSiblingDB('arcadia');
 
-db.createCollection('opening');
+arcadia.createCollection('animals');
 
-db.animals.insertMany([
+arcadia.createCollection('opening');
+
+arcadia.animals.insertMany([
     { "firstname": "Frodon", "clickCount": 0},
     { "firstname": "Sam", "clickCount": 0},
     { "firstname": "Pippin", "clickCount": 0},
@@ -17,7 +19,10 @@ db.animals.insertMany([
     { "firstname": "Legolas", "clickCount": 0}
 ])
 
-db.opening.insert(
+arcadia.opening.insert(
     { "openingTime": "9h00", "closingTime": "19h00", "openingDay": "Lundi", "closingDay": "Dimanche" }
 )
 
+// use.arcadia
+
+export default arcadia;
