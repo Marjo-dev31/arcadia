@@ -53,6 +53,8 @@ export class ConnexionComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(): void {
-   this.loginService.login(this.user).subscribe()
+   this.loginService.login(this.user).subscribe();
+   this.user.email='';
+   this.user.password='';
   }
 }

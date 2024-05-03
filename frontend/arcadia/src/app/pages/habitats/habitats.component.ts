@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { HabitatsService } from './services/habitat.service';
-import { Animal, Habitat } from '../../shared/models';
+import { Animal, AnimalOnMongo, Habitat } from '../../shared/models';
 import { AnimalsComponent } from '../animals/animals.component';
 import {
   MatDialog,
@@ -18,19 +18,20 @@ import { AnimalService } from '../animals/services/animal.service';
         Au sein des vastes étendues d'Arcadia, découvrez des habitats conçus
         pour le bien-être de nos animaux.
       </h2>
+      <!-- <div>{{ animalsOnMongoByFirstname.clickCount }}</div> -->
       <section class="habitats">
         @if(habitats && habitats.length) {
         @for (habitat of habitats; track habitat) {
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img [src]="'http://localhost:8000/upload/' + habitat.image_url" alt="photo représentative de l'habitat" class="habitat-img" />
-          <div class="habitat-content">
+          <div class="habitat-content" >
             <h3>{{ habitat.title }}</h3>
             @if (showDetails == habitat.id) {
             <p>{{ habitat.description }}</p>
             <ul>
               @for (animal of animals; track animal) {
                 @if(animal) {
-              <li (click)="openDialog(animal)">{{ animal.firstname }}</li>
+              <li class="animal-item" (click)="openDialog(animal)">{{ animal.firstname }}</li>
               } @else {
                 <p>Il n'y a pas encore d'animaux dans cet habitat</p>
               }}
@@ -50,8 +51,13 @@ export class HabitatsComponent implements OnInit {
 
   habitats!: Habitat[];
   animals!: Animal[];
+
+  animalsOnMongoByFirstname!: AnimalOnMongo
+
+
+
   private readonly habitatService = inject(HabitatsService);
-  private readonly animalService = inject(AnimalService)
+  private readonly animalService = inject(AnimalService);
 
   showDetails: string | undefined = undefined;
 
@@ -79,11 +85,23 @@ export class HabitatsComponent implements OnInit {
     this.getAnimalsByHabitat(id)
   }
 
-  openDialog(animal: Animal): void {
+  openDialog(animal: Animal) {
     const dialogRef = this.matdialog.open(AnimalsComponent, {
       width: '400px',
       data: {animal: animal},
     });
-
+    this.addClick(animal.firstname);
   }
+
+  getAnimalOnMongoByFirstname(firstname: string) {
+    // select animal by firstname on mongo
+  }
+
+  addClick(firstname: string) {
+    this.getAnimalOnMongoByFirstname(firstname)
+    // .susbscribe((response)=>{this.animalsOnMongoByFirstname = response})
+    this.animalsOnMongoByFirstname.clickCount += 1
+    // ajouter put a mongo, update du count
+  }
+
 }
