@@ -259,3 +259,6 @@ Content-Type: application/json
     "password":"azertyui31"
 }
 
+###
+
+get http://localhost:8000/click/Gimli

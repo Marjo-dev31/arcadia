@@ -7,6 +7,7 @@ import {
   MatDialogModule
 } from '@angular/material/dialog';
 import { AnimalService } from '../animals/services/animal.service';
+import { ClickService } from '../animals/services/click.service';
 
 @Component({
   selector: 'app-habitats',
@@ -58,6 +59,7 @@ export class HabitatsComponent implements OnInit {
 
   private readonly habitatService = inject(HabitatsService);
   private readonly animalService = inject(AnimalService);
+  private readonly clickService = inject(ClickService)
 
   showDetails: string | undefined = undefined;
 
@@ -90,17 +92,20 @@ export class HabitatsComponent implements OnInit {
       width: '400px',
       data: {animal: animal},
     });
-    this.addClick(animal.firstname);
+    console.log(animal.firstname)
+    this.getAnimalOnMongoByFirstname(animal.firstname)
+    // this.addClick(animal.firstname);
   }
 
   getAnimalOnMongoByFirstname(firstname: string) {
-    // select animal by firstname on mongo
+    this.clickService.getAnimalByFirstname(firstname).subscribe((response)=>{
+      console.log(response)
+    this.animalsOnMongoByFirstname = response });
   }
 
   addClick(firstname: string) {
     this.getAnimalOnMongoByFirstname(firstname)
-    // .susbscribe((response)=>{this.animalsOnMongoByFirstname = response})
-    this.animalsOnMongoByFirstname.clickCount += 1
+    // this.animalsOnMongoByFirstname.clickCount += 1
     // ajouter put a mongo, update du count
   }
 
