@@ -15,3 +15,9 @@ export interface AnimalCreate {
     habitat: string,
     breed: string
 }
+
+export interface AnimalOnMongo {
+    id: string,
+    firstname: string,
+    clickCount: number
+}
