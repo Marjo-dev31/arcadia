@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI || 'localhost:27017/test'
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(MONGODB_URI);
+        await mongoose.connect(MONGODB_URI, {dbName: "arcadia"});
         console.log('MongoDb is connected!')
     } catch(error) {
         console.log(error);

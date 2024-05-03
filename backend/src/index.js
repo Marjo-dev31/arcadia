@@ -18,6 +18,7 @@ import employeeRoutes from "./route/employee.route.js";
 import roleRoutes from "./route/role.route.js";
 import loginRoutes from "./route/login.route.js";
 import connectDB from "./config/mongodb.config.js";
+import clickRoutes from "./route/click.route.js";
 
 
 dotenv.config();
@@ -41,7 +42,8 @@ app.use('/veterinaries', veterinaryRoutes);
 app.use('/users', userRoutes);
 app.use('/employees', employeeRoutes);
 app.use('/roles', roleRoutes);
-app.use('/login', loginRoutes)
+app.use('/login', loginRoutes);
+app.use('/click', clickRoutes)
 
 // app.use(require('body-parser').json());
 
