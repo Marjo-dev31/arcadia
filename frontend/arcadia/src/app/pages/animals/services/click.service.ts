@@ -9,7 +9,9 @@ export class ClickService {
 
     constructor(private http: HttpClient){}
 
-    getAnimalByFirstname(firstname: string): Observable<any> {
-        return this.http.get(`${this.url}/${firstname}`)
+    addClick(firstname: string): Observable<any> {
+        return this.http.put(`${this.url}/${firstname}`, firstname)
     }
+
+
 }
