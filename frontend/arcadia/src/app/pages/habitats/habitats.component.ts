@@ -93,20 +93,11 @@ export class HabitatsComponent implements OnInit {
       data: {animal: animal},
     });
     console.log(animal.firstname)
-    this.getAnimalOnMongoByFirstname(animal.firstname)
-    // this.addClick(animal.firstname);
-  }
-
-  getAnimalOnMongoByFirstname(firstname: string) {
-    this.clickService.getAnimalByFirstname(firstname).subscribe((response)=>{
-      console.log(response)
-    this.animalsOnMongoByFirstname = response });
+    this.addClick(animal.firstname);
   }
 
   addClick(firstname: string) {
-    this.getAnimalOnMongoByFirstname(firstname)
-    // this.animalsOnMongoByFirstname.clickCount += 1
-    // ajouter put a mongo, update du count
+    this.clickService.addClick(firstname).subscribe()
   }
 
 }

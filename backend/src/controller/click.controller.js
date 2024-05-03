@@ -8,9 +8,18 @@ export const getAnimalByFirstname = async (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
     try {
     const animal = await animalModel.findOne({firstname: req.params.firstname});
-    console.log('animal trouve', req.params.firstname, animal)
+    console.log('Animal retrieve', req.params.firstname, animal)
     res.send(animal)
 } catch (error) {
     res.status(500).send({error})
 }
+}
+
+export const addCount = async (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, update count`);
+    try {
+        const animal = await animalModel.updateOne({firstname: req.params.firstname},{$inc: {"clickCount": 1}})
+    } catch(error) {
+        res.status(500).send({error})
+    }
 }
