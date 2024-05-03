@@ -1,5 +1,5 @@
 import express from 'express'
-import { addCount, getAnimalByFirstname } from '../controller/click.controller.js'
+import { addCount, getAnimalByFirstname, getAnimals } from '../controller/click.controller.js'
 
 const clickRoutes = express.Router()
 
@@ -8,6 +8,7 @@ clickRoutes.route('/:firstname')
 .put(addCount)
 
 clickRoutes.route('/')
+.get(getAnimals)
 // .post(addAnimalOnMongo)
 
 export default clickRoutes

@@ -267,3 +267,8 @@ get http://localhost:8000/click/Gimli
 ###
 
 put http://localhost:8000/click/Gimli
+
+
+###
+
+get http://localhost:8000/click
