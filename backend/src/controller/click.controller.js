@@ -23,3 +23,14 @@ export const addCount = async (req, res) => {
         res.status(500).send({error})
     }
 }
+
+export const getAnimals= async (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
+    try {
+    const animals = await animalModel.find();
+    console.log('Animals retrieved')
+    res.send(animals)
+} catch (error) {
+    res.status(500).send({error})
+}
+}
