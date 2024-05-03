@@ -13,5 +13,9 @@ export class ClickService {
         return this.http.put(`${this.url}/${firstname}`, firstname)
     }
 
+    getAnimals(): Observable<any> {
+        return this.http.get(this.url)
+    }
+
 
 }

@@ -12,6 +12,7 @@ import { ReviewHandledComponent } from './pages/backoffice/component-handled/emp
 import { AccountHandledComponent } from './pages/backoffice/component-handled/admin/account-handled.component';
 import { VeterinaryReportHandledComponent } from './pages/backoffice/component-handled/veterinary/veterinary-report-handled.component';
 import { EmployeeReportHandledComponent } from './pages/backoffice/component-handled/employee/employee-animal-report-handled.component';
+import { FameComponent } from './pages/backoffice/component-handled/admin/fame.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,7 +31,7 @@ export const routes: Routes = [
       { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent},
       { path: 'rapportemploye', component: EmployeeReportHandledComponent},
       // { path: 'horaire'},
-      // { path: 'popularite'}
+      { path: 'popularite', component: FameComponent}
     ],
   },
 ];

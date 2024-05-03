@@ -22,7 +22,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
           <li><a [routerLink]="['/espacepersonnel/rapportemploye']">Compte-rendu employé</a></li>
           <li><a [routerLink]="['/espacepersonnel/avis']">Modulation des avis</a></li>
           <li><a [routerLink]="['/espacepersonnel/creationdecompte']">Création de compte</a></li>
-          <li><a href="">Popularité des animaux</a></li>
+          <li><a [routerLink]="['/espacepersonnel/popularite']">Popularité des animaux</a></li>
         </ul>
       </mat-sidenav>
       
