@@ -21,6 +21,21 @@ services:
     networks:
       - internalnet
 
+  mongodb:
+    container_name: mongodbcontainer
+    image: mongo:7.0.8
+    restart: unless-stopped
+    volumes:
+      - ./dbinit/mongo.init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - $HOME/database:/var/lib/mongodb
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: arcadiamongodb
+      MONGODB_URI: mongodb://admin:arcadiamongodb@localhost:27017/?directConnection=true&authMechanism=DEFAULT
+    networks:
+      - internalnet
 
   nodeapp:
     container_name: nodeappcontainer
@@ -32,6 +47,7 @@ services:
       - 8000
     depends_on:
       - mysqldb
+      - mongodb
     environment:
       DB_HOST: mysqldb
       DB_USER: admin
@@ -39,6 +55,10 @@ services:
       DB_NAME: arcadiadb
       DB_PORT: 3306
       DB_CONNECTION_LIMIT: 20
+      MONGODB_URI: mongodb://admin:arcadiamongodb@localhost:27017/?directConnection=true&authMechanism=DEFAULT
+      MONGO_INITDB_DATABASE: arcadia
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: arcadiamongodb
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappservice
       SERVICE_PORT: 8000
