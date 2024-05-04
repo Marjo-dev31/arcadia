@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const animalSchema = new mongoose.Schema({
-    fistname: {
+    firstname: {
         type: String,
         required: true
     },

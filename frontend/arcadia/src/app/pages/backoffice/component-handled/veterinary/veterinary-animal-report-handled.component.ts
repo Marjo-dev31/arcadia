@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Animal } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
-import { MatSortModule, MatSort, SortDirection } from '@angular/material/sort';
+import { MatSortModule, MatSort } from '@angular/material/sort';
 import { VeterinaryReport, VeterinaryReportCreate } from '../../../../shared/models/veterinaryreport.interface';
 import { VeterinaryService } from '../../../animals/services/veterinary.service';
 import { tap } from 'rxjs';
