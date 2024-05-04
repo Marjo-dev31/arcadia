@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Opening } from '../../../shared/models/opening.interface';
 
 
 @Injectable()
@@ -10,8 +11,13 @@ export class OpeningService {
 
   constructor( private http: HttpClient) {}
 
-  getOpening(){
-    
+  getOpeningToPublic(): Observable<any> {
+    return this.http.get(this.url)
+  }
+
+  UpdateOpeningToPublic(opening: Opening, id:string): Observable<any> {
+    console.log(opening)
+    return this.http.put(`${this.url}/${id}`, opening)
   }
 
 }

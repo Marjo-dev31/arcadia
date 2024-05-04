@@ -10,7 +10,7 @@ const openingSchema = new mongoose.Schema({
     openingDay: {
         type: String
     },
-    closingTime: {
+    closingDay: {
         type: String
     },
 });

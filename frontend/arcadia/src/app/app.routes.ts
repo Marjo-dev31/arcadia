@@ -13,6 +13,7 @@ import { AccountHandledComponent } from './pages/backoffice/component-handled/ad
 import { VeterinaryReportHandledComponent } from './pages/backoffice/component-handled/veterinary/veterinary-report-handled.component';
 import { EmployeeReportHandledComponent } from './pages/backoffice/component-handled/employee/employee-animal-report-handled.component';
 import { FameComponent } from './pages/backoffice/component-handled/admin/fame.component';
+import { OpeningComponent } from './pages/backoffice/component-handled/admin/opening.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,7 +31,7 @@ export const routes: Routes = [
       { path: 'creationdecompte', component: AccountHandledComponent},
       { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent},
       { path: 'rapportemploye', component: EmployeeReportHandledComponent},
-      // { path: 'horaire'},
+      { path: 'horaires', component: OpeningComponent},
       { path: 'popularite', component: FameComponent}
     ],
   },
