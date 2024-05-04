@@ -14,7 +14,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       <mat-sidenav #drawer mode="side" class="sidenav" opened>
         <h3>Bonjour user</h3>
         <ul>
-          <li><a href="">Horaires</a></li>
+          <li><a [routerLink]="['/espacepersonnel/horaires']">Horaires</a></li>
           <li><a [routerLink]="['/espacepersonnel/services']">Services</a></li>
           <li><a [routerLink]="['/espacepersonnel/habitats']">Habitats</a></li>
           <li><a [routerLink]="['/espacepersonnel/animaux']">Animaux</a></li>

@@ -19,6 +19,7 @@ export const getOpening = async (req, res) => {
 
 
 export const updateOpening = async (req, res) =>{
+    console.log(req.body, req.params.id)
     logger.info(`${req.method} ${req.originalUrl}, updating`)
     try {
         const opening = await openingModel.findByIdAndUpdate(req.params.id, req.body)
@@ -28,11 +29,11 @@ export const updateOpening = async (req, res) =>{
     }
 }
 
-// export const getOne = async (req, res) => {
-//     try {
-//         const opening = await openingModel.findById(req.params.id)
-//         res.send(opening)
-//     } catch (error) {
-//         res.status(500).send({error})
-//     }
-// }
+export const getOne = async (req, res) => {
+    try {
+        const opening = await openingModel.findById(req.params.id)
+        res.send(opening)
+    } catch (error) {
+        res.status(500).send({error})
+    }
+}
