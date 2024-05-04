@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-
 
 arcadia = db.getSiblingDB('arcadia');
 
@@ -23,6 +21,6 @@ arcadia.opening.insert(
     { "openingTime": "9h00", "closingTime": "19h00", "openingDay": "Lundi", "closingDay": "Dimanche" }
 )
 
-// use.arcadia
+
 
 export default arcadia;
