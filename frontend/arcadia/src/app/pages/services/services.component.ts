@@ -2,6 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ServiceService } from './service/service.service';
 import { JsonPipe } from '@angular/common';
 import { Service } from '../../shared/models/service.interface';
+import { Opening } from '../../shared/models/opening.interface';
+import { OpeningService } from './service/opening.service';
 
 @Component({
   selector: 'app-services',
@@ -15,8 +17,8 @@ import { Service } from '../../shared/models/service.interface';
           séjour plus agréable !
         </h2>
         <div class="schedule">
-          <p>Nous vous accueillons du Lundi au Dimanche</p>
-          <p>De 9h00 à 19h00</p>
+          <p>Nous vous accueillons du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
+          <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
           <p>
             Tous les jours de l'année
             <span id="exception">(sauf cas exceptionnel)</span>
@@ -43,62 +45,30 @@ import { Service } from '../../shared/models/service.interface';
       </section>
     </main>
   `,
-  styles: `
-.schedule p {
-    font-family: var(--font-family-title);
-    font-size: var(--font-size-h3);
-    text-align: center;
-    margin: 0;
-}
-
-.services {
-    width: 100%;
-    background-color: var(--color-secondary);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-top: 2rem;
-    margin-bottom: 8rem;
-}
-
-.service-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-    min-height: 500px;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    background-color: var(--color-primary);
-    color: var(--color-background);
-    border-radius: 50% 20% / 10% 40%;
-    overflow: hidden;
-}
-
-.service-img {
-    max-width : 100%;
-    object-fit: contain; 
-}
-
-.service-content p {
-    text-align: justify;
-    padding: 0 2rem;
-}
-
-#exception {
-    font-size: var(--font-size-footer);
-    font-style: italic;
-}
-  `
+  styleUrl: `./service.component.css`
 })
 export class ServicesComponent implements OnInit {
-  services!:Service[]
+  services!: Service[]
   private readonly serviceService = inject(ServiceService);
+  private readonly openingService = inject(OpeningService)
+
+  openToPublic!: Opening
   
   
   ngOnInit() {
-    this.serviceService.getServices().then(response => {
-      this.services = response
-  })
+    this.getServices()
+    this.getOpeningToPublic()
   }
-}
+ 
+  getServices() {
+    this.serviceService.getServices().then(response => {
+      this.services = response }
+     )}
+
+  getOpeningToPublic(){
+    this.openingService.getOpeningToPublic().subscribe((response)=>{
+      this.openToPublic = response[0]
+    })
+  };
+
+ }

@@ -27,7 +27,7 @@ form {
   max-width: 300px;
   margin: auto;
   align-items: center;
-  border: solid 0.3rem var(--color-font);
+  border: solid 0.2rem var(--color-font);
   border-radius: 10px;
 }
 
