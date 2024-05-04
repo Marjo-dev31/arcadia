@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { OpeningService } from '../../../pages/services/service/opening.service';
+import { Opening } from '../../models/opening.interface';
 
 
 @Component({
@@ -17,8 +19,8 @@ import { RouterLink } from '@angular/router';
         </div>
         <div>
           <p>Nos horaires et jours d'ouvertures :</p>
-          <p>De 9h00 à 19h00</p>
-          <p>Du Lundi au Dimanche</p>
+          <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
+          <p>Du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
         </div>
         <div><a [routerLink]="['/contact']">Nous contacter</a></div>
       </div>
@@ -54,5 +56,18 @@ import { RouterLink } from '@angular/router';
 export class FooterComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  private readonly openingService = inject(OpeningService)
+
+  openToPublic!: Opening
+
+  ngOnInit() {
+    this.getOpeningToPublic()
+  }
+
+  getOpeningToPublic(){
+    this.openingService.getOpeningToPublic().subscribe((response)=>{
+      this.openToPublic = response[0]
+    })
+  };
+
 }

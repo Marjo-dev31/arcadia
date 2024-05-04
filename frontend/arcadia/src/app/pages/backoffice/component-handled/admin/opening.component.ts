@@ -57,7 +57,6 @@ export class OpeningComponent implements OnInit {
     };
 
     updateOpeningToPublic(id: string){
-        console.log(this.updateForm.value)
         this.openingService.UpdateOpeningToPublic(this.updateForm.value, id).subscribe()
     }
 }
