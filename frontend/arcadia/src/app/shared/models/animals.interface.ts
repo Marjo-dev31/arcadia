@@ -21,3 +21,7 @@ export interface AnimalOnMongo {
     firstname: string,
     clickCount: number
 }
+
+export interface AnimalOnMongoCreate {
+    firstname: string
+}

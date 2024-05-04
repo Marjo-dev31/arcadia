@@ -94,10 +94,9 @@ import { Breed } from '../../../../shared/models/breed.interface';
             <option [value]="habitat.id">{{ habitat.title }}</option>
           }
           </select>
-
-          
           <button class="add-btn">Enregistrer nouvel animal</button>
         </form>
+        <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux !</p>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
         <form

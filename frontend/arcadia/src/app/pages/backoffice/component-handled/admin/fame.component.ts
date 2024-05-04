@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild, inject } from "@angular/core";
 import { ClickService } from "../../../animals/services/click.service";
-import { AnimalOnMongo } from "../../../../shared/models";
+import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../shared/models";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatSortModule, MatSort } from "@angular/material/sort";
+import { FormsModule} from "@angular/forms";
+import { tap } from "rxjs";
 
 @Component({
     selector: 'app-fame',
     standalone: true,
-    imports:[MatTableModule, MatSortModule, MatSort],
+    imports:[MatTableModule, MatSortModule, MatSort, FormsModule],
     template: `
     <h3>Popularité des animaux</h3>
     <table mat-table [dataSource]="datasource" matSort matSortActive="click" matSortDirection="desc">
@@ -22,24 +24,34 @@ import { MatSortModule, MatSort } from "@angular/material/sort";
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
+    <form #form="ngForm" name="addForm" (ngSubmit)="addAnimalOnMongo()">
+        <label for="firstname">Prénom</label>
+        <input type="text" name="firstname" [(ngModel)]="newAnimal.firstname" #firstname="ngModel" >
+        <button>Annuler</button>
+        <button>Valider</button>
+    </form>
     `,
-    styles:``
+    styleUrl:`../component-handled.component.css`
 })
 
 export class FameComponent implements OnInit {
     constructor(){}
 
-    displayColums: string[] = ['firstname','click']
+    displayColums: string[] = ['firstname','click'];
 
-    private readonly clickService = inject(ClickService)
+    private readonly clickService = inject(ClickService);
 
-    animals: AnimalOnMongo [] = []
-    datasource = new MatTableDataSource(this.animals)
+    animals: AnimalOnMongo [] = [];
+    datasource = new MatTableDataSource(this.animals);
+
+    newAnimal: AnimalOnMongoCreate = {
+        firstname: ''
+    };
 
     @ViewChild(MatSort) sort!:MatSort;
 
     ngOnInit(){
-        this.getAnimals()
+        this.getAnimals();
     }
 
     ngAfterOnInit(){
@@ -50,8 +62,12 @@ export class FameComponent implements OnInit {
         this.clickService.getAnimals().subscribe((response)=> {
             this.animals = response;
             this.datasource = new MatTableDataSource(this.animals);
-            console.log(this.datasource)
             this.datasource.sort = this.sort
         })
+    }
+
+    addAnimalOnMongo(){
+        this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe()
+        this.newAnimal.firstname = '';
     }
 }
