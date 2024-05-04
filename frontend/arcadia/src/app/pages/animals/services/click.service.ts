@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { AnimalOnMongoCreate } from "../../../shared/models";
 
 
 @Injectable()
@@ -17,5 +18,7 @@ export class ClickService {
         return this.http.get(this.url)
     }
 
-
+    addAnimalOnMongo(animal: AnimalOnMongoCreate): Observable<any> {
+        return this.http.post(this.url, animal)
+    }
 }

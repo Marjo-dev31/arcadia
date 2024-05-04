@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { OpeningService } from '../../../services/service/opening.service';
 import { Opening } from '../../../../shared/models/opening.interface';
+import { tap } from 'rxjs';
 
 @Component({
     selector: 'app-opening',
@@ -57,6 +58,6 @@ export class OpeningComponent implements OnInit {
     };
 
     updateOpeningToPublic(id: string){
-        this.openingService.UpdateOpeningToPublic(this.updateForm.value, id).subscribe()
+        this.openingService.UpdateOpeningToPublic(this.updateForm.value, id).pipe(tap(()=>{this.getOpeningToPublic()})).subscribe()
     }
 }
