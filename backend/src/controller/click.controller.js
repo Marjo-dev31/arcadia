@@ -16,7 +16,7 @@ export const getAnimalByFirstname = async (req, res) => {
 }
 
 export const addCount = async (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, update count`);
+    logger.info(`${req.method} ${req.originalUrl}, updating count`);
     try {
         const animal = await animalModel.updateOne({firstname: req.params.firstname},{$inc: {"clickCount": 1}})
     } catch(error) {

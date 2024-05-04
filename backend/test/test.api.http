@@ -272,3 +272,21 @@ put http://localhost:8000/click/Gimli
 ###
 
 get http://localhost:8000/click
+
+
+###
+
+put http://localhost:8000/opening/66350050bc37a8a6882202e1
+Content-Type: application/json
+
+{
+    "openingTime":"10h00"
+}
+
+###
+
+get http://localhost:8000/opening
+
+###
+
+get http://localhost:8000/opening/66350050bc37a8a6882202e1
