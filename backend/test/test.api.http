@@ -290,3 +290,13 @@ get http://localhost:8000/opening
 ###
 
 get http://localhost:8000/opening/66350050bc37a8a6882202e1
+
+
+###
+
+post http://localhost:8000/click
+Content-Type: application/json
+
+{
+    "firstname":"Boromi",
+}

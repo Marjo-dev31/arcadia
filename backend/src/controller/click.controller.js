@@ -34,3 +34,15 @@ export const getAnimals= async (req, res) => {
     res.status(500).send({error})
 }
 }
+
+
+export const addAnimalOnMongo = async (req, res)=> {
+    logger.info(`${req.method} ${req.originalUrl}, creating animal`);
+    try {
+        const animal = await animalModel.create({firstname: req.body.firstname, clickCount: 0})
+        res.send(req.body)
+    } catch(error) {
+        console.log('An error occured!')
+    res.status(500).send({error})
+    }
+}
