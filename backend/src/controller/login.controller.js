@@ -4,6 +4,7 @@ import logger from "../util/logger.js";
 import QUERYUSERS from "../query/user.query.js";
 import httpStatus from "../domain/httpstatus.js";
 import bcrypt from 'bcrypt'
+import generatedAccessToken from "../util/jwt.js";
 
 
 export const login =  (req, res) => {
@@ -35,6 +36,7 @@ export const login =  (req, res) => {
             )
           
         } else {
+            const accessToken = generatedAccessToken(req)
             res
             .status(httpStatus.OK.code)
             .send(
@@ -42,7 +44,7 @@ export const login =  (req, res) => {
                     httpStatus.OK.code,
                     httpStatus.OK.status,
                     `User is log in`,
-                    {user: results[0]}
+                    {user: results[0], accessToken}
                 )
             )
         }
