@@ -5,8 +5,8 @@ import Response from "../domain/response.js";
 
 
 const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    // push accesstoken in headers - authorization = Bearer+ ' '+token
+    const authHeader = req.headers['Authorization'];
+    // push accesstoken in headers - authorization = Bearer+ ' '+token A voir si gerer en front
     const token = authHeader && authHeader.split(' ')[1];
     if(!token) {
         res

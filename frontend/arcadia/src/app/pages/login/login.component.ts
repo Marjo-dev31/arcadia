@@ -44,7 +44,7 @@ import { LoginService } from './service/login.service';
 export class ConnexionComponent implements OnInit {
   constructor() {}
 
-  private loginService = inject(LoginService)
+  private readonly loginService = inject(LoginService)
   private readonly router = inject(Router)
 
   user: UserLogin = {
@@ -56,11 +56,13 @@ export class ConnexionComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(): void {
-   this.loginService.login(this.user).subscribe(()=> {
-    this.router.navigate(['/espacepersonnel'])
+   this.loginService.login(this.user).subscribe((response)=> {
+    console.log(response.data.accessToken)
+    localStorage.setItem('accessToken', response.data.accessToken)
+     this.router.navigate(['/espacepersonnel'])
    });
-   this.user.email='';
-   this.user.password='';
+    this.user.email='';
+    this.user.password='';
   }
 
 }
