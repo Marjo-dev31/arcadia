@@ -41,7 +41,7 @@ export const login =  (req, res) => {
                 new Response(
                     httpStatus.OK.code,
                     httpStatus.OK.status,
-                    `User is login`,
+                    `User is log in`,
                     {user: results[0]}
                 )
             )

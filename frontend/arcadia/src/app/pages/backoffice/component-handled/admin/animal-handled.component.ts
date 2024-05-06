@@ -48,7 +48,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
             >
           </div>
           } @else {
-          <p>Il n'y a pas encore de photo associé à cet habitat</p>
+          <p>Il n'y a pas encore de photo associé à cet animal</p>
           }
           <input
             type="file"
@@ -95,8 +95,8 @@ import { Breed } from '../../../../shared/models/breed.interface';
           }
           </select>
           <button class="add-btn">Enregistrer nouvel animal</button>
+          <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux !</p>
         </form>
-        <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux !</p>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
         <form

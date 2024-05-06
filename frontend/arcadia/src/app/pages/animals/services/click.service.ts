@@ -21,4 +21,8 @@ export class ClickService {
     addAnimalOnMongo(animal: AnimalOnMongoCreate): Observable<any> {
         return this.http.post(this.url, animal)
     }
+
+    deleteAnimal(id: string){
+        return this.http.delete(`${this.url}/${id}`)
+    }
 }

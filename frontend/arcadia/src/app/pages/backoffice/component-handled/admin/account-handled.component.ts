@@ -42,7 +42,7 @@ import { UserService } from '../../../login/service/user.service';
           required
         />
         @if(lastname.invalid && (lastname.dirty || lastname.touched)){
-          @if(lastname.errors?.['required']){
+          @if(lastname.errors?.['required'] && lastname.touched){
             <p class="alert">Un nom est requis</p>
           }}
         <label for="firstname">Prénom :</label>
