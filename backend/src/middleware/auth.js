@@ -21,7 +21,15 @@ const authenticateToken = (req, res, next) => {
     }
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, response) => {
         if(err) {
-            return res.sendStatus(401);
+            res
+        .status(httpStatus.BAD_REQUEST.code)
+        .send(
+            new Response(
+                httpStatus.BAD_REQUEST.code,
+                httpStatus.BAD_REQUEST.status,
+                `Access denied!`
+                )
+            )
         }
         req.user = response
         next()
