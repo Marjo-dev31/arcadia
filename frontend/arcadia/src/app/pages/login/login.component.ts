@@ -4,6 +4,7 @@ import { UserLogin } from '../../shared/models/user.interface';
 import { RouterLink } from '@angular/router';
 import { LoginService } from './service/login.service';
 
+
 @Component({
   selector: 'app-connexion',
   imports: [FormsModule, RouterLink],
@@ -45,10 +46,12 @@ export class ConnexionComponent implements OnInit {
 
   private loginService = inject(LoginService)
 
+
   user: UserLogin = {
     email: '',
     password: '',
   }
+
 
   ngOnInit() {}
 
@@ -57,4 +60,5 @@ export class ConnexionComponent implements OnInit {
    this.user.email='';
    this.user.password='';
   }
+
 }
