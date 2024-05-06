@@ -23,7 +23,8 @@ export const login =  (req, res) => {
             );
            
     } else {
-    const passwordIsValid = await bcrypt.compare(password, results[0].password);
+        const user = results[0];
+    const passwordIsValid = await bcrypt.compare(password, user.password);
         if (!passwordIsValid) {
             res
             .status(httpStatus.BAD_REQUEST.code)
@@ -44,7 +45,7 @@ export const login =  (req, res) => {
                     httpStatus.OK.code,
                     httpStatus.OK.status,
                     `User is log in`,
-                    {user: results[0], accessToken}
+                    {user: {results}, accessToken}
                 )
             )
         }
