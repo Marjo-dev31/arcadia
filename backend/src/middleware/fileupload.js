@@ -1,7 +1,7 @@
 import path from "path";
 import url from "url";
 
-const fileupload = (req, res) => {
+const fileupload = (req, res, next) => {
   const file = req.files.myImg;
   const __filename = url.fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
@@ -12,7 +12,8 @@ const fileupload = (req, res) => {
       console.log(err);
       return res.status(500).send(err);
     }
-  return res = dirPath;
+  res = dirPath;
+  next()
   });
 };
 
