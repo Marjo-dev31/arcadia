@@ -9,7 +9,7 @@ clickRoutes.route('/:firstname')
 .put(addCount)
 
 clickRoutes.route('/')
-.get(authenticateToken, getAnimals)
+.get(getAnimals)
 .post(authenticateToken, addAnimalOnMongo)
 
 clickRoutes.route('/:id')
