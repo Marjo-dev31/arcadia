@@ -3,7 +3,7 @@ import QUERYIMAGES from "../query/image.query.js";
 import logger from "../util/logger.js";
 import Response from "../domain/response.js";
 import httpStatus from "../domain/httpstatus.js";
-import fileupload from "../middleware/fileupload.js";
+
 
 
 
@@ -130,7 +130,6 @@ export const deleteImage = (req, res) => {
 
 export const addServiceImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-  fileupload(req);
   const file = req.files.myImg
   const filename = file.name
   database.query(
@@ -253,7 +252,6 @@ export const addServiceImage = (req, res) => {
 
 export const addHabitatImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-  fileupload(req);
   const file = req.files.myImg
   const filename = file.name
   database.query(
@@ -323,8 +321,6 @@ export const getAnimalsImages = (req, res) => {
 
 export const addAnimalImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
-  console.log(req.params)
-  fileupload(req);
   const file = req.files.myImg
   const filename = file.name
   database.query(
