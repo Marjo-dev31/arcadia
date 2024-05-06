@@ -1,5 +1,6 @@
 import express from "express";
 import { addHabitatImage, addServiceImage, getImage, getImages, deleteImage, addAnimalImage } from "../controller/image.controller.js";
+import fileupload from "../middleware/fileupload.js";
 
 
 
@@ -13,19 +14,19 @@ imageRoutes.route('/')
 
 imageRoutes.route('/service/:id')
 // .put(updateServiceImage)
-.post(addServiceImage)
+.post(fileupload, addServiceImage)
 
 // imageRoutes.route('/habitats')
 // .get(getHabitatsImages)
 
 imageRoutes.route('/habitat/:id')
-.post(addHabitatImage)
+.post(fileupload, addHabitatImage)
 
 // imageRoutes.route('/animals')
 // .get(getAnimalsImages)
 
 imageRoutes.route('/animal/:id')
-.post(addAnimalImage)
+.post(fileupload, addAnimalImage)
 
 imageRoutes.route('/:id')
 .get(getImage)
