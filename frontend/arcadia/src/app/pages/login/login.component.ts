@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserLogin } from '../../shared/models/user.interface';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from './service/login.service';
 
 
@@ -45,7 +45,7 @@ export class ConnexionComponent implements OnInit {
   constructor() {}
 
   private loginService = inject(LoginService)
-
+  private readonly router = inject(Router)
 
   user: UserLogin = {
     email: '',
@@ -56,7 +56,9 @@ export class ConnexionComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(): void {
-   this.loginService.login(this.user).subscribe();
+   this.loginService.login(this.user).subscribe(()=> {
+    this.router.navigate(['/espacepersonnel'])
+   });
    this.user.email='';
    this.user.password='';
   }
