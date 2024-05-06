@@ -61,6 +61,7 @@ export const getAnimal = (req, res) => {
   });
 };
 
+
 export const addAnimal = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating animal`);
     database.query(QUERYANIMALS.CREATE_ANIMAL, Object.values(req.body),(error, results) => {
