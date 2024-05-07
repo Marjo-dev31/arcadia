@@ -68,7 +68,7 @@ export const getAnimals = async (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
   try {
     const animals = await animalModel.find();
-    res
+      res
         .status(httpStatus.OK.code)
         .send(
             new Response(
@@ -80,15 +80,15 @@ export const getAnimals = async (req, res) => {
         );
   } catch (error) {
     logger.error(error.message);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-      .send(
-        new Response(
-          httpStatus.INTERNAL_SERVER_ERROR.code,
-          httpStatus.INTERNAL_SERVER_ERROR.status,
-          `Error occured`
-        )
-      );
+      res
+        .status(httpStatus.INTERNAL_SERVER_ERROR.code)
+        .send(
+          new Response(
+            httpStatus.INTERNAL_SERVER_ERROR.code,
+            httpStatus.INTERNAL_SERVER_ERROR.status,
+            `Error occured`
+          )
+       );
   }
 };
 

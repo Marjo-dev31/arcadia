@@ -23,6 +23,7 @@ import openingRoutes from "./route/opening.route.js";
 
 
 
+
 dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
 const app = express();
