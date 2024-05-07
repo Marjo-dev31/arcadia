@@ -14,8 +14,8 @@ import { VeterinaryReportHandledComponent } from './pages/backoffice/component-h
 import { EmployeeReportHandledComponent } from './pages/backoffice/component-handled/employee/employee-animal-report-handled.component';
 import { FameComponent } from './pages/backoffice/component-handled/admin/fame.component';
 import { OpeningComponent } from './pages/backoffice/component-handled/admin/opening.component';
-import { AuthGuard } from './shared/interceptors/guards/auth.guard';
-import { RoleGuard } from './shared/interceptors/guards/role.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { RoleGuard } from './shared/guards/role.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },

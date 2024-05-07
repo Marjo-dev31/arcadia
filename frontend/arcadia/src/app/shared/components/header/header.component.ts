@@ -3,6 +3,7 @@ import { Component, Inject, OnInit, inject } from '@angular/core';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { tap } from 'rxjs';
+import { LoginService } from '../../../pages/login/service/login.service';
 
 @Component({
   selector: 'app-header',
@@ -23,13 +24,18 @@ import { tap } from 'rxjs';
             <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
           </ul>
         </nav>
-        <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
-        <!-- <a class="login-btn" [routerLink]="['/connexion']">Déconnexion</a> -->
-        <a class="menu-btn" (click)="toggleSideDrawer()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
+        <div>
+          @if(isLoggin === true){
+            <a class="login-btn" [routerLink]="['/connexion']">Déconnexion</a>
+        } @else {
+            <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
+        }
+          <a class="menu-btn" (click)="toggleSideDrawer()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+        </div>
       </div>
       <div class="hero-scene">
         <h1>Arcadia</h1>
@@ -45,7 +51,10 @@ import { tap } from 'rxjs';
           <li><a [routerLink]="['/services']">Services</a></li>
           <li><a [routerLink]="['/contact']">Contact</a></li>
           <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
-          <li><a [routerLink]="['/connexion']">Connexion</a></li>
+          @if(isLoggin === true){
+          <li><a [routerLink]="['/connexion']">Déconnexion</a></li>
+          } @else {
+          <li><a [routerLink]="['/connexion']">Connexion</a></li>}
         </ul>
       </nav>
     </aside>
@@ -55,17 +64,28 @@ import { tap } from 'rxjs';
 export class HeaderComponent implements OnInit {
   showSideDrawer = false;
   title!: string;
+  isLoggin : boolean = false
   constructor(public route: Router) {}
 
+  loginService = inject(LoginService)
+
   ngOnInit() {
-    // console.log(this.route.url);
-    // this.title = this.route.url
-    // console.log(this.showSideDrawer)
+    this.getToken();
   }
+
+  getToken(){
+    const token = localStorage.getItem('accessToken')
+     if(token){
+       return this.isLoggin = true 
+     }
+     return this.isLoggin
+    }
 
   toggleSideDrawer(){
     this.showSideDrawer = !this.showSideDrawer;
   }
   
-
+  logout(){
+    this.loginService.logout()
+  }
 }
