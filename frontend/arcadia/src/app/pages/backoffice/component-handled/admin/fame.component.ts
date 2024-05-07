@@ -3,7 +3,7 @@ import { ClickService } from "../../../animals/services/click.service";
 import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../shared/models";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatSortModule, MatSort } from "@angular/material/sort";
-import { FormsModule} from "@angular/forms";
+import { FormsModule, NgForm} from "@angular/forms";
 import { tap } from "rxjs";
 import { MatIconModule } from "@angular/material/icon";
 
@@ -78,8 +78,8 @@ export class FameComponent implements OnInit {
     }
 
     addAnimalOnMongo(){
-        this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe()
-        this.newAnimal.firstname = '';
+        this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe(); 
+        // this.newAnimal.firstname = '';
     }
 
     deleteAnimal(id: string){

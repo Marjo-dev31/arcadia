@@ -58,6 +58,7 @@ export class ConnexionComponent implements OnInit {
   onSubmit(): void {
    this.loginService.login(this.user).subscribe((response)=> {
     localStorage.setItem('accessToken', response.data.accessToken)
+    localStorage.setItem('role', response.data.user.name)
      this.router.navigate(['/espacepersonnel'])
    });
     this.user.email='';
