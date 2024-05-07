@@ -24,17 +24,18 @@ export const routes: Routes = [
   { path: 'habitats', component: HabitatsComponent },
   { path: 'connexion', component: ConnexionComponent },
   {
-    path: 'espacepersonnel', component: BackofficeComponent, canActivate:[AuthGuard, RoleGuard], data: {expectedRoles: ['Vétérinaire']} ,
+    path: 'espacepersonnel', component: BackofficeComponent, canActivate:[AuthGuard],canActivateChild:[RoleGuard],
     children: [
-      { path: 'services', component: ServiceHandledComponent },
-      { path: 'habitats', component: HabitatHandledComponent },
-      { path: 'animaux', component: AnimalHandledComponent },
-      { path: 'avis', component: ReviewHandledComponent },
-      { path: 'creationdecompte', component: AccountHandledComponent },
-      { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent },
-      { path: 'rapportemploye', component: EmployeeReportHandledComponent },
-      { path: 'horaires', component: OpeningComponent },
-      { path: 'popularite', component: FameComponent }
+      { path: 'services', component: ServiceHandledComponent, data: {expectedRoles: ['Admin', 'Employé']} },
+      { path: 'habitats', component: HabitatHandledComponent, data: {expectedRoles: ['Admin']} },
+      { path: 'animaux', component: AnimalHandledComponent, data: {expectedRoles: ['Admin']} },
+      { path: 'avis', component: ReviewHandledComponent, data: {expectedRoles: ['Admin', 'Employé']} },
+      { path: 'creationdecompte', component: AccountHandledComponent, data: {expectedRoles: ['Admin']} },
+      { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent, data: {expectedRoles: ['Admin', 'Vétérinaire']} },
+      { path: 'rapportemploye', component: EmployeeReportHandledComponent, data: {expectedRoles: ['Admin', 'Employé']}},
+      { path: 'horaires', component: OpeningComponent, data: {expectedRoles: ['Admin']} },
+      { path: 'popularite', component: FameComponent, data: {expectedRoles: ['Admin', 'Vétérinaire']} }
     ],
   },
+  { path: '**', redirectTo: '' }
 ];

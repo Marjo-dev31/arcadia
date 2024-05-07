@@ -14,7 +14,7 @@ export const RoleGuard: CanActivateFn = (
             if(expectedRoles.indexOf(role) !== -1){
                 return true
             }
-            router.navigateByUrl('/login')
+            router.navigateByUrl('/connexion')
             return false;
     }
     
