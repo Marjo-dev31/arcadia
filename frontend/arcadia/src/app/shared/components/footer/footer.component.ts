@@ -19,8 +19,8 @@ import { Opening } from '../../models/opening.interface';
         </div>
         <div>
           <p>Nos horaires et jours d'ouvertures :</p>
-          <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
-          <p>Du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
+          <!-- <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
+          <p>Du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p> -->
         </div>
         <div><a [routerLink]="['/contact']">Nous contacter</a></div>
       </div>
