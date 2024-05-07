@@ -9,7 +9,6 @@ export const getOpening = async (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching`)
     try {
         const openingToPublic = await openingModel.find()
-        console.log(openingToPublic)
         res.send(openingToPublic)
     } catch(error) {
         console.log('An error occured!')
@@ -19,7 +18,6 @@ export const getOpening = async (req, res) => {
 
 
 export const updateOpening = async (req, res) =>{
-    console.log(req.body, req.params.id)
     logger.info(`${req.method} ${req.originalUrl}, updating`)
     try {
         const opening = await openingModel.findByIdAndUpdate(req.params.id, req.body)
