@@ -11,9 +11,9 @@ clickRoutes.route('/:firstname')
 
 clickRoutes.route('/')
 .get(authenticateToken, getAnimals)
-.post(addAnimalOnMongo)
+.post(authenticateToken, addAnimalOnMongo)
 
 clickRoutes.route('/:id')
-.delete(deleteAnimalOnMongo)
+.delete(authenticateToken, deleteAnimalOnMongo)
 
 export default clickRoutes
