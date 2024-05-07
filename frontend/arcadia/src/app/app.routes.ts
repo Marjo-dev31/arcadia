@@ -14,6 +14,8 @@ import { VeterinaryReportHandledComponent } from './pages/backoffice/component-h
 import { EmployeeReportHandledComponent } from './pages/backoffice/component-handled/employee/employee-animal-report-handled.component';
 import { FameComponent } from './pages/backoffice/component-handled/admin/fame.component';
 import { OpeningComponent } from './pages/backoffice/component-handled/admin/opening.component';
+import { AuthGuard } from './shared/interceptors/guards/auth.guard';
+import { RoleGuard } from './shared/interceptors/guards/role.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,17 +24,17 @@ export const routes: Routes = [
   { path: 'habitats', component: HabitatsComponent },
   { path: 'connexion', component: ConnexionComponent },
   {
-    path: 'espacepersonnel', component: BackofficeComponent,
+    path: 'espacepersonnel', component: BackofficeComponent, canActivate:[AuthGuard, RoleGuard], data: {expectedRoles: ['Vétérinaire']} ,
     children: [
       { path: 'services', component: ServiceHandledComponent },
       { path: 'habitats', component: HabitatHandledComponent },
-      { path: 'animaux', component: AnimalHandledComponent},
-      { path: 'avis', component: ReviewHandledComponent},
-      { path: 'creationdecompte', component: AccountHandledComponent},
-      { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent},
-      { path: 'rapportemploye', component: EmployeeReportHandledComponent},
-      { path: 'horaires', component: OpeningComponent},
-      { path: 'popularite', component: FameComponent}
+      { path: 'animaux', component: AnimalHandledComponent },
+      { path: 'avis', component: ReviewHandledComponent },
+      { path: 'creationdecompte', component: AccountHandledComponent },
+      { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent },
+      { path: 'rapportemploye', component: EmployeeReportHandledComponent },
+      { path: 'horaires', component: OpeningComponent },
+      { path: 'popularite', component: FameComponent }
     ],
   },
 ];

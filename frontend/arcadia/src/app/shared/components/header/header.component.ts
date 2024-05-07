@@ -24,6 +24,7 @@ import { tap } from 'rxjs';
           </ul>
         </nav>
         <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
+        <!-- <a class="login-btn" [routerLink]="['/connexion']">Déconnexion</a> -->
         <a class="menu-btn" (click)="toggleSideDrawer()">
           <span></span>
           <span></span>

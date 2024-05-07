@@ -56,8 +56,8 @@ export class ServicesComponent implements OnInit {
   
   
   ngOnInit() {
-    this.getServices()
     this.getOpeningToPublic()
+    this.getServices()
   }
  
   getServices() {

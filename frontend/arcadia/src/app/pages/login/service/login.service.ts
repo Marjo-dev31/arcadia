@@ -12,4 +12,6 @@ export class LoginService {
     login(user: UserLogin): Observable<any> {
         return this.http.post(this.url, user)
     }
+
+    logout(){}
 }
