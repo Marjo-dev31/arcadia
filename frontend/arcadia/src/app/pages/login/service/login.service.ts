@@ -13,5 +13,8 @@ export class LoginService {
         return this.http.post(this.url, user)
     }
 
-    logout(){}
+    logout(){
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('role')
+    }
 }
