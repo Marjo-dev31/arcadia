@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
      if(token){
        return this.isLoggin = true 
      }
-     return this.isLoggin
+     return this.isLoggin = false
     }
 
   toggleSideDrawer(){
