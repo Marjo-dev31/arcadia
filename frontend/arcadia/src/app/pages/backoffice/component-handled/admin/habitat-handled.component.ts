@@ -17,6 +17,9 @@ import { ImageService } from '../../../home/services/image.service';
   template: `
   <h3>Habitats</h3>
   <section>
+    @if(datasource.length === 0){
+      <p>Il n'y a pas d'habitat</p>
+    }
     <table mat-table [dataSource]="datasource">
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef>Titre</th>
@@ -146,7 +149,7 @@ export class HabitatHandledComponent implements OnInit {
   getHabitats() {
      this.habitatService.getHabitats().then((response) => {
       this.datasource = response;
-      console.log(this.datasource)
+
     });
   }
   

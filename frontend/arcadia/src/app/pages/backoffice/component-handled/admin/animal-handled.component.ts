@@ -19,6 +19,9 @@ import { Breed } from '../../../../shared/models/breed.interface';
     <h3>Animaux</h3>
     <section>
     <table mat-table [dataSource]="datasource">
+    @if(datasource.length === 0){
+      <p>Il n'y a pas d'animal</p>
+    }
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef>Prénom</th>
         <td mat-cell *matCellDef="let animal">{{ animal.firstname }}</td>
