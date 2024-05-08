@@ -25,9 +25,8 @@ import { NgStyle } from '@angular/common';
         <td mat-cell *matCellDef="let habitat"> {{habitat.comment}} </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <th mat-header-cell *matHeaderCellDef>Supprimer</th>
         <td mat-cell *matCellDef="let habitat">
-          <!-- <mat-icon>create</mat-icon> -->
           <mat-icon (click)="deleteComment(habitat.id)">delete</mat-icon>
         </td>
       </ng-container>
