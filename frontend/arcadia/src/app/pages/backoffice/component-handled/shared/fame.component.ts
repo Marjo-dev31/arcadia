@@ -25,12 +25,17 @@ import { MatIconModule } from "@angular/material/icon";
         <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Supprimer</th>
             <td mat-cell *matCellDef="let animal">
+            @if(role === 'Admin'){
                 <mat-icon (click)="deleteAnimal(animal._id)">delete</mat-icon>
+            } @else {
+                <p>Non autorisé</p>
+            }
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
+    @if( role === 'Admin'){
     <h3>Ajouter un animal pour connaître sa popularité :</h3>
     <form #form="ngForm" name="addForm" (ngSubmit)="addAnimalOnMongo()">
         <label for="firstname" >Prénom</label>
@@ -41,6 +46,7 @@ import { MatIconModule } from "@angular/material/icon";
         <button>Annuler</button>
         <button>Valider</button>
     </form>
+}
     `,
     styleUrl:`../component-handled.component.css`
 })
@@ -58,6 +64,8 @@ export class FameComponent implements OnInit {
     newAnimal: AnimalOnMongoCreate = {
         firstname: ''
     };
+
+    role: string = localStorage.getItem('role') || '';
 
     @ViewChild(MatSort) sort!:MatSort;
 
