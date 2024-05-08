@@ -46,8 +46,12 @@ import { tap } from 'rxjs';
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let report">
+          @if(role === 'Employé'){
             <mat-icon (click)="editReport(report.id)">create </mat-icon>
             <mat-icon (click)="deleteReport(report.id)" >delete</mat-icon>
+          } @else {
+            <p>Non autorisé</p>
+          }
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
@@ -57,7 +61,9 @@ import { tap } from 'rxjs';
         ></tr>
       </table>
     }}
+    @if(role === 'Employé'){
     <mat-icon class="add-icon" (click)="toggleAddForm()">add_circle_outline</mat-icon>
+  }
   </section>
   <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
       <form
@@ -161,6 +167,7 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   addFormIsDisplay: boolean = false;
   updateFormIsDisplay: boolean = false;
+  role: string = localStorage.getItem('role') || '';
 
   newReport: EmployeeReportCreate = {
     food: '',

@@ -14,7 +14,7 @@ export const RoleGuard: CanActivateFn = (
             if(expectedRoles.indexOf(role) !== -1){
                 return true
             }
-            router.navigateByUrl('/connexion')
+            router.navigateByUrl('espacepersonnel/accesinterdit')
             return false;
     }
     

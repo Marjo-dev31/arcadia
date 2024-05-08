@@ -15,6 +15,6 @@ export class LoginService {
 
     logout(){
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('role')
+        localStorage.removeItem('role');
     }
 }
