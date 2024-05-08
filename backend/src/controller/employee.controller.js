@@ -8,7 +8,7 @@ import httpStatus from "../domain/httpstatus.js";
 export const getEmployeeReports = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching reports`);
     database.query(QUERYEMPLOYEES.SELECT_REPORTS, [req.params.id], (error, results) => {
-      if (!results) {
+      if (!results[0]) {
         res
           .status(httpStatus.OK.code)
           .send(

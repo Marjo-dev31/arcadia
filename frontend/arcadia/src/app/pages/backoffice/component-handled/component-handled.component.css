@@ -44,6 +44,10 @@ form > * {
   color: var(--color-secondary);
 }
 
+p {
+  text-align: center;
+}
+
 /* style account creation form */
 
 .account-creation-form {

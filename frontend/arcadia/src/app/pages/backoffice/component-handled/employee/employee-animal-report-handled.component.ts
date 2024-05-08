@@ -28,6 +28,9 @@ import { tap } from 'rxjs';
         </select>
         <button>Filtrer</button>
       </form>
+      @if(errorMessage === 'No reports found') {
+        <p>Il n'y a pas de rapport associé à cet animal</p>
+      }
       @for(animal of animals; track animal) { 
         @if (selectedAnimalOption === animal.id) {
       <table mat-table [dataSource]="datasource" matSort matSortActive="date">
@@ -168,6 +171,7 @@ export class EmployeeReportHandledComponent implements OnInit {
   addFormIsDisplay: boolean = false;
   updateFormIsDisplay: boolean = false;
   role: string = localStorage.getItem('role') || '';
+  errorMessage: string = ''
 
   newReport: EmployeeReportCreate = {
     food: '',
@@ -201,9 +205,14 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   getEmployeeReports(id: string) {
     this.employeeService.getEmployeeReports(id).subscribe((response)=> {
+      try {
     this.employeeReports = response.data.reports;
     this.datasource = new MatTableDataSource(this.employeeReports);
-    this.datasource.sort = this.sort
+    this.datasource.sort = this.sort;
+    this.errorMessage = response.message;
+  } catch(error) {
+    this.errorMessage = response.message;
+  }
     })
   };
 

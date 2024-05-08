@@ -40,6 +40,9 @@ import { UserService } from '../../../login/service/user.service';
         </select>
         <button>Filtrer</button>
       </form>
+      @if(errorMessage === 'No reports found'){
+        <p>Il n'y pas encore de rapport associé à cet animal !</p>
+      }
       @for(animal of animals; track animal){ 
         @if (selectedAnimalOption === animal.id) {
       <table
@@ -210,7 +213,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   ];
 
   animals!: Animal[];
-  veterinaryReports: VeterinaryReport [] = [];
+  veterinaryReports!: VeterinaryReport [];
   users!: User[];
 
   selectedAnimalOption!: string;
@@ -230,6 +233,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   };
 
   role: string = localStorage.getItem('role') || '';
+
+  errorMessage: string = ''
 
   private readonly animalService = inject(AnimalService);
   private readonly veterinaryService = inject(VeterinaryService);
@@ -263,9 +268,14 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
   getVeterinaryReports(id: string) {
     this.veterinaryService.getVeterinaryReports(id).subscribe((response) => {
+      try {
     this.veterinaryReports = response.data.reports;
     this.dataSource = new MatTableDataSource(this.veterinaryReports)
     this.dataSource.sort = this.sort;
+    this.errorMessage = response.message;
+      } catch(error) {
+        this.errorMessage = response.message;
+      }
     });
   }
 
