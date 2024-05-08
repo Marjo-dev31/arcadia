@@ -36,7 +36,7 @@ import { ImageService } from '../../../home/services/image.service';
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>
         <td mat-cell *matCellDef="let habitat">
-        @if(habitat.image_url) {
+          @if(habitat.image_url) {
           <div class="delete-img">
             <div>{{ habitat.image_url }}</div>
             <mat-icon class="mat-icon-clear" (click)="deleteImage(habitat.image_id)">clear</mat-icon>
@@ -50,7 +50,7 @@ import { ImageService } from '../../../home/services/image.service';
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let habitat">
           <mat-icon (click)="editHabitat(habitat.id)">create</mat-icon>
-          <mat-icon (click)="deleteHabitat(habitat.id)">delete</mat-icon>  
+          <mat-icon (click)="deleteHabitat(habitat.id)">delete</mat-icon>
         </td>
       </ng-container>
 
@@ -135,8 +135,9 @@ export class HabitatHandledComponent implements OnInit {
     description: ''
   };
 
-  addFormIsDisplay: boolean = false
-  updateFormIsDisplay: boolean = false
+  addFormIsDisplay: boolean = false;
+  updateFormIsDisplay: boolean = false;
+
 
   ngOnInit() {
    this.getHabitats();

@@ -26,7 +26,7 @@ import { LoginService } from '../../../pages/login/service/login.service';
         </nav>
         <div>
           @if(isLoggin === true){
-            <a class="login-btn" [routerLink]="['/connexion']">Déconnexion</a>
+            <a class="login-btn" (click)="logout()">Déconnexion</a>
         } @else {
             <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
         }
@@ -52,7 +52,7 @@ import { LoginService } from '../../../pages/login/service/login.service';
           <li><a [routerLink]="['/contact']">Contact</a></li>
           <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
           @if(isLoggin === true){
-          <li><a [routerLink]="['/connexion']">Déconnexion</a></li>
+          <li><a (click)="logout()">Déconnexion</a></li>
           } @else {
           <li><a [routerLink]="['/connexion']">Connexion</a></li>}
         </ul>
@@ -86,6 +86,8 @@ export class HeaderComponent implements OnInit {
   }
   
   logout(){
-    this.loginService.logout()
+    this.loginService.logout();
+    this.isLoggin = false;
+    this.route.navigateByUrl('/');
   }
 }

@@ -76,17 +76,22 @@ import { UserService } from '../../../login/service/user.service';
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let report">
+          @if(role === 'Vétérinaire'){
             <mat-icon (click)="editReport(report.id)">create</mat-icon>
             <mat-icon (click)="deleteReport(report.id)">delete</mat-icon>
+          } @else {
+            <p>Non autorisé</p>
+          }
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
       </table>
       }}
+      @if(role === 'Vétérinaire'){
       <mat-icon class="add-icon" (click)="toggleAddForm()"
         >add_circle_outline</mat-icon
-      >
+      >}
     </section>
     <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
       <form
@@ -223,6 +228,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     id_user: '',
     id_animal: '',
   };
+
+  role: string = localStorage.getItem('role') || '';
 
   private readonly animalService = inject(AnimalService);
   private readonly veterinaryService = inject(VeterinaryService);
