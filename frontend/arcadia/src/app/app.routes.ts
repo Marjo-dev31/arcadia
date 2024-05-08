@@ -17,6 +17,7 @@ import { OpeningComponent } from './pages/backoffice/component-handled/admin/ope
 import { AuthGuard } from './shared/guards/auth.guard';
 import { RoleGuard } from './shared/guards/role.guard';
 import { ForbiddenComponent } from './pages/backoffice/component-handled/shared/forbidden.component';
+import { ErrorComponent } from './shared/components/errors/error.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,5 +40,6 @@ export const routes: Routes = [
       { path: 'accesinterdit', component: ForbiddenComponent, data: {expectedRoles: ['Admin', 'Vétérinaire', 'Employé' ]}}
     ],
   },
+  { path: 'erreur', component: ErrorComponent},
   { path: '**', redirectTo: '' }
 ];
