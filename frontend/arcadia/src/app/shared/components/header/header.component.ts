@@ -21,7 +21,9 @@ import { LoginService } from '../../../pages/login/service/login.service';
             <li><a [routerLink]="['/habitats']">Habitats</a></li>
             <li><a [routerLink]="['/services']">Services</a></li>
             <li><a [routerLink]="['/contact']">Contact</a></li>
-            <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
+            @if(isLoggin === true){
+              <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
+            }
           </ul>
         </nav>
         <div>
@@ -50,8 +52,8 @@ import { LoginService } from '../../../pages/login/service/login.service';
           <li><a [routerLink]="['/habitats']">Habitats</a></li>
           <li><a [routerLink]="['/services']">Services</a></li>
           <li><a [routerLink]="['/contact']">Contact</a></li>
-          <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
           @if(isLoggin === true){
+          <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
           <li><a (click)="logout()">Déconnexion</a></li>
           } @else {
           <li><a [routerLink]="['/connexion']">Connexion</a></li>}
@@ -70,6 +72,10 @@ export class HeaderComponent implements OnInit {
   loginService = inject(LoginService)
 
   ngOnInit() {
+    this.getToken();
+  }
+
+  afterOnInit(){
     this.getToken();
   }
 
