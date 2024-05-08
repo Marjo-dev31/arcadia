@@ -22,8 +22,8 @@ CREATE TABLE animals (
     firstname VARCHAR(50) NOT NULL UNIQUE,
     id_habitat VARCHAR(36),
     id_breed VARCHAR(36),
-    FOREIGN KEY (id_habitat) REFERENCES habitats(id),
-    FOREIGN KEY (id_breed) REFERENCES breeds(id)
+    FOREIGN KEY (id_habitat) REFERENCES habitats(id) DELETE ON CASCADE,
+    FOREIGN KEY (id_breed) REFERENCES breeds(id) DELETE ON CASCADE
 );
 
 CREATE TABLE services (
@@ -44,7 +44,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     id_role VARCHAR(36),
-    FOREIGN KEY (id_role) REFERENCES roles(id)
+    FOREIGN KEY (id_role) REFERENCES roles(id) ON DELETE SET NULL
 );
 
 CREATE TABLE employee_reports (
@@ -52,10 +52,10 @@ CREATE TABLE employee_reports (
     food VARCHAR(255) NOT NULL,
     grammage INT NOT NULL,
     date DATETIME NOT NULL,
-    id_user VARCHAR(36) NOT NULL,
-    id_animal VARCHAR(36) NOT NULL,
-    FOREIGN KEY (id_user) REFERENCES users(id),
-    FOREIGN KEY (id_animal) REFERENCES animals(id)
+    id_user VARCHAR(36),
+    id_animal VARCHAR(36),
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL, 
+    FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
 );
 
 CREATE TABLE veterinary_reports (
@@ -65,10 +65,10 @@ CREATE TABLE veterinary_reports (
     date DATETIME NOT NULL,
     health VARCHAR(50) NOT NULL,
     details_condition VARCHAR(255) DEFAULT NULL,
-    id_user VARCHAR(36) NOT NULL,
-    id_animal VARCHAR(36) NOT NULL,
-    FOREIGN KEY (id_user) REFERENCES users(id),
-    FOREIGN KEY (id_animal) REFERENCES animals(id)
+    id_user VARCHAR(36),
+    id_animal VARCHAR(36),
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
 );
 
 CREATE TABLE images (
@@ -88,7 +88,7 @@ CREATE TABLE reviews (
     content VARCHAR(255) NOT NULL,
     date DATE NOT NULL,
     status BOOLEAN NOT NULL,
-    id_employee VARCHAR(36) NOT NULL,
-    FOREIGN KEY (id_employee) REFERENCES users(id) DELETE ON CASCADE
+    id_employee VARCHAR(36) NULL,
+    FOREIGN KEY (id_employee) REFERENCES users(id) DELETE ON SET NULL
 );
 

@@ -68,6 +68,17 @@ export const getAnimals = async (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
   try {
     const animals = await animalModel.find();
+      if(!animals[0]){
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `No animal found`
+            )
+          )
+        }
       res
         .status(httpStatus.OK.code)
         .send(
@@ -77,7 +88,7 @@ export const getAnimals = async (req, res) => {
                 `Animals retrieved`,
                 { animals: animals}
             )
-        );
+        )
   } catch (error) {
     logger.error(error.message);
       res

@@ -17,6 +17,9 @@ import { ImageService } from '../../../home/services/image.service';
   template: `
     <h3>Services</h3>
     <section>
+      @if(datasource.length === 0){
+        <p>Il n'y a pas de service</p>
+      }
       <table mat-table [dataSource]="datasource">
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef>Titre</th>
