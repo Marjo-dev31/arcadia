@@ -10,6 +10,9 @@ import { ReviewsService } from '../../../home/services/reviews.service';
   imports: [MatTableModule, MatIconModule],
   template: `
     <h3>Avis</h3>
+    @if(responseMessage === 'No reviews found'){
+      <p>Il n'y a pas d'avis</p>
+    }
     <table mat-table [dataSource]="datasource">
       <ng-container matColumnDef="pseudo">
         <th mat-header-cell *matHeaderCellDef>Pseudo</th>
@@ -52,31 +55,38 @@ export class ReviewHandledComponent implements OnInit {
 
   displayColums: string[] = ['pseudo', 'content', 'date', 'actions', 'status'];
 
-  datasource!: Review[];
+  datasource: Review[] = [];
   private readonly reviewService = inject(ReviewsService);
+  responseMessage: string = '';
 
   ngOnInit() {
-   this.getReviews()
+    this.getReviews();
   }
 
   getReviews() {
-     this.reviewService.getReviews().then((response) => {
-      this.datasource = response;
+    this.reviewService.getReviews().then((response) => {
+      try {
+        this.datasource = response.data.reviews;
+        this.responseMessage = response.message;
+      } catch (error) {
+        this.responseMessage = response.message;
+      }
     });
   }
 
   publishReview(id: string) {
     const reviewToPublish = this.datasource.find((el) => el.id === id);
-    if(reviewToPublish) {
-      reviewToPublish.status = true
-    this.reviewService.updateReview(reviewToPublish).subscribe()}
+    if (reviewToPublish) {
+      reviewToPublish.status = true;
+      this.reviewService.updateReview(reviewToPublish).subscribe();
+    }
   }
 
   unpublishReview(id: string) {
     const reviewToPublish = this.datasource.find((el) => el.id === id);
     if (reviewToPublish) {
       reviewToPublish.status = false;
-      this.reviewService.updateReview(reviewToPublish).subscribe()
+      this.reviewService.updateReview(reviewToPublish).subscribe();
     }
   }
 }

@@ -9,9 +9,9 @@ export class ReviewsService {
     url = 'http://localhost:8000/reviews';
     constructor(private http: HttpClient) {}
 
-    async getReviews(): Promise<Review []> {
+    async getReviews(): Promise<any> {
         const reviewsList = await fetch(this.url).then((response)=> response.json());
-        return reviewsList.data.reviews
+        return reviewsList
     }
     
     addReview(review: ReviewPost): Observable<any> {
