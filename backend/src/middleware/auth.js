@@ -28,6 +28,7 @@ const authenticateToken = (req, res, next) => {
             `Access denied! Wrong token`
           )
         );
+        return
     }
 
     // res.send({success: true, response})
@@ -40,7 +41,7 @@ const authenticateToken = (req, res, next) => {
     //       { success: true, response}
     //     )
     //   );
-    next()
+    next(response)
   });
 
 };

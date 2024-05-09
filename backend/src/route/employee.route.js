@@ -1,15 +1,16 @@
 import express from "express";
 import { addEmployeeReport, deleteEmployeeReport, getEmployeeReports, updateEmployeeReport } from "../controller/employee.controller.js";
+import authenticateToken from "../middleware/auth.js";
 
 const employeeRoutes = express.Router();
 
 employeeRoutes.route('/')
-.post(addEmployeeReport)
+.post(authenticateToken, addEmployeeReport)
 
 employeeRoutes.route('/:id')
 .get(getEmployeeReports)
-.delete(deleteEmployeeReport)
-.put(updateEmployeeReport)
+.delete(authenticateToken, deleteEmployeeReport)
+.put(authenticateToken, updateEmployeeReport)
 
 
 export default employeeRoutes;

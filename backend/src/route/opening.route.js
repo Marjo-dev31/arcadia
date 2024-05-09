@@ -1,5 +1,6 @@
 import express from 'express'
-import { getOne, getOpening, updateOpening } from '../controller/opening.controller.js';
+import { getOpening, updateOpening } from '../controller/opening.controller.js';
+import authenticateToken from '../middleware/auth.js';
 
 const openingRoutes = express.Router();
 
@@ -7,8 +8,7 @@ openingRoutes.route('/')
 .get(getOpening)
 
 openingRoutes.route('/:id')
-.put(updateOpening)
-.get(getOne)
+.put(authenticateToken, updateOpening)
 
 
 export default openingRoutes
