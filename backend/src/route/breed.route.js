@@ -6,6 +6,4 @@ const breedRoutes = express.Router();
 breedRoutes.route('/')
 .get(getBreed)
 
-
-
 export default breedRoutes;
