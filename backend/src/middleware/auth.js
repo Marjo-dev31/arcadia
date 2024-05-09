@@ -41,7 +41,10 @@ const authenticateToken = (req, res, next) => {
     //       { success: true, response}
     //     )
     //   );
-    next(response)
+    
+
+
+    next()
   });
 
 };
