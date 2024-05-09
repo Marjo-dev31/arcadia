@@ -12,7 +12,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   template: `
     <mat-sidenav-container autosize>
       <mat-sidenav #drawer mode="side" class="sidenav" opened>
-        <h3>Bonjour user</h3>
+        <h3>Bonjour</h3>
         <ul>
           <li><a [routerLink]="['/espacepersonnel/horaires']">Horaires</a></li>
           <li><a [routerLink]="['/espacepersonnel/services']">Services</a></li>
