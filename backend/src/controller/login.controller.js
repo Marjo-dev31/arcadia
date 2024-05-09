@@ -13,31 +13,33 @@ export const login =  (req, res) => {
      database.query(QUERYUSERS.SELECT_USER, [email], async (error, results)=> {
         if (results<1) {
             res
-            .status(httpStatus.NOT_FOUND.code)
+            .status(httpStatus.OK.code)
             .send(
               new Response(
-                httpStatus.NOT_FOUND.code,
-                httpStatus.NOT_FOUND.status,
-                `User doesn't exists`
+                httpStatus.OK.code,
+                httpStatus.OK.status,
+                `User doesn t exists`
               )
             );
-           
-    } else {
+           return
+        }
+
         const user = results[0];
         const passwordIsValid = await bcrypt.compare(password, user.password);
             if (!passwordIsValid) {
             res
-            .status(httpStatus.BAD_REQUEST.code)
+            .status(httpStatus.OK.code)
             .send(
                 new Response(
-                    httpStatus.BAD_REQUEST.code,
-                    httpStatus.BAD_REQUEST.status,
+                    httpStatus.OK.code,
+                    httpStatus.OK.status,
                     `Email and password does not match!`
                 )
             )
-          
-            } else {
-            const accessToken = generatedAccessToken(user.email, user.name)
+          return
+            }
+
+        const accessToken = generatedAccessToken(user.email, user.name)
             res
             .status(httpStatus.OK.code)
             .send(
@@ -49,5 +51,5 @@ export const login =  (req, res) => {
                 )
             )
         }
-       }})
+       )
 }

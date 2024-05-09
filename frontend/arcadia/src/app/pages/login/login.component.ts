@@ -18,6 +18,12 @@ import { LoginService } from './service/login.service';
 
       <form class="login-form" name="loginForm" #form="ngForm" (ngSubmit)="onSubmit()">
         <p>Connexion</p>
+        @if(responseMessage === 'User doesn t exists'){
+          <p class="alert">Utilisateur inconnu</p>
+        }
+        @if(responseMessage === 'Email and password does not match!'){
+          <p class="alert">Email ou mot de passe incorrect</p>
+        }
         <div>
           <label for="email" >Email :</label>
           <input type="email" id="email" name="email" [(ngModel)]="user.email"/>
@@ -52,16 +58,20 @@ export class ConnexionComponent implements OnInit {
     password: '',
   }
 
+  responseMessage!: string
 
   ngOnInit() {}
 
   onSubmit(): void {
    this.loginService.login(this.user).subscribe((response)=> {
+    try{
     localStorage.setItem('accessToken', response.data.accessToken)
     localStorage.setItem('role', response.data.user.name)
-    
-     this.router.navigate(['/espacepersonnel'])
-   });
+    this.router.navigate(['/espacepersonnel'])
+  } catch(error) {
+    this.responseMessage = response.message
+  }
+  });
     this.user.email='';
     this.user.password='';
   }

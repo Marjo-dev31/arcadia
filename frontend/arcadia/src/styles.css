@@ -91,3 +91,16 @@ button:hover {
   background-color: var(--color-call-to-action);
   color: var(--color-font);
 }
+
+.alert {
+  color: red;
+  font-size: var(--font-size-footer);
+  }
+  
+  
+  .alert-form {
+    color: red;
+    text-align: center;
+    font: var(--font-size-h3);
+    margin-bottom: 2rem;
+  }
