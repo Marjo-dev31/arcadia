@@ -1,5 +1,6 @@
 import express from "express";
 import { getReviews, addReview, updateReview } from "../controller/review.controller.js";
+import authenticateToken from "../middleware/auth.js";
 
 const reviewRoutes = express.Router();
 
@@ -9,6 +10,6 @@ reviewRoutes.route('/')
 
 
 reviewRoutes.route('/:id')
-.put(updateReview)
+.put(authenticateToken, updateReview)
 
 export default reviewRoutes

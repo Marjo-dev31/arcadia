@@ -1,6 +1,7 @@
 import express from "express";
 import { addHabitatImage, addServiceImage, getImage, getImages, deleteImage, addAnimalImage } from "../controller/image.controller.js";
 import fileupload from "../middleware/fileupload.js";
+import authenticateToken from "../middleware/auth.js";
 
 
 
@@ -14,22 +15,22 @@ imageRoutes.route('/')
 
 imageRoutes.route('/service/:id')
 // .put(updateServiceImage)
-.post(fileupload, addServiceImage)
+.post(authenticateToken, fileupload, addServiceImage)
 
 // imageRoutes.route('/habitats')
 // .get(getHabitatsImages)
 
 imageRoutes.route('/habitat/:id')
-.post(fileupload, addHabitatImage)
+.post(authenticateToken, fileupload, addHabitatImage)
 
 // imageRoutes.route('/animals')
 // .get(getAnimalsImages)
 
 imageRoutes.route('/animal/:id')
-.post(fileupload, addAnimalImage)
+.post(authenticateToken, fileupload, addAnimalImage)
 
 imageRoutes.route('/:id')
 .get(getImage)
-.delete(deleteImage)
+.delete(authenticateToken, deleteImage)
 
 export default imageRoutes
