@@ -4,7 +4,7 @@ import { MatTableModule } from '@angular/material/table';
 import { Habitat, HabitatCreate } from '../../../../shared/models';
 import { HabitatsService } from '../../../habitats/services/habitat.service';
 import { tap } from 'rxjs';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgStyle } from '@angular/common';
 import { ImageService } from '../../../home/services/image.service';
 
@@ -17,7 +17,7 @@ import { ImageService } from '../../../home/services/image.service';
   template: `
   <h3>Habitats</h3>
   <section>
-    @if(datasource.length === 0){
+    @if(datasource && datasource.length === 0){
       <p>Il n'y a pas d'habitat</p>
     }
     <table mat-table [dataSource]="datasource">
@@ -98,10 +98,16 @@ import { ImageService } from '../../../home/services/image.service';
             type="text"
             formControlName="title"
             />
+            @if(habitatForm.controls['title'].touched){
+              <div class="alert">Un titre est requis</div>
+            }
           <textarea
             formControlName="description"
             cols="30"
             rows="10"></textarea>
+            @if(habitatForm.controls['description'].touched){
+              <div class="alert">Une description est requise</div>
+            }
           <button class="add-btn">Modifier habitat</button>
         </form>
   </section>
@@ -114,8 +120,8 @@ export class HabitatHandledComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.habitatForm = this.fb.group({
-      title: new FormControl(''),
-      description: new FormControl(''),
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
       id: new FormControl('')
     })};
 
