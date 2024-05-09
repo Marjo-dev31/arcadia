@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Animal } from '../../../../shared/models';
@@ -28,7 +28,7 @@ import { tap } from 'rxjs';
         </select>
         <button>Filtrer</button>
       </form>
-      @if(errorMessage === 'No reports found') {
+      @if(responsemessage === 'No reports found') {
         <p>Il n'y a pas de rapport associé à cet animal</p>
       }
       @for(animal of animals; track animal) { 
@@ -112,21 +112,33 @@ import { tap } from 'rxjs';
         <input
           type="text"
           formControlName="food"/>
+          @if(updateForm.controls['food'].touched){
+              <div class="alert">Une type de nourriture est requis</div>
+            }
         <input
           type="text"
           formControlName="grammage"/>
+          @if(updateForm.controls['grammage'].touched){
+              <div class="alert">Un grammage est requis</div>
+            }
         <label for="animal">Sélectionner un animal : </label>
         <select name="selected-animal" id="animal" formControlName="id_animal">
           @for(animal of animals; track animal) {
           <option [value]="animal.id">{{ animal.firstname }}</option>
           }
         </select>
+        @if(updateForm.controls['id_animal'].touched){
+              <div class="alert">Un animal est requis</div>
+            }
         <label for="selected-user">Sélectionner un rapporteur : </label>
         <select name="user" id="user" formControlName="id_user">
           @for(user of users; track user) {
           <option [value]="user.id">{{ user.firstname }}</option>
           }
         </select>
+        @if(updateForm.controls['id_user'].touched){
+              <div class="alert">Un rapporteur est requis</div>
+            }
         <button class="add-btn">Modifier rapport</button>
         <button>Annuler</button>
       </form>
@@ -140,10 +152,10 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   constructor(public fb: FormBuilder) {
     this.updateForm = fb.group({
-      food: new FormControl(''),
-      grammage: new FormControl(''),
-      id_user: new FormControl(''),
-      id_animal: new FormControl(''),
+      food: new FormControl('', [Validators.required]),
+      grammage: new FormControl('', [Validators.required]),
+      id_user: new FormControl('', [Validators.required]),
+      id_animal: new FormControl('', [Validators.required]),
       id: new FormControl('')
     })
   }
@@ -171,7 +183,7 @@ export class EmployeeReportHandledComponent implements OnInit {
   addFormIsDisplay: boolean = false;
   updateFormIsDisplay: boolean = false;
   role: string = localStorage.getItem('role') || '';
-  errorMessage: string = ''
+  responsemessage: string = ''
 
   newReport: EmployeeReportCreate = {
     food: '',
@@ -209,9 +221,9 @@ export class EmployeeReportHandledComponent implements OnInit {
     this.employeeReports = response.data.reports;
     this.datasource = new MatTableDataSource(this.employeeReports);
     this.datasource.sort = this.sort;
-    this.errorMessage = response.message;
+    this.responsemessage = response.message;
   } catch(error) {
-    this.errorMessage = response.message;
+    this.responsemessage = response.message;
   }
     })
   };

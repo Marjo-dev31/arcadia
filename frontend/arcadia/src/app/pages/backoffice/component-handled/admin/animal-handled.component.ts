@@ -6,7 +6,7 @@ import { AnimalService } from '../../../animals/services/animal.service';
 import { ImageService } from '../../../home/services/image.service';
 import { tap } from 'rxjs';
 import { NgStyle } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HabitatsService } from '../../../habitats/services/habitat.service';
 import { BreedService } from '../../../animals/services/breed.service';
 import { Breed } from '../../../../shared/models/breed.interface';
@@ -19,7 +19,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
     <h3>Animaux</h3>
     <section>
     <table mat-table [dataSource]="datasource">
-    @if(datasource.length === 0){
+    @if(datasource && datasource.length === 0){
       <p>Il n'y a pas d'animal</p>
     }
       <ng-container matColumnDef="firstname">
@@ -111,17 +111,20 @@ import { Breed } from '../../../../shared/models/breed.interface';
             type="text"
             formControlName="firstname"
             />
+            @if(updateForm.controls['firstname'].touched){
+              <div class="alert">Un prénom est requis</div>
+            }
             <select name="selected-breed" #selectedBreed formControlName="breed">
             @for(animal of datasource; track animal) {
             <option [value]="animal.id_breed">{{ animal.breed }}</option>
           }
           </select>
           <select name="selected-habitat" #selectedHabitat formControlName="habitat">
-            @for(animal of datasource; track animal) {
-            <option [value]="animal.id_habitat">{{ animal.habitat }}</option>
+            @for(habitat of habitats; track habitat) {
+            <option [value]="habitat.id">{{ habitat.title }}</option>
           }
           </select>
-          <button class="add-btn">Modifier habitat</button>
+          <button class="add-btn">Modifier animal</button>
         </form>
   </section>
   `,
@@ -133,7 +136,7 @@ export class AnimalHandledComponent implements OnInit {
 
   constructor(public fb: FormBuilder) {
     this.updateForm = this.fb.group({
-      firstname: new FormControl(''),
+      firstname: new FormControl('', [Validators.required]),
       habitat: new FormControl(''),
       breed: new FormControl(''),
       id: new FormControl('')
@@ -177,6 +180,7 @@ export class AnimalHandledComponent implements OnInit {
   getAnimals() {
     this.animalService.getAnimals().then((response) => {
       this.datasource = response;
+      console.log(this.datasource)
     });
   }
 
@@ -226,6 +230,7 @@ export class AnimalHandledComponent implements OnInit {
   getHabitat(){
     this.habitatService.getHabitats().then((response) => {
     this.habitats = response;
+    console.log(this.habitats)
     })
   }
 }
