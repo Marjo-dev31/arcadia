@@ -92,7 +92,7 @@ export class HabitatsComponent implements OnInit {
       width: '400px',
       data: {animal: animal},
     });
-    console.log(animal.firstname)
+    // console.log(animal.firstname)
     this.addClick(animal.firstname);
   }
 

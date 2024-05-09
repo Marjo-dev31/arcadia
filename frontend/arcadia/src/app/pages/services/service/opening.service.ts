@@ -16,7 +16,7 @@ export class OpeningService {
   }
 
   UpdateOpeningToPublic(opening: Opening, id:string): Observable<any> {
-    console.log(opening)
+    // console.log(opening)
     return this.http.put(`${this.url}/${id}`, opening)
   }
 
