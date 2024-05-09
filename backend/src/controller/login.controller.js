@@ -24,8 +24,8 @@ export const login =  (req, res) => {
            
     } else {
         const user = results[0];
-    const passwordIsValid = await bcrypt.compare(password, user.password);
-        if (!passwordIsValid) {
+        const passwordIsValid = await bcrypt.compare(password, user.password);
+            if (!passwordIsValid) {
             res
             .status(httpStatus.BAD_REQUEST.code)
             .send(
@@ -36,8 +36,8 @@ export const login =  (req, res) => {
                 )
             )
           
-        } else {
-            const accessToken = generatedAccessToken(req)
+            } else {
+            const accessToken = generatedAccessToken(user.email, user.name)
             res
             .status(httpStatus.OK.code)
             .send(
