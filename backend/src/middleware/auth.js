@@ -29,21 +29,10 @@ const authenticateToken = (req, res, next) => {
           )
         );
         return
-    }
+    } 
 
-    // res.send({success: true, response})
-    //   .status(httpStatus.OK.code)
-    //   .send(
-    //     new Response(
-    //       httpStatus.OK.code,
-    //       httpStatus.OK.status,
-    //       "Access authorized",
-    //       { success: true, response}
-    //     )
-    //   );
-    
-
-
+    const role = response.name;
+    req['role'] = role  
     next()
   });
 
