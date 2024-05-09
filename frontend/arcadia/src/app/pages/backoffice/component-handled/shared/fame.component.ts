@@ -13,7 +13,7 @@ import { MatIconModule } from "@angular/material/icon";
     imports:[MatTableModule, MatSortModule, MatSort, FormsModule, MatIconModule],
     template: `
     <h3>Popularité des animaux</h3>
-    @if(errorMessage === 'No animal found'){
+    @if(responsemessage === 'No animal found'){
         <p>Il n'y a pas d'animal</p>
     }
     <table mat-table [dataSource]="datasource" matSort matSortActive="click" matSortDirection="desc">
@@ -69,7 +69,7 @@ export class FameComponent implements OnInit {
     };
 
     role: string = localStorage.getItem('role') || '';
-    errorMessage: string = ''
+    responsemessage: string = ''
 
     @ViewChild(MatSort) sort!:MatSort;
 
@@ -87,9 +87,9 @@ export class FameComponent implements OnInit {
             this.animals = response.data.animals;
             this.datasource = new MatTableDataSource(this.animals);
             this.datasource.sort = this.sort;
-            this.errorMessage = response.message;
+            this.responsemessage = response.message;
         } catch {
-            this.errorMessage = response.message;
+            this.responsemessage = response.message;
         }
         })
     }

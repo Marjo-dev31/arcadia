@@ -36,7 +36,7 @@ export const login =  (req, res) => {
                     `Email and password does not match!`
                 )
             )
-          return
+            return
             }
 
         const accessToken = generatedAccessToken(user.email, user.name)
