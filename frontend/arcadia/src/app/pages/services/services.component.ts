@@ -17,9 +17,11 @@ import { OpeningService } from './service/opening.service';
           séjour plus agréable !
         </h2>
         <div class="schedule">
-          <p>Nous vous accueillons du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
+          <p>Nous vous accueillons</p>
+          @if(openToPublic){
+          <p> du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
           <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
-          <p>
+          }<p>
             Tous les jours de l'année
             <span id="exception">(sauf cas exceptionnel)</span>
           </p>
