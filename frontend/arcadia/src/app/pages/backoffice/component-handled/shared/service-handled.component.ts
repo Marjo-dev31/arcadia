@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Service, ServiceCreate } from '../../../../shared/models/service.interface';
 import { ServiceService } from '../../../services/service/service.service';
-import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder, Validators } from '@angular/forms';
 import { NgStyle } from '@angular/common';
 import { tap } from 'rxjs';
 import { ImageService } from '../../../home/services/image.service';
@@ -92,10 +92,16 @@ import { ImageService } from '../../../home/services/image.service';
             type="text"
             formControlName="title"
             />
+            @if(serviceForm.controls['title'].invalid && serviceForm.controls['title'].touched){
+              <div class="alert">Un titre est requis</div>
+            }
           <textarea
             formControlName="description"
             cols="30"
             rows="10"></textarea>
+            @if(serviceForm.controls['description'].invalid && serviceForm.controls['description'].touched){
+              <div class="alert">Un titre est requis</div>
+            }
           <button class="add-btn">Modifier service</button>
           <button>Annuler</button>
         </form>
@@ -110,8 +116,8 @@ export class ServiceHandledComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.serviceForm = this.fb.group({
-      title: new FormControl(''),
-      description: new FormControl(''),
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
       id: new FormControl('')
     })}
 
