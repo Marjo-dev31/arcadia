@@ -76,20 +76,16 @@ p {
 
 /* veterinary component */
 
-.animals-section {
+section{
   border-bottom: solid 0.5rem var(--color-secondary);
   border-top: solid 0.5rem var(--color-secondary);
   padding-bottom: 2rem;
 }
-
 /* employee component */
 
 .animal-choice {
   margin-left: 2rem;
 }
-
-
-
 
 /* opening component*/
 

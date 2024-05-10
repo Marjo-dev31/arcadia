@@ -3,8 +3,6 @@ CREATE DATABASE IF NOT EXISTS arcadiadb;
 
 USE arcadiadb;
 
--- ici il faut creer les tables CREATE TABLE
-
 CREATE TABLE habitats (
     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     title VARCHAR(255) NOT NULL,
@@ -91,4 +89,26 @@ CREATE TABLE reviews (
     id_employee VARCHAR(36) NULL,
     FOREIGN KEY (id_employee) REFERENCES users(id) DELETE ON SET NULL
 );
+
+INSERT INTO habitats VALUES 
+(DEFAULT, 'La Savane', "Lieu aride, typique des régions chaudes africaines. Elle est dominée par les plantes herbacées et est parsemée d'arbres. Malgré un climat tropical la faune y est riche.", DEFAULT),
+(DEFAULT, 'La Jungle', "Avec sa forêt tropicale, forêt dense à la végétation verte et luxuriante, son fort taux d'humidité et sa biodiversité, découvrez la nature à l'état sauvage ", DEFAULT),
+(DEFAULT, 'Les Marais', "Les marais, zone humide par excellence, sont composés d'une couche d'eau stagnante, peu profonde et envahie par la végétation aquatique. Ces conditons permettent d'accueillir une faune très diversifiée", DEFAULT);
+
+
+INSERT INTO breeds VALUES
+(DEFAULT, 'Lion'),
+(DEFAULT, 'Tigre'),
+(DEFAULT, 'Grand Koudou'),
+(DEFAULT, 'Paresseux'),
+(DEFAULT, 'Toucan'),
+(DEFAULT, 'Chimpanzé'),
+(DEFAULT, "Loutre d'Europe"),
+(DEFAULT, 'Caimen à Lunette'),
+(DEFAULT, 'Rainette de White');
+
+INSERT INTO services VALUES
+(DEFAULT, 'Visite guidée avec Manu', "Manu vous propose ses services afins de vous faire découvrir plus en détails l'habitat de votre choix. IL vous expliquera la vie au sein de celui-ci et décryptera pour vous la faune et la flore. Pensez à vous positionner dès votre arrivée au parc, les places sont limitées. Service gratuit."),
+(DEFAULT, 'Visite à bod du petit train', "A bord de notre petit train touristique faites le tour complet de la propriété. Tout au long du trajet vous découvrirez les différents habitats et au plus proche des animaux. Les réservations se font à l'accueil et un départ à lieu toutes les 45 minutes. Tarifs: 5€/adulte et 2€/enfant"),
+(DEFAULT, 'Restauration', "Vous trouverez au sein du parc différents lieux de restauration. Faites une pause gourmande à la cahute aux crêpes, une halte aux snacks pour manger sur le pouce ou encore une coupure déjeuner au restaurant l'Arca-diner, qui se fera un plaisir de vous faire savourer une cuisine traditionnelle. Il y en a pour tous les budgets. A table!");
 
