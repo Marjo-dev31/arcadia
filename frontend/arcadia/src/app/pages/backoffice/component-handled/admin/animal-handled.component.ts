@@ -111,7 +111,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
             type="text"
             formControlName="firstname"
             />
-            @if(updateForm.controls['firstname'].touched){
+            @if(updateForm.controls['firstname'].invalid && updateForm.controls['firstname'].touched){
               <div class="alert">Un prénom est requis</div>
             }
             <select name="selected-breed" #selectedBreed formControlName="breed">
@@ -119,11 +119,17 @@ import { Breed } from '../../../../shared/models/breed.interface';
             <option [value]="animal.id_breed">{{ animal.breed }}</option>
           }
           </select>
+          @if(updateForm.controls['breed'].invalid && updateForm.controls['breed'].touched){
+              <div class="alert">Une race est requise</div>
+            }
           <select name="selected-habitat" #selectedHabitat formControlName="habitat">
             @for(habitat of habitats; track habitat) {
             <option [value]="habitat.id">{{ habitat.title }}</option>
           }
           </select>
+          @if(updateForm.controls['habitat'].invalid && updateForm.controls['habitat'].touched){
+              <div class="alert">Un habitat est requis</div>
+            }
           <button class="add-btn">Modifier animal</button>
         </form>
   </section>
@@ -137,8 +143,8 @@ export class AnimalHandledComponent implements OnInit {
   constructor(public fb: FormBuilder) {
     this.updateForm = this.fb.group({
       firstname: new FormControl('', [Validators.required]),
-      habitat: new FormControl(''),
-      breed: new FormControl(''),
+      habitat: new FormControl('', [Validators.required]),
+      breed: new FormControl('', [Validators.required]),
       id: new FormControl('')
     })
   };

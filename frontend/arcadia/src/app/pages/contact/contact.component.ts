@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
       </div>
 
       <form class="contact-form" action="">
-        <input type="text" id="password" name="password" placeholder="Titre" />
+        <input type="text" id="password" name="password" placeholder="Titre" required />
 
         <textarea
           name="message"
@@ -19,9 +19,10 @@ import { Component, OnInit } from '@angular/core';
           cols="30"
           rows="10"
           placeholder="Votre message..."
+          required
         ></textarea>
 
-        <input type="email" id="email" name="email" placeholder="Email" />
+        <input type="email" id="email" name="email" placeholder="Email" required/>
 
         <button>Envoyer</button>
       </form>
@@ -29,10 +30,10 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: `
   body {
-  background-image: url("/images/feuilles\ volantes.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: 30%;
+    background-image: url("/images/feuilles\ volantes.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 30%;
 }
 
 .contact-form {
