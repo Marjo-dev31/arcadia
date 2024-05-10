@@ -26,12 +26,18 @@ import { LoginService } from './service/login.service';
         }
         <div>
           <label for="email" >Email :</label>
-          <input type="email" id="email" name="email" [(ngModel)]="user.email"/>
+          <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" required/>
         </div>
+        @if(email.invalid && email.touched){
+          <p class="alert">Un Email est requis</p>
+        }
         <div>
           <label for="password">Mot de passe :</label>
-          <input type="password" id="password" name="password" [(ngModel)]="user.password"/>
+          <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required/>
         </div>
+        @if(password.invalid && password.touched){
+          <p class="alert">Un Email est requis</p>
+        }
         <button>Se connecter</button>
       </form>
       <div class="password-forgot">
