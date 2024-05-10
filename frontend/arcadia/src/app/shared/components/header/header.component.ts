@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, inject } from '@angular/core';
 
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { tap } from 'rxjs';
@@ -21,17 +21,17 @@ import { LoginService } from '../../../pages/login/service/login.service';
             <li><a [routerLink]="['/habitats']">Habitats</a></li>
             <li><a [routerLink]="['/services']">Services</a></li>
             <li><a [routerLink]="['/contact']">Contact</a></li>
-            @if(isLoggin === true){
-              <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
+            @if(loginService.isLoggin === true){
+            <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
             }
           </ul>
         </nav>
         <div>
-          @if(isLoggin === true){
-            <a class="login-btn" (click)="logout()">Déconnexion</a>
-        } @else {
-            <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
-        }
+          @if(loginService.isLoggin === true){
+          <a class="login-btn" (click)="logout()">Déconnexion</a>
+          } @else {
+          <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
+          }
           <a class="menu-btn" (click)="toggleSideDrawer()">
             <span></span>
             <span></span>
@@ -43,57 +43,59 @@ import { LoginService } from '../../../pages/login/service/login.service';
         <h1>Arcadia</h1>
       </div>
     </header>
-    <aside id="side-drawer"
-    [ngStyle]="{'display': showSideDrawer ? 'block' : 'none' }"
-    (click)="toggleSideDrawer()">
+    <aside
+      id="side-drawer"
+      [ngStyle]="{ display: showSideDrawer ? 'block' : 'none' }"
+      (click)="toggleSideDrawer()"
+    >
       <nav>
         <ul>
           <li><a [routerLink]="['/']">Accueil</a></li>
           <li><a [routerLink]="['/habitats']">Habitats</a></li>
           <li><a [routerLink]="['/services']">Services</a></li>
           <li><a [routerLink]="['/contact']">Contact</a></li>
-          @if(isLoggin === true){
+          @if(loginService.isLoggin === true){
           <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
           <li><a (click)="logout()">Déconnexion</a></li>
           } @else {
-          <li><a [routerLink]="['/connexion']">Connexion</a></li>}
+          <li><a [routerLink]="['/connexion']">Connexion</a></li>
+          }
         </ul>
       </nav>
     </aside>
   `,
   styleUrl: './header.component.css',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   showSideDrawer = false;
   title!: string;
-  isLoggin : boolean = false
+  // isLoggin: boolean = false;
   constructor(public route: Router) {}
 
-  loginService = inject(LoginService)
+  loginService = inject(LoginService);
 
-  ngOnInit() {
-    this.getToken();
-  }
+  // ngOnInit() {
+  //   this.getToken();
+  // }
 
-  afterOnInit(){
-    this.getToken();
-  }
+  // getToken() {
+  //   const token = localStorage.getItem('accessToken');
+  //   if (token) {
+  //     this.isLoggin = true;
+  //     return
+  //   }
+  //   this.isLoggin = false;
+  // }
 
-  getToken(){
-    const token = localStorage.getItem('accessToken')
-     if(token){
-       return this.isLoggin = true 
-     }
-     return this.isLoggin = false
-    }
 
-  toggleSideDrawer(){
+
+  toggleSideDrawer() {
     this.showSideDrawer = !this.showSideDrawer;
   }
-  
-  logout(){
+
+  logout() {
     this.loginService.logout();
-    this.isLoggin = false;
+    // this.isLoggin = false;
     this.route.navigateByUrl('/');
   }
 }

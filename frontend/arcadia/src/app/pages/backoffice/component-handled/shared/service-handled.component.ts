@@ -17,7 +17,7 @@ import { ImageService } from '../../../home/services/image.service';
   template: `
     <h3>Services</h3>
     <section>
-      @if(datasource.length === 0){
+      @if(datasource && datasource.length === 0){
         <p>Il n'y a pas de service</p>
       }
       <table mat-table [dataSource]="datasource">
@@ -137,7 +137,7 @@ export class ServiceHandledComponent implements OnInit {
   }
 
   getServices() {
-      this.serviceService.getServices().then((response) => {
+      this.serviceService.getHandleServices().subscribe((response) => {
       this.datasource = response;
     });
   };

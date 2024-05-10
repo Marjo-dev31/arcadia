@@ -13,6 +13,10 @@ export class ReviewsService {
         const reviewsList = await fetch(this.url).then((response)=> response.json());
         return reviewsList
     }
+
+    getHandleReviews(): Observable<any> {
+        return this.http.get(`${this.url}/backoffice`)
+    }
     
     addReview(review: ReviewPost): Observable<any> {
         return this.http.post(this.url, review)

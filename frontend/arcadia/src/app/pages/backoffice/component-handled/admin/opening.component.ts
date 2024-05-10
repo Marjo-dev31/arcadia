@@ -66,7 +66,7 @@ export class OpeningComponent implements OnInit {
     }
 
     getOpeningToPublic(){
-        this.openingService.getOpeningToPublic().subscribe((response)=>{
+        this.openingService.getHandleOpeningToPublic().subscribe((response)=>{
             this.openToPublic = response[0]
         })
     };

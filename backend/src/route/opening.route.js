@@ -8,6 +8,9 @@ const openingRoutes = express.Router();
 openingRoutes.route('/')
 .get(getOpening)
 
+openingRoutes.route('/backoffice')
+.get(authenticateToken,verifyRoles('Admin'), getOpening)
+
 openingRoutes.route('/:id')
 .put(authenticateToken, verifyRoles('Admin'), updateOpening)
 

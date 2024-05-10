@@ -10,6 +10,9 @@ habitatRoutes.route('/')
 .get(getHabitats)
 .post(authenticateToken, verifyRoles('Admin'), addHabitat);
 
+habitatRoutes.route('/backoffice')
+.get(authenticateToken,verifyRoles('Admin'), getHabitats)
+
 habitatRoutes.route('/:id')
 .get(getHabitat)
 .put(authenticateToken, verifyRoles('Admin'), updateHabitat)

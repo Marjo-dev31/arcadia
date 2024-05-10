@@ -9,6 +9,7 @@ animalsRoutes.route('/')
 .get(getAnimals)
 .post(authenticateToken, verifyRoles('Admin'), addAnimal)
 
+
 animalsRoutes.route('/:id')
 .get(getAnimal)
 .delete(authenticateToken, verifyRoles('Admin'), deleteAnimal)
