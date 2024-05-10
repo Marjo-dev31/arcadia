@@ -112,3 +112,8 @@ INSERT INTO services VALUES
 (DEFAULT, 'Visite à bod du petit train', "A bord de notre petit train touristique faites le tour complet de la propriété. Tout au long du trajet vous découvrirez les différents habitats et au plus proche des animaux. Les réservations se font à l'accueil et un départ à lieu toutes les 45 minutes. Tarifs: 5€/adulte et 2€/enfant"),
 (DEFAULT, 'Restauration', "Vous trouverez au sein du parc différents lieux de restauration. Faites une pause gourmande à la cahute aux crêpes, une halte aux snacks pour manger sur le pouce ou encore une coupure déjeuner au restaurant l'Arca-diner, qui se fera un plaisir de vous faire savourer une cuisine traditionnelle. Il y en a pour tous les budgets. A table!");
 
+INSERT INTO roles VALUES
+(DEFAULT, 'Admin'),
+(DEFAULT, 'Vétérinaire'),
+(DEFAULT, 'Employé');
+
