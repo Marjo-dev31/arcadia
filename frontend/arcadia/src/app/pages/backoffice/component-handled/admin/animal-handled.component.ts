@@ -84,19 +84,29 @@ import { Breed } from '../../../../shared/models/breed.interface';
             placeholder="Prénom"
             name="firstname"
             [(ngModel)]="newAnimal.firstname"
-            #title="ngModel"
+            #firstname="ngModel"
+            required
           />
-          <select name="selected-breed" [(ngModel)]="newAnimal.breed">
+          @if(firstname.invalid && firstname.touched){
+          <p class="alert">Un prénom est requis</p>
+        }
+          <select name="selected-breed" [(ngModel)]="newAnimal.breed" #breed="ngModel" required>
             <option value="null">--Choissisez une race--</option>
             @for(breed of breeds; track breed) {
             <option [value]="breed.id">{{ breed.name }}</option>}
           </select>
-          <select name="selected-habitat" [(ngModel)]="newAnimal.habitat">
+          @if(breed.invalid && breed.touched){
+          <p class="alert">Une race est requise</p>
+        }
+          <select name="selected-habitat" [(ngModel)]="newAnimal.habitat" #habitat="ngModel" required>
             <option value="null">--Choissisez un habitat--</option>
             @for(habitat of habitats; track habitat) {
             <option [value]="habitat.id">{{ habitat.title }}</option>
           }
           </select>
+          @if(habitat.invalid && habitat.touched){
+          <p class="alert">Un type de nourriture est requis</p>
+        }
           <button class="add-btn">Enregistrer nouvel animal</button>
           <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux !</p>
         </form>

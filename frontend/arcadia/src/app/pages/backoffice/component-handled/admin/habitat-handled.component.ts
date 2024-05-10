@@ -75,7 +75,11 @@ import { ImageService } from '../../../home/services/image.service';
             name="title"
             [(ngModel)]="newHabitat.title"
             #title="ngModel"
+            required
           />
+          @if(title.invalid && title.touched){
+          <p class="alert">Un titre est requis</p>
+        }
           <textarea
             name="description"
             placeholder="Description"
@@ -83,8 +87,11 @@ import { ImageService } from '../../../home/services/image.service';
             rows="10"
             [(ngModel)]="newHabitat.description"
             #description="ngModel"
+            required
           ></textarea>
-          
+          @if(description.invalid && description.touched){
+          <p class="alert">Une description est requise</p>
+        }
           <button class="add-btn">Enregistrer nouvel habitat</button>
         </form>
   </section>

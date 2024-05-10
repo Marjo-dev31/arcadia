@@ -81,26 +81,40 @@ import { tap } from 'rxjs';
           name="food"
           [(ngModel)]="newReport.food"
           #food="ngModel"
+          required
         />
+        @if(food.invalid && food.touched){
+          <p class="alert">Un type de nourriture est requis</p>
+        }
         <input
           type="text"
           placeholder="Grammage donné"
           name="grammage"
           [(ngModel)]="newReport.grammage"
           #grammage="ngModel"
+          required
         />
+        @if(grammage.invalid && grammage.touched){
+          <p class="alert">Un grammage est requis</p>
+        }
         <label for="animal">Sélectionner un animal : </label>
-        <select name="animal" id="animal" [(ngModel)]="newReport.id_animal">
+        <select name="animal" id="animal" [(ngModel)]="newReport.id_animal" #animal="ngModel" required>
           @for(animal of animals; track animal) {
           <option [ngValue]="animal.id">{{ animal.firstname }}</option>
           }
         </select>
+        @if(animal.invalid && animal.touched){
+          <p class="alert">Un type de nourriture est requis</p>
+        }
         <label for="user">Sélectionner un rapporteur : </label>
-        <select name="user" id="user" [(ngModel)]="newReport.id_user">
+        <select name="user" id="user" [(ngModel)]="newReport.id_user" #user="ngModel" required>
           @for(user of users; track user) {
           <option [ngValue]="user.id">{{ user.firstname }}</option>
           }
         </select>
+        @if(user.invalid && user.touched){
+          <p class="alert">Un type de nourriture est requis</p>
+        }
         <button class="add-btn">Enregistrer nouveau rapport</button>
       </form>
   </section>
