@@ -117,3 +117,4 @@ INSERT INTO roles VALUES
 (DEFAULT, 'Vétérinaire'),
 (DEFAULT, 'Employé');
 
+INSERT INTO animals VALUES	(DEFAULT, 'Frodon', (SELECT id FROM habitats WHERE title="La Savane"),(SELECT id FROM breeds WHERE name='Lion'));
