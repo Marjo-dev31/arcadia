@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Service, ServiceCreate } from '../../../shared/models/service.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 
 @Injectable()
@@ -18,6 +19,10 @@ export class ServiceService {
     catch (error) {
       return []
     }
+  }
+
+  getHandleServices(): Observable<any> {
+    return this.http.get(`${this.url}/backoffice`)
   }
 
   addService(service: ServiceCreate): Observable<any> {

@@ -18,6 +18,10 @@ export class AnimalService {
         }
     }
 
+    getHandleAnimals(): Observable<any> {
+        return this.http.get(`${this.url}/backoffice`)
+    }
+
     getAnimal(id: string): Observable<any> {
         return this.http.get(`${this.url}/${id}`)
     }

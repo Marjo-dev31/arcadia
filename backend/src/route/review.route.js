@@ -9,8 +9,12 @@ reviewRoutes.route('/')
 .get(getReviews)
 .post(addReview)
 
+reviewRoutes.route('/backoffice')
+.get(authenticateToken, verifyRoles('Admin', 'Employé'), getReviews)
 
 reviewRoutes.route('/:id')
 .put(authenticateToken, verifyRoles('Employé'), updateReview)
 
 export default reviewRoutes
+
+

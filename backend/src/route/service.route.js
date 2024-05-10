@@ -9,6 +9,9 @@ serviceRoutes.route('/')
 .get(getServices)
 .post(authenticateToken, verifyRoles('Admin', 'Employé'), addService);
 
+serviceRoutes.route('/backoffice')
+.get(authenticateToken, verifyRoles('Admin', 'Employé'), getServices)
+
 serviceRoutes.route('/:id')
 .get(getService)
 .put(authenticateToken, verifyRoles('Admin', 'Employé'), updateService)
