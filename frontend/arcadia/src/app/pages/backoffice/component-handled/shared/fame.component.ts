@@ -43,7 +43,7 @@ import { MatIconModule } from "@angular/material/icon";
     <form #form="ngForm" name="addForm" (ngSubmit)="addAnimalOnMongo()">
         <label for="firstname" >Prénom</label>
         <input type="text" name="firstname" [(ngModel)]="newAnimal.firstname" #firstname="ngModel" required>
-        @if(firstname.errors?.['required'] && firstname.touched){
+        @if(firstname.invalid && firstname.touched){
             <p class="alert">Un Prénom est requis</p>
         }
         <button>Annuler</button>

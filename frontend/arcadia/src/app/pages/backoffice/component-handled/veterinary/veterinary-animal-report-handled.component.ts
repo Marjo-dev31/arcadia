@@ -109,43 +109,59 @@ import { UserService } from '../../../login/service/user.service';
           name="food"
           [(ngModel)]="newReport.food"
           #food="ngModel"
+          required
         />
+        @if(food.invalid && food.touched){
+          <p class="alert">Un type de nourriture est requis</p>
+        }
         <input
           type="text"
           placeholder="Grammage recommandé"
           name="grammage"
           [(ngModel)]="newReport.grammage"
           #grammage="ngModel"
+          required
         />
+        @if(grammage.invalid && grammage.touched){
+          <p class="alert">Un grammage est requis</p>
+        }
         <input
           type="text"
           placeholder="Etat de santé actuel"
           name="health"
           [(ngModel)]="newReport.health"
           #health="ngModel"
+          required
         />
+        @if(health.invalid && health.touched){
+          <p class="alert">Un état de santé est requis</p>
+        }
         <textarea
           name="details_condition"
           placeholder="Détails de la condition physique(optionnel)"
-          name="details_condition"
           cols="30"
           rows="10"
           [(ngModel)]="newReport.details_condition"
           #details_condition="ngModel"
         ></textarea>
         <label for="animal">Sélectionner un animal : </label>
-        <select name="animal" id="animal" [(ngModel)]="newReport.id_animal">
+        <select name="animal" id="animal" [(ngModel)]="newReport.id_animal" #animal="ngModel" required>
           @for(animal of animals; track animal) {
           <option [ngValue]="animal.id">{{ animal.firstname }}</option>
           }
         </select>
+        @if(animal.invalid && animal.touched){
+          <p class="alert">Un animal est requis</p>
+        }
         <label for="user">Sélectionner un rapporteur : </label>
-        <select name="user" id="user" [(ngModel)]="newReport.id_user">
+        <select name="user" id="user" [(ngModel)]="newReport.id_user" #user="ngModel">
           @for(user of users; track user) {
           <option [ngValue]="user.id">{{ user.firstname }}</option>
           }
         </select>
-
+        @if(user.invalid && user.touched){
+          <p class="alert">Un habitat est requis</p>
+        }
         <button class="add-btn">Enregistrer nouveau rapport</button>
       </form>
     </section>

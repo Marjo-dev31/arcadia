@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { User, UserCreate } from '../../../../shared/models/user.interface';
+import { UserCreate } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../../login/service/role.service';
 import { Role } from '../../../../shared/models/role.interface';
@@ -28,10 +28,9 @@ import { UserService } from '../../../login/service/user.service';
           #email="ngModel"
           required
         />
-        @if(email.invalid && (email.dirty || email.touched)){
-          @if(email.errors?.['required']){
+        @if(email.invalid && email.touched){
             <div class="alert">Un email est requis</div>
-          }}
+          }
         <label for="lastname">Nom :</label>
         <input
           type="text"
@@ -41,10 +40,9 @@ import { UserService } from '../../../login/service/user.service';
           #lastname="ngModel"
           required
         />
-        @if(lastname.invalid && (lastname.dirty || lastname.touched)){
-          @if(lastname.errors?.['required'] && lastname.touched){
+        @if(lastname.invalid && lastname.touched){
             <p class="alert">Un nom est requis</p>
-          }}
+          }
         <label for="firstname">Prénom :</label>
         <input
           type="text"
@@ -54,18 +52,17 @@ import { UserService } from '../../../login/service/user.service';
           #firstname="ngModel"
           required
         />
-        @if(firstname.invalid && (firstname.dirty || firstname.touched)){
-          @if(firstname.errors?.['required']){
+        @if(firstname.invalid && firstname.touched) {
             <p class="alert">Un prénom est requis</p>
-          }}
+          }
         <label for="role">Rôle :</label>
         <select name="role" id="role" [(ngModel)]= "selectedRoleOption" #role="ngModel" required>
           <option *ngFor="let role of roles" [ngValue]="role.id" >{{ role.name }}</option>
         </select>
-        @if(role.invalid && (role.dirty || firstname.touched)){
-          @if(role.errors?.['required']){
+        @if(role.invalid && firstname.touched){
+
             <p class="alert">Un rôle est requis</p>
-          }}
+          }
         <label for="password">Mot de passe :</label>
         <input
           type="password"
