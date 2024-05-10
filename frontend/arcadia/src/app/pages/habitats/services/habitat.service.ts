@@ -17,6 +17,10 @@ export class HabitatsService {
             return []
         }
     }
+
+    getHandleHabitats(): Observable<any> {
+        return this.http.get(`${this.url}/backoffice`)
+    }
  
     addHabitat(habitat: HabitatCreate): Observable<any> {
         return this.http.post(this.url, habitat)

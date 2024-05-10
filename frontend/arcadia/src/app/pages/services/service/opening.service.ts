@@ -15,6 +15,9 @@ export class OpeningService {
     return this.http.get(this.url)
   }
 
+  getHandleOpeningToPublic(): Observable<any> {
+    return this.http.get(`${this.url}/backoffice`)
+  }
   UpdateOpeningToPublic(opening: Opening, id:string): Observable<any> {
     // console.log(opening)
     return this.http.put(`${this.url}/${id}`, opening)

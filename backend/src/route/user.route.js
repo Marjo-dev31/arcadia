@@ -6,7 +6,7 @@ import verifyRoles from '../middleware/verifyroles.js';
 const userRoutes = express.Router()
 
 userRoutes.route('/')
-.get(getUsers)
+.get(authenticateToken, getUsers)
 .post(authenticateToken, verifyRoles('Admin'), addUser);
 
 export default userRoutes;

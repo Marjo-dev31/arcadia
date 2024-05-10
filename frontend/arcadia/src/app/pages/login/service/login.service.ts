@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UserLogin } from "../../../shared/models/user.interface";
-import { Observable, map } from "rxjs";
+import { Observable, map, tap } from "rxjs";
 
 @Injectable()
 export class LoginService {
@@ -9,12 +9,19 @@ export class LoginService {
 
     constructor(private http: HttpClient) {}
 
+    isLoggin: boolean = false;
+
     login(user: UserLogin): Observable<any> {
-        return this.http.post(this.url, user)
+        return this.http.post(this.url, user).pipe(
+            tap(()=>{
+                this.isLoggin = true
+            })
+        )
     }
 
     logout(){
         localStorage.removeItem('accessToken');
         localStorage.removeItem('role');
+        this.isLoggin = false
     }
 }

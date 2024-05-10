@@ -178,9 +178,8 @@ export class AnimalHandledComponent implements OnInit {
   }
 
   getAnimals() {
-    this.animalService.getAnimals().then((response) => {
+    this.animalService.getHandleAnimals().subscribe((response) => {
       this.datasource = response;
-      console.log(this.datasource)
     });
   }
 
