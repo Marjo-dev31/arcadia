@@ -9,6 +9,8 @@ animalsRoutes.route('/')
 .get(getAnimals)
 .post(authenticateToken, verifyRoles('Admin'), addAnimal)
 
+animalsRoutes.route('/backoffice')
+.get(authenticateToken, verifyRoles('Admin'), getAnimals)
 
 animalsRoutes.route('/:id')
 .get(getAnimal)
