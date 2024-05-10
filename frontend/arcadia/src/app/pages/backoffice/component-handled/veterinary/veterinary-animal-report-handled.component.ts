@@ -1,6 +1,6 @@
 import { CommonModule, formatPercent } from '@angular/common';
 import { Component, OnInit, ViewChild, inject, viewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Animal } from '../../../../shared/models';
@@ -157,12 +157,21 @@ import { UserService } from '../../../login/service/user.service';
         <input
           type="text"
           formControlName="food"/>
+          @if(updateForm.controls['food'].invalid && updateForm.controls['food'].touched){
+              <div class="alert">Un type de nourriture est requis</div>
+            }
         <input
           type="text"
           formControlName="grammage"/>
+          @if(updateForm.controls['grammage'].invalid && updateForm.controls['grammage'].touched){
+              <div class="alert">Un grammage est requis</div>
+            }
         <input
           type="text"
           formControlName="health"/>
+          @if(updateForm.controls['health'].invalid && updateForm.controls['health'].touched){
+              <div class="alert">Un état de santé est requis</div>
+            }
         <textarea
           formControlName="details_condition"
           cols="30"
@@ -173,12 +182,18 @@ import { UserService } from '../../../login/service/user.service';
           <option [value]="animal.id">{{ animal.firstname }}</option>
           }
         </select>
+        @if(updateForm.controls['id_animal'].invalid && updateForm.controls['id_animal'].touched){
+              <div class="alert">Un animal est requis</div>
+            }
         <label for="selected-user">Sélectionner un rapporteur : </label>
         <select name="user" id="user" formControlName="id_user">
           @for(user of users; track user) {
           <option [value]="user.id">{{ user.firstname }}</option>
           }
         </select>
+        @if(updateForm.controls['id_user'].invalid && updateForm.controls['id_user'].touched){
+              <div class="alert">Un rapporteur est requis</div>
+            }
         <button class="add-btn">Modifier rapport</button>
         <button>Annuler</button>
       </form>
@@ -193,12 +208,12 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
   constructor(public fb: FormBuilder) {
     this.updateForm = fb.group({
-      food: new FormControl(''),
-      grammage: new FormControl(''),
-      health: new FormControl(''),
+      food: new FormControl('', [Validators.required]),
+      grammage: new FormControl('', [Validators.required]),
+      health: new FormControl('', [Validators.required]),
       details_condition: new FormControl(''),
-      id_user: new FormControl(''),
-      id_animal: new FormControl(''),
+      id_user: new FormControl('', [Validators.required]),
+      id_animal: new FormControl('', [Validators.required]),
       id: new FormControl('')
     })
   }

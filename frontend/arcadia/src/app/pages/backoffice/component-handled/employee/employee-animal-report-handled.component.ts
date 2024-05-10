@@ -112,13 +112,13 @@ import { tap } from 'rxjs';
         <input
           type="text"
           formControlName="food"/>
-          @if(updateForm.controls['food'].touched){
+          @if(updateForm.controls['food'].invalid && updateForm.controls['food'].touched){
               <div class="alert">Une type de nourriture est requis</div>
             }
         <input
           type="text"
           formControlName="grammage"/>
-          @if(updateForm.controls['grammage'].touched){
+          @if(updateForm.controls['grammage'].invalid && updateForm.controls['grammage'].touched){
               <div class="alert">Un grammage est requis</div>
             }
         <label for="animal">Sélectionner un animal : </label>
@@ -127,7 +127,7 @@ import { tap } from 'rxjs';
           <option [value]="animal.id">{{ animal.firstname }}</option>
           }
         </select>
-        @if(updateForm.controls['id_animal'].touched){
+        @if(updateForm.controls['id_animal'].invalid && updateForm.controls['id_animal'].touched){
               <div class="alert">Un animal est requis</div>
             }
         <label for="selected-user">Sélectionner un rapporteur : </label>
@@ -136,7 +136,7 @@ import { tap } from 'rxjs';
           <option [value]="user.id">{{ user.firstname }}</option>
           }
         </select>
-        @if(updateForm.controls['id_user'].touched){
+        @if(updateForm.controls['id_user'].invalid && updateForm.controls['id_user'].touched){
               <div class="alert">Un rapporteur est requis</div>
             }
         <button class="add-btn">Modifier rapport</button>

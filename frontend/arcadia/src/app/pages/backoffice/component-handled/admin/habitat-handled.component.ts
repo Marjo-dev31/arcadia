@@ -98,14 +98,14 @@ import { ImageService } from '../../../home/services/image.service';
             type="text"
             formControlName="title"
             />
-            @if(habitatForm.controls['title'].touched){
+            @if(habitatForm.controls['title'].invalid && habitatForm.controls['title'].touched){
               <div class="alert">Un titre est requis</div>
             }
           <textarea
             formControlName="description"
             cols="30"
             rows="10"></textarea>
-            @if(habitatForm.controls['description'].touched){
+            @if(habitatForm.controls['description'].invalid && habitatForm.controls['description'].touched){
               <div class="alert">Une description est requise</div>
             }
           <button class="add-btn">Modifier habitat</button>
