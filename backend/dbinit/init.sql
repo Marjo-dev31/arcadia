@@ -117,9 +117,9 @@ INSERT INTO roles VALUES
 (DEFAULT, 'Vétérinaire'),
 (DEFAULT, 'Employé');
 
-INSERT INTO animals VALUES	(DEFAULT, 'Frodon', (SELECT id FROM habitats WHERE title="La Savane"),(SELECT id FROM breeds WHERE name='Lion'));
-INSERT INTO animals VALUES	(DEFAULT, 'Frodon', (SELECT id FROM habitats WHERE title="La Jungle"),(SELECT id FROM breeds WHERE name='Toucan'));
-INSERT INTO animals VALUES	(DEFAULT, 'Frodon', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Rainette de White'));
+INSERT INTO animals VALUES	(DEFAULT, 'Edward', (SELECT id FROM habitats WHERE title="La Savane"),(SELECT id FROM breeds WHERE name='Lion'));
+INSERT INTO animals VALUES	(DEFAULT, 'Alphonse', (SELECT id FROM habitats WHERE title="La Jungle"),(SELECT id FROM breeds WHERE name='Toucan'));
+INSERT INTO animals VALUES	(DEFAULT, 'Winry', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Rainette de White'));
 
 
 INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$RH93CoU6ZtHhjm/5a4wlrelChPqtjqKZ8XaA6mfA01UXeh1GFAkcG', (SELECT id FROM roles WHERE name = 'Admin'));
