@@ -109,7 +109,7 @@ INSERT INTO breeds VALUES
 
 INSERT INTO services VALUES
 (DEFAULT, 'Visite guidée avec Manu', "Manu vous propose ses services afins de vous faire découvrir plus en détails l'habitat de votre choix. IL vous expliquera la vie au sein de celui-ci et décryptera pour vous la faune et la flore. Pensez à vous positionner dès votre arrivée au parc, les places sont limitées. Service gratuit."),
-(DEFAULT, 'Visite à bod du petit train', "A bord de notre petit train touristique faites le tour complet de la propriété. Tout au long du trajet vous découvrirez les différents habitats et au plus proche des animaux. Les réservations se font à l'accueil et un départ à lieu toutes les 45 minutes. Tarifs: 5€/adulte et 2€/enfant"),
+(DEFAULT, 'Visite à bord du petit train', "A bord de notre petit train touristique faites le tour complet de la propriété. Tout au long du trajet vous découvrirez les différents habitats et au plus proche des animaux. Les réservations se font à l'accueil et un départ à lieu toutes les 45 minutes. Tarifs: 5€/adulte et 2€/enfant"),
 (DEFAULT, 'Restauration', "Vous trouverez au sein du parc différents lieux de restauration. Faites une pause gourmande à la cahute aux crêpes, une halte aux snacks pour manger sur le pouce ou encore une coupure déjeuner au restaurant l'Arca-diner, qui se fera un plaisir de vous faire savourer une cuisine traditionnelle. Il y en a pour tous les budgets. A table!");
 
 INSERT INTO roles VALUES
@@ -118,3 +118,8 @@ INSERT INTO roles VALUES
 (DEFAULT, 'Employé');
 
 INSERT INTO animals VALUES	(DEFAULT, 'Frodon', (SELECT id FROM habitats WHERE title="La Savane"),(SELECT id FROM breeds WHERE name='Lion'));
+INSERT INTO animals VALUES	(DEFAULT, 'Frodon', (SELECT id FROM habitats WHERE title="La Jungle"),(SELECT id FROM breeds WHERE name='Toucan'));
+INSERT INTO animals VALUES	(DEFAULT, 'Frodon', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Rainette de White'));
+
+
+INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$RH93CoU6ZtHhjm/5a4wlrelChPqtjqKZ8XaA6mfA01UXeh1GFAkcG', (SELECT id FROM roles WHERE name = 'Admin'));
