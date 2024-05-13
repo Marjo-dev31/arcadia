@@ -55,7 +55,7 @@ services:
       DB_NAME: arcadiadb
       DB_PORT: 3306
       DB_CONNECTION_LIMIT: 20
-      MONGODB_URI: mongodb://admin:arcadiamongodb@localhost:27017/?directConnection=true&authMechanism=DEFAULT
+      MONGODB_URI: mongodb://admin:arcadiamongodb@mongodb:27017/?directConnection=true&authMechanism=DEFAULT
       MONGO_INITDB_DATABASE: arcadia
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: arcadiamongodb
