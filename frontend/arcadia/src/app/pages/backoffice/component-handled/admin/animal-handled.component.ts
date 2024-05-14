@@ -143,12 +143,24 @@ import { Breed } from '../../../../shared/models/breed.interface';
           <button class="add-btn">Modifier animal</button>
         </form>
   </section>
+  <section>
+    <h3>Ajouter une nouvelle race :</h3>
+    <form [formGroup]="breedForm" (ngSubmit)="addBreed()">
+      <input type="text" formControlName="name">
+      <button>Ajouter la race</button>
+    </form>
+    @if(breedForm.valid){
+      <p>Nouvelle race créée !</p>
+    }
+    <div></div>
+  </section>
   `,
   styleUrl: `../component-handled.component.css`,
 })
 export class AnimalHandledComponent implements OnInit {
 
   public updateForm: FormGroup
+  public breedForm: FormGroup
 
   constructor(public fb: FormBuilder) {
     this.updateForm = this.fb.group({
@@ -157,7 +169,13 @@ export class AnimalHandledComponent implements OnInit {
       breed: new FormControl('', [Validators.required]),
       id: new FormControl('')
     })
+
+    this.breedForm = this.fb.group({
+      name: new FormControl('', [Validators.required])
+    })
   };
+
+
 
   displayColums: string[] = [
     'firstname',
@@ -247,5 +265,9 @@ export class AnimalHandledComponent implements OnInit {
     this.habitats = response;
     console.log(this.habitats)
     })
+  }
+
+  addBreed(){
+    this.breedService.addBreed(this.breedForm.value).subscribe();
   }
 }
