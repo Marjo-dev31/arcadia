@@ -7,7 +7,7 @@ import httpStatus from "../domain/httpstatus.js";
 export const getAnimals = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
     database.query(QUERYANIMALS.SELECT_ANIMALS, (error, results) => {
-      if (!results[0]) {
+      if (!results) {
         res
           .status(httpStatus.OK.code)
           .send(
@@ -36,7 +36,7 @@ export const getAnimals = (req, res) => {
 export const getAnimal = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
   database.query(QUERYANIMALS.SELECT_ANIMAL, [req.params.id], (error, results) => {
-    if (!results[0]) {
+    if (!results) {
       res
         .status(httpStatus.NOT_FOUND.code)
         .send(
@@ -123,7 +123,7 @@ export const deleteAnimal = (req, res) => {
 export const updateAnimal = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
   database.query(QUERYANIMALS.SELECT_ANIMAL, [req.params.id], (error, results) => {
-    if (!results[0]) {
+    if (!results) {
       res
       .status(httpStatus.NOT_FOUND.code)
       .send(
