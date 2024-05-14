@@ -7,7 +7,7 @@ import httpStatus from "../domain/httpstatus.js";
 export const getReviews = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching reviews`);
     database.query(QUERYREVIEWS.SELECT_REVIEWS, (error, results) => {
-      if (!results[0]) {
+      if (!results) {
         res
           .status(httpStatus.OK.code)
           .send(
@@ -66,7 +66,7 @@ export const getReviews = (req, res) => {
 export const updateReview = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching review`);
   database.query(QUERYREVIEWS.SELECT_REVIEW, [req.params.id], (error, results) => {
-    if (!results[0]) {
+    if (!results) {
       res
       .status(httpStatus.NOT_FOUND.code)
       .send(

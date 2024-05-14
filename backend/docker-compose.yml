@@ -2,16 +2,17 @@ services:
   mysqldb:
     container_name: mysqlcontainer
     image: mysql:8.0.36
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: unless-stopped
     volumes: 
       - ./dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
-      - $HOME/database:/var/lib/mysql
+      - $HOME/database:/var/lib/mysql1
     ports:
       - 3307:3306
     expose:
       - 3306
     environment:
+      LANG: C.UTF-8
       MYSQL_DATABASE: arcadiadb
       MYSQL_USER: admin
       MYSQL_PASSWORD: mamou31
@@ -26,8 +27,8 @@ services:
     image: mongo:7.0.8
     restart: unless-stopped
     volumes:
-      - ./dbinit/mongo.init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-      - $HOME/database:/var/lib/mongodb
+      - ./dbinit/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - $HOME/database:/var/lib/mongodb1
     ports:
       - 27017:27017
     environment:
@@ -42,7 +43,7 @@ services:
     build: .
     image: nodeapp:v1
     ports:
-      - 8001:8000
+      - 8000:8000
     expose:
       - 8000
     depends_on:
