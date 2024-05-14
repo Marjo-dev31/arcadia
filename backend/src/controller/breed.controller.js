@@ -32,3 +32,33 @@ export const getBreed = (req, res) => {
       }
     });
 }
+
+export const addBreed = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, creating breed`);
+  database.query(QUERYBREEDS.CREATE_BREED, Object.values(req.body), (error, results) => {
+    if (!results) {
+      logger.error(error.message);
+      res
+        .status(httpStatus.INTERNAL_SERVER_ERROR.code)
+        .send(
+          new Response(
+            httpStatus.INTERNAL_SERVER_ERROR.code,
+            httpStatus.INTERNAL_SERVER_ERROR.status,
+            `Error occured`
+          )
+        );
+    } else {
+      const breed = {...req.body};
+        res
+          .status(httpStatus.CREATED.code)
+          .send(
+            new Response(
+              httpStatus.CREATED.code,
+              httpStatus.CREATED.status,
+              `Breed created`,
+              { breed }
+            )
+          );
+      }
+  })
+}

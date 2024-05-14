@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { BreedCreate } from "../../../shared/models/breed.interface";
 
 @Injectable()
 export class BreedService {
@@ -12,5 +13,8 @@ export class BreedService {
         return this.http.get(this.url);
     }
 
+    addBreed(breed: BreedCreate): Observable<any> {
+        return this.http.post(this.url, breed)
+    }
 
 }
