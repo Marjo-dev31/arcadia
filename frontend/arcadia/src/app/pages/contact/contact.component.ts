@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { MailService } from './services/mail.service';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
+  imports: [ReactiveFormsModule],
   template: `
     <main>
       <div>
@@ -10,8 +13,8 @@ import { Component, OnInit } from '@angular/core';
         <h3>Contactez-nous</h3>
       </div>
 
-      <form class="contact-form" action="">
-        <input type="text" id="password" name="password" placeholder="Titre" required />
+      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
+        <input type="text" placeholder="Titre"  formControlName="title"/>
 
         <textarea
           name="message"
@@ -19,10 +22,10 @@ import { Component, OnInit } from '@angular/core';
           cols="30"
           rows="10"
           placeholder="Votre message..."
-          required
+          formControlName="text"
         ></textarea>
 
-        <input type="email" id="email" name="email" placeholder="Email" required/>
+        <input type="email" id="email" name="email" placeholder="Email" formControlName="emailToResponse"/>
 
         <button>Envoyer</button>
       </form>
@@ -74,7 +77,25 @@ import { Component, OnInit } from '@angular/core';
   `,
 })
 export class ContactComponent implements OnInit {
-  constructor() {}
+
+  public contactForm: FormGroup
+
+  constructor(public fb:FormBuilder) {
+    this.contactForm = this.fb.group({
+      title: new FormControl('', [Validators.required]),
+      text: new FormControl('', [Validators.required]),
+      emailToResponse: new FormControl('', [Validators.required])
+    })
+  }
+
+  private readonly mailService = inject(MailService)
+
+
 
   ngOnInit() {}
+
+onSubmit(){
+  this.mailService.sendEmail(this.contactForm.value).subscribe();
+}
+
 }

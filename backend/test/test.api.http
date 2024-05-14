@@ -316,5 +316,7 @@ post http://localhost:8000/send
 Content-Type: application/json
 
 {
-    "text":"J envoie un mail"
+    "title":"Demande de renseignement",
+    "text":"J envoie un mail",
+    "emailToResponse":"test@test.com"
 }

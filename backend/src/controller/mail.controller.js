@@ -3,7 +3,14 @@ import { MailtrapClient } from "mailtrap";
 
 export const sendEmail = (req, res) => {
 
-const text = req.body.text
+const title = req.body.title;
+
+const text = req.body.text;
+
+const email = req.body.emailToResponse;
+
+const message = `${title}, mon message: ${text}, mon email: ${email}`
+
 
 const TOKEN = "d508c20e9958a513857dcf7d7954bcce";
 const ENDPOINT = "https://send.api.mailtrap.io/";
@@ -25,7 +32,7 @@ client
     from: sender,
     to: recipients,
     subject: "Demande de contact",
-    text: text,
+    text: message,
     category: "Integration Test",
   })
   .then(console.log, console.error);

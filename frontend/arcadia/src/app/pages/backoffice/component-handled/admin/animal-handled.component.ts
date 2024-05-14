@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Animal, AnimalCreate, Habitat } from '../../../../shared/models';
