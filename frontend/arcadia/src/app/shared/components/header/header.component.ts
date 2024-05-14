@@ -69,24 +69,9 @@ import { LoginService } from '../../../pages/login/service/login.service';
 export class HeaderComponent {
   showSideDrawer = false;
   title!: string;
-  // isLoggin: boolean = false;
   constructor(public route: Router) {}
 
   loginService = inject(LoginService);
-
-  // ngOnInit() {
-  //   this.getToken();
-  // }
-
-  // getToken() {
-  //   const token = localStorage.getItem('accessToken');
-  //   if (token) {
-  //     this.isLoggin = true;
-  //     return
-  //   }
-  //   this.isLoggin = false;
-  // }
-
 
 
   toggleSideDrawer() {
@@ -95,7 +80,6 @@ export class HeaderComponent {
 
   logout() {
     this.loginService.logout();
-    // this.isLoggin = false;
     this.route.navigateByUrl('/');
   }
 }

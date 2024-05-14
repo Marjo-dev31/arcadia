@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UserLogin } from "../../../shared/models/user.interface";
-import { Observable, map, tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 
 @Injectable()
 export class LoginService {

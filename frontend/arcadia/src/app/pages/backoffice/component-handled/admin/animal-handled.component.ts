@@ -108,7 +108,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
           <p class="alert">Un type de nourriture est requis</p>
         }
           <button class="add-btn">Enregistrer nouvel animal</button>
-          <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux !</p>
+          <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux</p>
         </form>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
