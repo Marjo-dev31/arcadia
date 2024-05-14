@@ -7,7 +7,7 @@ import httpStatus from "../domain/httpstatus.js";
 export const getHabitats = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching habitats`);
   database.query(QUERYHABITATS.SELECT_HABITATS, (error, results) => {
-    if (results.length <1) {
+    if (!results) {
       res
         .status(httpStatus.OK.code)
         .send(

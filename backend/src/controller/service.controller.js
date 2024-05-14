@@ -8,7 +8,7 @@ import httpStatus from "../domain/httpstatus.js";
 export const getServices = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching services get`);
   database.query(QUERYSERVICES.SELECT_SERVICES, (error, results) => {
-    if (!results[0]) {
+    if (!results) {
       res
         .status(httpStatus.OK.code)
         .send(
@@ -37,7 +37,7 @@ export const getServices = (req, res) => {
 export const getService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching service get`);
     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
-      if (!results[0]) {
+      if (!results) {
         res
           .status(httpStatus.NOT_FOUND.code)
           .send(
@@ -98,7 +98,7 @@ export const addService = (req, res) => {
   export const updateService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching service put`);
     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
-      if (!results[0]) {
+      if (!results) {
         res
         .status(httpStatus.NOT_FOUND.code)
         .send(

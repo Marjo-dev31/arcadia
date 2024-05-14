@@ -1,5 +1,7 @@
+DROP DATABASE IF EXISTS arcadiadb; 
+
 CREATE DATABASE IF NOT EXISTS arcadiadb;
--- if arcadiabd exists, change the name or delete with DROP DATABASE IF EXISTS arcadiadb  
+-- if arcadiabd exists, change the name or delete with   
 
 USE arcadiadb;
 
@@ -20,8 +22,8 @@ CREATE TABLE animals (
     firstname VARCHAR(50) NOT NULL UNIQUE,
     id_habitat VARCHAR(36),
     id_breed VARCHAR(36),
-    FOREIGN KEY (id_habitat) REFERENCES habitats(id) DELETE ON CASCADE,
-    FOREIGN KEY (id_breed) REFERENCES breeds(id) DELETE ON CASCADE
+    FOREIGN KEY (id_habitat) REFERENCES habitats(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_breed) REFERENCES breeds(id) ON DELETE CASCADE
 );
 
 CREATE TABLE services (
@@ -75,9 +77,9 @@ CREATE TABLE images (
     id_animal VARCHAR(36)  NULL,
     id_habitat VARCHAR(36)  NULL,
     id_service VARCHAR(36) NULL,
-    FOREIGN KEY (id_animal) REFERENCES animals(id) DELETE ON CASCADE,
-    FOREIGN KEY (id_habitat) REFERENCES habitats(id) DELETE ON CASCADE,
-    FOREIGN KEY (id_service) REFERENCES services(id) DELETE ON CASCADE
+    FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_habitat) REFERENCES habitats(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_service) REFERENCES services(id) ON DELETE CASCADE
 );
 
 CREATE TABLE reviews (
@@ -87,7 +89,7 @@ CREATE TABLE reviews (
     date DATE NOT NULL,
     status BOOLEAN NOT NULL,
     id_employee VARCHAR(36) NULL,
-    FOREIGN KEY (id_employee) REFERENCES users(id) DELETE ON SET NULL
+    FOREIGN KEY (id_employee) REFERENCES users(id) ON DELETE SET NULL
 );
 
 INSERT INTO habitats VALUES 
