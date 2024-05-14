@@ -300,3 +300,12 @@ Content-Type: application/json
 {
     "firstname":"Boromi",
 }
+
+###
+
+post http://localhost:8000/breeds
+Content-Type: application/json
+
+{
+    "name":"Gorille"
+}

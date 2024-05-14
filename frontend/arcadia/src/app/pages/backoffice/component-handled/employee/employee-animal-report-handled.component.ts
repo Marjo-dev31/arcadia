@@ -75,10 +75,12 @@ import { tap } from 'rxjs';
         name="addform"
         (ngSubmit)="onSubmit(form)"
       >
+        <label for="food">Nourriture recommandée :</label>
         <input
           type="text"
           placeholder="Aliments données"
           name="food"
+          id="food"
           [(ngModel)]="newReport.food"
           #food="ngModel"
           required
@@ -86,10 +88,12 @@ import { tap } from 'rxjs';
         @if(food.invalid && food.touched){
           <p class="alert">Un type de nourriture est requis</p>
         }
+        <label for="grammage">Poids (en g) :</label>
         <input
           type="text"
           placeholder="Grammage donné"
           name="grammage"
+          id="grammage"
           [(ngModel)]="newReport.grammage"
           #grammage="ngModel"
           required
@@ -123,14 +127,18 @@ import { tap } from 'rxjs';
         class="add-form"
         [formGroup]="updateForm"
         (ngSubmit)="updateReport(selectedAnimalOption)">
+        <label for="food">Nourriture recommandée :</label>
         <input
           type="text"
-          formControlName="food"/>
+          formControlName="food"
+          id="food"/>
           @if(updateForm.controls['food'].invalid && updateForm.controls['food'].touched){
               <div class="alert">Une type de nourriture est requis</div>
             }
+        <label for="grammage">Poids (en g) :</label>
         <input
           type="text"
+          id="grammage"
           formControlName="grammage"/>
           @if(updateForm.controls['grammage'].invalid && updateForm.controls['grammage'].touched){
               <div class="alert">Un grammage est requis</div>

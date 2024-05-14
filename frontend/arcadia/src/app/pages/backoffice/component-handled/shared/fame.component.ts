@@ -41,13 +41,12 @@ import { MatIconModule } from "@angular/material/icon";
     @if( role === 'Admin'){
     <h3>Ajouter un animal pour connaître sa popularité :</h3>
     <form #form="ngForm" name="addForm" (ngSubmit)="addAnimalOnMongo()">
-        <label for="firstname" >Prénom</label>
+        <label for="firstname" >Prénom :</label>
         <input type="text" name="firstname" [(ngModel)]="newAnimal.firstname" #firstname="ngModel" required>
         @if(firstname.invalid && firstname.touched){
             <p class="alert">Un Prénom est requis</p>
         }
-        <button>Annuler</button>
-        <button>Valider</button>
+        <button>Ajouter</button>
     </form>
 }
     `,
@@ -96,7 +95,7 @@ export class FameComponent implements OnInit {
 
     addAnimalOnMongo(){
         this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe(); 
-        // this.newAnimal.firstname = '';
+        this.newAnimal.firstname = '';
     }
 
     deleteAnimal(id: string){
