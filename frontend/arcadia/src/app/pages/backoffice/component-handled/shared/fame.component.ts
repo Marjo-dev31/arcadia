@@ -3,7 +3,7 @@ import { ClickService } from "../../../animals/services/click.service";
 import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../shared/models";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatSortModule, MatSort } from "@angular/material/sort";
-import { FormsModule, NgForm} from "@angular/forms";
+import { FormsModule} from "@angular/forms";
 import { tap } from "rxjs";
 import { MatIconModule } from "@angular/material/icon";
 
@@ -16,17 +16,17 @@ import { MatIconModule } from "@angular/material/icon";
     @if(responsemessage === 'No animal found'){
         <p>Il n'y a pas d'animal</p>
     }
-    <table mat-table [dataSource]="datasource" matSort matSortActive="click" matSortDirection="desc">
+    <table mat-table [dataSource]="datasource" matSort matSortActive="clickCount" matSortDisableClear >
         <ng-container matColumnDef="firstname">
             <th mat-header-cell *matHeaderCellDef >Prénom</th>
             <td mat-cell *matCellDef="let animal">{{ animal.firstname }}</td>
         </ng-container>
-        <ng-container matColumnDef="click">
+        <ng-container matColumnDef="clickCount">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de click</th>
             <td mat-cell *matCellDef="let animal">{{ animal.clickCount }}</td>
         </ng-container>
         <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Supprimer</th>
+            <th mat-header-cell *matHeaderCellDef>Supprimer</th>
             <td mat-cell *matCellDef="let animal">
             @if(role === 'Admin'){
                 <mat-icon (click)="deleteAnimal(animal._id)">delete</mat-icon>
@@ -56,7 +56,7 @@ import { MatIconModule } from "@angular/material/icon";
 export class FameComponent implements OnInit {
     constructor(){}
 
-    displayColums: string[] = ['firstname','click', 'delete'];
+    displayColums: string[] = ['firstname','clickCount', 'delete'];
 
     private readonly clickService = inject(ClickService);
 
@@ -95,7 +95,7 @@ export class FameComponent implements OnInit {
 
     addAnimalOnMongo(){
         this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe(); 
-        this.newAnimal.firstname = '';
+        // this.newAnimal.firstname = '';
     }
 
     deleteAnimal(id: string){
