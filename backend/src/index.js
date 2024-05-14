@@ -20,6 +20,7 @@ import loginRoutes from "./route/login.route.js";
 import connectDB from "./config/mongodb.config.js";
 import clickRoutes from "./route/click.route.js";
 import openingRoutes from "./route/opening.route.js";
+import sendRoutes from "./route/send.route.js";
 
 
 
@@ -48,7 +49,8 @@ app.use('/employees', employeeRoutes);
 app.use('/roles', roleRoutes);
 app.use('/login', loginRoutes);
 app.use('/click', clickRoutes);
-app.use('/opening', openingRoutes)
+app.use('/opening', openingRoutes);
+app.use('/send', sendRoutes);
 
 // app.use(require('body-parser').json());
 
