@@ -72,23 +72,24 @@ import { UserService } from '../../../login/service/user.service';
           #password="ngModel"
           required
           minlength="8"
+          pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/"
         />
         @if(password.invalid && (password.dirty || password.touched)){
           @if(password.errors?.['required']){
             <p class="alert">Un mot de passe est requis</p>
           }
-          @else if(password.errors?.['minlength']){
+          @if(password.errors?.['minlength']){
             <p class="alert">Le mot de passe doit contenir au moins 8 caractères</p>
           }
-          @else {
-            <p class="alert">Une erreur est survenue, vérifiez votre saisie</p>
+          @if(password.errors?.['pattern']){
+            <p>Le mot de passe doit contenir au moins 8 charactères dont une majuscule, une minuscule, un chiffre et un caractère spécial</p>
           }
         }
         <label for="confirmPassword">Confirmer mot de passe :</label>
         <input type="password" name="confirmPassword" id="confirm-password" [(ngModel)]="confirmPassword"  #confirmPassword="ngModel" required/>
         @if(confirmPassword.touched){
           @if(confirmPassword.errors?.['required']){
-            <p class="alert">Un mot de passe est requis</p>
+            <p class="alert">Une confirmation du mot de passe est requise</p>
           }
           @else if(password.value !== confirmPassword.value) {
             <p class="alert">Le mot de passe ne correspond pas à la confirmation de mot de passe.</p>
