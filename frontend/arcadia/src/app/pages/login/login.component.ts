@@ -33,10 +33,10 @@ import { LoginService } from './service/login.service';
         }
         <div>
           <label for="password">Mot de passe :</label>
-          <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required/>
+          <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required minlength="8"/>
         </div>
         @if(password.invalid && password.touched){
-          <p class="alert">Un Email est requis</p>
+          <p class="alert">Mot de passe invalide</p>
         }
         <button>Se connecter</button>
       </form>
