@@ -103,10 +103,12 @@ import { UserService } from '../../../login/service/user.service';
         name="addform"
         (ngSubmit)="onSubmit(form)"
       >
+        <label for="food">Nourriture recommandée :</label>
         <input
           type="text"
           placeholder="Aliments recommandés"
           name="food"
+          id="food"
           [(ngModel)]="newReport.food"
           #food="ngModel"
           required
@@ -114,10 +116,12 @@ import { UserService } from '../../../login/service/user.service';
         @if(food.invalid && food.touched){
           <p class="alert">Un type de nourriture est requis</p>
         }
+        <label for="grammage">Poids (en g) :</label>
         <input
           type="text"
           placeholder="Grammage recommandé"
           name="grammage"
+          id="grammage"
           [(ngModel)]="newReport.grammage"
           #grammage="ngModel"
           required
@@ -125,10 +129,12 @@ import { UserService } from '../../../login/service/user.service';
         @if(grammage.invalid && grammage.touched){
           <p class="alert">Un grammage est requis</p>
         }
+        <label for="health">Etat de santé général :</label>
         <input
           type="text"
           placeholder="Etat de santé actuel"
           name="health"
+          id="health"
           [(ngModel)]="newReport.health"
           #health="ngModel"
           required
@@ -136,9 +142,11 @@ import { UserService } from '../../../login/service/user.service';
         @if(health.invalid && health.touched){
           <p class="alert">Un état de santé est requis</p>
         }
+        <label for="details">Détails de santé :</label>
         <textarea
           name="details_condition"
-          placeholder="Détails de la condition physique(optionnel)"
+          id="details"
+          placeholder="Détails de la condition physique"
           cols="30"
           rows="10"
           [(ngModel)]="newReport.details_condition"
@@ -170,26 +178,34 @@ import { UserService } from '../../../login/service/user.service';
         class="add-form"
         [formGroup]="updateForm"
         (ngSubmit)="updateReport(selectedAnimalOption)">
+        <label for="food">Nourriture recommandée :</label>
         <input
           type="text"
-          formControlName="food"/>
+          formControlName="food"
+          id="food"/>
           @if(updateForm.controls['food'].invalid && updateForm.controls['food'].touched){
               <div class="alert">Un type de nourriture est requis</div>
             }
+        <label for="grammage">Poids (en g) :</label>
         <input
           type="text"
-          formControlName="grammage"/>
+          formControlName="grammage"
+          id="grammage"/>
           @if(updateForm.controls['grammage'].invalid && updateForm.controls['grammage'].touched){
               <div class="alert">Un grammage est requis</div>
             }
+        <label for="health">Etat de santé général :</label>
         <input
           type="text"
-          formControlName="health"/>
+          formControlName="health"
+          id="health"/>
           @if(updateForm.controls['health'].invalid && updateForm.controls['health'].touched){
               <div class="alert">Un état de santé est requis</div>
             }
+        <label for="details">Détails de santé :</label>
         <textarea
           formControlName="details_condition"
+          id="details"
           cols="30"
           rows="10"></textarea>
         <label for="animal">Sélectionner un animal : </label>
