@@ -19,8 +19,8 @@ habitatRoutes.route('/:id')
 .delete(authenticateToken, verifyRoles('Admin'), deleteHabitat)
 
 habitatRoutes.route('/:id/comment')
-.put(authenticateToken, verifyRoles('Vétérinaire'), addComment)
-.delete(authenticateToken, verifyRoles('Vétérinaire'), deleteComment)
+.put(authenticateToken, verifyRoles('Admin', 'Vétérinaire'), addComment)
+.delete(authenticateToken, verifyRoles('Admin', 'Vétérinaire'), deleteComment)
 
 
 
