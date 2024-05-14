@@ -19,7 +19,6 @@ import { ClickService } from '../animals/services/click.service';
         Au sein des vastes étendues d'Arcadia, découvrez des habitats conçus
         pour le bien-être de nos animaux.
       </h2>
-      <!-- <div>{{ animalsOnMongoByFirstname.clickCount }}</div> -->
       <section class="habitats">
         @if(habitats && habitats.length) {
         @for (habitat of habitats; track habitat) {
@@ -78,7 +77,6 @@ export class HabitatsComponent implements OnInit {
   getAnimalsByHabitat(id: string) {
     this.animalService.getAnimalsByHabitat(id).subscribe((response)=> {
     this.animals = response.data.animals
-    
     })
   }
 
@@ -92,7 +90,7 @@ export class HabitatsComponent implements OnInit {
       width: '400px',
       data: {animal: animal},
     });
-    // console.log(animal.firstname)
+    console.log(animal)
     this.addClick(animal.firstname);
   }
 
