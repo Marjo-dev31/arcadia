@@ -73,6 +73,7 @@ export class ConnexionComponent implements OnInit {
     try{
     localStorage.setItem('accessToken', response.data.accessToken)
     localStorage.setItem('role', response.data.user.name)
+    localStorage.setItem('firstname', response.data.user.firstname)
     this.router.navigate(['/espacepersonnel'])
   } catch(error) {
     this.responseMessage = response.message
