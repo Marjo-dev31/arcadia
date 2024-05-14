@@ -124,4 +124,4 @@ INSERT INTO animals VALUES	(DEFAULT, 'Alphonse', (SELECT id FROM habitats WHERE 
 INSERT INTO animals VALUES	(DEFAULT, 'Winry', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Rainette de White'));
 
 
-INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$RH93CoU6ZtHhjm/5a4wlrelChPqtjqKZ8XaA6mfA01UXeh1GFAkcG', (SELECT id FROM roles WHERE name = 'Admin'));
+INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$pQBkrsu5.htIin8ao1xpvuHP48FP7VJQgEvnPkM2kyXteCLz62Mu2', (SELECT id FROM roles WHERE name = 'Admin'));
