@@ -309,3 +309,12 @@ Content-Type: application/json
 {
     "name":"Gorille"
 }
+
+###
+
+post http://localhost:8000/send
+Content-Type: application/json
+
+{
+    "text":"J envoie un mail"
+}
