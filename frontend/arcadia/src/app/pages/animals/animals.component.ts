@@ -21,7 +21,7 @@ import {
             <p>Son prénom: {{ animal.firstname }}</p>
             <p>Sa race: {{ animal.breed }}</p>
             <div>
-              <p>Son état de santé actuel: {{ animal.veterinary_report }}</p>
+              <p>Son état de santé actuel: {{ animal.health }}</p>
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@ export class AnimalsComponent implements OnInit {
 
 
   ngOnInit() {
-
+console.log(this.data)
   }
 
 }

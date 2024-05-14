@@ -6,8 +6,7 @@ export interface Animal {
     breed: string,
     id_breed: string,
     image_url: string [],
-    veterinary_report?: unknown [],
-    employee_report?: unknown [],
+    health?: string [],
 }
 
 export interface AnimalCreate {
