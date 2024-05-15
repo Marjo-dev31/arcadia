@@ -41,7 +41,7 @@ import { LoginService } from './service/login.service';
         <button>Se connecter</button>
       </form>
       <div class="password-forgot">
-        <a href="" id="password-forgot-link">Mot de passe oublié ?</a>
+        <a [routerLink]="['/mdpoublie']" id="password-forgot-link">Mot de passe oublié ?</a>
       </div>
       <div>
         <h3>
