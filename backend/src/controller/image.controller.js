@@ -100,33 +100,6 @@ export const deleteImage = (req, res) => {
 
 // create, update, read images-services
 
-// export const getServicesImages = (req, res) => {
-//   logger.info(`${req.method} ${req.originalUrl}, fetching images list `);
-//   database.query(QUERYIMAGES.SELECT_SERVICES_IMAGES, (error, results) => {
-//     if (!results[0]) {
-//       res
-//         .status(httpStatus.OK.code)
-//         .send(
-//           new Response(
-//             httpStatus.OK.code,
-//             httpStatus.OK.status,
-//             `No images found`
-//           )
-//         );
-//     } else {
-//       res
-//         .status(httpStatus.OK.code)
-//         .send(
-//           new Response(
-//             httpStatus.OK.code,
-//             httpStatus.OK.status,
-//             `Images retrieved`,
-//             { images: results }
-//           )
-//         );
-//     }
-//   });
-// };
 
 export const addServiceImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);
@@ -166,89 +139,6 @@ export const addServiceImage = (req, res) => {
     }
   );
 };
-
-// export const updateServiceImage = (req, res) => {
-//   logger.info(`${req.method} ${req.originalUrl}, fetching image `);
-//   database.query(
-//     QUERYIMAGES.SELECT_IMAGE,
-//     [req.params.id],
-//     (error, results) => {
-//       console.log(results);
-//       if (!results[0]) {
-//         res
-//           .status(httpStatus.NOT_FOUND.code)
-//           .send(
-//             new Response(
-//               httpStatus.NOT_FOUND.code,
-//               httpStatus.NOT_FOUND.status,
-//               `Image by id ${req.params.id} was not found !`
-//             )
-//           );
-//       } else {
-//         logger.info(`${req.method} ${req.originalUrl}, updating image`);
-//         database.query(
-//           QUERYIMAGES.UPDATE_SERVICE_IMAGE,
-//           [...Object.values(req.body), req.params.id],
-//           (error, results) => {
-//             if (!error) {
-//               res
-//                 .status(httpStatus.OK.code)
-//                 .send(
-//                   new Response(
-//                     httpStatus.OK.code,
-//                     httpStatus.OK.status,
-//                     `Image updated`,
-//                     { ...req.body }
-//                   )
-//                 );
-//             } else {
-//               logger.error(error.message);
-//               res
-//                 .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-//                 .send(
-//                   new Response(
-//                     httpStatus.INTERNAL_SERVER_ERROR.code,
-//                     httpStatus.INTERNAL_SERVER_ERROR.status,
-//                     `Error occured`
-//                   )
-//                 );
-//             }
-//           }
-//         );
-//       }
-//     }
-//   );
-// };
-
-// read, create images-habitats
-
-// export const getHabitatsImages = (req, res) => {
-//   logger.info(`${req.method} ${req.originalUrl}, fetching images list `);
-//   database.query(QUERYIMAGES.SELECT_HABITATS_IMAGES, (error, results) => {
-//     if (!results[0]) {
-//       res
-//         .status(httpStatus.OK.code)
-//         .send(
-//           new Response(
-//             httpStatus.OK.code,
-//             httpStatus.OK.status,
-//             `No images found`
-//           )
-//         );
-//     } else {
-//       res
-//         .status(httpStatus.OK.code)
-//         .send(
-//           new Response(
-//             httpStatus.OK.code,
-//             httpStatus.OK.status,
-//             `Images retrieved`,
-//             { images: results }
-//           )
-//         );
-//     }
-//   });
-// };
 
 export const addHabitatImage = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, creating image `);

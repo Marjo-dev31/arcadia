@@ -42,7 +42,6 @@ export class AnimalsComponent implements OnInit {
 
 
   ngOnInit() {
-console.log(this.data)
   }
 
 }

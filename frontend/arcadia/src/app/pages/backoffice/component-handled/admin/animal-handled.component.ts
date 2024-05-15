@@ -263,7 +263,7 @@ export class AnimalHandledComponent implements OnInit {
   getHabitat(){
     this.habitatService.getHabitats().then((response) => {
     this.habitats = response;
-    console.log(this.habitats)
+
     })
   }
 
