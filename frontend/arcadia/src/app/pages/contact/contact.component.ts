@@ -15,7 +15,9 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 
       <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
         <input type="text" placeholder="Titre"  formControlName="title"/>
-
+        @if(contactForm.controls['title'].invalid && contactForm.controls['title'].touched){
+          <p class="alert">Un titre est requis</p>
+        }
         <textarea
           name="message"
           id="message"
@@ -24,9 +26,13 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
           placeholder="Votre message..."
           formControlName="text"
         ></textarea>
-
+        @if(contactForm.controls['text'].invalid && contactForm.controls['text'].touched){
+          <p class="alert">Un message est requis</p>
+        }
         <input type="email" id="email" name="email" placeholder="Email" formControlName="emailToResponse"/>
-
+        @if(contactForm.controls['emailToResponse'].invalid && contactForm.controls['emailToResponse'].touched){
+          <p class="alert">Une adresse mail est requise</p>
+        }
         <button>Envoyer</button>
       </form>
     </main>
@@ -51,14 +57,11 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
   backdrop-filter: blur(2px);
 }
 
-.contact-form > * {
+.contact-form input,
+.contact-form textarea {
   margin: 1rem;
   border: none;
   border-bottom: 2px solid var(--color-font);
-}
-
-.contact-form input,
-.contact-form textarea {
   width: 100%;
   padding: 0 0.5rem;
   background-color: rgba(70, 46, 1, 0);
