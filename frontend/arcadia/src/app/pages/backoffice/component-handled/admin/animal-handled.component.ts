@@ -70,7 +70,12 @@ import { Breed } from '../../../../shared/models/breed.interface';
       <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
       <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
-    <mat-icon class="add-icon" (click)="toggleAddForm()">add_circle_outline</mat-icon>
+    @if(!addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()" >add_circle_outline</mat-icon>
+    }
+    @if(addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()" >remove_circle_outline</mat-icon>
+    }
   </section>
   <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
         <form
@@ -142,17 +147,20 @@ import { Breed } from '../../../../shared/models/breed.interface';
             }
           <button class="add-btn">Modifier animal</button>
         </form>
+        <mat-icon class="add-icon" (click)="closeUpdateForm()" >remove_circle_outline</mat-icon>
   </section>
   <section>
     <h3>Ajouter une nouvelle race :</h3>
     <form [formGroup]="breedForm" (ngSubmit)="addBreed()">
       <input type="text" formControlName="name">
+      @if(breedForm.controls['name'].invalid && breedForm.controls['name'].touched){
+        <p class="alert">Une race est requise</p>
+      }
       <button>Ajouter la race</button>
     </form>
-    @if(breedForm.valid){
+    @if(submitted){
       <p>Nouvelle race créée !</p>
     }
-    <div></div>
   </section>
   `,
   styleUrl: `../component-handled.component.css`,
@@ -203,6 +211,7 @@ export class AnimalHandledComponent implements OnInit {
 
   addFormIsDisplay: boolean = false;
   updateFormIsDisplay: boolean = false;
+  submitted: boolean = false
 
   ngOnInit() {
     this.getAnimals();
@@ -269,5 +278,10 @@ export class AnimalHandledComponent implements OnInit {
 
   addBreed(){
     this.breedService.addBreed(this.breedForm.value).subscribe();
+    this.submitted = true
+  }
+
+  closeUpdateForm(){
+    this.updateFormIsDisplay = !this.updateFormIsDisplay
   }
 }

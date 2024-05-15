@@ -65,8 +65,16 @@ import { tap } from 'rxjs';
       </table>
     }}
     @if(role === 'Employé'){
-    <mat-icon class="add-icon" (click)="toggleAddForm()">add_circle_outline</mat-icon>
-  }
+      @if(!addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()"
+        >add_circle_outline</mat-icon
+      >
+      } 
+        @if(addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()"
+        >remove_circle_outline</mat-icon
+      >
+  }}
   </section>
   <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
       <form
@@ -162,8 +170,10 @@ import { tap } from 'rxjs';
               <div class="alert">Un rapporteur est requis</div>
             }
         <button class="add-btn">Modifier rapport</button>
-        <button>Annuler</button>
       </form>
+      <mat-icon class="add-icon" (click)="closeUpdateForm()"
+        >remove_circle_outline</mat-icon
+      >
   </section>
   `,
   styleUrl: `../component-handled.component.css`,
@@ -275,4 +285,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     this.employeeService.deleteEmployeeReport(id).pipe(tap(() => {this.getEmployeeReports(id)})).subscribe()
   }
 
+  closeUpdateForm(){
+    this.updateFormIsDisplay = !this.updateFormIsDisplay
+  }
   }

@@ -32,15 +32,24 @@ import { NgStyle } from '@angular/common';
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Supprimer</th>
           <td mat-cell *matCellDef="let habitat">
+          @if(role === 'Vétérinaire'){
             <mat-icon (click)="deleteComment(habitat.id)">delete</mat-icon>
+          } @else {
+            <p>Non autorisé</p>
+          }
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
       </table>
-      <mat-icon class="add-icon" (click)="toggleAddForm()"
-        >add_circle_outline</mat-icon
-      >
+      @if(role === "Vétérinaire"){
+        @if(!addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()" >add_circle_outline</mat-icon>
+    }
+    @if(addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()" >remove_circle_outline</mat-icon>
+    }
+      }
     </section>
     <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
       <form
@@ -60,7 +69,7 @@ import { NgStyle } from '@angular/common';
           formControlName="comment"
           cols="30"
           rows="5"
-          placeholder="Ajouter votre commentaire ici"
+          placeholder="Ajouter ou mettre à jour votre commentaire ici"
         ></textarea>
         @if(commentForm.controls['comment'].invalid && commentForm.controls['comment'].touched){
         <div class="alert">Un commentaire est requis</div>
@@ -81,10 +90,9 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
   }
 
   displayColums: string[] = ['habitat', 'comment', 'actions'];
-
   datasource!: Habitat[];
-
   report!: string[];
+  role: string = localStorage.getItem('role') || '';
 
   private readonly habitatService = inject(HabitatsService);
 

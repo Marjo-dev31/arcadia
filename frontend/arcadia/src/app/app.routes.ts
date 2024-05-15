@@ -34,7 +34,7 @@ export const routes: Routes = [
       { path: 'animaux', component: AnimalHandledComponent, data: {expectedRoles: ['Admin']} },
       { path: 'avis', component: ReviewHandledComponent, data: {expectedRoles: ['Admin', 'Employé']} },
       { path: 'creationdecompte', component: AccountHandledComponent, data: {expectedRoles: ['Admin']} },
-      { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent, data: {expectedRoles: ['Admin', 'Vétérinaire']} },
+      { path: 'rapportveterinaire', component: VeterinaryReportHandledComponent, data: {expectedRoles: ['Admin', 'Vétérinaire', 'Employé']} },
       { path: 'rapportemploye', component: EmployeeReportHandledComponent, data: {expectedRoles: ['Admin', 'Employé', 'Vétérinaire']}},
       { path: 'horaires', component: OpeningComponent, data: {expectedRoles: ['Admin']} },
       { path: 'popularite', component: FameComponent, data: {expectedRoles: ['Admin', 'Vétérinaire']} },
