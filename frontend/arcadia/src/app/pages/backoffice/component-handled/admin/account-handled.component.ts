@@ -97,7 +97,7 @@ import { UserService } from '../../../login/service/user.service';
         </div>
       </form>
     </div>
-    @if(form.submitted){
+    @if(form.valid && form.submitted){
       <div class="alert">Le compte a été créé</div>
     }
     <div  class="alert-form" id="alert" [ngStyle]="{display: 'none'}">Une erreur est survenue, vérifiez votre saisie.</div>
@@ -137,13 +137,12 @@ export class AccountHandledComponent implements OnInit {
     const alert = document.getElementById('alert');
     if(alert){
       if(this.form.invalid) {
-        console.log(this.form.errors)
         alert.style.display = "block"
-      } else {
+      }
         alert.style.display = "none"
         this.newUser.id_role = this.selectedRoleOption;
         this.userService.addUser(this.newUser).subscribe();
         form.reset()
     }}
-  }
+
 }

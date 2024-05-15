@@ -78,7 +78,6 @@ export const updateEmployeeReport = (req, res) => {
           );
         } else {
           logger.info(`${req.method} ${req.originalUrl}, updating report`);
-          console.log(req.body)
           database.query(QUERYEMPLOYEES.UPDATE_REPORT, [...Object.values(req.body), req.params.id], (error, results) => {
         if(!error) {
               res

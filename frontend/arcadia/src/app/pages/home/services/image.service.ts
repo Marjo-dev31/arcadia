@@ -20,7 +20,6 @@ addHabitatImage(image: any, id: string): Observable<any> {
 };
 
 addAnimalImage(image: any, id: string): Observable<any> {
-  console.log(image)
   return this.http.post(`${this.url}/animal/${id}`, image )
 }
 
