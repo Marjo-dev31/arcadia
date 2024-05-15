@@ -12,7 +12,9 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
         <h2>Vous avez des questions ? Des suggestions ?</h2>
         <h3>Contactez-nous</h3>
       </div>
-
+      @if(submitted){
+        <p class="alert">Demande de contact envoyé !</p>
+      }
       <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
         <input type="text" placeholder="Titre"  formControlName="title"/>
         @if(contactForm.controls['title'].invalid && contactForm.controls['title'].touched){
@@ -81,24 +83,26 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 })
 export class ContactComponent implements OnInit {
 
-  public contactForm: FormGroup
+  public contactForm: FormGroup;
 
   constructor(public fb:FormBuilder) {
     this.contactForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       text: new FormControl('', [Validators.required]),
-      emailToResponse: new FormControl('', [Validators.required])
+      emailToResponse: new FormControl('', [Validators.required, Validators.email])
     })
-  }
+  };
 
-  private readonly mailService = inject(MailService)
+  private readonly mailService = inject(MailService);
 
-
+  submitted = false;
 
   ngOnInit() {}
 
 onSubmit(){
   this.mailService.sendEmail(this.contactForm.value).subscribe();
-}
+  this.submitted = true;
+  this.contactForm.reset()
+};
 
 }

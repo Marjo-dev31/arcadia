@@ -4,11 +4,8 @@ import { MailtrapClient } from "mailtrap";
 export const sendEmail = (req, res) => {
 
 const title = req.body.title;
-
 const text = req.body.text;
-
 const email = req.body.emailToResponse;
-
 const message = `${title}, mon message: ${text}, mon email: ${email}`
 
 
