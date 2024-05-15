@@ -1,24 +1,38 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { Service, ServiceCreate } from '../../../../shared/models/service.interface';
+import {
+  Service,
+  ServiceCreate,
+} from '../../../../shared/models/service.interface';
 import { ServiceService } from '../../../services/service/service.service';
-import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  FormsModule,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { NgStyle } from '@angular/common';
 import { tap } from 'rxjs';
 import { ImageService } from '../../../home/services/image.service';
 
-
-
 @Component({
   selector: 'app-service-handled',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, ReactiveFormsModule, NgStyle, FormsModule],
+  imports: [
+    MatTableModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    NgStyle,
+    FormsModule,
+  ],
   template: `
     <h3>Services</h3>
     <section>
       @if(datasource && datasource.length === 0){
-        <p>Il n'y a pas de service</p>
+      <p>Il n'y a pas de service</p>
       }
       <table mat-table [dataSource]="datasource">
         <ng-container matColumnDef="title">
@@ -32,105 +46,116 @@ import { ImageService } from '../../../home/services/image.service';
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Photo</th>
           <td mat-cell *matCellDef="let service">
-          @if( service.image_url){
+            @if( service.image_url){
             <div class="delete-img">
               <div>{{ service.image_url }}</div>
-              <mat-icon class="mat-icon-clear" (click)="deleteImage(service.image_id)">clear</mat-icon>
-            </div>} @else {
-              <p>Il n'y a pas encore de photo associé à cet habitat</p>
+              <mat-icon
+                class="mat-icon-clear"
+                (click)="deleteImage(service.image_id)"
+                >clear</mat-icon
+              >
+            </div>
+            } @else {
+            <p>Il n'y a pas encore de photo associé à cet habitat</p>
             }
-            <input type="file" class="file-input" (change)="onFileChange($event, service.id)" >
+            <input
+              type="file"
+              class="file-input"
+              (change)="onFileChange($event, service.id)"
+            />
           </td>
         </ng-container>
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let service">
             <mat-icon (click)="editService(service.id)">create</mat-icon>
-            <mat-icon (click)="deleteService(service.id)" >delete</mat-icon>
-            
+            <mat-icon (click)="deleteService(service.id)">delete</mat-icon>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
       </table>
+      @if(!addFormIsDisplay){
       <mat-icon class="add-icon" (click)="toggleAddForm()"
         >add_circle_outline</mat-icon
       >
+      } @if(addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()"
+        >remove_circle_outline</mat-icon
+      >
+      }
     </section>
     <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
-        <form
-          class="add-form"
-          #form="ngForm"
-          name="addform"
-          (ngSubmit)="onSubmit()"
-        >
-          <input
-            type="text"
-            placeholder="Titre"
-            name="title"
-            [(ngModel)]="newService.title"
-            #title="ngModel"
-            required
-          />
-          @if(title.invalid && title.touched){
-          <p class="alert">Un type de nourriture est requis</p>
+      <form
+        class="add-form"
+        #form="ngForm"
+        name="addform"
+        (ngSubmit)="onSubmit()"
+      >
+        <input
+          type="text"
+          placeholder="Titre"
+          name="title"
+          [(ngModel)]="newService.title"
+          #title="ngModel"
+          required
+        />
+        @if(title.invalid && title.touched){
+        <p class="alert">Un type de nourriture est requis</p>
         }
-          <textarea
-            name="description"
-            placeholder="Description"
-            cols="30"
-            rows="10"
-            [(ngModel)]="newService.description"
-            #description="ngModel"
-            required
-          ></textarea>
-          @if(description.invalid && description.touched){
-          <p class="alert">Un type de nourriture est requis</p>
+        <textarea
+          name="description"
+          placeholder="Description"
+          cols="30"
+          rows="10"
+          [(ngModel)]="newService.description"
+          #description="ngModel"
+          required
+        ></textarea>
+        @if(description.invalid && description.touched){
+        <p class="alert">Un type de nourriture est requis</p>
         }
-          <button class="add-btn">Enregistrer nouveau service</button>
-        </form>
+        <button class="add-btn">Enregistrer nouveau service</button>
+      </form>
     </section>
     <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
-        <form
-          class="update-form"
-          [formGroup]="serviceForm"
-          (ngSubmit)="updateService()">
-          <input
-            type="text"
-            formControlName="title"
-            />
-            @if(serviceForm.controls['title'].invalid && serviceForm.controls['title'].touched){
-              <div class="alert">Un titre est requis</div>
-            }
-          <textarea
-            formControlName="description"
-            cols="30"
-            rows="10"></textarea>
-            @if(serviceForm.controls['description'].invalid && serviceForm.controls['description'].touched){
-              <div class="alert">Un titre est requis</div>
-            }
-          <button class="add-btn">Modifier service</button>
-          <button>Annuler</button>
-        </form>
+      <form
+        class="update-form"
+        [formGroup]="serviceForm"
+        (ngSubmit)="updateService()"
+      >
+        <input type="text" formControlName="title" />
+        @if(serviceForm.controls['title'].invalid &&
+        serviceForm.controls['title'].touched){
+        <div class="alert">Un titre est requis</div>
+        }
+        <textarea formControlName="description" cols="30" rows="10"></textarea>
+        @if(serviceForm.controls['description'].invalid &&
+        serviceForm.controls['description'].touched){
+        <div class="alert">Un titre est requis</div>
+        }
+        <button class="add-btn">Modifier service</button>
+      </form>
+      <mat-icon class="add-icon" (click)="closeUpdateForm()"
+        >remove_circle_outline</mat-icon
+      >
     </section>
-    
   `,
   styleUrl: `../component-handled.component.css`,
 })
 export class ServiceHandledComponent implements OnInit {
-
- public serviceForm: FormGroup;
+  public serviceForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.serviceForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      id: new FormControl('')
-    })}
+      id: new FormControl(''),
+    });
+  }
 
   private readonly serviceService = inject(ServiceService);
   private readonly imageService = inject(ImageService);
-
 
   displayColums: string[] = ['title', 'description', 'actions', 'image'];
 
@@ -143,54 +168,95 @@ export class ServiceHandledComponent implements OnInit {
     title: '',
     description: '',
   };
-  
 
   ngOnInit() {
-    this.getServices();  
+    this.getServices();
   }
 
   getServices() {
-      this.serviceService.getHandleServices().subscribe((response) => {
+    this.serviceService.getHandleServices().subscribe((response) => {
       this.datasource = response.data.services;
     });
-  };
+  }
 
   toggleAddForm() {
     this.addFormIsDisplay = !this.addFormIsDisplay;
-  };
-  
+  }
+
   onSubmit(): void {
-    this.serviceService.addService(this.newService).pipe(tap(()=>{this.getServices()})).subscribe();
+    this.serviceService
+      .addService(this.newService)
+      .pipe(
+        tap(() => {
+          this.getServices();
+        })
+      )
+      .subscribe();
     this.newService.title = '';
     this.newService.description = '';
     this.addFormIsDisplay = !this.addFormIsDisplay;
-  };
+  }
 
   editService(id: string) {
     this.updateFormIsDisplay = true;
-    const serviceToUpdate = this.datasource.find((el)=> el.id === id);
-    this.serviceForm.patchValue({id: serviceToUpdate?.id , title : serviceToUpdate?.title, description : serviceToUpdate?.description });
-  };
+    const serviceToUpdate = this.datasource.find((el) => el.id === id);
+    this.serviceForm.patchValue({
+      id: serviceToUpdate?.id,
+      title: serviceToUpdate?.title,
+      description: serviceToUpdate?.description,
+    });
+  }
 
   updateService() {
-    this.serviceService.updateService(this.serviceForm.value).pipe(tap(()=>{this.getServices()})).subscribe();
+    this.serviceService
+      .updateService(this.serviceForm.value)
+      .pipe(
+        tap(() => {
+          this.getServices();
+        })
+      )
+      .subscribe();
     this.serviceForm.reset();
     this.updateFormIsDisplay = !this.updateFormIsDisplay;
-  };
+  }
 
-  deleteService(id:string) {
-    this.serviceService.deleteService(id).pipe(tap(()=>{this.getServices()})).subscribe();
-  };
+  deleteService(id: string) {
+    this.serviceService
+      .deleteService(id)
+      .pipe(
+        tap(() => {
+          this.getServices();
+        })
+      )
+      .subscribe();
+  }
 
-  onFileChange(event: any, id:string) {
-    const file: File = event.target.files[0]
-    const formData = new FormData()
-    formData.append("myImg", file)
-    this.imageService.addServiceImage(formData, id).pipe(tap(()=>{this.getServices()})).subscribe()
-  };
+  onFileChange(event: any, id: string) {
+    const file: File = event.target.files[0];
+    const formData = new FormData();
+    formData.append('myImg', file);
+    this.imageService
+      .addServiceImage(formData, id)
+      .pipe(
+        tap(() => {
+          this.getServices();
+        })
+      )
+      .subscribe();
+  }
 
-  deleteImage(id: string){
-    this.imageService.deleteImage(id).pipe(tap(()=>{this.getServices()})).subscribe()
+  deleteImage(id: string) {
+    this.imageService
+      .deleteImage(id)
+      .pipe(
+        tap(() => {
+          this.getServices();
+        })
+      )
+      .subscribe();
+  }
 
+  closeUpdateForm() {
+    this.updateFormIsDisplay = !this.updateFormIsDisplay;
   }
 }

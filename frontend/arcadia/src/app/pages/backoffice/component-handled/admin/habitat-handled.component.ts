@@ -60,7 +60,12 @@ import { ImageService } from '../../../home/services/image.service';
       <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
       <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
-    <mat-icon class="add-icon" (click)="toggleAddForm()" >add_circle_outline</mat-icon>
+    @if(!addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()" >add_circle_outline</mat-icon>
+    }
+    @if(addFormIsDisplay){
+      <mat-icon class="add-icon" (click)="toggleAddForm()" >remove_circle_outline</mat-icon>
+    }
   </section>
   <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
         <form
@@ -117,6 +122,9 @@ import { ImageService } from '../../../home/services/image.service';
             }
           <button class="add-btn">Modifier habitat</button>
         </form>
+        <mat-icon class="add-icon" (click)="closeUpdateForm()"
+        >remove_circle_outline</mat-icon
+      >
   </section>
   `,
   styleUrl: `../component-handled.component.css`,
@@ -204,4 +212,7 @@ export class HabitatHandledComponent implements OnInit {
     this.imageService.deleteImage(id).pipe(tap(()=>{this.getHabitats()})).subscribe()
   }
 
+  closeUpdateForm(){
+    this.updateFormIsDisplay = !this.updateFormIsDisplay;
+  }
 }
