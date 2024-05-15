@@ -18,6 +18,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { RoleGuard } from './shared/guards/role.guard';
 import { ForbiddenComponent } from './pages/backoffice/component-handled/shared/forbidden.component';
 import { ErrorComponent } from './shared/components/errors/error.component';
+import { PasswordForgotComponent } from './pages/passwordforgot/passwordforgot';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,5 +42,6 @@ export const routes: Routes = [
     ],
   },
   { path: 'erreur', component: ErrorComponent},
+  { path: 'mdpoublie', component: PasswordForgotComponent},
   { path: '**', redirectTo: '' }
 ];
