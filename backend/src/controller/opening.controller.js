@@ -10,9 +10,9 @@ export const getOpening = async (req, res) => {
     try {
         const openingToPublic = await openingModel.find()
         res.send(openingToPublic)
-    } catch(error) {
-        console.log('An error occured!')
-        res.status(500).send({error})
+    } catch {
+        console.log('No results!')
+        res.status(200).send({openingToPublic: []})
     }
 }
 
