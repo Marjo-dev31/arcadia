@@ -17,8 +17,8 @@ import { ClickService } from '../animals/services/click.service';
         pour le bien-être de nos animaux.
       </h2>
       <section class="habitats">
-        @if(habitats && habitats.length) { @for (habitat of habitats; track
-        habitat) {
+        @if(habitats && habitats.length) { 
+          @for (habitat of habitats; track habitat) {
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img
             [src]="'http://localhost:8000/upload/' + habitat.image_url"

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Service, ServiceCreate } from '../../../shared/models/service.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class ServiceService {
     try {
     const servicesList = await fetch(this.url).then((response) => response.json());
     return servicesList.data.services }
-    catch (error) {
+    catch {
       return []
     }
   }
