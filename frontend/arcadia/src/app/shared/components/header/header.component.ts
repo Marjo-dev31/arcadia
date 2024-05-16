@@ -1,8 +1,7 @@
 import { NgStyle } from '@angular/common';
-import { Component, Inject, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { tap } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../../pages/login/service/login.service';
 
 @Component({
