@@ -12,10 +12,11 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
         <h2>Vous avez des questions ? Des suggestions ?</h2>
         <h3>Contactez-nous</h3>
       </div>
+      
+      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
       @if(submitted){
         <p class="alert">Demande de contact envoyé !</p>
       }
-      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
         <input type="text" placeholder="Titre"  formControlName="title"/>
         @if(contactForm.controls['title'].invalid && contactForm.controls['title'].touched){
           <p class="alert">Un titre est requis</p>
