@@ -13,7 +13,7 @@ export class HabitatsService {
         try {
         const habitatsList = await fetch(this.url).then((response)=> response.json());
         return habitatsList.data.habitats }
-        catch (error){
+        catch {
             return []
         }
     }
