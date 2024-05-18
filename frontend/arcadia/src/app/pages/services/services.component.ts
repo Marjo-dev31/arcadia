@@ -29,19 +29,6 @@ import { OpeningService } from './service/opening.service';
       </section>
       <section class="services">
         @if(services && services.length) {
-<<<<<<< HEAD
-          @for (service of services; track service) {
-          <div class="service-item" >
-            <img
-              class="service-img"
-              [src]= "'http://localhost:8000/upload/' + service.image_url"
-              alt="photo representative du service"
-            />
-            <div class="service-content" >
-              <h3 >{{service.title}}</h3>
-              <p>{{service.description}}</p>
-            </div>
-=======
         @for (service of services; track service) {
         <div class="service-item" >
           <img
@@ -52,7 +39,6 @@ import { OpeningService } from './service/opening.service';
           <div class="service-content" >
             <h3 >{{service.title}}</h3>
             <p>{{service.description}}</p>
->>>>>>> development
           </div>
       }} @else {
         <h3 class="no-services">Il n'y a pas de service disponible</h3>
