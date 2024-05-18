@@ -29,13 +29,6 @@ import { ImageService } from '../../../home/services/image.service';
         <th mat-header-cell *matHeaderCellDef>Description</th>
         <td mat-cell *matCellDef="let habitat">{{ habitat.description }}</td>
       </ng-container>
-      <ng-container matColumnDef="animals">
-        <th mat-header-cell *matHeaderCellDef>Animaux</th>
-        <td mat-cell *matCellDef="let habitat">
-          @for(animal of habitat.animals; track animal) {
-          {{ animal.firstname }}, }
-        </td>
-      </ng-container>
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>
         <td mat-cell *matCellDef="let habitat">
@@ -147,7 +140,6 @@ export class HabitatHandledComponent implements OnInit {
   displayColums: string[] = [
     'title',
     'description',
-    'animals',
     'actions',
     'image'
   ];
