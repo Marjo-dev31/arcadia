@@ -130,3 +130,7 @@ INSERT INTO animals VALUES	(DEFAULT, 'Izumi', (SELECT id FROM habitats WHERE tit
 INSERT INTO animals VALUES	(DEFAULT, 'Pinako', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Caimen à Lunettes'));
 
 INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$pQBkrsu5.htIin8ao1xpvuHP48FP7VJQgEvnPkM2kyXteCLz62Mu2', (SELECT id FROM roles WHERE name = 'Admin'));
+
+INSERT INTO images(id, image_url, id_service ) VALUES ( DEFAULT, 'sandwich.jpg', '4de944cc-1510-11ef-9b15-0654193ea06b');
+INSERT INTO images(id, image_url, id_habitat ) VALUES ( DEFAULT, 'lasavane.jpg', '4dd1761c-1510-11ef-9b15-0654193ea06b');
+INSERT INTO images(id, image_url, id_animal ) VALUES ( DEFAULT, 'caimen.jpg', '4e62dbb8-1510-11ef-9b15-0654193ea06b');
