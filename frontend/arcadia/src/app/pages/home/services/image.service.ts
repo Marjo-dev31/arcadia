@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class ImageService {
-  url = 'http://localhost:8000/images';
+  url = 'http://13.39.80.204:8000/images';
 
   constructor( private http: HttpClient) {}
 
