@@ -122,6 +122,11 @@ INSERT INTO roles VALUES
 INSERT INTO animals VALUES	(DEFAULT, 'Edward', (SELECT id FROM habitats WHERE title="La Savane"),(SELECT id FROM breeds WHERE name='Lion'));
 INSERT INTO animals VALUES	(DEFAULT, 'Alphonse', (SELECT id FROM habitats WHERE title="La Jungle"),(SELECT id FROM breeds WHERE name='Toucan'));
 INSERT INTO animals VALUES	(DEFAULT, 'Winry', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Rainette de White'));
-
+INSERT INTO animals VALUES	(DEFAULT, 'Alphonse', (SELECT id FROM habitats WHERE title="La Jungle"),(SELECT id FROM breeds WHERE name='Toucan'));
+INSERT INTO animals VALUES	(DEFAULT, 'Greed', (SELECT id FROM habitats WHERE title="La Jungle"),(SELECT id FROM breeds WHERE name='Chimpanzé'));
+INSERT INTO animals VALUES	(DEFAULT, 'Maes', (SELECT id FROM habitats WHERE title="La Jungle"),(SELECT id FROM breeds WHERE name='Paresseux'));
+INSERT INTO animals VALUES	(DEFAULT, 'Winry', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Rainette de White'));
+INSERT INTO animals VALUES	(DEFAULT, 'Izumi', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name="loutre d'Europe"));
+INSERT INTO animals VALUES	(DEFAULT, 'Pinako', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Caimen à Lunettes'));
 
 INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$pQBkrsu5.htIin8ao1xpvuHP48FP7VJQgEvnPkM2kyXteCLz62Mu2', (SELECT id FROM roles WHERE name = 'Admin'));
