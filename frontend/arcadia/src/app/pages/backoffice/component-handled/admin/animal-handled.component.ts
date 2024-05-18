@@ -190,8 +190,8 @@ export class AnimalHandledComponent implements OnInit {
     'race',
     'habitat',
     'condition',
-    'image',
     'actions',
+    'image'
   ];
 
   private readonly animalService = inject(AnimalService);

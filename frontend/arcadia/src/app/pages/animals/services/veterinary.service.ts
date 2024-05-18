@@ -5,7 +5,7 @@ import { VeterinaryReport, VeterinaryReportCreate } from "../../../shared/models
 
 @Injectable()
 export class VeterinaryService {
-    url = 'http://localhost:8000/veterinaries';
+    url = 'http://13.39.80.204:8000/veterinaries';
 
     constructor(private http: HttpClient){}
 

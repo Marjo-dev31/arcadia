@@ -15,7 +15,7 @@ import {
       <div mat-dialog-content >
           @if(animal.id === this.data.animal.id) {
         <div>
-          <img [src]="'http://localhost:8000/upload/' + animal.image_url" alt="Photo d'un {{animal.breed}}" />
+          <img [src]="'http://13.39.80.204:8000/upload/' + animal.image_url" alt="Photo d'un {{animal.breed}}" />
 
           <div class="id-card-animal-content">
             <p>Son prénom: {{ animal.firstname }}</p>

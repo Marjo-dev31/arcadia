@@ -7,7 +7,7 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 @Injectable()
 export class ServiceService {
-  url = 'http://localhost:8000/services';
+  url = 'http://13.39.80.204:8000/services';
 
 
   constructor( private http: HttpClient) {}

@@ -5,7 +5,7 @@ import { BreedCreate } from "../../../shared/models/breed.interface";
 
 @Injectable()
 export class BreedService {
-    url = 'http://localhost:8000/breeds'
+    url = 'http://13.39.80.204:8000/breeds'
 
     constructor(private http: HttpClient) {}
 

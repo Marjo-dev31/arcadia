@@ -6,7 +6,7 @@ import { Mail } from '../../../shared/models/mail.interface';
 @Injectable()
 export class MailService {
     constructor(private http: HttpClient) { }
-    url = 'http://localhost:8000/send';
+    url = 'http://13.39.80.204:8000/send';
     
     sendEmail(mail: Mail): Observable<any> {
         return this.http.post(this.url, mail)
