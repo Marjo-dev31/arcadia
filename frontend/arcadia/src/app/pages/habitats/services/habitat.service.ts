@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class HabitatsService {
-    url = 'http://localhost:8000/habitats';
+    url = 'http://13.39.80.204:8000/habitats';
 
     constructor(private http: HttpClient) {}
 

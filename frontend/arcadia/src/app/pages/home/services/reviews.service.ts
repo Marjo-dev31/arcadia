@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ReviewsService {
-    url = 'http://localhost:8000/reviews';
+    url = 'http://13.39.80.204:8000/reviews';
     constructor(private http: HttpClient) {}
 
     async getReviews(): Promise<any> {
