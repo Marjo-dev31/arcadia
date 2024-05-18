@@ -6,7 +6,7 @@ import { Opening } from '../../../shared/models/opening.interface';
 
 @Injectable()
 export class OpeningService {
-  url = 'http://localhost:8000/opening';
+  url = 'http://13.39.80.204:8000/opening';
 
 
   constructor( private http: HttpClient) {}

@@ -33,7 +33,7 @@ import { OpeningService } from './service/opening.service';
         <div class="service-item" >
           <img
             class="service-img"
-            [src]= "'http://localhost:8000/upload/' + service.image_url"
+            [src]= "'http://13.39.80.204:8000/upload/' + service.image_url"
             alt="photo representative du service"
           />
           <div class="service-content" >

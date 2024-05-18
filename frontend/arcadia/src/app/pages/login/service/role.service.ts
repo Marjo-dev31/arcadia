@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class RoleService {
-    url = 'http://localhost:8000/roles';
+    url = 'http://13.39.80.204:8000/roles';
 
     constructor(private http: HttpClient) {}
 

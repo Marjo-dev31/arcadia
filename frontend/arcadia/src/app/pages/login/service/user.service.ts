@@ -5,7 +5,7 @@ import { UserCreate } from "../../../shared/models/user.interface";
 
 @Injectable()
 export class UserService {
-    url = 'http://localhost:8000/users';
+    url = 'http://13.39.80.204:8000/users';
 
     constructor(private http:HttpClient) {}
 

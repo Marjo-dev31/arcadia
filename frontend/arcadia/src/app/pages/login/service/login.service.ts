@@ -5,7 +5,7 @@ import { Observable, tap } from "rxjs";
 
 @Injectable()
 export class LoginService {
-    url = 'http://localhost:8000/login'
+    url = 'http://13.39.80.204:8000/login'
 
     constructor(private http: HttpClient) {}
 
