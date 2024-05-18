@@ -6,7 +6,7 @@ import httpStatus from "../domain/httpstatus.js";
 
 
 export const getServices = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching services get`);
+  logger.info(`${req.method} ${req.originalUrl}, fetching services`);
   database.query(QUERYSERVICES.SELECT_SERVICES, (error, results) => {
     if (!results) {
       res
@@ -35,9 +35,9 @@ export const getServices = (req, res) => {
 
 
 export const getService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching service get`);
+    logger.info(`${req.method} ${req.originalUrl}, fetching service`);
     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
-      if (!results) {
+      if (!results[0]) {
         res
           .status(httpStatus.NOT_FOUND.code)
           .send(
@@ -65,7 +65,7 @@ export const getService = (req, res) => {
 
 
 export const addService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, creating service post`);
+    logger.info(`${req.method} ${req.originalUrl}, creating service`);
     database.query(QUERYSERVICES.CREATE_SERVICE, Object.values(req.body),(error, results) => {
       if (!results) {
         logger.error(error.message);
@@ -96,7 +96,7 @@ export const addService = (req, res) => {
 
 
   export const updateService = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching service put`);
+    logger.info(`${req.method} ${req.originalUrl}, fetching service`);
     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
       if (!results) {
         res
