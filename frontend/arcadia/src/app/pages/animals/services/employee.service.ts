@@ -7,7 +7,7 @@ import { EmployeeReport, EmployeeReportCreate } from "../../../shared/models/emp
 @Injectable()
 
 export class EmployeeService {
-    url = 'http://localhost:8000/employees';
+    url = 'http://13.39.80.204:8000/employees';
 
     constructor( private http: HttpClient) {}
 

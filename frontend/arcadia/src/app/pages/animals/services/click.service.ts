@@ -6,7 +6,7 @@ import { AnimalOnMongoCreate } from "../../../shared/models";
 
 @Injectable()
 export class ClickService {
-    url = 'http://localhost:8000/click'
+    url = 'http://13.39.80.204:8000/click'
 
     constructor(private http: HttpClient){}
 
