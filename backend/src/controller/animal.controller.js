@@ -36,7 +36,7 @@ export const getAnimals = (req, res) => {
 export const getAnimal = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
   database.query(QUERYANIMALS.SELECT_ANIMAL, [req.params.id], (error, results) => {
-    if (!results) {
+    if (!results[0]) {
       res
         .status(httpStatus.NOT_FOUND.code)
         .send(
