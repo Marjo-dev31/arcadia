@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Animal, AnimalCreate } from '../../../shared/models';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AnimalService {
-    url = 'http://13.39.80.204:8000/animals';
+    url = `${environment.serverUrl}/animals`;
 
     constructor(private http: HttpClient) {}
 

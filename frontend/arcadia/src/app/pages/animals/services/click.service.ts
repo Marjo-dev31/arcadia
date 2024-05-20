@@ -2,11 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { AnimalOnMongoCreate } from "../../../shared/models";
+import { environment } from '../../../environments/environment';
+
 
 
 @Injectable()
 export class ClickService {
-    url = 'http://13.39.80.204:8000/click'
+    url = `${environment.serverUrl}/click`
 
     constructor(private http: HttpClient){}
 

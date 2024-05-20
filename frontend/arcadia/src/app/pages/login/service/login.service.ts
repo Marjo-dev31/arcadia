@@ -23,6 +23,7 @@ export class LoginService {
     logout(){
         localStorage.removeItem('accessToken');
         localStorage.removeItem('role');
+        localStorage.removeItem('firstname')
         this.isLoggin = false
     }
 }
