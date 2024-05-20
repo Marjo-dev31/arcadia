@@ -30,7 +30,8 @@ import { ClickService } from '../animals/services/click.service';
             @if (showDetails == habitat.id) {
             <p>{{ habitat.description }}</p>
             <ul>
-              @for (animal of animals; track animal) { @if(animal) {
+              @for (animal of animals; track animal) { 
+                @if(animal) {
               <li class="animal-item" (click)="openDialog(animal)">
                 {{ animal.firstname }}
               </li>
