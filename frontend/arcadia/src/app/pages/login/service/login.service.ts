@@ -2,10 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UserLogin } from "../../../shared/models/user.interface";
 import { Observable, tap } from "rxjs";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class LoginService {
-    url = 'http://13.39.80.204:8000/login'
+    url = `${environment.serverUrl}/login`
 
     constructor(private http: HttpClient) {}
 
