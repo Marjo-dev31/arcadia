@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Service, ServiceCreate } from '../../../shared/models/service.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 
 
 @Injectable()
 export class ServiceService {
-  url = 'http://13.39.80.204:8000/services';
+  url = `${environment.serverUrl}/services`;
 
 
   constructor( private http: HttpClient) {}
