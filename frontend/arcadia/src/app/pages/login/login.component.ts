@@ -71,7 +71,6 @@ export class ConnexionComponent implements OnInit {
   onSubmit(): void {
    this.loginService.login(this.user).subscribe((response)=> {
     try{
-      console.log(response.data)
     localStorage.setItem('accessToken', response.data.accessToken)
     localStorage.setItem('role', response.data.user.name)
     localStorage.setItem('firstname', response.data.user.firstname)

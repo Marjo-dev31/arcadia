@@ -2,10 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BreedCreate } from "../../../shared/models/breed.interface";
+import { environment } from '../../../environments/environment';
+
 
 @Injectable()
 export class BreedService {
-    url = 'http://13.39.80.204:8000/breeds'
+    url = `${environment.serverUrl}/breeds`;
 
     constructor(private http: HttpClient) {}
 

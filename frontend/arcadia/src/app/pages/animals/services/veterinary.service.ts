@@ -2,10 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { VeterinaryReport, VeterinaryReportCreate } from "../../../shared/models/veterinaryreport.interface";
+import { environment } from '../../../environments/environment';
+
 
 @Injectable()
 export class VeterinaryService {
-    url = 'http://13.39.80.204:8000/veterinaries';
+    url = `${environment.serverUrl}/veterinaries`;
 
     constructor(private http: HttpClient){}
 

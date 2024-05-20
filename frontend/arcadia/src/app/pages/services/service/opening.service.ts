@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Opening } from '../../../shared/models/opening.interface';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable()
 export class OpeningService {
-  url = 'http://13.39.80.204:8000/opening';
+  url = `${environment.serverUrl}/opening`;
 
 
   constructor( private http: HttpClient) {}
