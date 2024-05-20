@@ -60,7 +60,7 @@ app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.O
 
 
 app.listen(PORT, () => {
-    // connectDB().then(()=> {
+    connectDB().then(()=> {
         logger.info(`It's alive on: ${ip.address()}: ${PORT}`);
-    // });
+    });
 });
