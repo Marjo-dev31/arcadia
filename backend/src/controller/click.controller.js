@@ -15,7 +15,7 @@ export const getAnimalByFirstname = async (req, res) => {
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
-                `Animal retrienved`,
+                `Animal retrieved`,
                 { animal: animal}
             )
         );
