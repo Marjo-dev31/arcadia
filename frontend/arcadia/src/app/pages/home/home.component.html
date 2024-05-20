@@ -74,14 +74,12 @@
       <h3>Découvrez ce que nos visiteurs ont pensé de leurs séjours :</h3>
       <div class="review">
         @for(review of reviews; track review){
-          <!-- @if(review.status == true) { -->
           @if(reviews.indexOf(review)+1 === this.result){
         <p class="review-content">{{ review.content }}</p>
         <p class="review-name">{{ review.pseudo }}</p>
         <p class="review-date">{{ review.date }}</p>
         }
       }
-    <!-- } -->
         <button class="more-review-btn" (click)="moreReview(1, reviews.length)">
           + d'avis
         </button>
