@@ -34,7 +34,7 @@ import { OpeningService } from './service/opening.service';
             <img
               class="service-img"
               [src]= "'http://13.39.80.204:8000/upload/' + service.image_url"
-              alt="photo representative du service"
+              alt="photo representative du service {{service.title}}"
             />
             <div class="service-content" >
               <h3 >{{service.title}}</h3>
