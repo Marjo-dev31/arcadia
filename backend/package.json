@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "back end pour arcadia",
+  "description": "backend pour arcadia",
   "main": "index.js",
   "type": "module",
   "scripts": {
