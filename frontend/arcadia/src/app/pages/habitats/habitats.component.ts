@@ -22,7 +22,7 @@ import { ClickService } from '../animals/services/click.service';
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img
             [src]="'http://13.39.80.204:8000/upload/' + habitat.image_url"
-            alt="photo représentative de l'habitat"
+            alt="Photo représentative de l'habitat {{habitat.title}}"
             class="habitat-img"
           />
           <div class="habitat-content">
