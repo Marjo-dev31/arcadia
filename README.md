@@ -1,9 +1,9 @@
-# arcadia
+# Arcadia
 ==========
 
 A website of a Zoo in Britain for visitors, director and employees.
 For visitors, use to check habitats, services, animals and opening.
-For director and employees, use to manage habitats, services, animals, opening, meals, contact, and reviews.
+For director, veterinaries and employees, use to manage habitats, services, animals, opening, meals, contact, and reviews.
 
 # prerequisites globally
 node.js v20.22.1
@@ -40,6 +40,7 @@ _backend:_
     "ip": "^2.0.1",
     "jsonwebtoken": "^9.0.2",
     "mailtrap": "^3.3.0",
+    "mongodb": "^6.6.2",
     "mongoose": "^8.3.3",
     "mysql": "^2.18.1",
     "pino": "^8.20.0",
@@ -58,7 +59,7 @@ install git
 git clone https://github.com/Marjo-dev31/arcadia
 ```
 
-## Install prerequisites
+## Install prerequisites and run application
 
 # navigate
 `cd arcadia/backend`
@@ -68,6 +69,10 @@ git clone https://github.com/Marjo-dev31/arcadia
 `node -v`
 # verifies the right NPM version is in the environment
 `npm -v`
+# run API
+`npm run dev` (for NODE_ENV=dev nodemon src/index.js)
+`npm run start` (for NODE_ENV=prod node src/index.js) 
+
 
 # navigate
 `cd ..`
@@ -78,20 +83,19 @@ git clone https://github.com/Marjo-dev31/arcadia
 `node -v`
 # verifies the right NPM version is in the environment
 `npm -v`
-
-## run application
-# run API
-In new terminal:
-`cd arcadia/backend`
-`npm run dev` (for NODE_ENV=dev nodemon src/index.js)
-`npm run start` (for NODE_ENV=prod node src/index.js) 
 # run angular
-In new terminal
 `cd arcadia/frontend/arcadia`
 `ng serve` (for development environment)
 `ng build` (for production environment) 
 
-## see code in IDE
+## see code in VS CODE
 In new terminal
 `cd arcadia`
 `code .`
+
+
+## more
+API port : 8000
+Angular port : 4200
+sql deploy on AWS database port 3306
+nosql deploy on Cluster Atlas port 27017
