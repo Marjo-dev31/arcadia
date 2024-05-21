@@ -1,11 +1,10 @@
 # Arcadia
-==========
 
 A website of a Zoo in Britain for visitors, director and employees.
 For visitors, use to check habitats, services, animals and opening.
 For director, veterinaries and employees, use to manage habitats, services, animals, opening, meals, contact, and reviews.
 
-# prerequisites globally
+# Prerequisites globally
 node.js v20.22.1
 npm v10.2.4
 angular/cli v17.3.0
@@ -30,6 +29,19 @@ _frontend:_
     "uuidv4": "^6.2.13",
     "zone.js": "~0.14.3"
     }
+        "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.2",
+    "@angular/cli": "^17.3.2",
+    "@angular/compiler-cli": "^17.3.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.4.2"
+  }
 _backend:_
 {
     "bcrypt": "^5.1.1",
@@ -52,49 +64,49 @@ _backend:_
         "nodemon": "^3.1.0"
     }
 
-## Create directory and clone repository:
+# Create directory and clone repository:
 ```
 mkdir <directoryNameToChoose>
 install git
 git clone https://github.com/Marjo-dev31/arcadia
 ```
 
-## Install prerequisites and run application
-
-# navigate
+# Install prerequisites and run application
+## API
+### navigate
 `cd arcadia/backend`
-# download and install Node.js
+### download and install Node.js
 `node install 20`
-# verifies the right Node.js version is in the environment
+### verifies the right Node.js version is in the environment
 `node -v`
-# verifies the right NPM version is in the environment
+### verifies the right NPM version is in the environment
 `npm -v`
-# run API
+### run
 `npm run dev` (for NODE_ENV=dev nodemon src/index.js)
 `npm run start` (for NODE_ENV=prod node src/index.js) 
 
-
-# navigate
+## Frontend
+### navigate
 `cd ..`
 `cd frontend/arcadia`
-# download and install Node.js
+### download and install Node.js
 `node install 20`
-# verifies the right Node.js version is in the environment
+### verifies the right Node.js version is in the environment
 `node -v`
-# verifies the right NPM version is in the environment
+### verifies the right NPM version is in the environment
 `npm -v`
-# run angular
+### run angular
 `cd arcadia/frontend/arcadia`
 `ng serve` (for development environment)
 `ng build` (for production environment) 
 
-## see code in VS CODE
+# See code in VS CODE
 In new terminal
 `cd arcadia`
 `code .`
 
 
-## more
+# More
 API port : 8000
 Angular port : 4200
 sql deploy on AWS database port 3306
