@@ -26,7 +26,7 @@ import { ClickService } from '../animals/services/click.service';
             class="habitat-img"
           />
           <div class="habitat-content">
-            <h3>{{ habitat.title }}</h3>
+            <h3 class="habitat-title">{{ habitat.title }}</h3>
             @if (showDetails == habitat.id) {
             <p>{{ habitat.description }}</p>
             <ul>
