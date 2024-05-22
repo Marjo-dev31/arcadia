@@ -22,7 +22,7 @@ import { MatIconModule } from "@angular/material/icon";
             <td mat-cell *matCellDef="let animal">{{ animal.firstname }}</td>
         </ng-container>
         <ng-container matColumnDef="clickCount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de click</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de clic</th>
             <td mat-cell *matCellDef="let animal">{{ animal.clickCount }}</td>
         </ng-container>
         <ng-container matColumnDef="delete">
