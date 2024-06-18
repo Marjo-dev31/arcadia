@@ -256,6 +256,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     this.responsemessage = response.message;
   } catch(error) {
     this.responsemessage = response.message;
+    this.selectedAnimalOption = '';
   }
     })
   };

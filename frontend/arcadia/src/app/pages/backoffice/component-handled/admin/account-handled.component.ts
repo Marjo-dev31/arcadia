@@ -26,6 +26,7 @@ import { UserService } from '../../../login/service/user.service';
           id="email"
           [(ngModel)]="newUser.email"
           #email="ngModel"
+          email
           required
         />
         @if(email.invalid && email.touched){
@@ -82,7 +83,7 @@ import { UserService } from '../../../login/service/user.service';
           }
         }
         <label for="confirmPassword">Confirmer mot de passe :</label>
-        <input type="password" name="confirmPassword" id="confirm-password" [(ngModel)]="confirmPassword"  #confirmPassword="ngModel" required/>
+        <input  name="confirmPassword" id="confirm-password" ngModel #confirmPassword="ngModel" required/>
         @if(confirmPassword.touched){
           @if(confirmPassword.errors?.['required']){
             <p class="alert">Une confirmation du mot de passe est requise</p>
@@ -92,8 +93,8 @@ import { UserService } from '../../../login/service/user.service';
           }
         }
         <div class="btn-section">
-          <button type="reset" class="btn">Annuler</button>
-          <button class="btn">Valider</button>
+          <button type="reset" class="btn" >Annuler</button>
+          <button class="btn" [disabled]="form.invalid">Valider</button>
         </div>
       </form>
     </div>
@@ -121,7 +122,6 @@ export class AccountHandledComponent implements OnInit {
     id_role: '',
   };
 
-  @ViewChild('form') form!: NgForm;
 
   ngOnInit() {
     this.getRolesWithoutAdmin();
@@ -136,7 +136,7 @@ export class AccountHandledComponent implements OnInit {
   onSubmit(form: NgForm) {
     const alert = document.getElementById('alert');
     if(alert){
-      if(this.form.invalid) {
+      if(form.invalid) {
         alert.style.display = "block"
       }
         alert.style.display = "none"
