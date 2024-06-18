@@ -3,7 +3,8 @@ export interface Review {
     pseudo: string,
     content: string,
     date: Date,
-    status: boolean
+    status: boolean;
+    id_employee: string
 }
 
 export interface ReviewPost {

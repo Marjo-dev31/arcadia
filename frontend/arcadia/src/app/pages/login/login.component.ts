@@ -26,7 +26,7 @@ import { LoginService } from './service/login.service';
         }
         <div>
           <label for="email" >Email :</label>
-          <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" required/>
+          <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" email required/>
         </div>
         @if(email.invalid && email.touched){
           <p class="alert">Un Email est requis</p>
