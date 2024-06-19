@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Opening } from '../../../shared/models/opening.interface';
@@ -9,6 +9,13 @@ import { environment } from '../../../environments/environment';
 export class OpeningService {
   url = `${environment.serverUrl}/opening`;
 
+  schedule = signal<Opening>({
+    openingTime: '',
+    closingTime: '',
+    openingDay: '',
+    closingDay: '',
+    _id: ''
+  })
 
   constructor( private http: HttpClient) {}
 
@@ -21,7 +28,7 @@ export class OpeningService {
   }
 
   UpdateOpeningToPublic(opening: Opening, id:string): Observable<any> {
-    // console.log(opening)
+    this.schedule.set(opening)
     return this.http.put(`${this.url}/${id}`, opening)
   }
 
