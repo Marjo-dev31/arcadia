@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MailService } from './services/mail.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +10,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
   template: `
     <main>
       <div>
+        <h1 class="title">{{title}}</h1>
         <h2>Vous avez des questions ? Des suggestions ?</h2>
         <h3>Contactez-nous</h3>
       </div>
@@ -85,13 +87,15 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 export class ContactComponent implements OnInit {
 
   public contactForm: FormGroup;
+  title: string
 
-  constructor(public fb:FormBuilder) {
+  constructor(public fb:FormBuilder, route:ActivatedRoute) {
     this.contactForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
       text: new FormControl('', [Validators.required]),
       emailToResponse: new FormControl('', [Validators.required, Validators.email])
-    })
+    });
+    this.title = route.snapshot.data['title']
   };
 
   private readonly mailService = inject(MailService);

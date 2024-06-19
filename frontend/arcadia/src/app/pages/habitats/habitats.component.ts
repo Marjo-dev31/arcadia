@@ -5,6 +5,7 @@ import { AnimalsComponent } from '../animals/animals.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AnimalService } from '../animals/services/animal.service';
 import { ClickService } from '../animals/services/click.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-habitats',
@@ -12,6 +13,7 @@ import { ClickService } from '../animals/services/click.service';
   imports: [MatDialogModule],
   template: `
     <main>
+      <h1 class="title">{{title}}</h1>
       <h2>
         Au sein des vastes étendues d'Arcadia, découvrez des habitats conçus
         pour le bien-être de nos animaux.
@@ -61,11 +63,16 @@ export class HabitatsComponent implements OnInit {
   private readonly clickService = inject(ClickService);
 
   showDetails: string | undefined = undefined;
+  title: string
+  
+  constructor(private matdialog: MatDialog, route:ActivatedRoute) {
+    this.title = route.snapshot.data['title']
+  }
 
-  constructor(private matdialog: MatDialog) {}
-
+  
   ngOnInit() {
     this.getHabitats();
+
   }
 
   getHabitats() {

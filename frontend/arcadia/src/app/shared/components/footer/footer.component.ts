@@ -31,7 +31,12 @@ import { Opening } from '../../models/opening.interface';
   `,
   styles: `
       footer {
-    background-color: var(--color-primary);
+    /* background-color: var(--color-primary);*/
+    background: linear-gradient(
+    180deg,
+      var(--color-primary) 30%,
+      var(--color-font)
+  );
     color: var(--color-background);
     font-size: var(--font-size-footer);
   }
