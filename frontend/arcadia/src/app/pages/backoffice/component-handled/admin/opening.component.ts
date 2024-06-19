@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OpeningService } from '../../../services/service/opening.service';
 import { Opening } from '../../../../shared/models/opening.interface';
@@ -39,7 +39,7 @@ import { tap } from 'rxjs';
               <div class="alert">Un jour de fermeture est requis</div>
             }
         <button type="reset">Annuler</button>
-        <button [disabled]="updateForm.invalid">Valider</button>
+        <button [disabled]="updateForm.invalid" >Valider</button>
     </form>
     `,
     styleUrl:`../component-handled.component.css`
@@ -50,7 +50,7 @@ export class OpeningComponent implements OnInit {
 
     constructor(private fb: FormBuilder) {
         this.updateForm = this.fb.group({
-            openingTime: new FormControl('', [Validators.required] ),
+            openingTime: new FormControl('', [Validators.required]),
             closingTime: new FormControl('', [Validators.required]),
             openingDay: new FormControl('', [Validators.required]),
             closingDay: new FormControl('', [Validators.required])
@@ -60,6 +60,7 @@ export class OpeningComponent implements OnInit {
     private readonly openingService = inject(OpeningService)
 
    openToPublic!: Opening
+
 
     ngOnInit() { 
         this.getOpeningToPublic()
