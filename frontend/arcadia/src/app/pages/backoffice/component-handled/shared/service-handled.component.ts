@@ -115,7 +115,7 @@ import { ImageService } from '../../../home/services/image.service';
         @if(description.invalid && description.touched){
         <p class="alert">Un type de nourriture est requis</p>
         }
-        <button class="add-btn">Enregistrer nouveau service</button>
+        <button class="add-btn" [disabled]="form.invalid">Enregistrer nouveau service</button>
       </form>
     </section>
     <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
@@ -134,7 +134,7 @@ import { ImageService } from '../../../home/services/image.service';
         serviceForm.controls['description'].touched){
         <div class="alert">Un titre est requis</div>
         }
-        <button class="add-btn">Modifier service</button>
+        <button class="add-btn" [disabled]="serviceForm.invalid">Modifier service</button>
       </form>
       <mat-icon class="add-icon" (click)="closeUpdateForm()"
         >remove_circle_outline</mat-icon

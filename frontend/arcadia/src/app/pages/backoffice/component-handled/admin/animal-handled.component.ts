@@ -112,7 +112,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
           @if(habitat.invalid && habitat.touched){
           <p class="alert">Un type de nourriture est requis</p>
         }
-          <button class="add-btn">Enregistrer nouvel animal</button>
+          <button class="add-btn" [disabled]="form.invalid">Enregistrer nouvel animal</button>
           <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux</p>
         </form>
   </section>
@@ -145,7 +145,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
           @if(updateForm.controls['habitat'].invalid && updateForm.controls['habitat'].touched){
               <div class="alert">Un habitat est requis</div>
             }
-          <button class="add-btn">Modifier animal</button>
+          <button class="add-btn" [disabled]="updateForm.invalid">Modifier animal</button>
         </form>
         <mat-icon class="add-icon" (click)="closeUpdateForm()" >remove_circle_outline</mat-icon>
   </section>
@@ -156,7 +156,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
       @if(breedForm.controls['name'].invalid && breedForm.controls['name'].touched){
         <p class="alert">Une race est requise</p>
       }
-      <button>Ajouter la race</button>
+      <button [disabled]="breedForm.invalid">Ajouter la race</button>
     </form>
     @if(submitted){
       <p>Nouvelle race créée !</p>
