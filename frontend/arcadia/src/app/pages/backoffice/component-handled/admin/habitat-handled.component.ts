@@ -90,7 +90,7 @@ import { ImageService } from '../../../home/services/image.service';
           @if(description.invalid && description.touched){
           <p class="alert">Une description est requise</p>
         }
-          <button class="add-btn">Enregistrer nouvel habitat</button>
+          <button class="add-btn" [disabled]="form.invalid">Enregistrer nouvel habitat</button>
         </form>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
@@ -113,7 +113,7 @@ import { ImageService } from '../../../home/services/image.service';
             @if(habitatForm.controls['description'].invalid && habitatForm.controls['description'].touched){
               <div class="alert">Une description est requise</div>
             }
-          <button class="add-btn">Modifier habitat</button>
+          <button class="add-btn" [disabled]="habitatForm.invalid">Modifier habitat</button>
         </form>
         <mat-icon class="add-icon" (click)="closeUpdateForm()"
         >remove_circle_outline</mat-icon
