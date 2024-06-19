@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-backoffice',
@@ -10,7 +10,12 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: `./backoffice.component.css`
 })
 export class BackofficeComponent implements OnInit {
-  constructor() {}
+
+  title: string
+  
+  constructor(public route: ActivatedRoute) {
+    this.title = route.snapshot.data['title']
+  }
 
   ngOnInit() {}
 }
