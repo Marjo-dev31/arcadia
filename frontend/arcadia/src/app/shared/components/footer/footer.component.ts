@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, effect } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { OpeningService } from '../../../pages/services/service/opening.service';
 import { Opening } from '../../models/opening.interface';
@@ -19,9 +19,9 @@ import { Opening } from '../../models/opening.interface';
         </div>
         <div>
           <p>Nos horaires et jours d'ouvertures :</p>
-          @if(openToPublic && openToPublic.length){
-          <p>De {{ openToPublic[0].openingTime }} à {{ openToPublic[0].closingTime }}</p>
-          <p>Du {{ openToPublic[0].openingDay }} au {{ openToPublic[0].closingDay }}</p>
+          @if(openToPublic && openToPublic){
+          <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
+          <p>Du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
         }
         </div>
         <div><a [routerLink]="['/contact']">Nous contacter</a></div>
@@ -56,19 +56,23 @@ import { Opening } from '../../models/opening.interface';
     `,
 })
 export class FooterComponent implements OnInit {
-  constructor() {}
+  constructor() {
+    effect(()=>{
+    this.openToPublic = this.openingService.schedule()
+  })
+}
 
   private readonly openingService = inject(OpeningService)
 
-  openToPublic!: Opening []
+  openToPublic!: Opening
 
   ngOnInit() {
-    this.getOpeningToPublic()
-  }
+    this.getOpeningToPublic();
+  };
 
   getOpeningToPublic(){
     this.openingService.getOpeningToPublic().subscribe((response)=>{
-      this.openToPublic = response
+      this.openToPublic = response[0]
     })
   };
 
