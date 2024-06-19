@@ -200,7 +200,7 @@ import { UserService } from '../../../login/service/user.service';
         @if(user.invalid && user.touched){
         <p class="alert">Un habitat est requis</p>
         }
-        <button class="add-btn">Enregistrer nouveau rapport</button>
+        <button class="add-btn" [disabled]="form.invalid">Enregistrer nouveau rapport</button>
       </form>
     </section>
     <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
@@ -254,7 +254,7 @@ import { UserService } from '../../../login/service/user.service';
         updateForm.controls['id_user'].touched){
         <div class="alert">Un rapporteur est requis</div>
         }
-        <button class="add-btn">Modifier rapport</button>
+        <button class="add-btn" [disabled]="updateForm.invalid">Modifier rapport</button>
       </form>
       <mat-icon class="add-icon" (click)="closeUpdateForm()"
         >remove_circle_outline</mat-icon

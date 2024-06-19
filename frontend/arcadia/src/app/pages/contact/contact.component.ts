@@ -36,7 +36,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
         @if(contactForm.controls['emailToResponse'].invalid && contactForm.controls['emailToResponse'].touched){
           <p class="alert">Une adresse mail est requise</p>
         }
-        <button>Envoyer</button>
+        <button [disabled]="contactForm.invalid">Envoyer</button>
       </form>
     </main>
   `,

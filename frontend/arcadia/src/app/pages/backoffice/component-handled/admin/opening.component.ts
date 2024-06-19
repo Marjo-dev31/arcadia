@@ -39,7 +39,7 @@ import { tap } from 'rxjs';
               <div class="alert">Un jour de fermeture est requis</div>
             }
         <button type="reset">Annuler</button>
-        <button>Valider</button>
+        <button [disabled]="updateForm.invalid">Valider</button>
     </form>
     `,
     styleUrl:`../component-handled.component.css`

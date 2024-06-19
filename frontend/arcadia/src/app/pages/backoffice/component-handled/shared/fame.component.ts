@@ -46,7 +46,7 @@ import { MatIconModule } from "@angular/material/icon";
         @if(firstname.invalid && firstname.touched){
             <p class="alert">Un Prénom est requis</p>
         }
-        <button>Ajouter</button>
+        <button [disabled]="form.invalid">Ajouter</button>
     </form>
 }
     `,
