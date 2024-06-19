@@ -4,6 +4,7 @@ import { JsonPipe } from '@angular/common';
 import { Service } from '../../shared/models/service.interface';
 import { Opening } from '../../shared/models/opening.interface';
 import { OpeningService } from './service/opening.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-services',
@@ -12,6 +13,7 @@ import { OpeningService } from './service/opening.service';
   template: `
     <main>
       <section>
+        <h1 class="title">{{title}}</h1>
         <h2>
           Nous vous proposons une multitude de services afin de rendre votre
           séjour plus agréable !
@@ -52,6 +54,12 @@ import { OpeningService } from './service/opening.service';
 })
 export class ServicesComponent implements OnInit {
   services!: Service[]
+  title: string
+
+  constructor(route: ActivatedRoute){
+    this.title = route.snapshot.data['title']
+  }
+  
   private readonly serviceService = inject(ServiceService);
   private readonly openingService = inject(OpeningService)
 
