@@ -13,7 +13,7 @@ animalsRoutes.route('/backoffice')
 .get(authenticateToken, verifyRoles('Admin'), getAnimals)
 
 animalsRoutes.route('/:id')
-.get(getAnimal)
+// .get(getAnimal)
 .delete(authenticateToken, verifyRoles('Admin'), deleteAnimal)
 .put(authenticateToken, verifyRoles('Admin'), updateAnimal)
 

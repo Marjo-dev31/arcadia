@@ -14,7 +14,7 @@ habitatRoutes.route('/backoffice')
 .get(authenticateToken,verifyRoles('Admin'), getHabitats)
 
 habitatRoutes.route('/:id')
-.get(getHabitat)
+// .get(getHabitat)
 .put(authenticateToken, verifyRoles('Admin'), updateHabitat)
 .delete(authenticateToken, verifyRoles('Admin'), deleteHabitat)
 
