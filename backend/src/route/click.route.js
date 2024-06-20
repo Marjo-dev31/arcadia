@@ -8,7 +8,7 @@ import verifyRoles from '../middleware/verifyroles.js';
 const clickRoutes = express.Router()
 
 clickRoutes.route('/:firstname')
-.get(getAnimalByFirstname)
+// .get(getAnimalByFirstname)
 .put(addCount)
 
 clickRoutes.route('/')

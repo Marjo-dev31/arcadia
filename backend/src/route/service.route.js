@@ -13,7 +13,7 @@ serviceRoutes.route('/backoffice')
 .get(authenticateToken, verifyRoles('Admin', 'Employé'), getServices)
 
 serviceRoutes.route('/:id')
-.get(getService)
+// .get(getService)
 .put(authenticateToken, verifyRoles('Admin', 'Employé'), updateService)
 .delete(authenticateToken, verifyRoles('Admin', 'Employé'), deleteService);
 

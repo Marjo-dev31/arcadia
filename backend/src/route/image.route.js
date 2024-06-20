@@ -9,7 +9,7 @@ import verifyRoles from "../middleware/verifyroles.js";
 const imageRoutes = express.Router();
 
 imageRoutes.route('/')
-.get(getImages)
+// .get(getImages)
 
 // imageRoutes.route('/services')
 // .get(getServicesImages)
@@ -31,7 +31,7 @@ imageRoutes.route('/animal/:id')
 .post(authenticateToken, verifyRoles('Admin'), fileupload, addAnimalImage)
 
 imageRoutes.route('/:id')
-.get(getImage)
+// .get(getImage)
 .delete(authenticateToken, verifyRoles('Admin', 'Employé'), deleteImage)
 
 export default imageRoutes

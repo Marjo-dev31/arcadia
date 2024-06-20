@@ -5,7 +5,7 @@ import QUERYEMPLOYEES from "../query/employee.query.js";
 import httpStatus from "../domain/httpstatus.js";
 
 
-export const getEmployeeReports = (req, res) => {
+export const getEmployeeReportsByAnimal = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching reports`);
     database.query(QUERYEMPLOYEES.SELECT_REPORTS, [req.params.id], (error, results) => {
       if (!results[0]) {
