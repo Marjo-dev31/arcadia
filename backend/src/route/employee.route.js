@@ -1,5 +1,5 @@
 import express from "express";
-import { addEmployeeReport, deleteEmployeeReport, getEmployeeReports, updateEmployeeReport } from "../controller/employee.controller.js";
+import { addEmployeeReport, deleteEmployeeReport, getEmployeeReports, getEmployeeReportsByAnimal, updateEmployeeReport } from "../controller/employee.controller.js";
 import authenticateToken from "../middleware/auth.js";
 import verifyRoles from "../middleware/verifyroles.js";
 
@@ -9,7 +9,7 @@ employeeRoutes.route('/')
 .post(authenticateToken, verifyRoles('Employé'), addEmployeeReport)
 
 employeeRoutes.route('/:id')
-.get(getEmployeeReports)
+.get(getEmployeeReportsByAnimal)
 .delete(authenticateToken, verifyRoles('Employé'), deleteEmployeeReport)
 .put(authenticateToken, verifyRoles('Employé'), updateEmployeeReport)
 
