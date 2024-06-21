@@ -1,5 +1,5 @@
 import express from 'express';
-import { addAnimal, deleteAnimal, getAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
+import { addAnimal, deleteAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 

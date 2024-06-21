@@ -18,8 +18,9 @@ import { Breed } from '../../../../shared/models/breed.interface';
   template: `
     <h3>Animaux</h3>
     <section>
+      @if(datasource){
     <table mat-table [dataSource]="datasource">
-    @if(datasource && datasource.length === 0){
+    @if(datasource.length === 0){
       <p>Il n'y a pas d'animal</p>
     }
       <ng-container matColumnDef="firstname">
@@ -69,7 +70,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
       <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
-    </table>
+    </table>}
     @if(!addFormIsDisplay){
       <mat-icon class="add-icon" (click)="toggleAddForm()" >add_circle_outline</mat-icon>
     }
@@ -199,9 +200,9 @@ export class AnimalHandledComponent implements OnInit {
   private readonly habitatService = inject(HabitatsService);
   private readonly breedService = inject(BreedService)
 
-  datasource!: Animal[];
+  datasource!: Animal[] | undefined;
   habitats!: Habitat[];
-  breeds!: Breed[];
+  breeds!: Breed[] | undefined;
 
   newAnimal: AnimalCreate = {
     firstname: '',
@@ -222,7 +223,7 @@ export class AnimalHandledComponent implements OnInit {
 
   getAnimals() {
     this.animalService.getHandleAnimals().subscribe((response) => {
-      this.datasource = response.data.animals;
+      this.datasource = response.data;
     });
   }
 
@@ -253,9 +254,10 @@ export class AnimalHandledComponent implements OnInit {
 
   editAnimal(id: string) {
     this.updateFormIsDisplay= true;
+    if(this.datasource){
     const animalToUpdate = this.datasource.find((el)=> el.id === id);
     this.updateForm.patchValue({firstname: animalToUpdate?.firstname, habitat: animalToUpdate?.id_habitat, breed: animalToUpdate?.id_breed, id: animalToUpdate?.id })
-}
+}}
 
   updateAnimal() {
     this.animalService.updateAnimal(this.updateForm.value).pipe(tap(()=>{this.getAnimals()})).subscribe()
@@ -265,14 +267,13 @@ export class AnimalHandledComponent implements OnInit {
 
   getBreed(){
     this.breedService.getBreeds().subscribe((response)=> {
-      this.breeds = response.data.breeds;
+      this.breeds = response.data;
     } )
   }
 
   getHabitat(){
     this.habitatService.getHabitats().then((response) => {
     this.habitats = response;
-
     })
   }
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import {getHabitats, addHabitat, getHabitat, updateHabitat, deleteHabitat, addComment, deleteComment} from '../controller/habitat.controller.js';
+import {getHabitats, addHabitat, updateHabitat, deleteHabitat, addComment, deleteComment} from '../controller/habitat.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 
