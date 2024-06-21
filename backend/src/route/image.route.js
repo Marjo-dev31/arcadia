@@ -1,5 +1,5 @@
 import express from "express";
-import { addHabitatImage, addServiceImage, getImage, getImages, deleteImage, addAnimalImage } from "../controller/image.controller.js";
+import { addHabitatImage, addServiceImage, deleteImage, addAnimalImage } from "../controller/image.controller.js";
 import fileupload from "../middleware/fileupload.js";
 import authenticateToken from "../middleware/auth.js";
 import verifyRoles from "../middleware/verifyroles.js";
