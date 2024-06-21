@@ -1,5 +1,5 @@
 import express from "express";
-import { addEmployeeReport, deleteEmployeeReport, getEmployeeReports, getEmployeeReportsByAnimal, updateEmployeeReport } from "../controller/employee.controller.js";
+import { addEmployeeReport, deleteEmployeeReport, getEmployeeReportsByAnimal, updateEmployeeReport } from "../controller/employee.controller.js";
 import authenticateToken from "../middleware/auth.js";
 import verifyRoles from "../middleware/verifyroles.js";
 

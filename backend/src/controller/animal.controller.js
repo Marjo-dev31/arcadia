@@ -25,7 +25,7 @@ export const getAnimals = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Animals retrieved`,
-              { animals: results }
+              results 
             )
             
           );
@@ -85,7 +85,7 @@ export const addAnimal = (req, res) => {
               httpStatus.CREATED.code,
               httpStatus.CREATED.status,
               `Animal created`,
-              { animal }
+              animal
             )
           );
       }
@@ -145,7 +145,9 @@ export const updateAnimal = (req, res) => {
             httpStatus.OK.code,
             httpStatus.OK.status,
             `Habitat updated`,
-            {...req.body}))
+            {...req.body}
+          )
+        )
       } else {
           logger.error(error.message)
           res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
@@ -182,7 +184,7 @@ export const getAnimalsByHabitat = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Animals retrieved`,
-              { animals: results }
+              results
             )
             
           );

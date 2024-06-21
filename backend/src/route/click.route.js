@@ -1,5 +1,5 @@
 import express from 'express'
-import { addAnimalOnMongo, addCount, deleteAnimalOnMongo, getAnimalByFirstname, getAnimals } from '../controller/click.controller.js';
+import { addAnimalOnMongo, addCount, deleteAnimalOnMongo, getAnimals } from '../controller/click.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 

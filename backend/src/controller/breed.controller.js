@@ -25,7 +25,7 @@ export const getBreed = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Breeds retrieved`,
-              { breeds: results }
+              results
             )
             
           );
@@ -56,7 +56,7 @@ export const addBreed = (req, res) => {
               httpStatus.CREATED.code,
               httpStatus.CREATED.status,
               `Breed created`,
-              { breed }
+              breed
             )
           );
       }

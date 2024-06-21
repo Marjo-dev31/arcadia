@@ -1,5 +1,5 @@
 import express from 'express';
-import {getServices, getService, addService, updateService, deleteService} from '../controller/service.controller.js';
+import {getServices, addService, updateService, deleteService} from '../controller/service.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 
