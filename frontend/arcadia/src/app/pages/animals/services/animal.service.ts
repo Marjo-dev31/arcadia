@@ -20,8 +20,14 @@ export class AnimalService {
         }
     }
 
-    getHandleAnimals(): Observable<ResponseAnimal> {
-        return this.http.get<ResponseAnimal>(`${this.url}/backoffice`);
+    getHandleAnimals(): Observable<Animal[]> {
+        return this.http.get<Response<Animal>>(`${this.url}/backoffice`).pipe(map((r)=>{
+            if(r.data){
+                return r.data
+            } else {
+                return []
+            }
+        }))
     }
 
     // getAnimal(id: string): Observable<any> {
@@ -37,16 +43,20 @@ export class AnimalService {
         }))
     }
 
-    updateAnimal(animal: Animal): Observable<ResponseAnimal> {
-        return this.http.put<ResponseAnimal>(`${this.url}/${animal.id}`, animal)
+    updateAnimal(animal: Animal): Observable<Response<Animal>> {
+        return this.http.put<Response<Animal>>(`${this.url}/${animal.id}`, animal)
     }
 
-    deleteAnimal(id: string): Observable<ResponseAnimal> {
-      return this.http.delete<ResponseAnimal>(`${this.url}/${id}`)
+    deleteAnimal(id: string): Observable <Response<Animal>> {
+      return this.http.delete<Response<Animal>>(`${this.url}/${id}`)
     }
 
-    getAnimalsByHabitat(id: string): Observable<ResponseAnimal> {
-        return this.http.get<ResponseAnimal>(`${this.url}/habitats/${id}`)
-         
+    getAnimalsByHabitat(id: string): Observable<Animal[]> {
+        return this.http.get<Response<Animal>>(`${this.url}/habitats/${id}`).pipe(map((r)=>{
+        if(r.data){
+            return r.data
+        }
+        else{return []}
+    }))
     }
 }

@@ -82,7 +82,7 @@ export class HabitatsComponent implements OnInit {
 
   getAnimalsByHabitat(id: string) {
     this.animalService.getAnimalsByHabitat(id).subscribe((response) => {
-      this.animals = response.data;
+      this.animals = response;
     });
   }
 

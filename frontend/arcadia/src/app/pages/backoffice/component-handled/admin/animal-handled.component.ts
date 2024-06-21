@@ -223,7 +223,7 @@ export class AnimalHandledComponent implements OnInit {
 
   getAnimals() {
     this.animalService.getHandleAnimals().subscribe((response) => {
-      this.datasource = response.data;
+      this.datasource = response;
     });
   }
 
