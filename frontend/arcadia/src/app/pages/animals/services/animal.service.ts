@@ -30,10 +30,6 @@ export class AnimalService {
         }))
     }
 
-    // getAnimal(id: string): Observable<any> {
-    //     return this.http.get(`${this.url}/${id}`)
-    // }
-
     addAnimal(animal: AnimalCreate): Observable<Animal[]> {
         return this.http.post<Response<Animal>>(this.url, animal).pipe(map((r)=>{
             if(r.data){
@@ -59,4 +55,9 @@ export class AnimalService {
         else{return []}
     }))
     }
+
+
+    // getAnimal(id: string): Observable<any> {
+    //     return this.http.get(`${this.url}/${id}`)
+    // }
 }
