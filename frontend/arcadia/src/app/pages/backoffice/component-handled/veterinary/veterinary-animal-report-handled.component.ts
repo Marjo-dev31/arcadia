@@ -39,7 +39,7 @@ import { UserService } from '../../../login/service/user.service';
     <section class="animals-section">
       <h3>Section animaux</h3>
       <form
-        ngForm
+        #animalchoice=ngForm
         name="animalchoice"
         (ngSubmit)="getVeterinaryReports(selectedAnimalOption)"
       >
@@ -51,12 +51,11 @@ import { UserService } from '../../../login/service/user.service';
         </select>
         <button>Filtrer</button>
       </form>
-      @if(responsemessage === 'No reports found'){
+      @if(animalchoice.submitted && selectedAnimalOption && !veterinaryReports.length){
       <p>Il n'y pas encore de rapport associé à cet animal !</p>
       }
       @for(animal of animals; track animal){ 
-        @if (selectedAnimalOption ===
-      animal.id) {
+        @if (selectedAnimalOption === animal.id) {
       <table
         mat-table
         [dataSource]="dataSource"
@@ -275,7 +274,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
       details_condition: new FormControl(''),
       id_user: new FormControl('', [Validators.required]),
       id_animal: new FormControl('', [Validators.required]),
-      id: new FormControl(''),
+      id: new FormControl('')
     });
   }
 
@@ -289,7 +288,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   ];
 
   animals!: Animal[];
-  veterinaryReports!: VeterinaryReport[];
+  veterinaryReports: VeterinaryReport[] = [];
   users!: User[];
 
   selectedAnimalOption!: string;
@@ -340,16 +339,16 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   getVeterinaryReports(id: string) {
-    
     this.veterinaryService.getVeterinaryReports(id).subscribe((response) => {
-      try {
+      if(response.data) {
         this.veterinaryReports = response.data.reports;
         this.dataSource = new MatTableDataSource(this.veterinaryReports);
         this.dataSource.sort = this.sort;
-        this.responsemessage = response.message;
-      } catch (error) {
-        this.responsemessage = response.message;
-        this.selectedAnimalOption = ''
+        // this.responsemessage = response.message;
+      } else {
+        // this.responsemessage = response.message;
+        this.veterinaryReports = [];
+        this.dataSource = new MatTableDataSource(this.veterinaryReports)
       }
     });
   }
@@ -390,9 +389,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   updateReport(id: string) {
-    this.veterinaryService
-      .updateReport(this.updateForm.value)
-      .pipe(
+    this.veterinaryService.updateReport(this.updateForm.value).pipe(
         tap(() => {
           this.getVeterinaryReports(id);
         })

@@ -19,7 +19,7 @@ import { tap } from 'rxjs';
   template: `
       <h3>Rapport employé</h3>
   <section>
-      <form ngForm name="animalchoice" (ngSubmit)="getEmployeeReports(selectedAnimalOption)">
+      <form #animalchoice=ngForm name="animalchoice" (ngSubmit)="getEmployeeReports(selectedAnimalOption)">
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
           <option *ngFor="let animal of animals" [ngValue]="animal.id">
@@ -28,7 +28,8 @@ import { tap } from 'rxjs';
         </select>
         <button>Filtrer</button>
       </form>
-      @if(responsemessage === 'No reports found') {
+
+        @if(animalchoice.submitted && selectedAnimalOption && !employeeReports.length){
         <p>Il n'y a pas de rapport associé à cet animal</p>
       }
       @for(animal of animals; track animal) { 
@@ -249,14 +250,16 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   getEmployeeReports(id: string) {
     this.employeeService.getEmployeeReports(id).subscribe((response)=> {
-      try {
+      if(response.data) {
     this.employeeReports = response.data.reports;
     this.datasource = new MatTableDataSource(this.employeeReports);
     this.datasource.sort = this.sort;
-    this.responsemessage = response.message;
-  } catch(error) {
-    this.responsemessage = response.message;
-    this.selectedAnimalOption = '';
+    // this.responsemessage = response.message;
+  } else {
+    // this.responsemessage = response.message;
+    this.employeeReports = [];
+    this.datasource = new MatTableDataSource(this.employeeReports)
+    
   }
     })
   };
