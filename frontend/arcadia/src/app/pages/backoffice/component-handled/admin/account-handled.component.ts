@@ -83,7 +83,7 @@ import { UserService } from '../../../login/service/user.service';
           }
         }
         <label for="confirmPassword">Confirmer mot de passe :</label>
-        <input  name="confirmPassword" id="confirm-password" ngModel #confirmPassword="ngModel" required/>
+        <input type="password" name="confirmPassword" id="confirm-password" ngModel #confirmPassword="ngModel" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"/>
         @if(confirmPassword.touched){
           @if(confirmPassword.errors?.['required']){
             <p class="alert">Une confirmation du mot de passe est requise</p>

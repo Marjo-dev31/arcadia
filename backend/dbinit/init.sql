@@ -47,23 +47,36 @@ CREATE TABLE users (
     FOREIGN KEY (id_role) REFERENCES roles(id) ON DELETE SET NULL
 );
 
-CREATE TABLE employee_reports (
-    id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
-    food VARCHAR(255) NOT NULL,
-    grammage INT NOT NULL,
-    date DATETIME NOT NULL,
-    id_user VARCHAR(36),
-    id_animal VARCHAR(36),
-    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL, 
-    FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
-);
+-- CREATE TABLE employee_reports (
+--     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
+--     food VARCHAR(255) NOT NULL,
+--     grammage INT NOT NULL,
+--     date DATETIME NOT NULL,
+--     id_user VARCHAR(36),
+--     id_animal VARCHAR(36),
+--     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL, 
+--     FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
+-- );
 
-CREATE TABLE veterinary_reports (
+-- CREATE TABLE veterinary_reports (
+--     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
+--     food VARCHAR(255) NOT NULL,
+--     grammage INT NOT NULL,
+--     date DATETIME NOT NULL,
+--     health VARCHAR(50) NOT NULL,
+--     details_condition VARCHAR(255) DEFAULT NULL,
+--     id_user VARCHAR(36),
+--     id_animal VARCHAR(36),
+--     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL,
+--     FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
+-- );
+
+- CREATE TABLE reports (
     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     food VARCHAR(255) NOT NULL,
     grammage INT NOT NULL,
     date DATETIME NOT NULL,
-    health VARCHAR(50) NOT NULL,
+    health VARCHAR(50) DEFAULT NULL,
     details_condition VARCHAR(255) DEFAULT NULL,
     id_user VARCHAR(36),
     id_animal VARCHAR(36),
