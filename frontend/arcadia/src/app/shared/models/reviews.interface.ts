@@ -4,7 +4,7 @@ export interface Review {
     content: string,
     date: Date,
     status: boolean;
-    id_employee: string
+    employee: string
 }
 
 export interface ReviewPost {

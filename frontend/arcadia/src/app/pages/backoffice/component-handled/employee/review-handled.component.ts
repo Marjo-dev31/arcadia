@@ -78,7 +78,7 @@ export class ReviewHandledComponent implements OnInit {
     const reviewToPublish = this.datasource.find((el) => el.id === id);
     if (reviewToPublish) {
       reviewToPublish.status = true;
-      reviewToPublish.id_employee = localStorage.getItem('firstname') || ''
+      reviewToPublish.employee = localStorage.getItem('firstname') || ''
       this.reviewService.updateReview(reviewToPublish).subscribe();
     }
   }
