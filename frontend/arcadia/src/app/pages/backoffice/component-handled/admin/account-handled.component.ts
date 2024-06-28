@@ -98,10 +98,7 @@ import { UserService } from '../../../login/service/user.service';
         </div>
       </form>
     </div>
-    @if(form.valid && form.submitted){
-      <div class="alert">Le compte a été créé</div>
-    }
-    <div  class="alert-form" id="alert" [ngStyle]="{display: 'none'}">Une erreur est survenue, vérifiez votre saisie.</div>
+    <div class="alert" id="alert">Le compte a été créé</div>
   `,
   styleUrl: `../component-handled.component.css`,
 })
@@ -135,11 +132,8 @@ export class AccountHandledComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const alert = document.getElementById('alert');
-    if(alert){
-      if(form.invalid) {
-        alert.style.display = "block"
-      }
-        alert.style.display = "none"
+    if(alert && form.submitted){
+        alert.style.display = "block";
         this.newUser.id_role = this.selectedRoleOption;
         this.userService.addUser(this.newUser).subscribe();
         form.reset()
