@@ -277,7 +277,12 @@ export class EmployeeReportHandledComponent implements OnInit {
   editReport(id: string) {
     this.updateFormIsDisplay = true;
     const reportToUpdate = this.employeeReports.find((el)=> el.id === id);
-    this.updateForm.patchValue({food: reportToUpdate?.food, grammage: reportToUpdate?.grammage, id_user: reportToUpdate?.id_user, id_animal: reportToUpdate?.id_animal, id: reportToUpdate?.id});
+    this.updateForm.patchValue({
+      food: reportToUpdate?.food, 
+      grammage: reportToUpdate?.grammage, 
+      id_user: reportToUpdate?.id_user, 
+      id_animal: reportToUpdate?.id_animal, 
+      id: reportToUpdate?.id});
     }
 
   updateReport(id: string) {
