@@ -67,7 +67,6 @@ export const addCount = async (req, res) => {
 export const getAnimals = async (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
   try {
-  
     const animals = await animalModel.find();
       if(!animals[0]){
         res
@@ -80,7 +79,6 @@ export const getAnimals = async (req, res) => {
             )
           )
         }
-
       res
         .status(httpStatus.OK.code)
         .send(
@@ -91,7 +89,6 @@ export const getAnimals = async (req, res) => {
                 { animals: animals}
             )
         )
-  
 } catch (error) {
     logger.error(error.message);
       res
@@ -123,7 +120,6 @@ export const addAnimalOnMongo = async (req, res) => {
                 { animal: animal}
             )
         );
-
   } catch (error) {
     logger.error(error.message);
     res
@@ -142,7 +138,6 @@ export const addAnimalOnMongo = async (req, res) => {
 export const deleteAnimalOnMongo = async (req, res)=> {
   logger.info(`${req.method} ${req.originalUrl}, deleting animal`);
   try {
- 
     const animal = await animalModel.findByIdAndDelete({_id: req.params.id})
     res
         .status(httpStatus.OK.code)
