@@ -105,9 +105,10 @@ export class ContactComponent implements OnInit {
   ngOnInit() {}
 
 onSubmit(){
-  this.mailService.sendEmail(this.contactForm.value).subscribe();
-  this.submitted = true;
-  this.contactForm.reset()
+  // this.mailService.sendEmail(this.contactForm.value).subscribe();
+  // this.submitted = true;
+  // this.contactForm.reset()
+console.log(this.contactForm.value)
 };
 
 }

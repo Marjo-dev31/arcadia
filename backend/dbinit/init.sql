@@ -1,7 +1,5 @@
-DROP DATABASE IF EXISTS arcadiadb; 
-
 CREATE DATABASE IF NOT EXISTS arcadiadb;
--- if arcadiabd exists, change the name or delete with   
+-- if arcadiabd exists and you don't  want use it, change the name or delete with DROP DATABASE IF EXISTS arcadiadb; 
 
 USE arcadiadb;
 
@@ -144,6 +142,6 @@ INSERT INTO animals VALUES	(DEFAULT, 'Pinako', (SELECT id FROM habitats WHERE ti
 
 INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$pQBkrsu5.htIin8ao1xpvuHP48FP7VJQgEvnPkM2kyXteCLz62Mu2', (SELECT id FROM roles WHERE name = 'Admin'));
 
-INSERT INTO images(id, image_url, id_service ) VALUES ( DEFAULT, 'sandwich.jpg', '4de944cc-1510-11ef-9b15-0654193ea06b');
-INSERT INTO images(id, image_url, id_habitat ) VALUES ( DEFAULT, 'lasavane.jpg', '4dd1761c-1510-11ef-9b15-0654193ea06b');
-INSERT INTO images(id, image_url, id_animal ) VALUES ( DEFAULT, 'caimen.jpg', '4e62dbb8-1510-11ef-9b15-0654193ea06b');
+INSERT INTO images(id, image_url, id_service ) VALUES ( DEFAULT, 'sandwich.jpg', (SELECT id FROM services WHERE title='Restauration'));
+INSERT INTO images(id, image_url, id_habitat ) VALUES ( DEFAULT, 'lasavane.jpg', (SELECT id FROM habitats WHERE title='La Savane'));
+INSERT INTO images(id, image_url, id_animal ) VALUES ( DEFAULT, 'caimen.jpg', (SELECT id FROM animals WHERE name='Pinako'));

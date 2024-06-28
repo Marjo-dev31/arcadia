@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, effect } from '@angular/core';
+import { Component, OnInit, inject, effect, Signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { OpeningService } from '../../../pages/services/service/opening.service';
 import { Opening } from '../../models/opening.interface';
