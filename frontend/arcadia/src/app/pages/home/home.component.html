@@ -106,7 +106,7 @@
             placeholder="Ecrivez votre avis ici..."
             [(ngModel)]="newReview.content"
             #content="ngModel"></textarea>
-          <button class="form-review-btn" >Envoyer</button>
+          <button class="form-review-btn" [disabled]="form.invalid">Envoyer</button>
         </form>
       </div>
     </div>
