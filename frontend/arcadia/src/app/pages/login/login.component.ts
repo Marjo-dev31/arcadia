@@ -39,7 +39,7 @@ import { LoginService } from './service/login.service';
         @if(password.invalid && password.touched){
           <p class="alert">Mot de passe invalide</p>
         }
-        <button>Se connecter</button>
+        <button [disabled]="form.invalid">Se connecter</button>
       </form>
       <div class="password-forgot">
         <a [routerLink]="['/mdpoublie']" id="password-forgot-link">Mot de passe oublié ?</a>
