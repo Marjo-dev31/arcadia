@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Habitat, HabitatCreate } from '../../../shared/models';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class HabitatsService {
-    url = 'http://13.39.80.204:8000/habitats';
+    url = `${environment.serverUrl}/habitats`;
 
     constructor(private http: HttpClient) {}
 
@@ -13,7 +14,7 @@ export class HabitatsService {
         try {
         const habitatsList = await fetch(this.url).then((response)=> response.json());
         return habitatsList.data.habitats }
-        catch (error){
+        catch {
             return []
         }
     }

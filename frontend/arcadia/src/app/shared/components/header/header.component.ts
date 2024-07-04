@@ -1,13 +1,13 @@
-import { NgStyle } from '@angular/common';
-import { Component, Inject, OnInit, ViewChild, inject } from '@angular/core';
+import { AsyncPipe, NgStyle } from '@angular/common';
+import { Component, inject, input } from '@angular/core';
 
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { tap } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../../pages/login/service/login.service';
+import { Observable, filter, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, NgStyle],
+  imports: [RouterLink, NgStyle, AsyncPipe],
   standalone: true,
   template: `
     <header>
@@ -40,7 +40,7 @@ import { LoginService } from '../../../pages/login/service/login.service';
         </div>
       </div>
       <div class="hero-scene">
-        <h1>Arcadia</h1>
+        
       </div>
     </header>
     <aside
@@ -51,7 +51,7 @@ import { LoginService } from '../../../pages/login/service/login.service';
       <nav>
         <ul>
           <li><a [routerLink]="['/']">Accueil</a></li>
-          <li><a [routerLink]="['/habitats']">Habitats</a></li>
+          <li><a [routerLink]="['/habitats']" [state]="{title:'Habitats'}">Habitats</a></li>
           <li><a [routerLink]="['/services']">Services</a></li>
           <li><a [routerLink]="['/contact']">Contact</a></li>
           @if(loginService.isLoggin === true){
@@ -68,11 +68,13 @@ import { LoginService } from '../../../pages/login/service/login.service';
 })
 export class HeaderComponent {
   showSideDrawer = false;
-  title!: string;
+
   constructor(public route: Router) {}
 
   loginService = inject(LoginService);
 
+  ngOnInit(){ 
+  }
 
   toggleSideDrawer() {
     this.showSideDrawer = !this.showSideDrawer;

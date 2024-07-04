@@ -10,6 +10,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle, RouterLink, RouterOutlet],
   template: `
+    <h1 class="title">ARCADIA</h1>
     <mat-sidenav-container autosize>
       <mat-sidenav #drawer mode="side" class="sidenav" opened>
         <h3>Bonjour {{this.userFirstname}}</h3>
@@ -41,7 +42,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: `./sidenav.component.css`,
 })
 export class SidenavComponent implements OnInit {
-  constructor() {}
+  constructor() {
+  }
 
   sidenavState = false;
   userFirstname: string = localStorage.getItem('firstname') || ''

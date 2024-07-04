@@ -44,3 +44,7 @@
     font-size: var(--font-size-footer);
     font-style: italic;
 }
+
+.no-services {
+    color: var(--color-background)
+}

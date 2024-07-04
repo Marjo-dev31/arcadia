@@ -1,11 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from '../../../environments/environment';
 
 
 @Injectable()
 export class RoleService {
-    url = 'http://13.39.80.204:8000/roles';
+    url = `${environment.serverUrl}/roles`;
 
     constructor(private http: HttpClient) {}
 

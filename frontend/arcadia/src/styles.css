@@ -50,8 +50,6 @@ a {
 }
 
 a:hover {
-  /* text-decoration: var(--color-call-to-action) underline; */
-  /* background-color: var(--color-call-to-action); */
   color: var(--color-call-to-action);
   box-shadow: 0 0 5px var(--color-call-to-action);
   border-radius: 20px;
@@ -98,9 +96,19 @@ button:hover {
   }
   
   
-  .alert-form {
-    color: red;
-    text-align: center;
-    font: var(--font-size-h3);
-    margin-bottom: 2rem;
+.alert-form {
+  color: red;
+  text-align: center;
+  font: var(--font-size-h3);
+  margin-bottom: 2rem;
   }
+  
+.title{
+  text-align: center;
+  margin-top: 0;
+  padding: 2rem;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform:translateX(-50%);
+ }

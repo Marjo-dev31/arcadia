@@ -3,35 +3,35 @@ import logger from "../util/logger.js";
 import httpStatus from "../domain/httpstatus.js";
 import animalModel from "../models/animals.js";
 
-export const getAnimalByFirstname = async (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
-  try {
-    const animal = await animalModel.findOne({
-      firstname: req.params.firstname,
-    });
-    res
-        .status(httpStatus.OK.code)
-        .send(
-            new Response(
-                httpStatus.OK.code,
-                httpStatus.OK.status,
-                `Animal retrienved`,
-                { animal: animal}
-            )
-        );
-  } catch (error) {
-    logger.error(error.message);
-        res
-          .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-          .send(
-            new Response(
-              httpStatus.INTERNAL_SERVER_ERROR.code,
-              httpStatus.INTERNAL_SERVER_ERROR.status,
-              `Error occured`
-            )
-          );
-  }
-};
+// export const getAnimalByFirstname = async (req, res) => {
+//   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
+//   try {
+//     const animal = await animalModel.findOne({
+//       firstname: req.params.firstname,
+//     });
+//     res
+//         .status(httpStatus.OK.code)
+//         .send(
+//             new Response(
+//                 httpStatus.OK.code,
+//                 httpStatus.OK.status,
+//                 `Animal retrieved`,
+//                 { animal: animal}
+//             )
+//         );
+//   } catch (error) {
+//     logger.error(error.message);
+//         res
+//           .status(httpStatus.INTERNAL_SERVER_ERROR.code)
+//           .send(
+//             new Response(
+//               httpStatus.INTERNAL_SERVER_ERROR.code,
+//               httpStatus.INTERNAL_SERVER_ERROR.status,
+//               `Error occured`
+//             )
+//           );
+//   }
+// };
 
 export const addCount = async (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, updating count`);
@@ -67,7 +67,6 @@ export const addCount = async (req, res) => {
 export const getAnimals = async (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
   try {
-  
     const animals = await animalModel.find();
       if(!animals[0]){
         res
@@ -80,7 +79,6 @@ export const getAnimals = async (req, res) => {
             )
           )
         }
-
       res
         .status(httpStatus.OK.code)
         .send(
@@ -91,7 +89,6 @@ export const getAnimals = async (req, res) => {
                 { animals: animals}
             )
         )
-  
 } catch (error) {
     logger.error(error.message);
       res
@@ -123,7 +120,6 @@ export const addAnimalOnMongo = async (req, res) => {
                 { animal: animal}
             )
         );
-
   } catch (error) {
     logger.error(error.message);
     res
@@ -142,7 +138,6 @@ export const addAnimalOnMongo = async (req, res) => {
 export const deleteAnimalOnMongo = async (req, res)=> {
   logger.info(`${req.method} ${req.originalUrl}, deleting animal`);
   try {
- 
     const animal = await animalModel.findByIdAndDelete({_id: req.params.id})
     res
         .status(httpStatus.OK.code)

@@ -1,5 +1,5 @@
 import express from "express";
-import { addHabitatImage, addServiceImage, getImage, getImages, deleteImage, addAnimalImage } from "../controller/image.controller.js";
+import { addHabitatImage, addServiceImage, deleteImage, addAnimalImage } from "../controller/image.controller.js";
 import fileupload from "../middleware/fileupload.js";
 import authenticateToken from "../middleware/auth.js";
 import verifyRoles from "../middleware/verifyroles.js";
@@ -9,7 +9,7 @@ import verifyRoles from "../middleware/verifyroles.js";
 const imageRoutes = express.Router();
 
 imageRoutes.route('/')
-.get(getImages)
+// .get(getImages)
 
 // imageRoutes.route('/services')
 // .get(getServicesImages)
@@ -31,7 +31,7 @@ imageRoutes.route('/animal/:id')
 .post(authenticateToken, verifyRoles('Admin'), fileupload, addAnimalImage)
 
 imageRoutes.route('/:id')
-.get(getImage)
+// .get(getImage)
 .delete(authenticateToken, verifyRoles('Admin', 'Employé'), deleteImage)
 
 export default imageRoutes

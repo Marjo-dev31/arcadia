@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserLogin } from '../../shared/models/user.interface';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginService } from './service/login.service';
 
 
@@ -11,6 +11,7 @@ import { LoginService } from './service/login.service';
   standalone: true,
   template: `
     <main>
+      <h1 class="title">{{title}}</h1>
       <div>
         <h2>Espace Privé</h2>
         <h3>(Réservé à la direction, aux vétérinaires et aux employés)</h3>
@@ -26,7 +27,7 @@ import { LoginService } from './service/login.service';
         }
         <div>
           <label for="email" >Email :</label>
-          <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" required/>
+          <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" email required/>
         </div>
         @if(email.invalid && email.touched){
           <p class="alert">Un Email est requis</p>
@@ -38,7 +39,7 @@ import { LoginService } from './service/login.service';
         @if(password.invalid && password.touched){
           <p class="alert">Mot de passe invalide</p>
         }
-        <button>Se connecter</button>
+        <button [disabled]="form.invalid">Se connecter</button>
       </form>
       <div class="password-forgot">
         <a [routerLink]="['/mdpoublie']" id="password-forgot-link">Mot de passe oublié ?</a>
@@ -54,7 +55,10 @@ import { LoginService } from './service/login.service';
   styleUrl: `./login.component.css`,
 })
 export class ConnexionComponent implements OnInit {
-  constructor() {}
+  title : string
+  constructor(route: ActivatedRoute) {
+    this.title = route.snapshot.data['title']
+  }
 
   private readonly loginService = inject(LoginService)
   private readonly router = inject(Router)

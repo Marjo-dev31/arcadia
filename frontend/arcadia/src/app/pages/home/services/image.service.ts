@@ -1,13 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-
-
-
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ImageService {
-  url = 'http://13.39.80.204:8000/images';
+  url = `${environment.serverUrl}/images`;
 
   constructor( private http: HttpClient) {}
 

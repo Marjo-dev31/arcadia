@@ -22,7 +22,7 @@ import { MatIconModule } from "@angular/material/icon";
             <td mat-cell *matCellDef="let animal">{{ animal.firstname }}</td>
         </ng-container>
         <ng-container matColumnDef="clickCount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de click</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de clic</th>
             <td mat-cell *matCellDef="let animal">{{ animal.clickCount }}</td>
         </ng-container>
         <ng-container matColumnDef="delete">
@@ -43,10 +43,10 @@ import { MatIconModule } from "@angular/material/icon";
     <form #form="ngForm" name="addForm" (ngSubmit)="addAnimalOnMongo()">
         <label for="firstname" >Prénom :</label>
         <input type="text" name="firstname" [(ngModel)]="newAnimal.firstname" #firstname="ngModel" required>
-        @if(firstname.invalid && firstname.touched){
+        @if(firstname.invalid && firstname.touched && !form.submitted){
             <p class="alert">Un Prénom est requis</p>
         }
-        <button>Ajouter</button>
+        <button [disabled]="form.invalid">Ajouter</button>
     </form>
 }
     `,
@@ -95,7 +95,7 @@ export class FameComponent implements OnInit {
 
     addAnimalOnMongo(){
         this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe(); 
-        // this.newAnimal.firstname = '';
+        this.newAnimal.firstname = '';
     }
 
     deleteAnimal(id: string){
