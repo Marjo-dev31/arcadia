@@ -79,7 +79,7 @@ export const updateVeterinaryReport = (req, res) => {
         );
       } else {
         logger.info(`${req.method} ${req.originalUrl}, updating report`);
-        database.query(QUERYEMPLOYEES.UPDATE_REPORT, [...Object.values(req.body), req.params.id], (error, results) => {
+        database.query(QUERYVETERINARIES.UPDATE_REPORT, [...Object.values(req.body), req.params.id], (error, results) => {
       if(!error) {
             res
           .status(httpStatus.OK.code)

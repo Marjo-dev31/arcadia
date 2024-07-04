@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { ReviewPost, Review } from '../../../shared/models/reviews.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable()
 export class ReviewsService {
-    url = 'http://13.39.80.204:8000/reviews';
+    url = `${environment.serverUrl}/reviews`;
     constructor(private http: HttpClient) {}
 
     async getReviews(): Promise<any> {

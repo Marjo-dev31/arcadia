@@ -10,9 +10,9 @@ export const getOpening = async (req, res) => {
     try {
         const openingToPublic = await openingModel.find()
         res.send(openingToPublic)
-    } catch(error) {
-        console.log('An error occured!')
-        res.status(500).send({error})
+    } catch {
+        console.log('No results!')
+        res.status(200).send({openingToPublic: []})
     }
 }
 
@@ -27,11 +27,11 @@ export const updateOpening = async (req, res) =>{
     }
 }
 
-export const getOne = async (req, res) => {
-    try {
-        const opening = await openingModel.findById(req.params.id)
-        res.send(opening)
-    } catch (error) {
-        res.status(500).send({error})
-    }
-}
+// export const getOne = async (req, res) => {
+//     try {
+//         const opening = await openingModel.findById(req.params.id)
+//         res.send(opening)
+//     } catch (error) {
+//         res.status(500).send({error})
+//     }
+// }

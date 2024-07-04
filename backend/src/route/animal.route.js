@@ -1,5 +1,5 @@
 import express from 'express';
-import { addAnimal, deleteAnimal, getAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
+import { addAnimal, deleteAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 
@@ -13,7 +13,7 @@ animalsRoutes.route('/backoffice')
 .get(authenticateToken, verifyRoles('Admin'), getAnimals)
 
 animalsRoutes.route('/:id')
-.get(getAnimal)
+// .get(getAnimal)
 .delete(authenticateToken, verifyRoles('Admin'), deleteAnimal)
 .put(authenticateToken, verifyRoles('Admin'), updateAnimal)
 

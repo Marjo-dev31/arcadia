@@ -26,6 +26,7 @@ import { UserService } from '../../../login/service/user.service';
           id="email"
           [(ngModel)]="newUser.email"
           #email="ngModel"
+          email
           required
         />
         @if(email.invalid && email.touched){
@@ -82,7 +83,7 @@ import { UserService } from '../../../login/service/user.service';
           }
         }
         <label for="confirmPassword">Confirmer mot de passe :</label>
-        <input type="password" name="confirmPassword" id="confirm-password" [(ngModel)]="confirmPassword"  #confirmPassword="ngModel" required/>
+        <input type="password" name="confirmPassword" id="confirm-password" ngModel #confirmPassword="ngModel" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"/>
         @if(confirmPassword.touched){
           @if(confirmPassword.errors?.['required']){
             <p class="alert">Une confirmation du mot de passe est requise</p>
@@ -92,15 +93,12 @@ import { UserService } from '../../../login/service/user.service';
           }
         }
         <div class="btn-section">
-          <button type="reset" class="btn">Annuler</button>
-          <button class="btn">Valider</button>
+          <button type="reset" class="btn" >Annuler</button>
+          <button class="btn" [disabled]="form.invalid">Valider</button>
         </div>
       </form>
     </div>
-    @if(form.valid && form.submitted){
-      <div class="alert">Le compte a été créé</div>
-    }
-    <div  class="alert-form" id="alert" [ngStyle]="{display: 'none'}">Une erreur est survenue, vérifiez votre saisie.</div>
+    <div class="alert" id="alert">Le compte a été créé</div>
   `,
   styleUrl: `../component-handled.component.css`,
 })
@@ -121,7 +119,6 @@ export class AccountHandledComponent implements OnInit {
     id_role: '',
   };
 
-  @ViewChild('form') form!: NgForm;
 
   ngOnInit() {
     this.getRolesWithoutAdmin();
@@ -135,11 +132,8 @@ export class AccountHandledComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const alert = document.getElementById('alert');
-    if(alert){
-      if(this.form.invalid) {
-        alert.style.display = "block"
-      }
-        alert.style.display = "none"
+    if(alert && form.submitted){
+        alert.style.display = "block";
         this.newUser.id_role = this.selectedRoleOption;
         this.userService.addUser(this.newUser).subscribe();
         form.reset()

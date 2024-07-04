@@ -1,44 +1,63 @@
 import { Injectable } from '@angular/core';
 import { Animal, AnimalCreate } from '../../../shared/models';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { Response } from '../../../shared/models/response.interface';
 
 @Injectable()
 export class AnimalService {
-    url = 'http://13.39.80.204:8000/animals';
+    url = `${environment.serverUrl}/animals`;
 
     constructor(private http: HttpClient) {}
 
     async getAnimals(): Promise<Animal[]> {
         try {
         const animalsList = await fetch(this.url).then((response)=> response.json());
-        return animalsList.data.animals }
+        return animalsList.data }
         catch (error){
             return []
         }
     }
 
-    getHandleAnimals(): Observable<any> {
-        return this.http.get(`${this.url}/backoffice`)
+    getHandleAnimals(): Observable<Animal[]> {
+        return this.http.get<Response<Animal>>(`${this.url}/backoffice`).pipe(map((r)=>{
+            if(r.data){
+                return r.data
+            } else {
+                return []
+            }
+        }))
     }
 
-    getAnimal(id: string): Observable<any> {
-        return this.http.get(`${this.url}/${id}`)
+    addAnimal(animal: AnimalCreate): Observable<Animal[]> {
+        return this.http.post<Response<Animal>>(this.url, animal).pipe(map((r)=>{
+            if(r.data){
+                return r.data
+            }
+            else{return []}
+        }))
     }
 
-    addAnimal(animal: AnimalCreate): Observable<any> {
-        return this.http.post(this.url, animal)
+    updateAnimal(animal: Animal): Observable<Response<Animal>> {
+        return this.http.put<Response<Animal>>(`${this.url}/${animal.id}`, animal)
     }
 
-    updateAnimal(animal: Animal): Observable<any> {
-        return this.http.put(`${this.url}/${animal.id}`, animal)
+    deleteAnimal(id: string): Observable <Response<Animal>> {
+      return this.http.delete<Response<Animal>>(`${this.url}/${id}`)
     }
 
-    deleteAnimal(id: string): Observable<any> {
-      return this.http.delete(`${this.url}/${id}`)
+    getAnimalsByHabitat(id: string): Observable<Animal[]> {
+        return this.http.get<Response<Animal>>(`${this.url}/habitats/${id}`).pipe(map((r)=>{
+        if(r.data){
+            return r.data
+        }
+        else{return []}
+    }))
     }
 
-    getAnimalsByHabitat(id: string): Observable<any> {
-        return this.http.get(`${this.url}/habitats/${id}`)
-    }
+
+    // getAnimal(id: string): Observable<any> {
+    //     return this.http.get(`${this.url}/${id}`)
+    // }
 }

@@ -74,7 +74,7 @@ import { NgStyle } from '@angular/common';
         @if(commentForm.controls['comment'].invalid && commentForm.controls['comment'].touched){
         <div class="alert">Un commentaire est requis</div>
         }
-        <button>Ajouter mon commentaire</button>
+        <button [disabled]="commentForm.invalid">Ajouter mon commentaire</button>
       </form>
     </section>
   `,

@@ -22,10 +22,10 @@ import { PasswordForgotComponent } from './pages/passwordforgot/passwordforgot';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'services', component: ServicesComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'habitats', component: HabitatsComponent },
-  { path: 'connexion', component: ConnexionComponent },
+  { path: 'services', component: ServicesComponent, data: {title:'Services'} },
+  { path: 'contact', component: ContactComponent, data: {title:'Contact'} },
+  { path: 'habitats', component: HabitatsComponent, data: {title: 'Habitats'} },
+  { path: 'connexion', component: ConnexionComponent, data: {title:'Connexion'} },
   {
     path: 'espacepersonnel', component: BackofficeComponent, canActivate:[AuthGuard],canActivateChild:[RoleGuard],
     children: [

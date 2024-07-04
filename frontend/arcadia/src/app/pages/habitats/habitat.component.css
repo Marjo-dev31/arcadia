@@ -36,6 +36,12 @@
     max-width: 325px;
     overflow: hidden;
   }
+
+  .habitat-title:hover {
+    /* background-color: var(--color-call-to-action); */
+    border: solid 0.2rem var(--color-call-to-action);
+    border-radius: 20px;
+  }
   
   .habitat-content > * {
     margin: 0;

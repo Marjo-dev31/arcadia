@@ -2,10 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Review, ReviewPost } from '../../shared/models/reviews.interface';
 import { ReviewsService } from './services/reviews.service';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',

@@ -2,10 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { UserCreate } from "../../../shared/models/user.interface";
+import { environment } from '../../../environments/environment';
+
 
 @Injectable()
 export class UserService {
-    url = 'http://13.39.80.204:8000/users';
+    url = `${environment.serverUrl}/users`;
 
     constructor(private http:HttpClient) {}
 

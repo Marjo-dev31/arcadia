@@ -1,4 +1,5 @@
 <main>
+  <h1 class="title">ARCADIA</h1>
   <h2>Bienvenue au Zoo</h2>
   <section class="welcome">
     <div class="text-presentation">
@@ -58,8 +59,8 @@
       Poursuivez votre visite en découvrant nos habitats et nos services :
     </h3>
     <div class="container">
-      <a class="stork" href="/habitats"><h3>Les Habitats et les Animaux</h3></a>
-      <a class="visit" href="/services"><h3>Les Services</h3></a>
+      <a class="stork" [routerLink]="['/habitats']"><h3>Les Habitats et les Animaux</h3></a>
+      <a class="visit" [routerLink]="['/services']"><h3>Les Services</h3></a>
     </div>
     <div>
       <img
@@ -74,13 +75,12 @@
       <h3>Découvrez ce que nos visiteurs ont pensé de leurs séjours :</h3>
       <div class="review">
         @for(review of reviews; track review){
-          @if(review.status == true) {
           @if(reviews.indexOf(review)+1 === this.result){
         <p class="review-content">{{ review.content }}</p>
         <p class="review-name">{{ review.pseudo }}</p>
         <p class="review-date">{{ review.date }}</p>
         }
-      }}
+      }
         <button class="more-review-btn" (click)="moreReview(1, reviews.length)">
           + d'avis
         </button>
@@ -106,7 +106,7 @@
             placeholder="Ecrivez votre avis ici..."
             [(ngModel)]="newReview.content"
             #content="ngModel"></textarea>
-          <button class="form-review-btn" >Envoyer</button>
+          <button class="form-review-btn" [disabled]="form.invalid">Envoyer</button>
         </form>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { AnimalsComponent } from '../animals/animals.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AnimalService } from '../animals/services/animal.service';
 import { ClickService } from '../animals/services/click.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-habitats',
@@ -12,13 +13,14 @@ import { ClickService } from '../animals/services/click.service';
   imports: [MatDialogModule],
   template: `
     <main>
+      <h1 class="title">{{title}}</h1>
       <h2>
         Au sein des vastes étendues d'Arcadia, découvrez des habitats conçus
         pour le bien-être de nos animaux.
       </h2>
       <section class="habitats">
-        @if(habitats && habitats.length) { @for (habitat of habitats; track
-        habitat) {
+        @if(habitats && habitats.length) { 
+          @for (habitat of habitats; track habitat) {
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img
             [src]="'http://13.39.80.204:8000/upload/' + habitat.image_url"
@@ -26,18 +28,18 @@ import { ClickService } from '../animals/services/click.service';
             class="habitat-img"
           />
           <div class="habitat-content">
-            <h3>{{ habitat.title }}</h3>
+            <h3 class="habitat-title">{{ habitat.title }}</h3>
             @if (showDetails == habitat.id) {
             <p>{{ habitat.description }}</p>
-            <ul>
-              @for (animal of animals; track animal) { @if(animal) {
-              <li class="animal-item" (click)="openDialog(animal)">
-                {{ animal.firstname }}
-              </li>
-              } @else {
+              @if(animals) {
+                <ul>
+                @for (animal of animals; track animal) {   
+                  <li class="animal-item" (click)="openDialog(animal)">
+                  {{ animal.firstname }}
+                  </li>
+                }</ul>} @else {
               <p>Il n'y a pas encore d'animaux dans cet habitat</p>
-              }}
-            </ul>
+             }
             }
           </div>
         </div>
@@ -51,7 +53,7 @@ import { ClickService } from '../animals/services/click.service';
 })
 export class HabitatsComponent implements OnInit {
   habitats!: Habitat[];
-  animals!: Animal[];
+  animals!: Animal[] | undefined
 
   animalsOnMongoByFirstname!: AnimalOnMongo;
 
@@ -60,11 +62,16 @@ export class HabitatsComponent implements OnInit {
   private readonly clickService = inject(ClickService);
 
   showDetails: string | undefined = undefined;
+  title: string
+  
+  constructor(private matdialog: MatDialog, route:ActivatedRoute) {
+    this.title = route.snapshot.data['title']
+  }
 
-  constructor(private matdialog: MatDialog) {}
-
+  
   ngOnInit() {
     this.getHabitats();
+
   }
 
   getHabitats() {
@@ -75,7 +82,7 @@ export class HabitatsComponent implements OnInit {
 
   getAnimalsByHabitat(id: string) {
     this.animalService.getAnimalsByHabitat(id).subscribe((response) => {
-      this.animals = response.data.animals;
+      this.animals = response;
     });
   }
 
