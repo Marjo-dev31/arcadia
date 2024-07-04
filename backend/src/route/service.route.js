@@ -1,5 +1,5 @@
 import express from 'express';
-import {getServices, getService, addService, updateService, deleteService} from '../controller/service.controller.js';
+import {getServices, addService, updateService, deleteService} from '../controller/service.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 
@@ -13,7 +13,7 @@ serviceRoutes.route('/backoffice')
 .get(authenticateToken, verifyRoles('Admin', 'Employé'), getServices)
 
 serviceRoutes.route('/:id')
-.get(getService)
+// .get(getService)
 .put(authenticateToken, verifyRoles('Admin', 'Employé'), updateService)
 .delete(authenticateToken, verifyRoles('Admin', 'Employé'), deleteService);
 

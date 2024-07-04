@@ -19,7 +19,7 @@ import { tap } from 'rxjs';
   template: `
       <h3>Rapport employé</h3>
   <section>
-      <form ngForm name="animalchoice" (ngSubmit)="getEmployeeReports(selectedAnimalOption)">
+      <form #animalchoice=ngForm name="animalchoice" (ngSubmit)="getEmployeeReports(selectedAnimalOption)">
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
           <option *ngFor="let animal of animals" [ngValue]="animal.id">
@@ -28,7 +28,8 @@ import { tap } from 'rxjs';
         </select>
         <button>Filtrer</button>
       </form>
-      @if(responsemessage === 'No reports found') {
+
+        @if(animalchoice.submitted && selectedAnimalOption && !employeeReports.length){
         <p>Il n'y a pas de rapport associé à cet animal</p>
       }
       @for(animal of animals; track animal) { 
@@ -127,7 +128,7 @@ import { tap } from 'rxjs';
         @if(user.invalid && user.touched){
           <p class="alert">Un type de nourriture est requis</p>
         }
-        <button class="add-btn">Enregistrer nouveau rapport</button>
+        <button class="add-btn" [disabled]="form.invalid">Enregistrer nouveau rapport</button>
       </form>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
@@ -169,7 +170,7 @@ import { tap } from 'rxjs';
         @if(updateForm.controls['id_user'].invalid && updateForm.controls['id_user'].touched){
               <div class="alert">Un rapporteur est requis</div>
             }
-        <button class="add-btn">Modifier rapport</button>
+        <button class="add-btn" [disabled]="updateForm.invalid">Modifier rapport</button>
       </form>
       <mat-icon class="add-icon" (click)="closeUpdateForm()"
         >remove_circle_outline</mat-icon
@@ -249,13 +250,16 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   getEmployeeReports(id: string) {
     this.employeeService.getEmployeeReports(id).subscribe((response)=> {
-      try {
+      if(response.data) {
     this.employeeReports = response.data.reports;
     this.datasource = new MatTableDataSource(this.employeeReports);
     this.datasource.sort = this.sort;
-    this.responsemessage = response.message;
-  } catch(error) {
-    this.responsemessage = response.message;
+    // this.responsemessage = response.message;
+  } else {
+    // this.responsemessage = response.message;
+    this.employeeReports = [];
+    this.datasource = new MatTableDataSource(this.employeeReports)
+    
   }
     })
   };
@@ -273,7 +277,12 @@ export class EmployeeReportHandledComponent implements OnInit {
   editReport(id: string) {
     this.updateFormIsDisplay = true;
     const reportToUpdate = this.employeeReports.find((el)=> el.id === id);
-    this.updateForm.patchValue({food: reportToUpdate?.food, grammage: reportToUpdate?.grammage, id_user: reportToUpdate?.id_user, id_animal: reportToUpdate?.id_animal, id: reportToUpdate?.id});
+    this.updateForm.patchValue({
+      food: reportToUpdate?.food, 
+      grammage: reportToUpdate?.grammage, 
+      id_user: reportToUpdate?.id_user, 
+      id_animal: reportToUpdate?.id_animal, 
+      id: reportToUpdate?.id});
     }
 
   updateReport(id: string) {

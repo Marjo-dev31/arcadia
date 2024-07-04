@@ -25,7 +25,7 @@ export const getAnimals = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Animals retrieved`,
-              { animals: results }
+              results 
             )
             
           );
@@ -33,33 +33,33 @@ export const getAnimals = (req, res) => {
     });
 }
 
-export const getAnimal = (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
-  database.query(QUERYANIMALS.SELECT_ANIMAL, [req.params.id], (error, results) => {
-    if (!results[0]) {
-      res
-        .status(httpStatus.NOT_FOUND.code)
-        .send(
-          new Response(
-            httpStatus.NOT_FOUND.code,
-            httpStatus.NOT_FOUND.status,
-            `Animal by id ${req.params.id} was not found !`
-          )
-        );
-    } else {
-      res
-        .status(httpStatus.OK.code)
-        .send(
-          new Response(
-            httpStatus.OK.code,
-            httpStatus.OK.status,
-            `Animal retrieved`,
-            results[0]
-          )
-        );
-    }
-  });
-};
+// export const getAnimal = (req, res) => {
+//   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
+//   database.query(QUERYANIMALS.SELECT_ANIMAL, [req.params.id], (error, results) => {
+//     if (!results[0]) {
+//       res
+//         .status(httpStatus.NOT_FOUND.code)
+//         .send(
+//           new Response(
+//             httpStatus.NOT_FOUND.code,
+//             httpStatus.NOT_FOUND.status,
+//             `Animal by id ${req.params.id} was not found !`
+//           )
+//         );
+//     } else {
+//       res
+//         .status(httpStatus.OK.code)
+//         .send(
+//           new Response(
+//             httpStatus.OK.code,
+//             httpStatus.OK.status,
+//             `Animal retrieved`,
+//             results[0]
+//           )
+//         );
+//     }
+//   });
+// };
 
 
 export const addAnimal = (req, res) => {
@@ -85,7 +85,7 @@ export const addAnimal = (req, res) => {
               httpStatus.CREATED.code,
               httpStatus.CREATED.status,
               `Animal created`,
-              { animal }
+              animal
             )
           );
       }
@@ -145,7 +145,9 @@ export const updateAnimal = (req, res) => {
             httpStatus.OK.code,
             httpStatus.OK.status,
             `Habitat updated`,
-            {...req.body}))
+            {...req.body}
+          )
+        )
       } else {
           logger.error(error.message)
           res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
@@ -182,7 +184,7 @@ export const getAnimalsByHabitat = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Animals retrieved`,
-              { animals: results }
+              results
             )
             
           );

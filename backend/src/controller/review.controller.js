@@ -4,7 +4,7 @@ import logger from "../util/logger.js";
 import QUERYREVIEWS from "../query/review.query.js";
 import httpStatus from "../domain/httpstatus.js";
 
-export const getReviews = (req, res) => {
+export const getAllReviews = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching reviews`);
     database.query(QUERYREVIEWS.SELECT_REVIEWS, (error, results) => {
       if (!results) {
@@ -32,6 +32,33 @@ export const getReviews = (req, res) => {
     });
   };
 
+  export const getReviews = (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, fetching reviews`);
+    database.query(QUERYREVIEWS.SELECT_REVIEWS_TRUE, (error, results) => {
+      if (!results) {
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `No reviews found`,
+            )
+          );
+      } else {
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Reviews retrieved`,
+              { reviews: results }
+            )
+          );
+      }
+    });
+  };
 
   export const addReview = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating review`);
@@ -78,7 +105,7 @@ export const updateReview = (req, res) => {
       );
     } else {
       logger.info(`${req.method} ${req.originalUrl}, updating review`);
-      database.query(QUERYREVIEWS.UPDATE_REVIEW_STATUS, [req.body.status, req.params.id], (error, results) => {
+      database.query(QUERYREVIEWS.UPDATE_REVIEW_STATUS, [req.body.status, req.body.id_employee, req.params.id], (error, results) => {
     if(!error) {
           res
         .status(httpStatus.OK.code)

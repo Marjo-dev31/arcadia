@@ -1,5 +1,5 @@
 import express from 'express';
-import {getHabitats, addHabitat, getHabitat, updateHabitat, deleteHabitat, addComment, deleteComment} from '../controller/habitat.controller.js';
+import {getHabitats, addHabitat, updateHabitat, deleteHabitat, addComment, deleteComment} from '../controller/habitat.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 
@@ -14,7 +14,7 @@ habitatRoutes.route('/backoffice')
 .get(authenticateToken,verifyRoles('Admin'), getHabitats)
 
 habitatRoutes.route('/:id')
-.get(getHabitat)
+// .get(getHabitat)
 .put(authenticateToken, verifyRoles('Admin'), updateHabitat)
 .delete(authenticateToken, verifyRoles('Admin'), deleteHabitat)
 

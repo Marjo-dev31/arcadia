@@ -1,7 +1,5 @@
-DROP DATABASE IF EXISTS arcadiadb; 
-
 CREATE DATABASE IF NOT EXISTS arcadiadb;
--- if arcadiabd exists, change the name or delete with   
+-- if arcadiabd exists and you don't  want use it, change the name or delete with DROP DATABASE IF EXISTS arcadiadb; 
 
 USE arcadiadb;
 
@@ -47,23 +45,36 @@ CREATE TABLE users (
     FOREIGN KEY (id_role) REFERENCES roles(id) ON DELETE SET NULL
 );
 
-CREATE TABLE employee_reports (
-    id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
-    food VARCHAR(255) NOT NULL,
-    grammage INT NOT NULL,
-    date DATETIME NOT NULL,
-    id_user VARCHAR(36),
-    id_animal VARCHAR(36),
-    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL, 
-    FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
-);
+-- CREATE TABLE employee_reports (
+--     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
+--     food VARCHAR(255) NOT NULL,
+--     grammage INT NOT NULL,
+--     date DATETIME NOT NULL,
+--     id_user VARCHAR(36),
+--     id_animal VARCHAR(36),
+--     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL, 
+--     FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
+-- );
 
-CREATE TABLE veterinary_reports (
+-- CREATE TABLE veterinary_reports (
+--     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
+--     food VARCHAR(255) NOT NULL,
+--     grammage INT NOT NULL,
+--     date DATETIME NOT NULL,
+--     health VARCHAR(50) NOT NULL,
+--     details_condition VARCHAR(255) DEFAULT NULL,
+--     id_user VARCHAR(36),
+--     id_animal VARCHAR(36),
+--     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL,
+--     FOREIGN KEY (id_animal) REFERENCES animals(id) ON DELETE SET NULL
+-- );
+
+- CREATE TABLE reports (
     id VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     food VARCHAR(255) NOT NULL,
     grammage INT NOT NULL,
     date DATETIME NOT NULL,
-    health VARCHAR(50) NOT NULL,
+    health VARCHAR(50) DEFAULT NULL,
     details_condition VARCHAR(255) DEFAULT NULL,
     id_user VARCHAR(36),
     id_animal VARCHAR(36),
@@ -130,3 +141,7 @@ INSERT INTO animals VALUES	(DEFAULT, 'Izumi', (SELECT id FROM habitats WHERE tit
 INSERT INTO animals VALUES	(DEFAULT, 'Pinako', (SELECT id FROM habitats WHERE title="Les Marais"),(SELECT id FROM breeds WHERE name='Caimen à Lunettes'));
 
 INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com', '$2b$10$pQBkrsu5.htIin8ao1xpvuHP48FP7VJQgEvnPkM2kyXteCLz62Mu2', (SELECT id FROM roles WHERE name = 'Admin'));
+
+INSERT INTO images(id, image_url, id_service ) VALUES ( DEFAULT, 'sandwich.jpg', (SELECT id FROM services WHERE title='Restauration'));
+INSERT INTO images(id, image_url, id_habitat ) VALUES ( DEFAULT, 'lasavane.jpg', (SELECT id FROM habitats WHERE title='La Savane'));
+INSERT INTO images(id, image_url, id_animal ) VALUES ( DEFAULT, 'caimen.jpg', (SELECT id FROM animals WHERE name='Pinako'));

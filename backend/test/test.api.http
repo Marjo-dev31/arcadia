@@ -255,8 +255,8 @@ post http://localhost:8000/login
 Content-Type: application/json
 
 {
-    "email":"marjory.bravo@yahoo.fr",
-    "password":"azertyui31"
+    "email":"josepasbove@arcadia.com",
+    "password":"Azerty&1"
 }
 
 ###
@@ -320,3 +320,4 @@ Content-Type: application/json
     "text":"J envoie un mail",
     "emailToResponse":"test@test.com"
 }
+
