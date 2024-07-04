@@ -26,7 +26,7 @@ import { Opening } from '../../models/opening.interface';
         </div>
         <div><a [routerLink]="['/contact']">Nous contacter</a></div>
       </div>
-      <div id="copyright">copyright2024</div>
+      <div id="copyright">by MB2024</div>
     </footer>
   `,
   styles: `
