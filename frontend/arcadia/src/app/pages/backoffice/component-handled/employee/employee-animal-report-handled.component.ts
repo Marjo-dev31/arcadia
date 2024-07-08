@@ -251,7 +251,7 @@ export class EmployeeReportHandledComponent implements OnInit {
   getEmployeeReports(id: string) {
     this.employeeService.getEmployeeReports(id).subscribe((response)=> {
       if(response.data) {
-    this.employeeReports = response.data.reports;
+    this.employeeReports = response.data;
     this.datasource = new MatTableDataSource(this.employeeReports);
     this.datasource.sort = this.sort;
     // this.responsemessage = response.message;

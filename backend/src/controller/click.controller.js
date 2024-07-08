@@ -86,7 +86,7 @@ export const getAnimals = async (req, res) => {
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `Animals retrieved`,
-                { animals: animals}
+                animals
             )
         )
 } catch (error) {

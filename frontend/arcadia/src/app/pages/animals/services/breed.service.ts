@@ -23,8 +23,8 @@ export class BreedService {
         }));
     }
 
-    addBreed(breed: BreedCreate): Observable<any> {
-        return this.http.post(this.url, breed)
+    addBreed(breed: BreedCreate): Observable<Response<Breed>> {
+        return this.http.post<Response<Breed>>(this.url, breed)
     }
 
 }

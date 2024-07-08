@@ -60,7 +60,7 @@ export class FameComponent implements OnInit {
 
     private readonly clickService = inject(ClickService);
 
-    animals: AnimalOnMongo [] = [];
+    animals!: AnimalOnMongo [];
     datasource = new MatTableDataSource(this.animals);
 
     newAnimal: AnimalOnMongoCreate = {
@@ -82,12 +82,12 @@ export class FameComponent implements OnInit {
 
     getAnimals(){
         this.clickService.getAnimals().subscribe((response)=> {
-        try {
-            this.animals = response.data.animals;
+        if(response.data){
+            this.animals = response.data
             this.datasource = new MatTableDataSource(this.animals);
             this.datasource.sort = this.sort;
             this.responsemessage = response.message;
-        } catch {
+        } else {
             this.responsemessage = response.message;
         }
         })
