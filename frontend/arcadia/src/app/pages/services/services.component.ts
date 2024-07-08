@@ -5,6 +5,7 @@ import { Service } from '../../shared/models/service.interface';
 import { Opening } from '../../shared/models/opening.interface';
 import { OpeningService } from './service/opening.service';
 import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-services',
@@ -53,7 +54,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: `./service.component.css`
 })
 export class ServicesComponent implements OnInit {
-  services!: Service[]
+  
   title: string
 
   constructor(route: ActivatedRoute){
@@ -63,12 +64,13 @@ export class ServicesComponent implements OnInit {
   private readonly serviceService = inject(ServiceService);
   private readonly openingService = inject(OpeningService)
 
+  services!: Service[]
   openToPublic!: Opening []
-  
+  data$ = this.openingService.getOpeningToPublic().pipe(takeUntilDestroyed())
   
   ngOnInit() {
-    this.getOpeningToPublic()
     this.getServices()
+    this.getOpeningToPublic()
   }
  
   getServices() {
@@ -78,7 +80,7 @@ export class ServicesComponent implements OnInit {
      )}
 
   getOpeningToPublic(){
-    this.openingService.getOpeningToPublic().subscribe((response)=>{
+    this.data$.subscribe((response)=>{
       this.openToPublic = response
     })
   };

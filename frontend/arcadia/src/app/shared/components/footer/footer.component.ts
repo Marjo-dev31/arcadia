@@ -1,7 +1,8 @@
-import { Component, OnInit, inject, effect, Signal } from '@angular/core';
+import { Component, OnInit, inject, effect, Signal, computed, DestroyRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { OpeningService } from '../../../pages/services/service/opening.service';
 import { Opening } from '../../models/opening.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -61,12 +62,13 @@ import { Opening } from '../../models/opening.interface';
 })
 export class FooterComponent implements OnInit {
   constructor() {
-    effect(()=>{
+    computed(()=>{
     this.openToPublic = this.openingService.schedule()
   })
 }
 
-  private readonly openingService = inject(OpeningService)
+  public readonly openingService = inject(OpeningService)
+  destroyRef = inject(DestroyRef)
 
   openToPublic!: Opening
   
@@ -75,7 +77,7 @@ export class FooterComponent implements OnInit {
   };
 
   getOpeningToPublic(){
-    this.openingService.getOpeningToPublic().subscribe((response)=>{
+    this.openingService.getOpeningToPublic().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
       this.openToPublic = response[0]
     })
   };
