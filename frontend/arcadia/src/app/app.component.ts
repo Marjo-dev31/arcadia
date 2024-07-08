@@ -8,14 +8,12 @@ import { AnimalService } from './pages/animals/services/animal.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReviewsService } from './pages/home/services/reviews.service';
 import { FormsModule } from '@angular/forms';
-// import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
 import { SidenavComponent } from './pages/backoffice/sidenav/sidenav.component';
 import { ImageService } from './pages/home/services/image.service';
 import { BreedService } from './pages/animals/services/breed.service';
@@ -39,7 +37,6 @@ import { MailService } from './pages/contact/services/mail.service';
     FooterComponent,
     MatDialogModule,
     FormsModule,
-    // HttpClientModule,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,

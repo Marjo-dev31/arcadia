@@ -20,9 +20,15 @@ import {
           <div class="id-card-animal-content">
             <p>Son prénom: {{ animal.firstname }}</p>
             <p>Sa race: {{ animal.breed }}</p>
+            @if(animal.health){
+              <div>
+                <p>Son état de santé actuel: {{ animal.health }}</p>
+              </div>
+          } @else {
             <div>
-              <p>Son état de santé actuel: {{ animal.health }}</p>
+              <p>Il n'y a pas encore de rapport sur l'état de santé actuel</p>
             </div>
+          }  
           </div>
         </div>
         }
@@ -41,7 +47,6 @@ export class AnimalsComponent implements OnInit {
   animal: Animal = this.data.animal
 
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

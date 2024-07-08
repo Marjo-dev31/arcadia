@@ -31,7 +31,6 @@ import { Opening } from '../../models/opening.interface';
   `,
   styles: `
       footer {
-    /* background-color: var(--color-primary);*/
     background: linear-gradient(
     180deg,
       var(--color-primary) 30%,
@@ -70,7 +69,7 @@ export class FooterComponent implements OnInit {
   private readonly openingService = inject(OpeningService)
 
   openToPublic!: Opening
-
+  
   ngOnInit() {
     this.getOpeningToPublic();
   };
