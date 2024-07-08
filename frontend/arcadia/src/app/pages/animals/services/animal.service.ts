@@ -52,7 +52,9 @@ export class AnimalService {
         if(r.data){
             return r.data
         }
-        else{return []}
+        else {
+            return []
+        }
     }))
     }
 
