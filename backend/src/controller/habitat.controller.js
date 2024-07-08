@@ -25,7 +25,7 @@ export const getHabitats = (req, res) => {
             httpStatus.OK.code,
             httpStatus.OK.status,
             `Habitats retrieved`,
-            {habitats:results}
+            results
           )
           
         );

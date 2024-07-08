@@ -17,7 +17,7 @@ export class ServiceService {
   async getServices(): Promise<Service[]> {
     try {
     const servicesList = await fetch(this.url).then((response) => response.json());
-    return servicesList.data.services }
+    return servicesList.data}
     catch {
       return []
     }
