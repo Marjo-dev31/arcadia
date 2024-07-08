@@ -73,6 +73,6 @@ export class OpeningComponent implements OnInit {
     };
 
     updateOpeningToPublic(id: string){
-        this.openingService.UpdateOpeningToPublic(this.updateForm.value, id).pipe(tap(()=>{this.getOpeningToPublic()})).subscribe()
+        this.openingService.updateOpeningToPublic(this.updateForm.value, id).pipe(tap(()=>{this.getOpeningToPublic()})).subscribe()
     }
 }
