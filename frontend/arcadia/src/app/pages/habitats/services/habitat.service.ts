@@ -14,7 +14,7 @@ export class HabitatsService {
     async getHabitats(): Promise<Habitat[]> {
         try {
         const habitatsList = await fetch(this.url).then((response)=> response.json());
-        return habitatsList.data.habitats }
+        return habitatsList.data }
         catch {
             return []
         }
