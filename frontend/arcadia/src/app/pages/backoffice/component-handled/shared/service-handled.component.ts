@@ -175,7 +175,7 @@ export class ServiceHandledComponent implements OnInit {
 
   getServices() {
     this.serviceService.getHandleServices().subscribe((response) => {
-      this.datasource = response.data.services;
+      this.datasource = response;
     });
   }
 
