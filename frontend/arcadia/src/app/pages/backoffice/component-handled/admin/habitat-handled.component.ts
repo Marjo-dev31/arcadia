@@ -161,7 +161,7 @@ export class HabitatHandledComponent implements OnInit {
 
   getHabitats() {
      this.habitatService.getHandleHabitats().subscribe((response) => {
-      this.datasource = response.data.habitats;
+      this.datasource = response;
     });
   }
   

@@ -25,7 +25,7 @@ export const getAllReviews = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Reviews retrieved`,
-              { reviews: results }
+              results
             )
           );
       }
@@ -53,7 +53,7 @@ export const getAllReviews = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Reviews retrieved`,
-              { reviews: results }
+              results
             )
           );
       }
