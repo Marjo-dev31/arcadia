@@ -144,4 +144,4 @@ INSERT INTO users VALUES (DEFAULT, 'José', 'Pasbové', 'josepasbove@arcadia.com
 
 INSERT INTO images(id, image_url, id_service ) VALUES ( DEFAULT, 'sandwich.jpg', (SELECT id FROM services WHERE title='Restauration'));
 INSERT INTO images(id, image_url, id_habitat ) VALUES ( DEFAULT, 'lasavane.jpg', (SELECT id FROM habitats WHERE title='La Savane'));
-INSERT INTO images(id, image_url, id_animal ) VALUES ( DEFAULT, 'caimen.jpg', (SELECT id FROM animals WHERE name='Pinako'));
+INSERT INTO images(id, image_url, id_animal ) VALUES ( DEFAULT, 'caimen.jpg', (SELECT id FROM animals WHERE firstname='Pinako'));
