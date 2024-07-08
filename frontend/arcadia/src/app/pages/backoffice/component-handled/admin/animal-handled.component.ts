@@ -184,8 +184,6 @@ export class AnimalHandledComponent implements OnInit {
     })
   };
 
-
-
   displayColums: string[] = [
     'firstname',
     'race',
@@ -267,7 +265,7 @@ export class AnimalHandledComponent implements OnInit {
 
   getBreed(){
     this.breedService.getBreeds().subscribe((response)=> {
-      this.breeds = response.data;
+      this.breeds = response;
     } )
   }
 
