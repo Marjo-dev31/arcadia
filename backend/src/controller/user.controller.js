@@ -27,7 +27,7 @@ export const getUsers = (req, res)=> {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Users retrieved`,
-              { users: results }
+              results
             )
           );
       }
@@ -59,7 +59,7 @@ export const addUser = (req, res)=> {
             httpStatus.CREATED.code,
             httpStatus.CREATED.status,
             `User created`,
-            { user }
+            user
           )
         );
     }

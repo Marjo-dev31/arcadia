@@ -65,10 +65,10 @@ export class ReviewHandledComponent implements OnInit {
 
   getReviews() {
     this.reviewService.getHandleReviews().subscribe((response) => {
-      try {
-        this.datasource = response.data.reviews;
+      if(response.data) {
+        this.datasource = response.data;
         this.responseMessage = response.message;
-      } catch (error) {
+      } else {
         this.responseMessage = response.message;
       }
     });

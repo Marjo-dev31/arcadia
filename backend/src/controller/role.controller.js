@@ -26,7 +26,7 @@ export const getRolesWithoutAdmin = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Roles retrieved`,
-              { roles: results }
+              results
             )
           );
       }

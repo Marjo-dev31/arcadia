@@ -244,7 +244,7 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   getUsers() {
     this.userService.getUsers().subscribe((response) => {
-    this.users = response.data.users;
+    this.users = response;
     });
   };
 
