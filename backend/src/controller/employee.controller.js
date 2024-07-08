@@ -26,7 +26,7 @@ export const getEmployeeReportsByAnimal = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Reports retrieved`,
-              { reports: results }
+              results
             )
           );
       }

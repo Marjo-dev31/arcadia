@@ -341,7 +341,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   getVeterinaryReports(id: string) {
     this.veterinaryService.getVeterinaryReports(id).subscribe((response) => {
       if(response.data) {
-        this.veterinaryReports = response.data.reports;
+        this.veterinaryReports = response.data;
         this.dataSource = new MatTableDataSource(this.veterinaryReports);
         this.dataSource.sort = this.sort;
         // this.responsemessage = response.message;

@@ -30,13 +30,8 @@ export class AnimalService {
         }))
     }
 
-    addAnimal(animal: AnimalCreate): Observable<Animal[]> {
-        return this.http.post<Response<Animal>>(this.url, animal).pipe(map((r)=>{
-            if(r.data){
-                return r.data
-            }
-            else{return []}
-        }))
+    addAnimal(animal: AnimalCreate): Observable<Response<Animal>> {
+        return this.http.post<Response<Animal>>(this.url, animal)
     }
 
     updateAnimal(animal: Animal): Observable<Response<Animal>> {
