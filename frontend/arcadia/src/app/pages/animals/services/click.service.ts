@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { AnimalOnMongoCreate } from "../../../shared/models";
+import { Observable, map } from "rxjs";
+import { Animal, AnimalOnMongo, AnimalOnMongoCreate } from "../../../shared/models";
 import { environment } from '../../../environments/environment';
+import { Response } from "../../../shared/models/response.interface";
 
 
 
@@ -12,19 +13,19 @@ export class ClickService {
 
     constructor(private http: HttpClient){}
 
-    addClick(firstname: string): Observable<any> {
-        return this.http.put(`${this.url}/${firstname}`, firstname)
+    addClick(firstname: string): Observable<Response<AnimalOnMongo>> {
+        return this.http.put<Response<AnimalOnMongo>>(`${this.url}/${firstname}`, firstname)
     }
 
-    getAnimals(): Observable<any> {
-        return this.http.get(this.url)
+    getAnimals(): Observable<Response<AnimalOnMongo>> {
+        return this.http.get<Response<AnimalOnMongo>>(this.url)
     }
 
-    addAnimalOnMongo(animal: AnimalOnMongoCreate): Observable<any> {
-        return this.http.post(this.url, animal)
+    addAnimalOnMongo(animal: AnimalOnMongoCreate): Observable <Response<AnimalOnMongo>> {
+        return this.http.post<Response<AnimalOnMongo>>(this.url, animal)
     }
 
-    deleteAnimal(id: string){
-        return this.http.delete(`${this.url}/${id}`)
+    deleteAnimal(id: string): Observable<Response<AnimalOnMongo>>{
+        return this.http.delete<Response<AnimalOnMongo>>(`${this.url}/${id}`)
     }
 }
