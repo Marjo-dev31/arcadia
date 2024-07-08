@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   getReviews() {
     this.reviewService.getReviews().then((response) => {
-      this.reviews = response.data.reviews;
+      this.reviews = response;
     });
   }
 

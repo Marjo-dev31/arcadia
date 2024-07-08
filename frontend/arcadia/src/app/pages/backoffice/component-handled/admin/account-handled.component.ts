@@ -126,7 +126,7 @@ export class AccountHandledComponent implements OnInit {
 
   getRolesWithoutAdmin() {
     this.roleService.getRolesWithoutAdmin().subscribe((response)=>{
-      this.roles = response.data.roles
+      this.roles = response
     })
   }
 
