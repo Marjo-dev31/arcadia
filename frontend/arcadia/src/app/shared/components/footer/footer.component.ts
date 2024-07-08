@@ -19,7 +19,7 @@ import { Opening } from '../../models/opening.interface';
         </div>
         <div>
           <p>Nos horaires et jours d'ouvertures :</p>
-          @if(openToPublic && openToPublic){
+          @if(openToPublic){
           <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
           <p>Du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
         }
