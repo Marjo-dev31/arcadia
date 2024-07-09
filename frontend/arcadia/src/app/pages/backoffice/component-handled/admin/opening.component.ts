@@ -1,8 +1,9 @@
-import { Component, OnInit, inject} from '@angular/core';
+import { Component, DestroyRef, OnInit, inject} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OpeningService } from '../../../services/service/opening.service';
 import { Opening } from '../../../../shared/models/opening.interface';
 import { tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-opening',
@@ -57,7 +58,8 @@ export class OpeningComponent implements OnInit {
         })    
     }
 
-    private readonly openingService = inject(OpeningService)
+    private readonly openingService = inject(OpeningService);
+    private readonly destroyRef = inject(DestroyRef)
 
    openToPublic!: Opening
 
@@ -67,12 +69,12 @@ export class OpeningComponent implements OnInit {
     }
 
     getOpeningToPublic(){
-        this.openingService.getHandleOpeningToPublic().subscribe((response)=>{
+        this.openingService.getHandleOpeningToPublic().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
             this.openToPublic = response[0]
         })
     };
 
     updateOpeningToPublic(id: string){
-        this.openingService.updateOpeningToPublic(this.updateForm.value, id).pipe(tap(()=>{this.getOpeningToPublic()})).subscribe()
+        this.openingService.updateOpeningToPublic(this.updateForm.value, id).pipe(tap(()=>{this.getOpeningToPublic()}), takeUntilDestroyed(this.destroyRef)).subscribe()
     }
 }

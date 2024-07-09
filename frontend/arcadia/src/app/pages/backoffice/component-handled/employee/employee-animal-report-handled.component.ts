@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -11,6 +11,7 @@ import { UserService } from '../../../login/service/user.service';
 import { EmployeeReport, EmployeeReportCreate } from '../../../../shared/models/employeereport.interface';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
@@ -209,8 +210,9 @@ export class EmployeeReportHandledComponent implements OnInit {
   datasource = new MatTableDataSource(this.employeeReports);
 
   private readonly animalService = inject(AnimalService);
-  private readonly employeeService = inject(EmployeeService)
-  private readonly userService = inject(UserService)
+  private readonly employeeService = inject(EmployeeService);
+  private readonly userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef)
 
 
   addFormIsDisplay: boolean = false;
@@ -243,13 +245,13 @@ export class EmployeeReportHandledComponent implements OnInit {
   };
 
   getUsers() {
-    this.userService.getUsers().subscribe((response) => {
+    this.userService.getUsers().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
     this.users = response;
     });
   };
 
   getEmployeeReports(id: string) {
-    this.employeeService.getEmployeeReports(id).subscribe((response)=> {
+    this.employeeService.getEmployeeReports(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=> {
       if(response.data) {
     this.employeeReports = response.data;
     this.datasource = new MatTableDataSource(this.employeeReports);
@@ -269,7 +271,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     };
 
   onSubmit(form: NgForm){
-    this.employeeService.addEmployeeReport(this.newReport).subscribe();
+    this.employeeService.addEmployeeReport(this.newReport).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     this.addFormIsDisplay = !this.addFormIsDisplay;
     form.reset();
     };
@@ -286,12 +288,12 @@ export class EmployeeReportHandledComponent implements OnInit {
     }
 
   updateReport(id: string) {
-    this.employeeService.updateReport(this.updateForm.value).pipe(tap(()=>{this.getEmployeeReports(id)})).subscribe();
+    this.employeeService.updateReport(this.updateForm.value).pipe(tap(()=>{this.getEmployeeReports(id)}), takeUntilDestroyed(this.destroyRef)).subscribe();
     this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 
   deleteReport(id: string) {
-    this.employeeService.deleteEmployeeReport(id).pipe(tap(() => {this.getEmployeeReports(id)})).subscribe()
+    this.employeeService.deleteEmployeeReport(id).pipe(tap(() => {this.getEmployeeReports(id)}), takeUntilDestroyed(this.destroyRef)).subscribe()
   }
 
   closeUpdateForm(){

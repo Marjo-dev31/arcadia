@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { ServiceService } from './service/service.service';
 import { JsonPipe } from '@angular/common';
 import { Service } from '../../shared/models/service.interface';
@@ -55,18 +55,19 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ServicesComponent implements OnInit {
   
-  title: string
+  title: string;
+  services!: Service[];
+  openToPublic!: Opening [];
 
   constructor(route: ActivatedRoute){
     this.title = route.snapshot.data['title']
   }
   
   private readonly serviceService = inject(ServiceService);
-  private readonly openingService = inject(OpeningService)
+  private readonly openingService = inject(OpeningService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  services!: Service[]
-  openToPublic!: Opening []
-  data$ = this.openingService.getOpeningToPublic().pipe(takeUntilDestroyed())
+  
   
   ngOnInit() {
     this.getServices()
@@ -80,7 +81,7 @@ export class ServicesComponent implements OnInit {
      )}
 
   getOpeningToPublic(){
-    this.data$.subscribe((response)=>{
+    this.openingService.getOpeningToPublic().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
       this.openToPublic = response
     })
   };

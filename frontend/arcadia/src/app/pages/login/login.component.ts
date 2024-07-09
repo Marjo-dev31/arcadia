@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserLogin } from '../../shared/models/user.interface';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginService } from './service/login.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -60,8 +61,9 @@ export class ConnexionComponent implements OnInit {
     this.title = route.snapshot.data['title']
   }
 
-  private readonly loginService = inject(LoginService)
-  private readonly router = inject(Router)
+  private readonly loginService = inject(LoginService);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef)
 
   user: UserLogin = {
     email: '',
@@ -73,13 +75,13 @@ export class ConnexionComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(): void {
-   this.loginService.login(this.user).subscribe((response)=> {
-    try{
+   this.loginService.login(this.user).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=> {
+    if(response.data){
     localStorage.setItem('accessToken', response.data.accessToken)
     localStorage.setItem('role', response.data.user.name)
     localStorage.setItem('firstname', response.data.user.firstname)
     this.router.navigate(['/espacepersonnel'])
-  } catch(error) {
+  } else {
     this.responseMessage = response.message
   }
   });
