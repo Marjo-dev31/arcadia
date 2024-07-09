@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Review } from '../../../../shared/models';
 import { ReviewsService } from '../../../home/services/reviews.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-review-handled',
@@ -54,17 +55,18 @@ export class ReviewHandledComponent implements OnInit {
   constructor() {}
 
   displayColums: string[] = ['pseudo', 'content', 'date', 'actions', 'status'];
-
   datasource: Review[] = [];
-  private readonly reviewService = inject(ReviewsService);
   responseMessage: string = '';
+
+  private readonly reviewService = inject(ReviewsService);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.getReviews();
   }
 
   getReviews() {
-    this.reviewService.getHandleReviews().subscribe((response) => {
+    this.reviewService.getHandleReviews().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
       if(response.data) {
         this.datasource = response.data;
         this.responseMessage = response.message;
@@ -79,7 +81,7 @@ export class ReviewHandledComponent implements OnInit {
     if (reviewToPublish) {
       reviewToPublish.status = true;
       reviewToPublish.employee = localStorage.getItem('firstname') || ''
-      this.reviewService.updateReview(reviewToPublish).subscribe();
+      this.reviewService.updateReview(reviewToPublish).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     }
   }
 
@@ -87,7 +89,7 @@ export class ReviewHandledComponent implements OnInit {
     const reviewToPublish = this.datasource.find((el) => el.id === id);
     if (reviewToPublish) {
       reviewToPublish.status = false;
-      this.reviewService.updateReview(reviewToPublish).subscribe();
+      this.reviewService.updateReview(reviewToPublish).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     }
   }
 }
