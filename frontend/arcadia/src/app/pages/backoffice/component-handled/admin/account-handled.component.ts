@@ -57,7 +57,7 @@ import { UserService } from '../../../login/service/user.service';
             <p class="alert">Un prénom est requis</p>
           }
         <label for="role">Rôle :</label>
-        <select name="role" id="role" [(ngModel)]= "selectedRoleOption" #role="ngModel" required>
+        <select name="role" id="role" [(ngModel)]= "newUser.id_role" #role="ngModel" required>
           <option *ngFor="let role of roles" [ngValue]="role.id" >{{ role.name }}</option>
         </select>
         @if(role.invalid && firstname.touched){
@@ -108,7 +108,6 @@ export class AccountHandledComponent implements OnInit {
   private roleService = inject(RoleService);
   private userService = inject(UserService);
 
-  selectedRoleOption!: string;
   roles: Role[] = []
 
   newUser: UserCreate = {
@@ -134,7 +133,6 @@ export class AccountHandledComponent implements OnInit {
     const alert = document.getElementById('alert');
     if(alert && form.submitted){
         alert.style.display = "block";
-        this.newUser.id_role = this.selectedRoleOption;
         this.userService.addUser(this.newUser).subscribe();
         form.reset()
     }}
