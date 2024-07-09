@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserCreate } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../../login/service/role.service';
 import { Role } from '../../../../shared/models/role.interface';
 import { UserService } from '../../../login/service/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-account-handled',
@@ -107,6 +108,8 @@ export class AccountHandledComponent implements OnInit {
 
   private roleService = inject(RoleService);
   private userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef);
+  
 
   selectedRoleOption!: string;
   roles: Role[] = []
@@ -125,7 +128,7 @@ export class AccountHandledComponent implements OnInit {
   }
 
   getRolesWithoutAdmin() {
-    this.roleService.getRolesWithoutAdmin().subscribe((response)=>{
+    this.roleService.getRolesWithoutAdmin().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
       this.roles = response
     })
   }
@@ -135,7 +138,7 @@ export class AccountHandledComponent implements OnInit {
     if(alert && form.submitted){
         alert.style.display = "block";
         this.newUser.id_role = this.selectedRoleOption;
-        this.userService.addUser(this.newUser).subscribe();
+        this.userService.addUser(this.newUser).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
         form.reset()
     }}
 

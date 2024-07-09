@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, inject } from "@angular/core";
+import { Component, DestroyRef, OnInit, ViewChild, inject } from "@angular/core";
 import { ClickService } from "../../../animals/services/click.service";
 import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../shared/models";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
@@ -6,6 +6,7 @@ import { MatSortModule, MatSort } from "@angular/material/sort";
 import { FormsModule} from "@angular/forms";
 import { tap } from "rxjs";
 import { MatIconModule } from "@angular/material/icon";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'app-fame',
@@ -59,6 +60,8 @@ export class FameComponent implements OnInit {
     displayColums: string[] = ['firstname','clickCount', 'delete'];
 
     private readonly clickService = inject(ClickService);
+    private readonly destroyRef = inject(DestroyRef);
+
 
     animals!: AnimalOnMongo [];
     datasource = new MatTableDataSource(this.animals);
@@ -81,7 +84,7 @@ export class FameComponent implements OnInit {
        }
 
     getAnimals(){
-        this.clickService.getAnimals().subscribe((response)=> {
+        this.clickService.getAnimals().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=> {
         if(response.data){
             this.animals = response.data
             this.datasource = new MatTableDataSource(this.animals);
@@ -94,11 +97,11 @@ export class FameComponent implements OnInit {
     }
 
     addAnimalOnMongo(){
-        this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe(); 
+        this.clickService.addAnimalOnMongo(this.newAnimal).pipe(tap(()=>{this.getAnimals()}), takeUntilDestroyed(this.destroyRef)).subscribe(); 
         this.newAnimal.firstname = '';
     }
 
     deleteAnimal(id: string){
-        this.clickService.deleteAnimal(id).pipe(tap(()=>{this.getAnimals()})).subscribe();
+        this.clickService.deleteAnimal(id).pipe(tap(()=>{this.getAnimals()}), takeUntilDestroyed(this.destroyRef)).subscribe();
     }
 }
