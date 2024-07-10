@@ -1,5 +1,5 @@
 import { CommonModule, formatPercent } from '@angular/common';
-import { Component, OnInit, ViewChild, inject, viewChild } from '@angular/core';
+import { Component, DestroyRef, OnInit, ViewChild, inject, viewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -22,6 +22,7 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
 import { tap } from 'rxjs';
 import { User } from '../../../../shared/models/user.interface';
 import { UserService } from '../../../login/service/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
@@ -314,6 +315,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   private readonly animalService = inject(AnimalService);
   private readonly veterinaryService = inject(VeterinaryService);
   private readonly userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef);
+
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -333,13 +336,13 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe((response) => {
+    this.userService.getUsers().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
       this.users = response;
     });
   }
 
   getVeterinaryReports(id: string) {
-    this.veterinaryService.getVeterinaryReports(id).subscribe((response) => {
+    this.veterinaryService.getVeterinaryReports(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
       if(response.data) {
         this.veterinaryReports = response.data;
         this.dataSource = new MatTableDataSource(this.veterinaryReports);
@@ -359,7 +362,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
       .pipe(
         tap(() => {
           this.getVeterinaryReports(id);
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -369,7 +372,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.veterinaryService.addVeterinaryReport(this.newReport).subscribe();
+    this.veterinaryService.addVeterinaryReport(this.newReport).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     this.addFormIsDisplay = !this.addFormIsDisplay;
     form.reset();
   }
@@ -392,7 +395,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     this.veterinaryService.updateReport(this.updateForm.value).pipe(
         tap(() => {
           this.getVeterinaryReports(id);
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
     this.updateFormIsDisplay = !this.updateFormIsDisplay;
