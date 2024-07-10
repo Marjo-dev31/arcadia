@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Habitat, HabitatCreate } from '../../../../shared/models';
@@ -7,6 +7,7 @@ import { tap } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgStyle } from '@angular/common';
 import { ImageService } from '../../../home/services/image.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 
@@ -135,7 +136,7 @@ export class HabitatHandledComponent implements OnInit {
 
   private readonly habitatService = inject(HabitatsService);
   private readonly imageService = inject(ImageService);
-
+  private readonly destroyRef = inject(DestroyRef)
 
   displayColums: string[] = [
     'title',
@@ -160,7 +161,7 @@ export class HabitatHandledComponent implements OnInit {
   }
 
   getHabitats() {
-     this.habitatService.getHandleHabitats().subscribe((response) => {
+     this.habitatService.getHandleHabitats().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
       this.datasource = response;
     });
   }
@@ -172,7 +173,7 @@ export class HabitatHandledComponent implements OnInit {
   };
 
   updateHabitat() {
-   this.habitatService.updateHabitat(this.habitatForm.value).pipe(tap(()=>{this.getHabitats()})).subscribe();
+   this.habitatService.updateHabitat(this.habitatForm.value).pipe(tap(()=>{this.getHabitats()}), takeUntilDestroyed(this.destroyRef)).subscribe();
    this.habitatForm.reset();
    this.updateFormIsDisplay = !this.updateFormIsDisplay
   }
@@ -182,7 +183,7 @@ export class HabitatHandledComponent implements OnInit {
   }
 
   onSubmit() {
-    this.habitatService.addHabitat(this.newHabitat).pipe(tap(()=>{this.getHabitats()})).subscribe();
+    this.habitatService.addHabitat(this.newHabitat).pipe(tap(()=>{this.getHabitats()}), takeUntilDestroyed(this.destroyRef)).subscribe();
     this.newHabitat.description = '';
     this.newHabitat.title = '';
     this.addFormIsDisplay = !this.addFormIsDisplay
@@ -190,18 +191,18 @@ export class HabitatHandledComponent implements OnInit {
 
 
   deleteHabitat(id:string) {
-  this.habitatService.deleteHabitat(id).pipe(tap(()=>{this.getHabitats()})).subscribe();
+  this.habitatService.deleteHabitat(id).pipe(tap(()=>{this.getHabitats()}), takeUntilDestroyed(this.destroyRef)).subscribe();
 };
 
   onFileChange(event: any, id:string) {
     const file: File = event.target.files[0];
     const formData = new FormData();
     formData.append("myImg", file);
-    this.imageService.addHabitatImage(formData, id).pipe(tap(()=>{this.getHabitats()})).subscribe()
+    this.imageService.addHabitatImage(formData, id).pipe(tap(()=>{this.getHabitats()}), takeUntilDestroyed(this.destroyRef)).subscribe()
 };
 
   deleteImage(id: string) {
-    this.imageService.deleteImage(id).pipe(tap(()=>{this.getHabitats()})).subscribe()
+    this.imageService.deleteImage(id).pipe(tap(()=>{this.getHabitats()}), takeUntilDestroyed(this.destroyRef)).subscribe()
   }
 
   closeUpdateForm(){

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { HabitatsService } from '../../../habitats/services/habitat.service';
@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import { tap } from 'rxjs';
 import { NgStyle } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-veterinary-habitat-report-handled',
@@ -95,6 +96,8 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
   role: string = localStorage.getItem('role') || '';
 
   private readonly habitatService = inject(HabitatsService);
+  private readonly destroyRef = inject(DestroyRef);
+
 
   addFormIsDisplay: boolean = false;
 
@@ -118,7 +121,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
       .pipe(
         tap(() => {
           this.getHabitats();
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
     this.commentForm.reset();
@@ -131,7 +134,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
       .pipe(
         tap(() => {
           this.getHabitats();
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
