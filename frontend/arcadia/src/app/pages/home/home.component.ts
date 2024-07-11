@@ -41,8 +41,6 @@ export class HomeComponent implements OnInit {
     return (this.result = Math.floor(Math.random() * (max - min + 1) + min));
   }
 
-
-  
   onSubmit(): void {
     this.reviewService.addReview(this.newReview).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     this.newReview.pseudo = '';
