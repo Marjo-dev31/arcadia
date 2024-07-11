@@ -18,7 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <h3>(Réservé à la direction, aux vétérinaires et aux employés)</h3>
       </div>
 
-      <form class="login-form" name="loginForm" #form="ngForm" (ngSubmit)="onSubmit()">
+      <form class="login-form" name="loginForm" id="loginForm" #form="ngForm" (ngSubmit)="onSubmit()">
         <p>Connexion</p>
         @if(responseMessage === 'User doesn t exists'){
           <p class="alert">Utilisateur inconnu</p>
@@ -53,9 +53,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       </div>
     </main>
   `,
-  styleUrl: `./login.component.css`,
+  styleUrls: [`./login.component.css`],
 })
-export class ConnexionComponent implements OnInit {
+export class LoginComponent implements OnInit {
   title : string
   constructor(route: ActivatedRoute) {
     this.title = route.snapshot.data['title']
