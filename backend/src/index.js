@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import ip from 'ip';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import Response from './domain/response.js';
@@ -28,7 +27,7 @@ dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
 const app = express();
 
-app.use(cors({ origin: '*'}));
+app.use(cors({ origin: ['http://localhost:4200', 'http://myangularbucket31.s3-website.eu-north-1.amazonaws.com' ]}));
 app.use(express.json());
 app.use(fileUpload());
 
@@ -59,6 +58,6 @@ app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.O
 
 app.listen(PORT, () => {
     connectDB().then(()=> {
-        logger.info(`It's alive on: ${ip.address()}: ${PORT}`);
+        logger.info(`It's alive on port: ${PORT}`);
     });
 });
