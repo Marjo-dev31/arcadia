@@ -16,7 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <h3>Contactez-nous</h3>
       </div>
       
-      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
+      <form class="contact-form" [formGroup]="contactForm" id="contactForm" (ngSubmit)="onSubmit()" >
       @if(submitted){
         <p class="alert">Demande de contact envoyé !</p>
       }
