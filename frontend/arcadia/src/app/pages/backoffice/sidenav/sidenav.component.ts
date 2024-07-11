@@ -39,16 +39,14 @@ import { RouterLink, RouterOutlet } from '@angular/router';
       </mat-sidenav-content>
     </mat-sidenav-container>
   `,
-  styleUrl: `./sidenav.component.css`,
+  styleUrls: ['./sidenav.component.css'],
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent{
   constructor() {
   }
 
-  sidenavState = false;
+  // sidenavState = false;
   userFirstname: string = localStorage.getItem('firstname') || ''
 
-  ngOnInit() {  
-  }
 
 }
