@@ -142,7 +142,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       >
     </section>
   `,
-  styleUrl: `../component-handled.component.css`,
+  styleUrls: [`../component-handled.component.css`],
 })
 export class ServiceHandledComponent implements OnInit {
   public serviceForm: FormGroup;

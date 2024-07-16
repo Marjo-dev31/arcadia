@@ -11,13 +11,12 @@ describe('ServiceService', () => {
     let fixture: ComponentFixture<ServicesComponent>
     
     let service: ServiceService;
-    let serviceServiceMock!: { getServices: jest.Mock, addService: jest.Mock }; // the mock value
+    let serviceServiceMock!: { getServices: jest.Mock}; // the mock value
 
     beforeEach(() => {
       // create an object that mock the method from ServicesService
       serviceServiceMock = {
-        getServices: jest.fn(),
-        addService: jest.fn()
+        getServices: jest.fn()
       };
   
       TestBed.configureTestingModule({
@@ -58,5 +57,6 @@ describe('ServiceService', () => {
         expect(services.length).toEqual(1)
       })
     });
+
 
 })
