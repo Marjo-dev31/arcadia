@@ -51,7 +51,7 @@ import { TitleCasePipe } from '@angular/common';
       </section>
     </main>
   `,
-  styleUrl: `./habitat.component.css`,
+  styleUrls: [`./habitats.component.css`],
 })
 export class HabitatsComponent implements OnInit {
 

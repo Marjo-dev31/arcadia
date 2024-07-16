@@ -45,7 +45,6 @@ export class SidenavComponent{
   constructor() {
   }
 
-  // sidenavState = false;
   userFirstname: string = localStorage.getItem('firstname') || ''
 
 

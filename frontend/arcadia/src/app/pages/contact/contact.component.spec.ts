@@ -31,7 +31,7 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should count 2 element ', ()=>{
+  it('should count 2 input element ', ()=>{
     const formElement = fixture.debugElement.nativeElement.querySelector('#contactForm');
     const inputElements = formElement.querySelectorAll('input');
     expect(inputElements.length).toEqual(2)
