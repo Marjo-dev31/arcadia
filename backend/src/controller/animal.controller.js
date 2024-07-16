@@ -191,3 +191,4 @@ export const getAnimalsByHabitat = (req, res) => {
       }
     });
 }
+
