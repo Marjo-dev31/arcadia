@@ -51,7 +51,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       </section>
     </main>
   `,
-  styleUrl: `./service.component.css`
+  styleUrls: [`./services.component.css`]
 })
 export class ServicesComponent implements OnInit {
   
