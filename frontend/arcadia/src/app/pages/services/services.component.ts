@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { ServiceService } from './service/service.service';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, TitleCasePipe } from '@angular/common';
 import { Service } from '../../shared/models/service.interface';
 import { Opening } from '../../shared/models/opening.interface';
 import { OpeningService } from './service/opening.service';
@@ -9,7 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-services',
-  imports: [JsonPipe],
+  imports: [JsonPipe, TitleCasePipe],
   standalone: true,
   template: `
     <main>
@@ -40,7 +40,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
               alt="photo representative du service {{service.title}}"
             />
             <div class="service-content" >
-              <h3 >{{service.title}}</h3>
+              <h3 >{{service.title | titlecase}}</h3>
               <p>{{service.description}}</p>
             </div>
           </div>
