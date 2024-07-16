@@ -7,11 +7,12 @@ import { AnimalService } from '../animals/services/animal.service';
 import { ClickService } from '../animals/services/click.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-habitats',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, TitleCasePipe],
   template: `
     <main>
       <h1 class="title">{{title}}</h1>
@@ -29,7 +30,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             class="habitat-img"
           />
           <div class="habitat-content">
-            <h3 class="habitat-title">{{ habitat.title }}</h3>
+            <h3 class="habitat-title">{{ habitat.title | titlecase}}</h3>
             @if (showDetails == habitat.id) {
             <p>{{ habitat.description }}</p>
               @if(animals) {

@@ -1,4 +1,4 @@
-import { NgStyle } from '@angular/common';
+import { NgStyle, TitleCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -8,12 +8,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle, RouterLink, RouterOutlet],
+  imports: [MatSidenavModule, MatToolbarModule, MatIcon, NgStyle, RouterLink, RouterOutlet, TitleCasePipe],
   template: `
     <h1 class="title">ARCADIA</h1>
     <mat-sidenav-container autosize>
       <mat-sidenav #drawer mode="side" class="sidenav" opened>
-        <h3>Bonjour {{this.userFirstname}}</h3>
+        <h3>Bonjour {{this.userFirstname | titlecase }}</h3>
         <ul>
           <li><a [routerLink]="['/espacepersonnel/horaires']">Horaires</a></li>
           <li><a [routerLink]="['/espacepersonnel/services']">Services</a></li>
