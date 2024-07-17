@@ -23,19 +23,41 @@ const results = [
     id_breed:6
 }]
 
-const mockRes = new Response(
+let mockRes = new Response(
     200,
     'OK',
     `Animals retrieved`,
     results
   );
 
-const mockReq = {};
+let mockReq = {};
 
+let responseOk = new Response(
+    200,
+    'OK',
+    `Animals retrieved`,
+    results
+  );
 
+let noResponse = new Response(
+    200,
+    'OK',
+    `No animals found`,
+)
 
 describe('GET/animals', ()=>{
     it('should return Response', () => {
-        expect(getAnimals(mockReq, mockRes)).toBe(mockRes.status)
-    })
+        expect(getAnimals(mockReq, mockRes)).toBe(responseOk.status)
+        expect(getAnimals(mockReq, mockRes)).toBe(responseOk.code)
+    });
+
+    it('should return no results', ()=>{
+        mockRes = new Response(
+            200,
+            'OK',
+            `No animals found`,);
+        expect(getAnimals(mockReq, mockRes)).toBe(noResponse.status)
+    });
+
+    it('')
 })
