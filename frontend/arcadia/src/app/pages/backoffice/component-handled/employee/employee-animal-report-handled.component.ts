@@ -24,7 +24,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <label for="animal">Sélectionner un animal : </label>
         <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
           <option *ngFor="let animal of animals" [ngValue]="animal.id">
-            {{ animal.firstname }}
+            {{ animal.firstname }} ({{ animal.breed }})
           </option>
         </select>
         <button>Filtrer</button>
@@ -85,7 +85,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         name="addform"
         (ngSubmit)="onSubmit(form)"
       >
-        <label for="food">Nourriture recommandée :</label>
+        <label for="animal">Sélectionner un animal : </label>
+        <select name="animal" id="animal" [(ngModel)]="newReport.id_animal" #animal="ngModel" required>
+          @for(animal of animals; track animal) {
+          <option [ngValue]="animal.id">{{ animal.firstname | titlecase}} ({{ animal.breed }})</option>
+          }
+        </select>
+        @if(animal.invalid && animal.touched){
+          <p class="alert">Un animal est requis</p>
+        }
+        <label for="food">Nourriture donnée :</label>
         <input
           type="text"
           placeholder="Aliments données"
@@ -111,23 +120,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(grammage.invalid && grammage.touched){
           <p class="alert">Un grammage est requis</p>
         }
-        <label for="animal">Sélectionner un animal : </label>
-        <select name="animal" id="animal" [(ngModel)]="newReport.id_animal" #animal="ngModel" required>
-          @for(animal of animals; track animal) {
-          <option [ngValue]="animal.id">{{ animal.firstname }}</option>
-          }
-        </select>
-        @if(animal.invalid && animal.touched){
-          <p class="alert">Un type de nourriture est requis</p>
-        }
+        
         <label for="user">Sélectionner un rapporteur : </label>
         <select name="user" id="user" [(ngModel)]="newReport.id_user" #user="ngModel" required>
           @for(user of users; track user) {
-          <option [ngValue]="user.id">{{ user.firstname }}</option>
+          <option [ngValue]="user.id">{{ user.firstname | titlecase }} {{ user.lastname | titlecase }}</option>
           }
         </select>
         @if(user.invalid && user.touched){
-          <p class="alert">Un type de nourriture est requis</p>
+          <p class="alert">Un rapporteur est requis</p>
         }
         <button class="add-btn" [disabled]="form.invalid">Enregistrer nouveau rapport</button>
       </form>
@@ -165,7 +166,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <label for="selected-user">Sélectionner un rapporteur : </label>
         <select name="user" id="user" formControlName="id_user">
           @for(user of users; track user) {
-          <option [value]="user.id">{{ user.firstname }}</option>
+          <option [value]="user.id">{{ user.firstname | titlecase }} {{ user.lastname | titlecase}}</option>
           }
         </select>
         @if(updateForm.controls['id_user'].invalid && updateForm.controls['id_user'].touched){
@@ -252,17 +253,9 @@ export class EmployeeReportHandledComponent implements OnInit {
 
   getEmployeeReports(id: string) {
     this.employeeService.getEmployeeReports(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=> {
-      if(response.data) {
-    this.employeeReports = response.data;
+    this.employeeReports = response
     this.datasource = new MatTableDataSource(this.employeeReports);
     this.datasource.sort = this.sort;
-    // this.responsemessage = response.message;
-  } else {
-    // this.responsemessage = response.message;
-    this.employeeReports = [];
-    this.datasource = new MatTableDataSource(this.employeeReports)
-    
-  }
     })
   };
 
@@ -271,7 +264,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     };
 
   onSubmit(form: NgForm){
-    this.employeeService.addEmployeeReport(this.newReport).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+    this.employeeService.addEmployeeReport(this.newReport).pipe(tap(()=>{this.getEmployeeReports}) ,takeUntilDestroyed(this.destroyRef)).subscribe();
     this.addFormIsDisplay = !this.addFormIsDisplay;
     form.reset();
     };
