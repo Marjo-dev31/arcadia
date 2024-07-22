@@ -57,7 +57,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
               >
             </div>
             } @else {
-            <p>Il n'y a pas encore de photo associé à cet habitat</p>
+            <p>Il n'y a pas encore de photo associé à ce service</p>
             }
             <input
               type="file"

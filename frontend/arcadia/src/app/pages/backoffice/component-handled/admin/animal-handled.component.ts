@@ -5,7 +5,7 @@ import { Animal, AnimalCreate, Habitat } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { ImageService } from '../../../home/services/image.service';
 import { tap } from 'rxjs';
-import { NgStyle } from '@angular/common';
+import { LowerCasePipe, NgStyle, TitleCasePipe} from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HabitatsService } from '../../../habitats/services/habitat.service';
 import { BreedService } from '../../../animals/services/breed.service';
@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-animal-handled',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, NgStyle, FormsModule, ReactiveFormsModule],
+  imports: [MatTableModule, MatIconModule, NgStyle, FormsModule, ReactiveFormsModule, TitleCasePipe, LowerCasePipe],
   template: `
     <h3>Animaux</h3>
     <section>
@@ -26,11 +26,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     }
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef>Prénom</th>
-        <td mat-cell *matCellDef="let animal">{{ animal.firstname }}</td>
+        <td mat-cell *matCellDef="let animal">{{ animal.firstname | titlecase}}</td>
       </ng-container>
       <ng-container matColumnDef="race">
         <th mat-header-cell *matHeaderCellDef>Race</th>
-        <td mat-cell *matCellDef="let animal">{{ animal.breed }}</td>
+        <td mat-cell *matCellDef="let animal">{{ animal.breed | lowercase}}</td>
       </ng-container>
       <ng-container matColumnDef="habitat">
         <th mat-header-cell *matHeaderCellDef>Habitat</th>
@@ -100,7 +100,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <select name="selected-breed" [(ngModel)]="newAnimal.breed" #breed="ngModel" required>
             <option value="null">--Choissisez une race--</option>
             @for(breed of breeds; track breed) {
-            <option [value]="breed.id">{{ breed.name }}</option>}
+            <option [value]="breed.id">{{ breed.name | lowercase}}</option>}
           </select>
           @if(breed.invalid && breed.touched){
           <p class="alert">Une race est requise</p>
@@ -115,7 +115,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <p class="alert">Un type de nourriture est requis</p>
         }
           <button class="add-btn" [disabled]="form.invalid">Enregistrer nouvel animal</button>
-          <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux</p>
+          <p>Pensez à ajouter ce nouvel animal également dans la section popularité des animaux</p>
         </form>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
@@ -277,7 +277,7 @@ export class AnimalHandledComponent implements OnInit {
   }
 
   addBreed(){
-    this.breedService.addBreed(this.breedForm.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+    this.breedService.addBreed(this.breedForm.value).pipe(tap(()=>{this.getBreed()}), takeUntilDestroyed(this.destroyRef)).subscribe();
     this.submitted = true
   }
 
