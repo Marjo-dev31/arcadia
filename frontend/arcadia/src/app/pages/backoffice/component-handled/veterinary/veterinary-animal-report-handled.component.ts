@@ -347,7 +347,6 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
         this.veterinaryReports = response;
         this.dataSource = new MatTableDataSource(this.veterinaryReports);
         this.dataSource.sort = this.sort;
-        // this.responsemessage = response.message;
     });
   }
 
