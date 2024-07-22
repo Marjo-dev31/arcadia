@@ -1,18 +1,22 @@
+import { getAnimals } from '../controller/animal.controller.js';
 
 
-import Response from "../domain/response.js";
-import { getAnimals } from "./animal.controller.js";
-
-let mockRequest = {}
-
-let mockResponse = {}
+const mockReq = {
+    method: 'GET',
+    originalUrl: 'http://localhost:8000/animals'
+};
 
 
+const mockRes = {
+    status: jest.fn(()=>mockRes),
+    send: jest.fn()
+};
 
-describe('get animals', ()=> {
-    it('should get animals', ()=>{
-        getAnimals(mockRequest, mockResponse);
-        expect(mockResponse.send).toHaveBeenCalled();
-    })
+
+describe('getAnimals',  ()=>{
+it('should return animal list', async ()=> {
+
+    const response = await getAnimals(mockReq, mockRes);
+   expect(response.status).toHaveBeenCalled()
+})  
 })
-
