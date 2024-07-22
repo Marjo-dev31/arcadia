@@ -58,4 +58,11 @@ describe('LoginComponent', () => {
         expect(titleValue?.errors).toBeNull()
     })
   })
+
+  it('should check class = contact-form', ()=>{
+    const contactFormElement: HTMLElement = fixture.debugElement.nativeElement.querySelector('#contactForm')
+    expect(contactFormElement.className).toContain('contact-form')
+  })
+
+  
 });
