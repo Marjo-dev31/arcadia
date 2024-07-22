@@ -87,7 +87,7 @@
       </div>
       <h3>Laissez nous votre avis en <a href="#new-review">cliquant ici</a></h3>
       <div class="new-review" id="new-review">
-        <form class="form-review" #form="ngForm" name="reviewform" (ngSubmit)="onSubmit()">
+        <form class="form-review" #form="ngForm" name="reviewform" (ngSubmit)="onSubmit(form)">
           <div>
             <label for="name">Pseudo : </label>
             <input
@@ -96,8 +96,12 @@
               id="name"
               [(ngModel)]="newReview.pseudo"
               #pseudo="ngModel"
+              required
             />
           </div>
+          @if(pseudo.invalid && pseudo.touched){<div>
+            <p >Un pseudo est obligatoire</p>
+          </div>}
           <textarea
             name="content"
             id=""
@@ -105,9 +109,18 @@
             rows="10"
             placeholder="Ecrivez votre avis ici..."
             [(ngModel)]="newReview.content"
-            #content="ngModel"></textarea>
+            #content="ngModel"
+            required></textarea>
+            @if(content.invalid && content.touched){<div>
+              <p>Un avis est obligatoire</p>
+            </div>}
           <button class="form-review-btn" [disabled]="form.invalid">Envoyer</button>
-        </form>
+        @if(form.submitted){
+          <div>
+            <p class="alert">Votre avis a bien été soumis</p>
+          </div>
+        }
+      </form>  
       </div>
     </div>
   </section>
