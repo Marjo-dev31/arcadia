@@ -6,7 +6,6 @@ import httpStatus from "../domain/httpstatus.js";
 import QUERYEMPLOYEES from "../query/employee.query.js";
 
 export const getVeterinaryReports = (req, res)=> {
-  // console.log(req.params.id)
     logger.info(`${req.method} ${req.originalUrl}, fetching reports by animal`);
     database.query(QUERYVETERINARIES.SELECT_REPORTS, [req.params.id], (error, results) => {
       if (!results[0]) {
