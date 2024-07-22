@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { VeterinaryReport, VeterinaryReportCreate } from "../../../shared/models/veterinaryreport.interface";
 import { environment } from '../../../environments/environment';
 import { Response } from "../../../shared/models/response.interface";
@@ -12,8 +12,14 @@ export class VeterinaryService {
 
     constructor(private http: HttpClient){}
 
-    getVeterinaryReports(id: string): Observable<Response<VeterinaryReport>> {
-        return this.http.get<Response<VeterinaryReport>>(`${this.url}/animal/${id}`)
+    getVeterinaryReports(id: string): Observable<VeterinaryReport[]> {
+        return this.http.get<Response<VeterinaryReport>>(`${this.url}/animal/${id}`).pipe(map((r)=>{
+            if(r.data){
+                return r.data
+            } else {
+                return []
+            }
+        }))
     } 
 
     addVeterinaryReport(report: VeterinaryReportCreate): Observable<Response<VeterinaryReport>> {
