@@ -1,5 +1,5 @@
-import { CommonModule, formatPercent } from '@angular/common';
-import { Component, DestroyRef, OnInit, ViewChild, inject, viewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -122,6 +122,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         name="addform"
         (ngSubmit)="onSubmit(form)"
       >
+      <label for="animal">Sélectionner un animal : </label>
+        <select
+          name="animal"
+          id="animal"
+          [(ngModel)]="newReport.id_animal"
+          #animal="ngModel"
+          required
+        >
+          @for(animal of animals; track animal) {
+          <option [ngValue]="animal.id">{{ animal.firstname }}</option>
+          }
+        </select>
+        @if(animal.invalid && animal.touched){
+        <p class="alert">Un animal est requis</p>
+        }
         <label for="food">Nourriture recommandée :</label>
         <input
           type="text"
@@ -171,21 +186,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           [(ngModel)]="newReport.details_condition"
           #details_condition="ngModel"
         ></textarea>
-        <label for="animal">Sélectionner un animal : </label>
-        <select
-          name="animal"
-          id="animal"
-          [(ngModel)]="newReport.id_animal"
-          #animal="ngModel"
-          required
-        >
-          @for(animal of animals; track animal) {
-          <option [ngValue]="animal.id">{{ animal.firstname }}</option>
-          }
-        </select>
-        @if(animal.invalid && animal.touched){
-        <p class="alert">Un animal est requis</p>
-        }
+        
         <label for="user">Sélectionner un rapporteur : </label>
         <select
           name="user"
@@ -194,7 +195,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           #user="ngModel"
         >
           @for(user of users; track user) {
-          <option [ngValue]="user.id">{{ user.firstname }}</option>
+          <option [ngValue]="user.id">{{ user.firstname | titlecase }} {{ user.lastname | titlecase }}</option>
           }
         </select>
         @if(user.invalid && user.touched){
@@ -247,7 +248,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <label for="selected-user">Sélectionner un rapporteur : </label>
         <select name="user" id="user" formControlName="id_user">
           @for(user of users; track user) {
-          <option [value]="user.id">{{ user.firstname }}</option>
+          <option [value]="user.id">{{ user.firstname | titlecase}} {{ user.lastname | titlecase }}</option>
           }
         </select>
         @if(updateForm.controls['id_user'].invalid &&
@@ -343,16 +344,10 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
   getVeterinaryReports(id: string) {
     this.veterinaryService.getVeterinaryReports(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
-      if(response.data) {
-        this.veterinaryReports = response.data;
+        this.veterinaryReports = response;
         this.dataSource = new MatTableDataSource(this.veterinaryReports);
         this.dataSource.sort = this.sort;
         // this.responsemessage = response.message;
-      } else {
-        // this.responsemessage = response.message;
-        this.veterinaryReports = [];
-        this.dataSource = new MatTableDataSource(this.veterinaryReports)
-      }
     });
   }
 
