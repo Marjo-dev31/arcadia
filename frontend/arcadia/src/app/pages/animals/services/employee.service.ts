@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { EmployeeReport, EmployeeReportCreate } from "../../../shared/models/employeereport.interface";
 import { environment } from "../../../environments/environment";
 import { Response } from "../../../shared/models/response.interface";
@@ -13,8 +13,14 @@ export class EmployeeService {
 
     constructor( private http: HttpClient) {}
 
-    getEmployeeReports(id: string): Observable<Response<EmployeeReport>> {
-       return this.http.get<Response<EmployeeReport>>(`${this.url}/${id}`)
+    getEmployeeReports(id: string): Observable<EmployeeReport[]> {
+       return this.http.get<Response<EmployeeReport>>(`${this.url}/${id}`).pipe(map((r)=>{
+        if(r.data){
+            return r.data
+        } else {
+            return []
+        }
+       }))
     }
 
     addEmployeeReport(report: EmployeeReportCreate): Observable<Response<EmployeeReport>> {
