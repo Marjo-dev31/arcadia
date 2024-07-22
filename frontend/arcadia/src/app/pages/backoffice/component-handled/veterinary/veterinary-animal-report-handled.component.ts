@@ -199,7 +199,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           }
         </select>
         @if(user.invalid && user.touched){
-        <p class="alert">Un habitat est requis</p>
+        <p class="alert">Un rapporteur est requis</p>
         }
         <button class="add-btn" [disabled]="form.invalid">Enregistrer nouveau rapport</button>
       </form>
