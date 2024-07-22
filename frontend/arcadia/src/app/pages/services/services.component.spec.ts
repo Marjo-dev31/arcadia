@@ -42,21 +42,23 @@ describe('ServiceService', () => {
     it('should return an empty array when there is NO data', () => {
         
         const services = component.services
-
         // set the return value of the mocking function
         serviceServiceMock.getServices.mockReturnValue([]);
         expect(services).toEqual([]);
       });
 
     it('should return a list when there is data', ()=>{
-      
-      serviceServiceMock.getServices.mockReturnValue([{id: 'un', title: 'restaurant', description: 'plusieurs restaurants sur place', image_url: 'restaurant.jpg'}]);
+      const servicesMock = [
+        {id: 'un', title: 'restaurant', description: 'plusieurs restaurants sur place', image_url: 'restaurant.jpg'},
+        {id: 'deux', title: 'visite', description: 'visite guidée', image_url: 'visite.jpg'}
+      ]
+
+      serviceServiceMock.getServices.mockReturnValue(servicesMock);
       fixture.whenStable().then(()=>{
         const services = component.services
-        expect(services).toEqual([{id: 'un', title: 'restaurant', description: 'plusieurs restaurants sur place', image_url: 'restaurant.jpg'}]);
-        expect(services.length).toEqual(1)
+        expect(services).toEqual(servicesMock);
+        expect(services.length).toEqual(servicesMock.length)
       })
     });
-
 
 })
