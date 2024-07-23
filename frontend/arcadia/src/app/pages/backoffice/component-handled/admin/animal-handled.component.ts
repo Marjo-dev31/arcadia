@@ -1,20 +1,21 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Animal, AnimalCreate, Habitat } from '../../../../shared/models';
 import { AnimalService } from '../../../animals/services/animal.service';
 import { ImageService } from '../../../home/services/image.service';
 import { tap } from 'rxjs';
-import { NgStyle } from '@angular/common';
+import { LowerCasePipe, NgStyle, TitleCasePipe} from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HabitatsService } from '../../../habitats/services/habitat.service';
 import { BreedService } from '../../../animals/services/breed.service';
 import { Breed } from '../../../../shared/models/breed.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-animal-handled',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, NgStyle, FormsModule, ReactiveFormsModule],
+  imports: [MatTableModule, MatIconModule, NgStyle, FormsModule, ReactiveFormsModule, TitleCasePipe, LowerCasePipe],
   template: `
     <h3>Animaux</h3>
     <section>
@@ -25,11 +26,11 @@ import { Breed } from '../../../../shared/models/breed.interface';
     }
       <ng-container matColumnDef="firstname">
         <th mat-header-cell *matHeaderCellDef>Prénom</th>
-        <td mat-cell *matCellDef="let animal">{{ animal.firstname }}</td>
+        <td mat-cell *matCellDef="let animal">{{ animal.firstname | titlecase}}</td>
       </ng-container>
       <ng-container matColumnDef="race">
         <th mat-header-cell *matHeaderCellDef>Race</th>
-        <td mat-cell *matCellDef="let animal">{{ animal.breed }}</td>
+        <td mat-cell *matCellDef="let animal">{{ animal.breed | lowercase}}</td>
       </ng-container>
       <ng-container matColumnDef="habitat">
         <th mat-header-cell *matHeaderCellDef>Habitat</th>
@@ -99,7 +100,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
           <select name="selected-breed" [(ngModel)]="newAnimal.breed" #breed="ngModel" required>
             <option value="null">--Choissisez une race--</option>
             @for(breed of breeds; track breed) {
-            <option [value]="breed.id">{{ breed.name }}</option>}
+            <option [value]="breed.id">{{ breed.name | lowercase}}</option>}
           </select>
           @if(breed.invalid && breed.touched){
           <p class="alert">Une race est requise</p>
@@ -114,7 +115,7 @@ import { Breed } from '../../../../shared/models/breed.interface';
           <p class="alert">Un type de nourriture est requis</p>
         }
           <button class="add-btn" [disabled]="form.invalid">Enregistrer nouvel animal</button>
-          <p>Pensez à ajouter ce nouvel animal dans la section popularité des animaux</p>
+          <p>Pensez à ajouter ce nouvel animal également dans la section popularité des animaux</p>
         </form>
   </section>
   <section [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }">
@@ -170,22 +171,7 @@ export class AnimalHandledComponent implements OnInit {
 
   public updateForm: FormGroup
   public breedForm: FormGroup
-
-  constructor(public fb: FormBuilder) {
-    this.updateForm = this.fb.group({
-      firstname: new FormControl('', [Validators.required]),
-      habitat: new FormControl('', [Validators.required]),
-      breed: new FormControl('', [Validators.required]),
-      id: new FormControl('')
-    })
-
-    this.breedForm = this.fb.group({
-      name: new FormControl('', [Validators.required])
-    })
-  };
-
-
-
+  
   displayColums: string[] = [
     'firstname',
     'race',
@@ -195,10 +181,23 @@ export class AnimalHandledComponent implements OnInit {
     'image'
   ];
 
+  constructor(public fb: FormBuilder) {
+    this.updateForm = this.fb.group({
+      firstname: new FormControl('', [Validators.required]),
+      habitat: new FormControl('', [Validators.required]),
+      breed: new FormControl('', [Validators.required]),
+      id: new FormControl('')
+    })
+    this.breedForm = this.fb.group({
+      name: new FormControl('', [Validators.required])
+    })
+  };
+
   private readonly animalService = inject(AnimalService);
   private readonly imageService = inject(ImageService);
   private readonly habitatService = inject(HabitatsService);
-  private readonly breedService = inject(BreedService)
+  private readonly breedService = inject(BreedService);
+  private readonly destroyRef = inject(DestroyRef)
 
   datasource!: Animal[] | undefined;
   habitats!: Habitat[];
@@ -208,11 +207,11 @@ export class AnimalHandledComponent implements OnInit {
     firstname: '',
     habitat: '',
     breed: ''
-  }
+  };
 
   addFormIsDisplay: boolean = false;
   updateFormIsDisplay: boolean = false;
-  submitted: boolean = false
+  submitted: boolean = false;
 
   ngOnInit() {
     this.getAnimals();
@@ -222,7 +221,7 @@ export class AnimalHandledComponent implements OnInit {
   }
 
   getAnimals() {
-    this.animalService.getHandleAnimals().subscribe((response) => {
+    this.animalService.getHandleAnimals().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
       this.datasource = response;
     });
   }
@@ -231,15 +230,15 @@ export class AnimalHandledComponent implements OnInit {
     const file: File = event.target.files[0];
     const formData = new FormData();
     formData.append("myImg", file);
-    this.imageService.addAnimalImage(formData, id).pipe(tap(()=>{this.getAnimals()})).subscribe()
+    this.imageService.addAnimalImage(formData, id).pipe(tap(()=>{this.getAnimals()}), takeUntilDestroyed(this.destroyRef)).subscribe()
   }
 
   deleteImage(id: string) {
-    this.imageService.deleteImage(id).pipe(tap(()=>{this.getAnimals()})).subscribe()
+    this.imageService.deleteImage(id).pipe(tap(()=>{this.getAnimals()}), takeUntilDestroyed(this.destroyRef)).subscribe()
   }
 
   deleteAnimal(id: string) {
-    this.animalService.deleteAnimal(id).pipe(tap(()=>{this.getAnimals()})).subscribe()
+    this.animalService.deleteAnimal(id).pipe(tap(()=>{this.getAnimals()}), takeUntilDestroyed(this.destroyRef)).subscribe()
   }
 
   toggleAddForm() {
@@ -247,7 +246,7 @@ export class AnimalHandledComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.animalService.addAnimal(this.newAnimal).pipe(tap(()=>{this.getAnimals()})).subscribe()
+    this.animalService.addAnimal(this.newAnimal).pipe(tap(()=>{this.getAnimals()}), takeUntilDestroyed(this.destroyRef)).subscribe()
     this.addFormIsDisplay = !this.addFormIsDisplay;
     form.reset();
   }
@@ -260,14 +259,14 @@ export class AnimalHandledComponent implements OnInit {
 }}
 
   updateAnimal() {
-    this.animalService.updateAnimal(this.updateForm.value).pipe(tap(()=>{this.getAnimals()})).subscribe()
+    this.animalService.updateAnimal(this.updateForm.value).pipe(tap(()=>{this.getAnimals()}), takeUntilDestroyed(this.destroyRef)).subscribe()
     this.updateForm.reset();
     this.updateFormIsDisplay = !this.updateFormIsDisplay
   }
 
   getBreed(){
-    this.breedService.getBreeds().subscribe((response)=> {
-      this.breeds = response.data;
+    this.breedService.getBreeds().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=> {
+      this.breeds = response;
     } )
   }
 
@@ -278,7 +277,7 @@ export class AnimalHandledComponent implements OnInit {
   }
 
   addBreed(){
-    this.breedService.addBreed(this.breedForm.value).subscribe();
+    this.breedService.addBreed(this.breedForm.value).pipe(tap(()=>{this.getBreed()}), takeUntilDestroyed(this.destroyRef)).subscribe();
     this.submitted = true
   }
 

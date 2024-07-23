@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserLogin } from '../../shared/models/user.interface';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginService } from './service/login.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { LoginService } from './service/login.service';
         <h3>(Réservé à la direction, aux vétérinaires et aux employés)</h3>
       </div>
 
-      <form class="login-form" name="loginForm" #form="ngForm" (ngSubmit)="onSubmit()">
+      <form class="login-form" name="loginForm" id="loginForm" #form="ngForm" (ngSubmit)="onSubmit()">
         <p>Connexion</p>
         @if(responseMessage === 'User doesn t exists'){
           <p class="alert">Utilisateur inconnu</p>
@@ -39,7 +40,7 @@ import { LoginService } from './service/login.service';
         @if(password.invalid && password.touched){
           <p class="alert">Mot de passe invalide</p>
         }
-        <button>Se connecter</button>
+        <button [disabled]="form.invalid">Se connecter</button>
       </form>
       <div class="password-forgot">
         <a [routerLink]="['/mdpoublie']" id="password-forgot-link">Mot de passe oublié ?</a>
@@ -52,16 +53,17 @@ import { LoginService } from './service/login.service';
       </div>
     </main>
   `,
-  styleUrl: `./login.component.css`,
+  styleUrls: [`./login.component.css`],
 })
-export class ConnexionComponent implements OnInit {
+export class LoginComponent implements OnInit {
   title : string
   constructor(route: ActivatedRoute) {
     this.title = route.snapshot.data['title']
   }
 
-  private readonly loginService = inject(LoginService)
-  private readonly router = inject(Router)
+  private readonly loginService = inject(LoginService);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef)
 
   user: UserLogin = {
     email: '',
@@ -73,13 +75,13 @@ export class ConnexionComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(): void {
-   this.loginService.login(this.user).subscribe((response)=> {
-    try{
+   this.loginService.login(this.user).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=> {
+    if(response.data){
     localStorage.setItem('accessToken', response.data.accessToken)
     localStorage.setItem('role', response.data.user.name)
     localStorage.setItem('firstname', response.data.user.firstname)
     this.router.navigate(['/espacepersonnel'])
-  } catch(error) {
+  } else {
     this.responseMessage = response.message
   }
   });

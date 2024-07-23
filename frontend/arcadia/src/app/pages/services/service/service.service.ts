@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Service, ServiceCreate } from '../../../shared/models/service.interface';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Response } from '../../../shared/models/response.interface';
 
 
 
@@ -16,26 +17,32 @@ export class ServiceService {
   async getServices(): Promise<Service[]> {
     try {
     const servicesList = await fetch(this.url).then((response) => response.json());
-    return servicesList.data.services }
+    return servicesList.data}
     catch {
       return []
     }
   }
 
-  getHandleServices(): Observable<any> {
-    return this.http.get(`${this.url}/backoffice`)
+  getHandleServices(): Observable<Service[]> {
+    return this.http.get<Response<Service>>(`${this.url}/backoffice`).pipe(map((r)=>{
+      if(r.data){
+        return r.data
+      } else {
+        return []
+      }
+    }))
   }
 
-  addService(service: ServiceCreate): Observable<any> {
-    return this.http.post(this.url, service)
+  addService(service: ServiceCreate): Observable<Response<Service>> {
+    return this.http.post<Response<Service>>(this.url, service)
 }
 
-  updateService(service: Service): Observable<any> {
-    return this.http.put(this.url +'/'+ service.id, service)
+  updateService(service: Service): Observable<Response<Service>> {
+    return this.http.put<Response<Service>>(this.url +'/'+ service.id, service)
   }
 
-  deleteService(id: string): Observable<any> {
-    return this.http.delete(this.url +'/'+ id)
+  deleteService(id: string): Observable<Response<Service>> {
+    return this.http.delete<Response<Service>>(this.url +'/'+ id)
   }
 
 }

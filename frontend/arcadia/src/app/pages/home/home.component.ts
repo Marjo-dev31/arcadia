@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { Review, ReviewPost } from '../../shared/models/reviews.interface';
 import { ReviewsService } from './services/reviews.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -13,9 +14,9 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
 
   private readonly reviewService = inject(ReviewsService);
+  private readonly destroyRef = inject(DestroyRef);
 
   reviews!: Review[];
   newReview: ReviewPost = {
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
 
   getReviews() {
     this.reviewService.getReviews().then((response) => {
-      this.reviews = response.data.reviews;
+      this.reviews = response;
     });
   }
 
@@ -40,11 +41,8 @@ export class HomeComponent implements OnInit {
     return (this.result = Math.floor(Math.random() * (max - min + 1) + min));
   }
 
-
-  
-  onSubmit(): void {
-    this.reviewService.addReview(this.newReview).subscribe();
-    this.newReview.pseudo = '';
-    this.newReview.content = '';
+  onSubmit(form: NgForm): void {
+    this.reviewService.addReview(this.newReview).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+    form.reset() 
   }
 }

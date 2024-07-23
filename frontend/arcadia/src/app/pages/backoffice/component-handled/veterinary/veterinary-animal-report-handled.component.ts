@@ -1,5 +1,5 @@
-import { CommonModule, formatPercent } from '@angular/common';
-import { Component, OnInit, ViewChild, inject, viewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -22,6 +22,7 @@ import { VeterinaryService } from '../../../animals/services/veterinary.service'
 import { tap } from 'rxjs';
 import { User } from '../../../../shared/models/user.interface';
 import { UserService } from '../../../login/service/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-veterinary-animal-report-handled',
@@ -39,7 +40,7 @@ import { UserService } from '../../../login/service/user.service';
     <section class="animals-section">
       <h3>Section animaux</h3>
       <form
-        ngForm
+        #animalchoice=ngForm
         name="animalchoice"
         (ngSubmit)="getVeterinaryReports(selectedAnimalOption)"
       >
@@ -51,12 +52,11 @@ import { UserService } from '../../../login/service/user.service';
         </select>
         <button>Filtrer</button>
       </form>
-      @if(responsemessage === 'No reports found'){
+      @if(animalchoice.submitted && selectedAnimalOption && !veterinaryReports.length){
       <p>Il n'y pas encore de rapport associé à cet animal !</p>
       }
       @for(animal of animals; track animal){ 
-        @if (selectedAnimalOption ===
-      animal.id) {
+        @if (selectedAnimalOption === animal.id) {
       <table
         mat-table
         [dataSource]="dataSource"
@@ -122,6 +122,21 @@ import { UserService } from '../../../login/service/user.service';
         name="addform"
         (ngSubmit)="onSubmit(form)"
       >
+      <label for="animal">Sélectionner un animal : </label>
+        <select
+          name="animal"
+          id="animal"
+          [(ngModel)]="newReport.id_animal"
+          #animal="ngModel"
+          required
+        >
+          @for(animal of animals; track animal) {
+          <option [ngValue]="animal.id">{{ animal.firstname }}</option>
+          }
+        </select>
+        @if(animal.invalid && animal.touched){
+        <p class="alert">Un animal est requis</p>
+        }
         <label for="food">Nourriture recommandée :</label>
         <input
           type="text"
@@ -171,21 +186,7 @@ import { UserService } from '../../../login/service/user.service';
           [(ngModel)]="newReport.details_condition"
           #details_condition="ngModel"
         ></textarea>
-        <label for="animal">Sélectionner un animal : </label>
-        <select
-          name="animal"
-          id="animal"
-          [(ngModel)]="newReport.id_animal"
-          #animal="ngModel"
-          required
-        >
-          @for(animal of animals; track animal) {
-          <option [ngValue]="animal.id">{{ animal.firstname }}</option>
-          }
-        </select>
-        @if(animal.invalid && animal.touched){
-        <p class="alert">Un animal est requis</p>
-        }
+        
         <label for="user">Sélectionner un rapporteur : </label>
         <select
           name="user"
@@ -194,11 +195,11 @@ import { UserService } from '../../../login/service/user.service';
           #user="ngModel"
         >
           @for(user of users; track user) {
-          <option [ngValue]="user.id">{{ user.firstname }}</option>
+          <option [ngValue]="user.id">{{ user.firstname | titlecase }} {{ user.lastname | titlecase }}</option>
           }
         </select>
         @if(user.invalid && user.touched){
-        <p class="alert">Un habitat est requis</p>
+        <p class="alert">Un rapporteur est requis</p>
         }
         <button class="add-btn" [disabled]="form.invalid">Enregistrer nouveau rapport</button>
       </form>
@@ -247,7 +248,7 @@ import { UserService } from '../../../login/service/user.service';
         <label for="selected-user">Sélectionner un rapporteur : </label>
         <select name="user" id="user" formControlName="id_user">
           @for(user of users; track user) {
-          <option [value]="user.id">{{ user.firstname }}</option>
+          <option [value]="user.id">{{ user.firstname | titlecase}} {{ user.lastname | titlecase }}</option>
           }
         </select>
         @if(updateForm.controls['id_user'].invalid &&
@@ -275,7 +276,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
       details_condition: new FormControl(''),
       id_user: new FormControl('', [Validators.required]),
       id_animal: new FormControl('', [Validators.required]),
-      id: new FormControl(''),
+      id: new FormControl('')
     });
   }
 
@@ -289,7 +290,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   ];
 
   animals!: Animal[];
-  veterinaryReports!: VeterinaryReport[];
+  veterinaryReports: VeterinaryReport[] = [];
   users!: User[];
 
   selectedAnimalOption!: string;
@@ -315,6 +316,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   private readonly animalService = inject(AnimalService);
   private readonly veterinaryService = inject(VeterinaryService);
   private readonly userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef);
+
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -334,23 +337,16 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe((response) => {
-      this.users = response.data.users;
+    this.userService.getUsers().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
+      this.users = response;
     });
   }
 
   getVeterinaryReports(id: string) {
-    
-    this.veterinaryService.getVeterinaryReports(id).subscribe((response) => {
-      try {
-        this.veterinaryReports = response.data.reports;
+    this.veterinaryService.getVeterinaryReports(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
+        this.veterinaryReports = response;
         this.dataSource = new MatTableDataSource(this.veterinaryReports);
         this.dataSource.sort = this.sort;
-        this.responsemessage = response.message;
-      } catch (error) {
-        this.responsemessage = response.message;
-        this.selectedAnimalOption = ''
-      }
     });
   }
 
@@ -360,7 +356,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
       .pipe(
         tap(() => {
           this.getVeterinaryReports(id);
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -370,7 +366,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.veterinaryService.addVeterinaryReport(this.newReport).subscribe();
+    this.veterinaryService.addVeterinaryReport(this.newReport).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     this.addFormIsDisplay = !this.addFormIsDisplay;
     form.reset();
   }
@@ -390,12 +386,10 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   updateReport(id: string) {
-    this.veterinaryService
-      .updateReport(this.updateForm.value)
-      .pipe(
+    this.veterinaryService.updateReport(this.updateForm.value).pipe(
         tap(() => {
           this.getVeterinaryReports(id);
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
     this.updateFormIsDisplay = !this.updateFormIsDisplay;

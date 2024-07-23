@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import {
@@ -17,6 +17,7 @@ import {
 import { NgStyle } from '@angular/common';
 import { tap } from 'rxjs';
 import { ImageService } from '../../../home/services/image.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-service-handled',
@@ -56,7 +57,7 @@ import { ImageService } from '../../../home/services/image.service';
               >
             </div>
             } @else {
-            <p>Il n'y a pas encore de photo associé à cet habitat</p>
+            <p>Il n'y a pas encore de photo associé à ce service</p>
             }
             <input
               type="file"
@@ -141,7 +142,7 @@ import { ImageService } from '../../../home/services/image.service';
       >
     </section>
   `,
-  styleUrl: `../component-handled.component.css`,
+  styleUrls: [`../component-handled.component.css`],
 })
 export class ServiceHandledComponent implements OnInit {
   public serviceForm: FormGroup;
@@ -156,6 +157,8 @@ export class ServiceHandledComponent implements OnInit {
 
   private readonly serviceService = inject(ServiceService);
   private readonly imageService = inject(ImageService);
+  private readonly destroyRef = inject(DestroyRef);
+
 
   displayColums: string[] = ['title', 'description', 'actions', 'image'];
 
@@ -174,8 +177,8 @@ export class ServiceHandledComponent implements OnInit {
   }
 
   getServices() {
-    this.serviceService.getHandleServices().subscribe((response) => {
-      this.datasource = response.data.services;
+    this.serviceService.getHandleServices().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
+      this.datasource = response;
     });
   }
 
@@ -188,8 +191,8 @@ export class ServiceHandledComponent implements OnInit {
       .addService(this.newService)
       .pipe(
         tap(() => {
-          this.getServices();
-        })
+          this.getServices()
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
     this.newService.title = '';
@@ -212,8 +215,8 @@ export class ServiceHandledComponent implements OnInit {
       .updateService(this.serviceForm.value)
       .pipe(
         tap(() => {
-          this.getServices();
-        })
+          this.getServices()
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
     this.serviceForm.reset();
@@ -226,7 +229,7 @@ export class ServiceHandledComponent implements OnInit {
       .pipe(
         tap(() => {
           this.getServices();
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -240,7 +243,7 @@ export class ServiceHandledComponent implements OnInit {
       .pipe(
         tap(() => {
           this.getServices();
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
@@ -251,7 +254,7 @@ export class ServiceHandledComponent implements OnInit {
       .pipe(
         tap(() => {
           this.getServices();
-        })
+        }), takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit, inject, effect } from '@angular/core';
+import { Component, OnInit, inject, effect, Signal, computed, DestroyRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { OpeningService } from '../../../pages/services/service/opening.service';
 import { Opening } from '../../models/opening.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -19,19 +20,18 @@ import { Opening } from '../../models/opening.interface';
         </div>
         <div>
           <p>Nos horaires et jours d'ouvertures :</p>
-          @if(openToPublic && openToPublic){
+          @if(openToPublic){
           <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
           <p>Du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
         }
         </div>
         <div><a [routerLink]="['/contact']">Nous contacter</a></div>
       </div>
-      <div id="copyright">copyright2024</div>
+      <div id="copyright">by MB2024</div>
     </footer>
   `,
   styles: `
       footer {
-    /* background-color: var(--color-primary);*/
     background: linear-gradient(
     180deg,
       var(--color-primary) 30%,
@@ -62,21 +62,22 @@ import { Opening } from '../../models/opening.interface';
 })
 export class FooterComponent implements OnInit {
   constructor() {
-    effect(()=>{
+    computed(()=>{
     this.openToPublic = this.openingService.schedule()
   })
 }
 
-  private readonly openingService = inject(OpeningService)
+  public readonly openingService = inject(OpeningService)
+  destroyRef = inject(DestroyRef)
 
   openToPublic!: Opening
-
+  
   ngOnInit() {
     this.getOpeningToPublic();
   };
 
   getOpeningToPublic(){
-    this.openingService.getOpeningToPublic().subscribe((response)=>{
+    this.openingService.getOpeningToPublic().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
       this.openToPublic = response[0]
     })
   };

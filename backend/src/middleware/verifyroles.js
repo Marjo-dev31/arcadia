@@ -6,7 +6,6 @@ const verifyRoles = (...allowedRoles) => {
         const role = req.role
         const result = rolesArray.includes(role)
         if(!result){
-            console.log('You don\'t have the good role')
             res
             .status(httpStatus.BAD_REQUEST.code)
             .send(

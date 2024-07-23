@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { BreedCreate } from "../../../shared/models/breed.interface";
+import { Observable, map } from "rxjs";
+import { Breed, BreedCreate } from "../../../shared/models/breed.interface";
 import { environment } from '../../../environments/environment';
+import { Response } from "../../../shared/models/response.interface";
 
 
 
@@ -12,12 +13,18 @@ export class BreedService {
 
     constructor(private http: HttpClient) {}
 
-    getBreeds(): Observable<any> {
-        return this.http.get(this.url);
+    getBreeds(): Observable<Breed[]> {
+        return this.http.get<Response<Breed>>(this.url).pipe(map((r)=>{
+            if(r.data){
+                return r.data
+            } else {
+                return []
+            }
+        }));
     }
 
-    addBreed(breed: BreedCreate): Observable<any> {
-        return this.http.post(this.url, breed)
+    addBreed(breed: BreedCreate): Observable<Response<Breed>> {
+        return this.http.post<Response<Breed>>(this.url, breed)
     }
 
 }
