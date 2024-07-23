@@ -38,7 +38,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       </ng-container>
       <ng-container matColumnDef="condition">
         <th mat-header-cell *matHeaderCellDef>Etat de santé</th>
-        <td mat-cell *matCellDef="let animal">{{ animal.condition }}</td>
+        <td mat-cell *matCellDef="let animal">{{ animal.details_condition }}</td>
       </ng-container>
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Photo</th>

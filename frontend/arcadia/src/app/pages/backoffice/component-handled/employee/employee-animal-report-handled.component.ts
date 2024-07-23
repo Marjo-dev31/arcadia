@@ -264,7 +264,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     };
 
   onSubmit(form: NgForm){
-    this.employeeService.addEmployeeReport(this.newReport).pipe(tap(()=>{this.getEmployeeReports}) ,takeUntilDestroyed(this.destroyRef)).subscribe();
+    this.employeeService.addEmployeeReport(this.newReport).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     this.addFormIsDisplay = !this.addFormIsDisplay;
     form.reset();
     };
