@@ -25,7 +25,7 @@ export const getHabitats = (req, res) => {
             httpStatus.OK.code,
             httpStatus.OK.status,
             `Habitats retrieved`,
-            { habitats: results }
+            results
           )
           
         );
@@ -84,7 +84,7 @@ export const addHabitat = (req, res) => {
               httpStatus.CREATED.code,
               httpStatus.CREATED.status,
               `Habitat created`,
-              { habitat }
+              habitat
             )
           );
       }
@@ -116,7 +116,8 @@ export const updateHabitat = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Habitat updated`,
-              {...req.body}))
+              {...req.body}
+            ))
         } else {
             logger.error(error.message)
             res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
@@ -186,7 +187,8 @@ export const addComment = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Comment created`,
-              {...req.body}))
+              {...req.body}
+            ))
         } else {
             logger.error(error.message)
             res.status(httpStatus.INTERNAL_SERVER_ERROR.code)

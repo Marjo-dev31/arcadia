@@ -26,7 +26,7 @@ export const getServices = (req, res) => {
             httpStatus.OK.code,
             httpStatus.OK.status,
             `Services retrieved`,
-            { services: results }
+            results
           )
         );
     }
@@ -87,7 +87,7 @@ export const addService = (req, res) => {
               httpStatus.CREATED.code,
               httpStatus.CREATED.status,
               `Service created`,
-              { service }
+              service
             )
           );
       }

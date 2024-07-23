@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserCreate } from '../../../../shared/models/user.interface';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../../login/service/role.service';
 import { Role } from '../../../../shared/models/role.interface';
 import { UserService } from '../../../login/service/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-account-handled',
@@ -57,7 +58,7 @@ import { UserService } from '../../../login/service/user.service';
             <p class="alert">Un prénom est requis</p>
           }
         <label for="role">Rôle :</label>
-        <select name="role" id="role" [(ngModel)]= "selectedRoleOption" #role="ngModel" required>
+        <select name="role" id="role" [(ngModel)]= "newUser.id_role" #role="ngModel" required>
           <option *ngFor="let role of roles" [ngValue]="role.id" >{{ role.name }}</option>
         </select>
         @if(role.invalid && firstname.touched){
@@ -83,7 +84,7 @@ import { UserService } from '../../../login/service/user.service';
           }
         }
         <label for="confirmPassword">Confirmer mot de passe :</label>
-        <input  name="confirmPassword" id="confirm-password" ngModel #confirmPassword="ngModel" required/>
+        <input type="password" name="confirmPassword" id="confirm-password" ngModel #confirmPassword="ngModel" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"/>
         @if(confirmPassword.touched){
           @if(confirmPassword.errors?.['required']){
             <p class="alert">Une confirmation du mot de passe est requise</p>
@@ -98,10 +99,7 @@ import { UserService } from '../../../login/service/user.service';
         </div>
       </form>
     </div>
-    @if(form.valid && form.submitted){
-      <div class="alert">Le compte a été créé</div>
-    }
-    <div  class="alert-form" id="alert" [ngStyle]="{display: 'none'}">Une erreur est survenue, vérifiez votre saisie.</div>
+    <div class="alert" id="alert">Le compte a été créé</div>
   `,
   styleUrl: `../component-handled.component.css`,
 })
@@ -110,8 +108,9 @@ export class AccountHandledComponent implements OnInit {
 
   private roleService = inject(RoleService);
   private userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef);
+  
 
-  selectedRoleOption!: string;
   roles: Role[] = []
 
   newUser: UserCreate = {
@@ -128,19 +127,15 @@ export class AccountHandledComponent implements OnInit {
   }
 
   getRolesWithoutAdmin() {
-    this.roleService.getRolesWithoutAdmin().subscribe((response)=>{
-      this.roles = response.data.roles
+    this.roleService.getRolesWithoutAdmin().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
+      this.roles = response
     })
   }
 
   onSubmit(form: NgForm) {
     const alert = document.getElementById('alert');
-    if(alert){
-      if(form.invalid) {
-        alert.style.display = "block"
-      }
-        alert.style.display = "none"
-        this.newUser.id_role = this.selectedRoleOption;
+    if(alert && form.submitted){
+        alert.style.display = "block";
         this.userService.addUser(this.newUser).subscribe();
         form.reset()
     }}

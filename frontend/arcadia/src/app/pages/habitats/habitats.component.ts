@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { HabitatsService } from './services/habitat.service';
 import { Animal, AnimalOnMongo, Habitat } from '../../shared/models';
 import { AnimalsComponent } from '../animals/animals.component';
@@ -6,11 +6,13 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AnimalService } from '../animals/services/animal.service';
 import { ClickService } from '../animals/services/click.service';
 import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-habitats',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, TitleCasePipe],
   template: `
     <main>
       <h1 class="title">{{title}}</h1>
@@ -24,11 +26,11 @@ import { ActivatedRoute } from '@angular/router';
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img
             [src]="'http://13.39.80.204:8000/upload/' + habitat.image_url"
-            alt="Photo représentative de l'habitat {{habitat.title}}"
+            alt="photo représentative de l'habitat"
             class="habitat-img"
           />
           <div class="habitat-content">
-            <h3 class="habitat-title">{{ habitat.title }}</h3>
+            <h3 class="habitat-title">{{ habitat.title | titlecase}}</h3>
             @if (showDetails == habitat.id) {
             <p>{{ habitat.description }}</p>
               @if(animals) {
@@ -49,20 +51,21 @@ import { ActivatedRoute } from '@angular/router';
       </section>
     </main>
   `,
-  styleUrl: `./habitat.component.css`,
+  styleUrls: [`./habitats.component.css`],
 })
 export class HabitatsComponent implements OnInit {
+
   habitats!: Habitat[];
   animals!: Animal[] | undefined
-
   animalsOnMongoByFirstname!: AnimalOnMongo;
+  showDetails: string | undefined = undefined;
+  title: string;
 
   private readonly habitatService = inject(HabitatsService);
   private readonly animalService = inject(AnimalService);
   private readonly clickService = inject(ClickService);
+  private readonly destroyRef = inject(DestroyRef)
 
-  showDetails: string | undefined = undefined;
-  title: string
   
   constructor(private matdialog: MatDialog, route:ActivatedRoute) {
     this.title = route.snapshot.data['title']
@@ -81,7 +84,7 @@ export class HabitatsComponent implements OnInit {
   }
 
   getAnimalsByHabitat(id: string) {
-    this.animalService.getAnimalsByHabitat(id).subscribe((response) => {
+    this.animalService.getAnimalsByHabitat(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response) => {
       this.animals = response;
     });
   }
@@ -100,6 +103,6 @@ export class HabitatsComponent implements OnInit {
   }
 
   addClick(firstname: string) {
-    this.clickService.addClick(firstname).subscribe();
+    this.clickService.addClick(firstname).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 }

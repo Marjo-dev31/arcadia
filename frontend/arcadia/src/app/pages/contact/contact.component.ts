@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MailService } from './services/mail.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-contact',
@@ -15,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
         <h3>Contactez-nous</h3>
       </div>
       
-      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
+      <form class="contact-form" [formGroup]="contactForm" id="contactForm" (ngSubmit)="onSubmit()" >
       @if(submitted){
         <p class="alert">Demande de contact envoyé !</p>
       }
@@ -43,11 +44,11 @@ import { ActivatedRoute } from '@angular/router';
     </main>
   `,
   styles: `
-  body {
-    background-image: url("/images/feuilles\ volantes.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 30%;
+body {
+  background-image: url("/images/feuilles\ volantes.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 30%;
 }
 
 .contact-form {
@@ -73,7 +74,7 @@ import { ActivatedRoute } from '@angular/router';
 }
 
 .contact-form input {
-    height: 50px;
+  height: 50px;
 }
 
 ::placeholder {
@@ -95,17 +96,19 @@ export class ContactComponent implements OnInit {
       text: new FormControl('', [Validators.required]),
       emailToResponse: new FormControl('', [Validators.required, Validators.email])
     });
+    
     this.title = route.snapshot.data['title']
   };
 
   private readonly mailService = inject(MailService);
+  private readonly destroyRef = inject(DestroyRef)
 
   submitted = false;
 
   ngOnInit() {}
 
 onSubmit(){
-  this.mailService.sendEmail(this.contactForm.value).subscribe();
+  this.mailService.sendEmail(this.contactForm.value).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   this.submitted = true;
   this.contactForm.reset()
 };

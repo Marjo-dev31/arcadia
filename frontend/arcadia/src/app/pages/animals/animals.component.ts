@@ -4,12 +4,13 @@ import {
   MAT_DIALOG_DATA,
   MatDialogClose,
 } from '@angular/material/dialog';
+import { TitleCasePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-animals',
   standalone: true,
-  imports: [MatDialogClose],
+  imports: [MatDialogClose, TitleCasePipe],
   template: `
     <main class="id-card-animal">
       <div mat-dialog-content >
@@ -18,11 +19,17 @@ import {
           <img [src]="'http://13.39.80.204:8000/upload/' + animal.image_url" alt="Photo d'un {{animal.breed}}" />
 
           <div class="id-card-animal-content">
-            <p>Son prénom: {{ animal.firstname }}</p>
+            <p>Son prénom: {{ animal.firstname | titlecase}}</p>
             <p>Sa race: {{ animal.breed }}</p>
+            @if(animal.health){
+              <div>
+                <p>Son état de santé actuel: {{ animal.health }}</p>
+              </div>
+          } @else {
             <div>
-              <p>Son état de santé actuel: {{ animal.health }}</p>
+              <p>Il n'y a pas encore de rapport sur l'état de santé actuel</p>
             </div>
+          }  
           </div>
         </div>
         }
@@ -41,7 +48,6 @@ export class AnimalsComponent implements OnInit {
   animal: Animal = this.data.animal
 
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

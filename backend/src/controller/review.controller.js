@@ -25,7 +25,7 @@ export const getAllReviews = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Reviews retrieved`,
-              { reviews: results }
+              results
             )
           );
       }
@@ -53,7 +53,7 @@ export const getAllReviews = (req, res) => {
               httpStatus.OK.code,
               httpStatus.OK.status,
               `Reviews retrieved`,
-              { reviews: results }
+              results
             )
           );
       }
@@ -105,7 +105,7 @@ export const updateReview = (req, res) => {
       );
     } else {
       logger.info(`${req.method} ${req.originalUrl}, updating review`);
-      database.query(QUERYREVIEWS.UPDATE_REVIEW_STATUS, [req.body.status, req.params.id], (error, results) => {
+      database.query(QUERYREVIEWS.UPDATE_REVIEW_STATUS, [req.body.status, req.body.id_employee, req.params.id], (error, results) => {
     if(!error) {
           res
         .status(httpStatus.OK.code)
