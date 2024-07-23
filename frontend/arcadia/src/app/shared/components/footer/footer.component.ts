@@ -62,7 +62,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class FooterComponent implements OnInit {
   constructor() {
-    computed(()=>{
+    effect(()=>{
     this.openToPublic = this.openingService.schedule()
   })
 }
