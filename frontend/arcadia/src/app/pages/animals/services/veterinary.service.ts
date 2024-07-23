@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { VeterinaryReport, VeterinaryReportCreate } from "../../../shared/models/veterinaryreport.interface";
 import { environment } from '../../../environments/environment';
+import { Response } from "../../../shared/models/response.interface";
 
 
 @Injectable()
@@ -11,19 +12,25 @@ export class VeterinaryService {
 
     constructor(private http: HttpClient){}
 
-    getVeterinaryReports(id: string): Observable<any> {
-        return this.http.get(`${this.url}/animal/${id}`)
+    getVeterinaryReports(id: string): Observable<VeterinaryReport[]> {
+        return this.http.get<Response<VeterinaryReport>>(`${this.url}/animal/${id}`).pipe(map((r)=>{
+            if(r.data){
+                return r.data
+            } else {
+                return []
+            }
+        }))
     } 
 
-    addVeterinaryReport(report: VeterinaryReportCreate): Observable<any> {
-        return this.http.post(this.url, report)
+    addVeterinaryReport(report: VeterinaryReportCreate): Observable<Response<VeterinaryReport>> {
+        return this.http.post<Response<VeterinaryReport>>(this.url, report)
     }
 
-    updateReport(report: VeterinaryReport): Observable<any> {
-        return this.http.put(`${this.url}/${report.id}`, report)
+    updateReport(report: VeterinaryReport): Observable<Response<VeterinaryReport>> {
+        return this.http.put<Response<VeterinaryReport>>(`${this.url}/${report.id}`, report)
     }
 
-    deleteReport(id: string): Observable<any> {
-        return this.http.delete(`${this.url}/${id}`)
+    deleteReport(id: string): Observable<Response<VeterinaryReport>> {
+        return this.http.delete<Response<VeterinaryReport>>(`${this.url}/${id}`)
     }
 }

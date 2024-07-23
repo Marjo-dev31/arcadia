@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from '../../../environments/environment';
+import { Response } from "../../../shared/models/response.interface";
+import { Image } from "../../../shared/models/image.interface";
 
 @Injectable()
 export class ImageService {
@@ -9,20 +11,20 @@ export class ImageService {
 
   constructor( private http: HttpClient) {}
 
-addServiceImage(image: any, id: string): Observable<any> {
-  return this.http.post(`${this.url}/service/${id}`, image )
+addServiceImage(image: any, id: string): Observable<Response<Image>>{
+  return this.http.post<Response<Image>>(`${this.url}/service/${id}`, image )
 };
 
-addHabitatImage(image: any, id: string): Observable<any> {
-  return this.http.post(`${this.url}/habitat/${id}`, image )
+addHabitatImage(image: any, id: string): Observable<Response<Image>> {
+  return this.http.post<Response<Image>>(`${this.url}/habitat/${id}`, image )
 };
 
-addAnimalImage(image: any, id: string): Observable<any> {
-  return this.http.post(`${this.url}/animal/${id}`, image )
+addAnimalImage(image: any, id: string): Observable<Response<Image>> {
+  return this.http.post<Response<Image>>(`${this.url}/animal/${id}`, image )
 }
 
-deleteImage(id: string): Observable<any> {
-  return this.http.delete(`${this.url}/${id}`)
+deleteImage(id: string): Observable<Response<Image>> {
+  return this.http.delete<Response<Image>>(`${this.url}/${id}`)
 }
 
 

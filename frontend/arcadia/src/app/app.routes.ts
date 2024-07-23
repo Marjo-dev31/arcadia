@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { ConnexionComponent } from './pages/login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { HabitatsComponent } from './pages/habitats/habitats.component';
@@ -25,7 +25,7 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent, data: {title:'Services'} },
   { path: 'contact', component: ContactComponent, data: {title:'Contact'} },
   { path: 'habitats', component: HabitatsComponent, data: {title: 'Habitats'} },
-  { path: 'connexion', component: ConnexionComponent, data: {title:'Connexion'} },
+  { path: 'connexion', component: LoginComponent, data: {title:'Connexion'} },
   {
     path: 'espacepersonnel', component: BackofficeComponent, canActivate:[AuthGuard],canActivateChild:[RoleGuard],
     children: [
