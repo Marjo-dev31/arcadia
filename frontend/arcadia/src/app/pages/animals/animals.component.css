@@ -1,26 +1,28 @@
   /* style ID card animal */
   
-  .id-card-animal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: var(--color-primary);
-    color: var(--color-background);
-    width: 100%;
-    padding-bottom: 2rem;
-    /* padding: 2rem; */
+.id-card-animal {
+  flex-wrap: wrap;
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.id-card-animal-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .id-card-animal img {
-  /* clip-path: circle(); */
   overflow: hidden;
   max-height: 300px;
   max-width: 400px;
 }
 
-.id-card-animal-content>* {
-    text-align: center;
+.id-card-animal-content {
+  text-align: center;
 }
 
 .mat-dialog-actions {

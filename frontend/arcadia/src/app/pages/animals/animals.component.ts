@@ -15,7 +15,7 @@ import { TitleCasePipe } from '@angular/common';
     <main class="id-card-animal">
       <div mat-dialog-content >
           @if(animal.id === this.data.animal.id) {
-        <div>
+        <div class="id-card-animal-item">
           <img [src]="'http://13.39.80.204:8000/upload/' + animal.image_url" alt="Photo d'un {{animal.breed}}" />
 
           <div class="id-card-animal-content">
@@ -31,11 +31,13 @@ import { TitleCasePipe } from '@angular/common';
             </div>
           }  
           </div>
+          <div mat-dialog-actions class="mat-dialog-actions">
+              <button mat-dialog-close>Fermer</button>
+          </div>
         </div>
+        
         }
-      </div>
-      <div mat-dialog-actions class="mat-dialog-actions">
-        <button mat-dialog-close>Fermer</button>
+          
       </div>
     </main>
   `,
