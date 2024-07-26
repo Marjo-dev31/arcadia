@@ -55,11 +55,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           } @else {
           <p>Il n'y a pas encore de photo associé à cet animal</p>
           }
-          <input
-            type="file"
-            class="file-input"
-            (change)="onFileChange($event, animal.id)"
-          />
+          <div class="add-img">
+            <p>Ajouter une photo : </p>
+            <input
+              type="file"
+              class="file-input"
+              (change)="onFileChange($event, animal.id)"
+            />
+          </div>
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
