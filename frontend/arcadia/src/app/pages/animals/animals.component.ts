@@ -5,6 +5,7 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { TitleCasePipe } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { TitleCasePipe } from '@angular/common';
       <div mat-dialog-content >
           @if(animal.id === this.data.animal.id) {
         <div class="id-card-animal-item">
-          <img [src]="'http://13.39.80.204:8000/upload/' + animal.image_url" alt="Photo d'un {{animal.breed}}" />
+          <img [src]="this.url+animal.image_url" alt="Photo d'un {{animal.breed}}" />
 
           <div class="id-card-animal-content">
             <p>Son prénom: {{ animal.firstname | titlecase}}</p>
@@ -46,10 +47,11 @@ import { TitleCasePipe } from '@angular/common';
 export class AnimalsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { animal: Animal }) {}
 
+  url = `${environment.serverUrl}/upload/`;
+  animal: Animal = this.data.animal;
 
-  animal: Animal = this.data.animal
 
-
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

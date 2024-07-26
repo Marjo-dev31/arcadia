@@ -53,8 +53,4 @@ export class AnimalService {
     }))
     }
 
-
-    // getAnimal(id: string): Observable<any> {
-    //     return this.http.get(`${this.url}/${id}`)
-    // }
 }

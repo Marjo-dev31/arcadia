@@ -28,7 +28,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    /* min-height: 30px; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     justify-items: center;
@@ -41,8 +40,6 @@
       rgba(2, 94, 25, 0.9) 10%,
       rgba(255, 255, 255, 0)
     );
-  
-    /* backdrop-filter: blur(1px); */
   }
   
   .navbar {
@@ -56,6 +53,7 @@
   
   .navbar li {
     list-style: none;
+    text-align: center;
   }
   
   /* burger menu btn style */
@@ -87,13 +85,8 @@
     top: 0;
     left: 0;
     z-index: 99;
-    /* display: none; */
   }
   
-  /* #side-drawer:target {
-    display: block;
-  }
-   */
    
   #side-drawer ul {
     list-style: none;

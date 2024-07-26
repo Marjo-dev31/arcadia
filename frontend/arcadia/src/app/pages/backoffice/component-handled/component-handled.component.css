@@ -35,7 +35,8 @@ form > * {
   margin: 0.5rem;
 }
 
-.delete-img {
+.delete-img,
+.add-img {
   display: flex;
   align-items: center;
 }
