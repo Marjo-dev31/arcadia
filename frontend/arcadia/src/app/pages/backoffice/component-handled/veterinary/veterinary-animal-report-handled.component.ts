@@ -246,7 +246,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <div class="alert">Un animal est requis</div>
         }
         <label for="selected-user">Sélectionner un rapporteur : </label>
-        <select name="user" id="user" formControlName="id_user">
+        <select name="selected-user" id="user" formControlName="id_user">
           @for(user of users; track user) {
           <option [value]="user.id">{{ user.firstname | titlecase}} {{ user.lastname | titlecase }}</option>
           }
