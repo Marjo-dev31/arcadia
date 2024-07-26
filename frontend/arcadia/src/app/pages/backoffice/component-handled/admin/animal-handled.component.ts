@@ -37,7 +37,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <td mat-cell *matCellDef="let animal">{{ animal.habitat }}</td>
       </ng-container>
       <ng-container matColumnDef="condition">
-        <th mat-header-cell *matHeaderCellDef>Etat de santé</th>
+        <th mat-header-cell *matHeaderCellDef>Détails état de santé</th>
         <td mat-cell *matCellDef="let animal">{{ animal.details_condition }}</td>
       </ng-container>
       <ng-container matColumnDef="image">
@@ -55,11 +55,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           } @else {
           <p>Il n'y a pas encore de photo associé à cet animal</p>
           }
-          <input
-            type="file"
-            class="file-input"
-            (change)="onFileChange($event, animal.id)"
-          />
+          <div class="add-img">
+            <p>Ajouter une photo : </p>
+            <input
+              type="file"
+              class="file-input"
+              (change)="onFileChange($event, animal.id)"
+            />
+          </div>
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">

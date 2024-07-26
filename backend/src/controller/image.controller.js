@@ -40,7 +40,7 @@ import httpStatus from "../domain/httpstatus.js";
 // export const getImage = (req, res) => {
 //   logger.info(`${req.method} ${req.originalUrl}, fetching image `);
 //   database.query(
-//     QUERYIMAGES.SELECT_IMAGE,
+//     QUERYIMAGES.SELECT_IMAGE_ANIMAL,
 //     [req.params.id],
 //     (error, results) => {
 //       if (!results[0]) {
