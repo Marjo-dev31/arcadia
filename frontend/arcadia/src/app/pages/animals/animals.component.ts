@@ -46,10 +46,10 @@ import { TitleCasePipe } from '@angular/common';
 export class AnimalsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { animal: Animal }) {}
 
-
   animal: Animal = this.data.animal
 
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
