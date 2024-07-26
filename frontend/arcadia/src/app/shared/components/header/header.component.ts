@@ -22,7 +22,7 @@ import { Observable, filter, map, tap } from 'rxjs';
             <li><a [routerLink]="['/services']">Services</a></li>
             <li><a [routerLink]="['/contact']">Contact</a></li>
             @if(loginService.isLoggin === true){
-            <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
+            <li><a [routerLink]="['/espacepersonnel']">Espace Personnel</a></li>
             }
           </ul>
         </nav>

@@ -66,7 +66,7 @@ export const addVeterinaryReport = (req, res) => {
 export const updateVeterinaryReport = (req, res) => {
   logger.info(`${req.method} ${req.originalUrl}, fetching report`);
     database.query(QUERYVETERINARIES.SELECT_REPORT, [req.params.id], (error, results) => {
-      if (!results) {
+      if(!results) {
         res
         .status(httpStatus.NOT_FOUND.code)
         .send(
