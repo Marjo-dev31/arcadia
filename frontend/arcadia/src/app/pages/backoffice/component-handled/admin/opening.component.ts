@@ -70,7 +70,8 @@ export class OpeningComponent implements OnInit {
 
     getOpeningToPublic(){
         this.openingService.getHandleOpeningToPublic().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
-            this.openToPublic = response[0]
+            this.openToPublic = response[0];
+            this.updateForm.patchValue({openingTime: this.openToPublic.openingTime, closingTime: this.openToPublic.closingTime, openingDay: this.openToPublic.openingDay, closingDay: this.openToPublic.closingDay})
         })
     };
 

@@ -99,7 +99,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         </div>
       </form>
     </div>
-    <div class="alert" id="alert">Le compte a été créé</div>
+    <div class="alert" id="alert-account-created">Le compte a été créé</div>
+    <div class="alert" id="alert-account-already-exist">Un compte existe déjà avec cet email</div>
   `,
   styleUrl: `../component-handled.component.css`,
 })
@@ -133,11 +134,18 @@ export class AccountHandledComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const alert = document.getElementById('alert');
-    if(alert && form.submitted){
-        alert.style.display = "block";
-        this.userService.addUser(this.newUser).subscribe();
-        form.reset()
+    const alertOk = document.getElementById('alert-account-created');
+    const alertNotOk = document.getElementById('alert-account-already-exist');
+    if(alertOk && alertNotOk && form.submitted){
+        this.userService.addUser(this.newUser).subscribe((response)=>{
+          if(response.data){
+            alertOk.style.display = "block";
+            form.reset()
+          } else {
+            alertNotOk.style.display = "block"
+          }
+        });
+        
     }}
 
 }
