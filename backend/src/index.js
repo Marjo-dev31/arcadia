@@ -49,11 +49,8 @@ app.use('/click', clickRoutes);
 app.use('/opening', openingRoutes);
 app.use('/send', sendRoutes);
 
-// app.use(require('body-parser').json());
-
 
 app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
-// app.all('*', (req, res)=> res.send(new Response(httpStatus.NOT_FOUND.code, httpStatus.NOT_FOUND.status, 'Route does not exist on server')));
 
 
 app.listen(PORT, () => {

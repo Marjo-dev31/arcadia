@@ -103,6 +103,9 @@ CREATE TABLE reviews (
     FOREIGN KEY (id_employee) REFERENCES users(id) ON DELETE SET NULL
 );
 
+ALTER TABLE images 
+    ADD createdAt DATE;
+
 INSERT INTO habitats VALUES 
 (DEFAULT, 'La Savane', "Lieu aride, typique des régions chaudes africaines. Elle est dominée par les plantes herbacées et est parsemée d'arbres. Malgré un climat tropical la faune y est riche.", DEFAULT),
 (DEFAULT, 'La Jungle', "Avec sa forêt tropicale, forêt dense à la végétation verte et luxuriante, son fort taux d'humidité et sa biodiversité, découvrez la nature à l'état sauvage ", DEFAULT),
