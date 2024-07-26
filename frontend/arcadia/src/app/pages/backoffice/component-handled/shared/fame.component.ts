@@ -43,7 +43,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     <h3>Ajouter un animal pour connaître sa popularité :</h3>
     <form #form="ngForm" name="addForm" (ngSubmit)="addAnimalOnMongo()">
         <label for="firstname" >Prénom :</label>
-        <input type="text" name="firstname" [(ngModel)]="newAnimal.firstname" #firstname="ngModel" required>
+        <input type="text" name="firstname" id="firstname" [(ngModel)]="newAnimal.firstname" #firstname="ngModel" required>
         @if(firstname.invalid && firstname.touched && !form.submitted){
             <p class="alert">Un Prénom est requis</p>
         }
