@@ -8,6 +8,8 @@ import { ClickService } from '../animals/services/click.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TitleCasePipe } from '@angular/common';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-habitats',
@@ -25,7 +27,7 @@ import { TitleCasePipe } from '@angular/common';
           @for (habitat of habitats; track habitat) {
         <div class="habitat-item" (click)="toggleDetails(habitat.id)">
           <img
-            [src]="'http://13.39.80.204:8000/upload/' + habitat.image_url"
+            [src]="this.url+habitat.image_url"
             alt="photo représentative de l'habitat"
             class="habitat-img"
           />
@@ -60,6 +62,8 @@ export class HabitatsComponent implements OnInit {
   animalsOnMongoByFirstname!: AnimalOnMongo;
   showDetails: string | undefined = undefined;
   title: string;
+  url = `${environment.serverUrl}/upload/`;
+  
 
   private readonly habitatService = inject(HabitatsService);
   private readonly animalService = inject(AnimalService);

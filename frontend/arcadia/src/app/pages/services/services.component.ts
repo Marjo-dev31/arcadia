@@ -6,6 +6,8 @@ import { Opening } from '../../shared/models/opening.interface';
 import { OpeningService } from './service/opening.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-services',
@@ -36,7 +38,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <div class="service-item" >
             <img
               class="service-img"
-              [src]= "'http://13.39.80.204:8000/upload/' + service.image_url"
+              [src]= "this.url + service.image_url"
               alt="photo representative du service {{service.title}}"
             />
             <div class="service-content" >
@@ -58,6 +60,8 @@ export class ServicesComponent implements OnInit {
   title: string;
   services!: Service[];
   openToPublic!: Opening [];
+  url = `${environment.serverUrl}/upload/`;
+
 
   constructor(route: ActivatedRoute){
     this.title = route.snapshot.data['title']
