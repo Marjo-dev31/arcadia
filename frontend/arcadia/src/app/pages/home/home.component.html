@@ -89,11 +89,11 @@
       <div class="new-review" id="new-review">
         <form class="form-review" #form="ngForm" name="reviewform" (ngSubmit)="onSubmit(form)">
           <div>
-            <label for="name">Pseudo : </label>
+            <label for="name-add-review">Pseudo : </label>
             <input
               type="text"
               name="name"
-              id="name"
+              id="name-add-review"
               [(ngModel)]="newReview.pseudo"
               #pseudo="ngModel"
               required

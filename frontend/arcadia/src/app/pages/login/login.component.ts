@@ -27,15 +27,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <p class="alert">Email ou mot de passe incorrect</p>
         }
         <div>
-          <label for="email" >Email :</label>
-          <input type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" email required/>
+          <label for="email-login" >Email :</label>
+          <input type="email" id="email-login" name="email" [(ngModel)]="user.email" #email="ngModel" email required/>
         </div>
         @if(email.invalid && email.touched){
           <p class="alert">Un Email est requis</p>
         }
         <div>
-          <label for="password">Mot de passe :</label>
-          <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required minlength="8"/>
+          <label for="password-login">Mot de passe :</label>
+          <input type="password" id="password-login" name="password" [(ngModel)]="user.password" #password="ngModel" required minlength="8"/>
         </div>
         @if(password.invalid && password.touched){
           <p class="alert">Mot de passe invalide</p>
