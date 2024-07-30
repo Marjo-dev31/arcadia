@@ -94,12 +94,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(animal.invalid && animal.touched){
           <p class="alert">Un animal est requis</p>
         }
-        <label for="food">Nourriture donnée :</label>
+        <label for="food-add-employee">Nourriture donnée :</label>
         <input
           type="text"
           placeholder="Aliments données"
           name="food"
-          id="food"
+          id="food-add-employee"
           [(ngModel)]="newReport.food"
           #food="ngModel"
           required
@@ -107,12 +107,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(food.invalid && food.touched){
           <p class="alert">Un type de nourriture est requis</p>
         }
-        <label for="grammage">Poids (en g) :</label>
+        <label for="grammage-add-employee">Poids (en g) :</label>
         <input
           type="text"
           placeholder="Grammage donné"
           name="grammage"
-          id="grammage"
+          id="grammage-add-employee"
           [(ngModel)]="newReport.grammage"
           #grammage="ngModel"
           required
@@ -138,18 +138,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         class="add-form"
         [formGroup]="updateForm"
         (ngSubmit)="updateReport(selectedAnimalOption)">
-        <label for="food">Nourriture recommandée :</label>
+        <label for="food-update-employee">Nourriture recommandée :</label>
         <input
           type="text"
           formControlName="food"
-          id="food"/>
+          id="food-update-employee"/>
           @if(updateForm.controls['food'].invalid && updateForm.controls['food'].touched){
               <div class="alert">Une type de nourriture est requis</div>
             }
-        <label for="grammage">Poids (en g) :</label>
+        <label for="grammage-update-employee">Poids (en g) :</label>
         <input
           type="text"
-          id="grammage"
+          id="grammage-update-employee"
           formControlName="grammage"/>
           @if(updateForm.controls['grammage'].invalid && updateForm.controls['grammage'].touched){
               <div class="alert">Un grammage est requis</div>

@@ -20,11 +20,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         name="accountcreationform"
         (ngSubmit)="onSubmit(form)"
       >
-        <label for="email">Email/Identifiant :</label>
+        <label for="email-addaccount-form">Email/Identifiant :</label>
         <input
           type="email"
           name="email"
-          id="email"
+          id="email-addaccount-form"
           [(ngModel)]="newUser.email"
           #email="ngModel"
           email
@@ -33,11 +33,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(email.invalid && email.touched){
             <div class="alert">Un email est requis</div>
           }
-        <label for="lastname">Nom :</label>
+        <label for="lastname-addaccount-form">Nom :</label>
         <input
           type="text"
           name="lastname"
-          id="lastname"
+          id="lastname-addaccount-form"
           [(ngModel)]="newUser.lastname"
           #lastname="ngModel"
           required
@@ -45,11 +45,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(lastname.invalid && lastname.touched){
             <p class="alert">Un nom est requis</p>
           }
-        <label for="firstname">Prénom :</label>
+        <label for="firstname-addaccount-form">Prénom :</label>
         <input
           type="text"
           name="firstname"
-          id="firstname"
+          id="firstname-addaccount-form"
           [(ngModel)]="newUser.firstname"
           #firstname="ngModel"
           required
@@ -57,19 +57,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(firstname.invalid && firstname.touched) {
             <p class="alert">Un prénom est requis</p>
           }
-        <label for="role">Rôle :</label>
-        <select name="role" id="role" [(ngModel)]= "newUser.id_role" #role="ngModel" required>
+        <label for="role-addaccount-form">Rôle :</label>
+        <select name="role" id="role-addaccount-form" [(ngModel)]= "newUser.id_role" #role="ngModel" required>
           <option *ngFor="let role of roles" [ngValue]="role.id" >{{ role.name }}</option>
         </select>
         @if(role.invalid && firstname.touched){
-
             <p class="alert">Un rôle est requis</p>
           }
-        <label for="password">Mot de passe :</label>
+        <label for="password-addaccount-form">Mot de passe :</label>
         <input
           type="password"
           name="password"
-          id="password"
+          id="password-addaccount-form"
           [(ngModel)]="newUser.password"
           #password="ngModel"
           required
@@ -83,8 +82,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             <p class="alert">Le mot de passe doit contenir au moins 8 caractères dont une majuscule, une minuscule, un chiffre et un caractère spécial</p>
           }
         }
-        <label for="confirmPassword">Confirmer mot de passe :</label>
-        <input type="password" name="confirmPassword" id="confirm-password" ngModel #confirmPassword="ngModel" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"/>
+        <label for="confirm-password-addaccount-form">Confirmer mot de passe :</label>
+        <input type="password" name="confirmPassword" id="confirm-password-addaccount-form" ngModel #confirmPassword="ngModel" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"/>
         @if(confirmPassword.touched){
           @if(confirmPassword.errors?.['required']){
             <p class="alert">Une confirmation du mot de passe est requise</p>
