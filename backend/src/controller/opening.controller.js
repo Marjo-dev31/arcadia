@@ -9,10 +9,14 @@ export const getOpening = async (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching`)
     try {
         const openingToPublic = await openingModel.find()
-        res.send(openingToPublic)
-    } catch {
-        console.log('No results!')
-        res.status(200).send({openingToPublic: []})
+        if(openingToPublic){
+            res.send(openingToPublic)   
+        } else {
+            res.send('No openingToPublic')
+        }
+    } catch(error) {
+        console.log(error)
+        res.status(500).send('An error occured')
     }
 }
 
