@@ -26,7 +26,8 @@ import { environment } from '../../environments/environment';
           @if(openToPublic && openToPublic.length){
           <p> du {{ openToPublic[0].openingDay }} au {{ openToPublic[0].closingDay }}</p>
           <p>De {{ openToPublic[0].openingTime }} à {{ openToPublic[0].closingTime }}</p>
-          }<p>
+          }
+          <p>
             Tous les jours de l'année
             <span id="exception">(sauf cas exceptionnel)</span>
           </p>
@@ -59,7 +60,7 @@ export class ServicesComponent implements OnInit {
   
   title: string;
   services!: Service[];
-  openToPublic!: Opening [];
+  openToPublic!: Opening[];
   url = `${environment.serverUrl}/upload/`;
 
 

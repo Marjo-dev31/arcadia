@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { LoginService } from '../../../pages/login/service/login.service';
 
 @Component({
     selector: 'app-error',
@@ -10,6 +11,9 @@ import { Component, OnInit } from '@angular/core';
 
 export class ErrorComponent implements OnInit {
     constructor() { }
-
-    ngOnInit() { }
+    public readonly loginService = inject(LoginService)
+    
+    ngOnInit() { 
+        this.loginService.logout()
+    }
 }
