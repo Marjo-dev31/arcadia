@@ -44,8 +44,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         name="animalchoice"
         (ngSubmit)="getVeterinaryReports(selectedAnimalOption)"
       >
-        <label for="animal">Sélectionner un animal : </label>
-        <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
+        <label for="animal-veterinary">Sélectionner un animal : </label>
+        <select name="animal" id="animal-veterinary" [(ngModel)]="selectedAnimalOption">
           @for(animal of animals; track animal) {
           <option [ngValue]="animal.id">{{ animal.firstname }}</option>
           }
@@ -122,10 +122,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         name="addform"
         (ngSubmit)="onSubmit(form)"
       >
-      <label for="animal">Sélectionner un animal : </label>
+      <label for="animal-add-veterinary">Sélectionner un animal : </label>
         <select
           name="animal"
-          id="animal"
+          id="anima-add-veterinary"
           [(ngModel)]="newReport.id_animal"
           #animal="ngModel"
           required
@@ -176,10 +176,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(health.invalid && health.touched){
         <p class="alert">Un état de santé est requis</p>
         }
-        <label for="details">Détails de santé :</label>
+        <label for="details-add-veterinary">Détails de santé :</label>
         <textarea
           name="details_condition"
-          id="details"
+          id="details-add-veterinary"
           placeholder="Détails de la condition physique"
           cols="30"
           rows="10"
@@ -187,10 +187,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           #details_condition="ngModel"
         ></textarea>
         
-        <label for="user">Sélectionner un rapporteur : </label>
+        <label for="user-add-veterinary">Sélectionner un rapporteur : </label>
         <select
           name="user"
-          id="user"
+          id="user-add-veterinary"
           [(ngModel)]="newReport.id_user"
           #user="ngModel"
         >
@@ -210,6 +210,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         [formGroup]="updateForm"
         (ngSubmit)="updateReport(selectedAnimalOption)"
       >
+        <label for="animal-update-veterinary">Sélectionner un animal : </label>
+        <select name="selected-animal" id="animal-update-veterinary" formControlName="id_animal">
+            @for(animal of animals; track animal) {
+            <option [value]="animal.id">{{ animal.firstname }}</option>
+            }
+        </select>
+        @if(updateForm.controls['id_animal'].invalid && updateForm.controls['id_animal'].touched){
+          <div class="alert">Un animal est requis</div>
+          }
         <label for="food-update-veterinary">Nourriture recommandée :</label>
         <input type="text" formControlName="food" id="food-update-veterinary" />
         @if(updateForm.controls['food'].invalid &&
@@ -228,25 +237,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         updateForm.controls['health'].touched){
         <div class="alert">Un état de santé est requis</div>
         }
-        <label for="details">Détails de santé :</label>
+        <label for="details-update-veterinary">Détails de santé :</label>
         <textarea
           formControlName="details_condition"
-          id="details"
+          id="details-update-veterinary"
           cols="30"
           rows="10"
         ></textarea>
-        <label for="animal">Sélectionner un animal : </label>
-        <select name="selected-animal" id="animal" formControlName="id_animal">
-          @for(animal of animals; track animal) {
-          <option [value]="animal.id">{{ animal.firstname }}</option>
-          }
-        </select>
-        @if(updateForm.controls['id_animal'].invalid &&
-        updateForm.controls['id_animal'].touched){
-        <div class="alert">Un animal est requis</div>
-        }
-        <label for="selected-user">Sélectionner un rapporteur : </label>
-        <select name="selected-user" id="user" formControlName="id_user">
+        <label for="selected-user-update-veterinary">Sélectionner un rapporteur : </label>
+        <select name="selected-user" id="user-update-veterinary" formControlName="id_user">
           @for(user of users; track user) {
           <option [value]="user.id">{{ user.firstname | titlecase}} {{ user.lastname | titlecase }}</option>
           }

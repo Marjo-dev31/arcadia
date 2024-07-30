@@ -21,8 +21,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
       <h3>Rapport employé</h3>
   <section>
       <form #animalchoice=ngForm name="animalchoice" (ngSubmit)="getEmployeeReports(selectedAnimalOption)">
-        <label for="animal">Sélectionner un animal : </label>
-        <select name="animal" id="animal" [(ngModel)]="selectedAnimalOption">
+        <label for="animal-employee">Sélectionner un animal : </label>
+        <select name="animal" id="animal-employee" [(ngModel)]="selectedAnimalOption">
           <option *ngFor="let animal of animals" [ngValue]="animal.id">
             {{ animal.firstname }} ({{ animal.breed }})
           </option>
@@ -85,8 +85,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         name="addform"
         (ngSubmit)="onSubmit(form)"
       >
-        <label for="animal">Sélectionner un animal : </label>
-        <select name="animal" id="animal" [(ngModel)]="newReport.id_animal" #animal="ngModel" required>
+        <label for="animal-add-employee">Sélectionner un animal : </label>
+        <select name="animal" id="animal-add-employee" [(ngModel)]="newReport.id_animal" #animal="ngModel" required>
           @for(animal of animals; track animal) {
           <option [ngValue]="animal.id">{{ animal.firstname | titlecase}} ({{ animal.breed }})</option>
           }
@@ -121,8 +121,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <p class="alert">Un grammage est requis</p>
         }
         
-        <label for="user">Sélectionner un rapporteur : </label>
-        <select name="user" id="user" [(ngModel)]="newReport.id_user" #user="ngModel" required>
+        <label for="user-add-employee">Sélectionner un rapporteur : </label>
+        <select name="user" id="user-add-employee" [(ngModel)]="newReport.id_user" #user="ngModel" required>
           @for(user of users; track user) {
           <option [ngValue]="user.id">{{ user.firstname | titlecase }} {{ user.lastname | titlecase }}</option>
           }
@@ -154,8 +154,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           @if(updateForm.controls['grammage'].invalid && updateForm.controls['grammage'].touched){
               <div class="alert">Un grammage est requis</div>
             }
-        <label for="animal">Sélectionner un animal : </label>
-        <select name="selected-animal" id="animal" formControlName="id_animal">
+        <label for="animal-update-employee">Sélectionner un animal : </label>
+        <select name="selected-animal" id="animal-update-employee" formControlName="id_animal">
           @for(animal of animals; track animal) {
           <option [value]="animal.id">{{ animal.firstname }}</option>
           }
@@ -163,8 +163,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(updateForm.controls['id_animal'].invalid && updateForm.controls['id_animal'].touched){
               <div class="alert">Un animal est requis</div>
             }
-        <label for="selected-user">Sélectionner un rapporteur : </label>
-        <select name="user" id="selected-user" formControlName="id_user">
+        <label for="selected-user-update-employee">Sélectionner un rapporteur : </label>
+        <select name="user" id="selected-user-update-employee" formControlName="id_user">
           @for(user of users; track user) {
           <option [value]="user.id">{{ user.firstname | titlecase }} {{ user.lastname | titlecase}}</option>
           }
