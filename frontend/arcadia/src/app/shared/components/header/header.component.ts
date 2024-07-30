@@ -1,9 +1,7 @@
 import { AsyncPipe, NgStyle } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-
-import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../../pages/login/service/login.service';
-import { Observable, filter, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-header',

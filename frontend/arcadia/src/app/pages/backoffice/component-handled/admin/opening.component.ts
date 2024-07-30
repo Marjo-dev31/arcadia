@@ -19,23 +19,23 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     </div>
 }
     <form [formGroup]="updateForm" (submit)="updateOpeningToPublic(openToPublic._id)">
-        <label for="openingTime">Heure d'ouverture:</label>
-        <input type="text" formControlName="openingTime" id="openingTime">
+        <label for="opening-time">Heure d'ouverture:</label>
+        <input type="text" formControlName="openingTime" id="opening-time">
         @if(updateForm.controls['openingTime'].invalid && updateForm.controls['openingTime'].touched){
               <div class="alert">Une heure d'ouverture est requise</div>
             }
-        <label for="closingTime">Heure de fermeture:</label>
-        <input type="text" formControlName="closingTime" id="closingTime">
+        <label for="closing-time">Heure de fermeture:</label>
+        <input type="text" formControlName="closingTime" id="closing-time">
         @if(updateForm.controls['closingTime'].invalid && updateForm.controls['closingTime'].touched){
               <div class="alert">Une heure de fermeture est requise</div>
             }
-        <label for="openingDay">Jour d'ouverture:</label>
-        <input type="text" formControlName="openingDay" id="openingDay">
+        <label for="opening-day">Jour d'ouverture:</label>
+        <input type="text" formControlName="openingDay" id="opening-day">
         @if(updateForm.controls['openingDay'].invalid && updateForm.controls['openingDay'].touched){
               <div class="alert">Un jour d'ouverture est requis</div>
             }
-        <label for="closingDay">Jour de fermeture:</label>
-        <input type="text" formControlName="closingDay" id="closingDay">
+        <label for="closing-day">Jour de fermeture:</label>
+        <input type="text" formControlName="closingDay" id="closing-day">
         @if(updateForm.controls['closingDay'].invalid && updateForm.controls['closingDay'].touched){
               <div class="alert">Un jour de fermeture est requis</div>
             }

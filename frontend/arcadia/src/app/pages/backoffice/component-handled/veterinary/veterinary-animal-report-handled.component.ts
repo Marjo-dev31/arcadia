@@ -137,12 +137,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(animal.invalid && animal.touched){
         <p class="alert">Un animal est requis</p>
         }
-        <label for="food">Nourriture recommandée :</label>
+        <label for="food-add-veterinary">Nourriture recommandée :</label>
         <input
           type="text"
           placeholder="Aliments recommandés"
           name="food"
-          id="food"
+          id="food-add-veterinary"
           [(ngModel)]="newReport.food"
           #food="ngModel"
           required
@@ -150,12 +150,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(food.invalid && food.touched){
         <p class="alert">Un type de nourriture est requis</p>
         }
-        <label for="grammage">Poids (en g) :</label>
+        <label for="grammage-add-veterinary">Poids (en g) :</label>
         <input
           type="text"
           placeholder="Grammage recommandé"
           name="grammage"
-          id="grammage"
+          id="grammage-add-veterinary"
           [(ngModel)]="newReport.grammage"
           #grammage="ngModel"
           required
@@ -163,12 +163,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         @if(grammage.invalid && grammage.touched){
         <p class="alert">Un grammage est requis</p>
         }
-        <label for="health">Etat de santé général :</label>
+        <label for="health-add-veterinary">Etat de santé général :</label>
         <input
           type="text"
           placeholder="Etat de santé actuel"
           name="health"
-          id="health"
+          id="health-add-veterinary"
           [(ngModel)]="newReport.health"
           #health="ngModel"
           required
@@ -210,20 +210,20 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         [formGroup]="updateForm"
         (ngSubmit)="updateReport(selectedAnimalOption)"
       >
-        <label for="food">Nourriture recommandée :</label>
-        <input type="text" formControlName="food" id="food" />
+        <label for="food-update-veterinary">Nourriture recommandée :</label>
+        <input type="text" formControlName="food" id="food-update-veterinary" />
         @if(updateForm.controls['food'].invalid &&
         updateForm.controls['food'].touched){
         <div class="alert">Un type de nourriture est requis</div>
         }
-        <label for="grammage">Poids (en g) :</label>
-        <input type="text" formControlName="grammage" id="grammage" />
+        <label for="grammage-update-veterinary">Poids (en g) :</label>
+        <input type="text" formControlName="grammage" id="grammage-update-veterinary" />
         @if(updateForm.controls['grammage'].invalid &&
         updateForm.controls['grammage'].touched){
         <div class="alert">Un grammage est requis</div>
         }
-        <label for="health">Etat de santé général :</label>
-        <input type="text" formControlName="health" id="health" />
+        <label for="health-update-veterinary">Etat de santé général :</label>
+        <input type="text" formControlName="health" id="health-update-veterinary" />
         @if(updateForm.controls['health'].invalid &&
         updateForm.controls['health'].touched){
         <div class="alert">Un état de santé est requis</div>
