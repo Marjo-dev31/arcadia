@@ -58,14 +58,14 @@
   
   /* burger menu btn style */
   
-  .menu-btn {
+  .menu-btn a {
     width: 3rem;
     height: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
   }
-  
+
   .menu-btn span {
     display: block;
     width: 100%;
