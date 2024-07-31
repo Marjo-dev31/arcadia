@@ -24,21 +24,20 @@ import { LoginService } from '../../../pages/login/service/login.service';
             }
           </ul>
         </nav>
-        <div>
+        <div class="login-btn">
           @if(loginService.isLoggin === true){
-          <a class="login-btn" (click)="logout()">Déconnexion</a>
+          <a  (click)="logout()">Déconnexion</a>
           } @else {
-          <a class="login-btn" [routerLink]="['/connexion']">Connexion</a>
+          <a [routerLink]="['/connexion']">Connexion</a>
           }
-          <a class="menu-btn" (click)="toggleSideDrawer()">
+        </div>
+        <div class="menu-btn">
+          <a (click)="toggleSideDrawer()">
             <span></span>
             <span></span>
             <span></span>
           </a>
         </div>
-      </div>
-      <div class="hero-scene">
-        
       </div>
     </header>
     <aside
