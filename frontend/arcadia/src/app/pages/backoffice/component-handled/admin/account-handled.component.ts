@@ -136,7 +136,7 @@ export class AccountHandledComponent implements OnInit {
     const alertOk = document.getElementById('alert-account-created');
     const alertNotOk = document.getElementById('alert-account-already-exist');
     if(alertOk && alertNotOk && form.submitted){
-        this.userService.addUser(this.newUser).subscribe((response)=>{
+        this.userService.addUser(this.newUser).pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
           if(response.data){
             alertOk.style.display = "block";
             form.reset()
@@ -144,7 +144,6 @@ export class AccountHandledComponent implements OnInit {
             alertNotOk.style.display = "block"
           }
         });
-        
     }}
 
 }
