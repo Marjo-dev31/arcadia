@@ -12,7 +12,7 @@ describe('ServiceHandledComponent', () => {
     let fixture: ComponentFixture<ServiceHandledComponent>
     
     let service: ServiceService;
-    let serviceServiceMock!: { getHandleServices: jest.Mock, addService: jest.Mock, deleteService: jest.Mock }; // the mock value
+    let serviceServiceMock: { getHandleServices: jest.Mock, addService: jest.Mock, deleteService: jest.Mock }; // the mock value
 
     beforeEach(() => {
       // create an object that mock the method from ServicesService
