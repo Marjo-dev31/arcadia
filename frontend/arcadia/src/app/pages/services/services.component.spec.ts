@@ -51,8 +51,7 @@ describe('ServiceService', () => {
       const servicesMock = [
         {id: 'un', title: 'restaurant', description: 'plusieurs restaurants sur place', image_url: 'restaurant.jpg'},
         {id: 'deux', title: 'visite', description: 'visite guidée', image_url: 'visite.jpg'}
-      ]
-
+      ];
       serviceServiceMock.getServices.mockReturnValue(servicesMock);
       fixture.whenStable().then(()=>{
         const services = component.services

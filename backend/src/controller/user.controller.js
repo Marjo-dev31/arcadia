@@ -47,7 +47,7 @@ export const addUser = (req, res) => {
                   `Error occured`
                )
             )};
-          if(results) {
+          if(results[0]) {
                res
                 .status(httpStatus.OK.code)
                 .send(

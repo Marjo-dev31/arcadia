@@ -64,5 +64,4 @@ describe('LoginComponent', () => {
     expect(contactFormElement.className).toContain('contact-form')
   })
 
-  
 });

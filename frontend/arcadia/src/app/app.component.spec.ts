@@ -43,10 +43,8 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have the 'arcadia' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('arcadia');
+  it(`should have the 'arcadia' title`, () => { 
+    expect(component.title).toEqual('arcadia');
   });
 
 });
