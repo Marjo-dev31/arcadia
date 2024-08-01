@@ -239,13 +239,14 @@ Content-Type: application/json
 
  post http://localhost:8000/users
 Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VwYXNib3ZlQGFyY2FkaWEuY29tIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNzIyNTA1OTQ5LCJleHAiOjE3MjI1MTY3NDl9.rPqPsD4Wjc0szZAAz1DuV7qEubzMEPB0GXqOBR0vHi8
 
 {
     "firstname":"tes",
     "lastname":"test",
-    "email":"test@test2.com",
+    "email":"test@test3.com",
     "password":"veto",
-    "id_role":"70c0d6f6-085e-11ef-a7f8-0242ac180002"
+    "id_role":"4df4dee1-1510-11ef-9b15-0654193ea06b"
 }
 
 

@@ -33,7 +33,6 @@ app.use(fileUpload());
 
 app.use('/upload', express.static('src/upload'))
 
-
 app.use('/services', serviceRoutes);
 app.use('/images', imageRoutes);
 app.use('/habitats', habitatRoutes);
@@ -49,9 +48,7 @@ app.use('/click', clickRoutes);
 app.use('/opening', openingRoutes);
 app.use('/send', sendRoutes);
 
-
 app.get('/', (req, res)=> res.send(new Response(httpStatus.OK.code, httpStatus.OK.status, 'Test API, all Systems Go')));
-
 
 app.listen(PORT, () => {
     connectDB().then(()=> {
