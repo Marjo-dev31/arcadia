@@ -4,9 +4,10 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 
 /* handmade */
@@ -34,7 +35,6 @@ html {
 }
 
 body {
-  margin: 0;
   background-color: var(--color-background);
   font-size: var(--font-size-content);
   font-family: var(--font-family-content);
