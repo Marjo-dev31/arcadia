@@ -56,7 +56,7 @@ export const addEmployeeReport = (req, res) => {
             httpStatus.CREATED.code,
             httpStatus.CREATED.status,
             `Habitat created`,
-            { report }
+            report
           )
         );
     }

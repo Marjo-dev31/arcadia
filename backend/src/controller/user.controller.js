@@ -8,7 +8,7 @@ import bcrypt from "bcrypt";
 export const getUsers = (req, res) => {
    logger.info(`${req.method} ${req.originalUrl}, fetching users`);
    database.query(QUERYUSERS.SELECT_USERS, (error, results) => {
-      if (!results[0]) {
+      if (!results) {
          res
           .status(httpStatus.OK.code)
           .send(

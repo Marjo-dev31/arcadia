@@ -365,7 +365,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.veterinaryService.addVeterinaryReport(this.newReport).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+    this.veterinaryService.addVeterinaryReport(this.newReport).pipe(tap(() => {this.getVeterinaryReports(this.selectedAnimalOption)}),takeUntilDestroyed(this.destroyRef)).subscribe();
     form.reset();
   }
 
