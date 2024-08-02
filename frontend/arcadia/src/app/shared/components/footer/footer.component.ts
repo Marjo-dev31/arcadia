@@ -31,12 +31,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     </footer>
   `,
   styles: `
-      footer {
+  footer {
     background: linear-gradient(
-    180deg,
+      180deg,
       var(--color-primary) 30%,
       var(--color-font)
-  );
+      );
     color: var(--color-background);
     font-size: var(--font-size-footer);
   }
