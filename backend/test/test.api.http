@@ -290,8 +290,16 @@ get http://localhost:8000/opening
 
 ###
 
-get http://localhost:8000/opening/66350050bc37a8a6882202e1
+put http://localhost:8000/opening/664b59b6acf2316c62bf2ae1
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VwYXNib3ZlQGFyY2FkaWEuY29tIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNzIyNjAzNzY1LCJleHAiOjE3MjI2MTQ1NjV9.OML_2srP3xzodQxzmK7t9MmxHJJXt6Dftkk-UupHWho  
 
+{
+    "openingTime":"10h00",
+    "closingTime":"19h00",
+    "openingDay":"Lundi",
+    "closingDay":"Dimanche"
+}
 
 ###
 
