@@ -41,10 +41,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           <p class="alert">Mot de passe invalide</p>
         }
         <button [disabled]="form.invalid">Se connecter</button>
-      </form>
       <div class="password-forgot">
         <a [routerLink]="['/mdpoublie']" id="password-forgot-link">Mot de passe oublié ?</a>
       </div>
+    </form>
+      
       <div>
         <h3>
           Pour toutes questions, rendez-vous
