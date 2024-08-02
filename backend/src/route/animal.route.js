@@ -1,12 +1,12 @@
 import express from 'express';
-import { addAnimal, deleteAnimal, getAnimals, getAnimalsByHabitat, updateAnimal } from '../controller/animal.controller.js';
+import { addAnimal, deleteAnimal, getAnimals, getAnimalsByHabitat, getAnimalsForFilter, updateAnimal } from '../controller/animal.controller.js';
 import authenticateToken from '../middleware/auth.js';
 import verifyRoles from '../middleware/verifyroles.js';
 
 const animalsRoutes = express.Router();
 
 animalsRoutes.route('/')
-.get(getAnimals)
+.get(getAnimalsForFilter)
 .post(authenticateToken, verifyRoles('Admin'), addAnimal)
 
 animalsRoutes.route('/backoffice')

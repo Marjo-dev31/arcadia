@@ -21,15 +21,27 @@ export class OpeningService {
   constructor( private http: HttpClient) {}
 
   getOpeningToPublic(): Observable<Opening[]> {
-      return this.http.get<Opening[]>(this.url)
+      return this.http.get<Response<Opening>>(this.url).pipe(map((r)=>{
+        if(r.data){
+            return r.data
+        } else {
+            return []
+        }
+       }))
   }
 
   getHandleOpeningToPublic(): Observable<Opening[]> {
-    return this.http.get<Opening[]>(`${this.url}/backoffice`)
+    return this.http.get<Response<Opening>>(`${this.url}/backoffice`).pipe(map((r)=>{
+      if(r.data){
+          return r.data
+      } else {
+          return []
+      }
+     }))
   }
 
   updateOpeningToPublic(opening: Opening, id:string): Observable<Opening> {
-    this.schedule.set(opening)
+    this.schedule.set(opening);
     return this.http.put<Opening>(`${this.url}/${id}`, opening)
   }
 
