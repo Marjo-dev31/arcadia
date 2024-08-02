@@ -23,8 +23,14 @@ export class EmployeeService {
        }))
     }
 
-    addEmployeeReport(report: EmployeeReportCreate): Observable<Response<EmployeeReport>> {
-        return this.http.post<Response<EmployeeReport>>(this.url, report)
+    addEmployeeReport(report: EmployeeReportCreate): Observable<EmployeeReport[]> {
+        return this.http.post<Response<EmployeeReport>>(this.url, report).pipe(map((r)=>{
+            if(r.data){
+                return r.data
+            } else {
+                return []
+            }
+           }))
     }
 
     updateReport(report: EmployeeReport): Observable<Response<EmployeeReport>> {

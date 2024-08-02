@@ -191,3 +191,32 @@ export const getAnimalsByHabitat = (req, res) => {
       }
     });
 }
+
+export const getAnimalsForFilter = (req, res) => {
+  logger.info(`${req.method} ${req.originalUrl}, fetching animals by habitat`);
+    database.query(QUERYANIMALS.SELECT_ANIMALS_GROUP_BY, (error, results) => {
+      if (!results) {
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `No animals found`,
+            )
+          );
+      } else {
+        res
+          .status(httpStatus.OK.code)
+          .send(
+            new Response(
+              httpStatus.OK.code,
+              httpStatus.OK.status,
+              `Animals retrieved`,
+              results
+            )
+            
+          );
+      }
+    });
+}
