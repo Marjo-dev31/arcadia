@@ -11,6 +11,9 @@ import { FormsModule, NgForm } from '@angular/forms';
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
         <label for="emailToNewPassword">Votre email de connexion :</label>
         <input type="email" id="emailtoNewPassword" [(ngModel)]="email" name="emailToNewPassword" #emailToNewPassword="ngModel" required>
+        @if (emailToNewPassword.invalid && emailToNewPassword.touched) {
+            <p class="alert">Un email est obligatoire</p>
+        }
         <button [disabled]="form.invalid">Envoyer</button>
     </form>
     `,
