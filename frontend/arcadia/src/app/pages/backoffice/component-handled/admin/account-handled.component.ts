@@ -98,8 +98,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         </div>
       </form>
     </div>
-    <div class="alert" id="alert-account-created">Le compte a été créé</div>
-    <div class="alert" id="alert-account-already-exist">Un compte existe déjà avec cet email</div>
+    <p class="alert" id="alert-account-created">Le compte a été créé</p>
+    <p class="alert" id="alert-account-already-exist">Un compte existe déjà avec cet email</p>
   `,
   styleUrl: `../component-handled.component.css`,
 })

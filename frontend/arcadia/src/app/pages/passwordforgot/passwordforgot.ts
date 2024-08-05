@@ -15,6 +15,9 @@ import { FormsModule, NgForm } from '@angular/forms';
             <p class="alert">Un email est obligatoire</p>
         }
         <button [disabled]="form.invalid">Envoyer</button>
+        @if (form.submitted) {
+            <p class="alert">Un email a été envoyé !</p>
+        }
     </form>
     `,
     styles: `
