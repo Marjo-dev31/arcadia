@@ -44,6 +44,10 @@ export const routes: Routes = [
   },
   { path: 'erreur', component: ErrorComponent},
   { path: 'mdpoublie', component: PasswordForgotComponent},
-  { path: 'changermdp', component: UpdatePasswordComponent},
+  { path: 'changermdp', component: UpdatePasswordComponent,
+      children: [
+        { path: '**', component: UpdatePasswordComponent }
+      ]
+  },
   { path: '**', redirectTo: '' }
 ];

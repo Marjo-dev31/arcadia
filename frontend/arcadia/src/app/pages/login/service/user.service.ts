@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { User, UserCreate } from "../../../shared/models/user.interface";
+import { User, UserCreate, UserLogin } from "../../../shared/models/user.interface";
 import { environment } from '../../../environments/environment';
 import { Response } from "../../../shared/models/response.interface";
 
@@ -26,8 +26,8 @@ export class UserService {
         return this.http.post<Response<UserCreate>>(this.url, user)
     }
 
-    updatePassword() {
-        
+    updatePassword(user: UserLogin) {
+        return this.http.put(this.url, user)
     }
     
 

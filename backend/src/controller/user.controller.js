@@ -95,7 +95,6 @@ export const addUser = (req, res) => {
 };
 
 export const  updatePassword = (req, res) => {
-   console.log(req.body.email, req.body.password)
 logger.info(`${req.method} ${req.originalUrl}, fetching user`);
   database.query(QUERYUSERS.SELECT_USER, [req.body.email], (error, results) => {
     if (!results) {

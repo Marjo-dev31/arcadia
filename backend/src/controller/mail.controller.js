@@ -4,6 +4,8 @@ import QUERYUSERS from "../query/user.query.js";
 import httpStatus from "../domain/httpstatus.js";
 import Response from "../domain/response.js";
 import logger from "../util/logger.js";
+import generatedAccessToken from "../util/jwt.js";
+
 
 
 export const sendEmail = (req, res) => {
