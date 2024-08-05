@@ -26,8 +26,8 @@ export class UserService {
         return this.http.post<Response<UserCreate>>(this.url, user)
     }
 
-    updatePassword(user: UserLogin) {
-        return this.http.put(this.url, user)
+    updatePassword(user: UserLogin): Observable<Response<UserLogin>> {
+        return this.http.put<Response<UserLogin>>(this.url, user)
     }
     
 
