@@ -233,11 +233,11 @@ Content-Type: application/json
 
 ###
 
- get http://localhost:8000/roles
+get http://localhost:8000/roles
 
 ###
 
- post http://localhost:8000/users
+post http://localhost:8000/users
 Content-Type: application/json
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VwYXNib3ZlQGFyY2FkaWEuY29tIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNzIyNTA1OTQ5LCJleHAiOjE3MjI1MTY3NDl9.rPqPsD4Wjc0szZAAz1DuV7qEubzMEPB0GXqOBR0vHi8
 
@@ -330,3 +330,20 @@ Content-Type: application/json
     "emailToResponse":"test@test.com"
 }
 
+###
+
+post http://localhost:8000/send/forgotpassword
+Content-Type: application/json
+
+{
+    "email":"marjory.bravo.dev@gmail.com"
+}
+
+###
+put http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "email":"marjory.bravo.dev@gmail.com",
+    "password":"Azerty1&"
+}

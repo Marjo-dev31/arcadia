@@ -1,20 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject} from '@angular/core';
+import { MailService } from '../contact/services/mail.service';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-passwordforgot',
+    standalone: true,
+    imports: [FormsModule],
     template: `
     <h3>Mot de passe oublié ?</h3>
-    <p>Le mot de passe a été choisi par José, retournez le voir !!!</p>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <label for="emailToNewPassword">Votre email de connexion :</label>
+        <input type="email" id="emailtoNewPassword" [(ngModel)]="email" name="emailToNewPassword" #emailToNewPassword="ngModel" required>
+        <button [disabled]="form.invalid">Envoyer</button>
+    </form>
     `,
     styles: `
     p {
         text-align: center
     }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 300px;
+        margin : auto;   
+    }
+
+    form > * {
+       margin: 0.5rem
+    }
     `
 })
 
-export class PasswordForgotComponent implements OnInit {
+export class PasswordForgotComponent {
     constructor() { }
 
-    ngOnInit() { }
+    email: string = ''
+
+    private readonly mailService = inject(MailService)
+
+    onSubmit(form: NgForm) {
+        this.mailService.sendEmailToNewPassword(this.email).subscribe();
+        form.reset()
+    }
+
 }
