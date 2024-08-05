@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 import { UserLogin } from "../../shared/models/user.interface";
 import { UserService } from "../login/service/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'app-update-password',
@@ -48,7 +49,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 export class UpdatePasswordComponent implements OnInit{
     private route = inject(ActivatedRoute);
-    private router = inject(Router)
+    private router = inject(Router);
+    private readonly destroyRef = inject(DestroyRef);
+
 
 user: UserLogin = {
     email: '',
@@ -68,7 +71,7 @@ setToken() {
 }
 
 onSubmit(form: NgForm){
-    this.userService.updatePassword(this.user).subscribe();
+    this.userService.updatePassword(this.user).pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
     form.reset()
 }
 

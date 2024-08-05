@@ -68,7 +68,7 @@ export class HabitatsComponent implements OnInit {
   private readonly habitatService = inject(HabitatsService);
   private readonly animalService = inject(AnimalService);
   private readonly clickService = inject(ClickService);
-  private readonly destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef);
 
   
   constructor(private matdialog: MatDialog, route:ActivatedRoute) {
