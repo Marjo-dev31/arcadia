@@ -27,6 +27,9 @@ import { ActivatedRoute, Router } from "@angular/router";
             }
         }
         <button [disabled]="form.invalid">Envoyer</button>
+        @if (form.submitted) {
+            <p class="alert">Le mot de passe a été changé !</p>
+        }
     </form>
     `,
     styles: `
