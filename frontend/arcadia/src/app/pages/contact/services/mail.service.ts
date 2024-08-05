@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Mail } from '../../../shared/models/mail.interface';
 import { environment } from '../../../environments/environment';
+import { Form } from '@angular/forms';
 
 
 @Injectable()
@@ -12,5 +13,9 @@ export class MailService {
     
     sendEmail(mail: Mail): Observable<any> {
         return this.http.post(this.url, mail)
+    }
+
+    sendEmailToNewPassword(email: string): Observable<any> {
+        return this.http.post(`${this.url}/forgotpassword`, {email})
     }
 }

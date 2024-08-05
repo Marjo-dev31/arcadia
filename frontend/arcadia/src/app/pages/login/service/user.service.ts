@@ -26,4 +26,9 @@ export class UserService {
         return this.http.post<Response<UserCreate>>(this.url, user)
     }
 
+    updatePassword() {
+        
+    }
+    
+
 }

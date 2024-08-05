@@ -93,3 +93,45 @@ export const addUser = (req, res) => {
       }
    );
 };
+
+export const  updatePassword = (req, res) => {
+   console.log(req.body.email, req.body.password)
+logger.info(`${req.method} ${req.originalUrl}, fetching user`);
+  database.query(QUERYUSERS.SELECT_USER, [req.body.email], (error, results) => {
+    if (!results) {
+      res
+      .status(httpStatus.NOT_FOUND.code)
+      .send(
+        new Response(
+          httpStatus.NOT_FOUND.code,
+          httpStatus.NOT_FOUND.status,
+          `User was not found !`
+        )
+      );
+    } else {
+      logger.info(`${req.method} ${req.originalUrl}, updating user`);
+      bcrypt.hash(req.body.password, 10).then((hash) => {
+      database.query(QUERYUSERS.UPDATE_USER_PASSWORD, [hash, req.body.email], (error, results) => {
+         if(!error) {
+          res
+        .status(httpStatus.OK.code)
+        .send(
+          new Response(
+            httpStatus.OK.code,
+            httpStatus.OK.status,
+            `User updated`
+          )
+        )
+       } else {
+          logger.error(error.message)
+          res.status(httpStatus.INTERNAL_SERVER_ERROR.code)
+          .send(
+            new Response(
+              httpStatus.INTERNAL_SERVER_ERROR.code,
+              httpStatus.INTERNAL_SERVER_ERROR.status,
+              `Error occured`
+            )
+          );
+      }   
+    })})
+}})}
