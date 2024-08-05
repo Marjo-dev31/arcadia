@@ -61,7 +61,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         <select name="role" id="role-addaccount-form" [(ngModel)]= "newUser.id_role" #role="ngModel" required>
           <option *ngFor="let role of roles" [ngValue]="role.id" >{{ role.name }}</option>
         </select>
-        @if(role.invalid && firstname.touched){
+        @if(role.invalid && role.touched){
             <p class="alert">Un rôle est requis</p>
           }
         <label for="password-addaccount-form">Mot de passe :</label>
@@ -114,9 +114,9 @@ export class AccountHandledComponent implements OnInit {
   roles: Role[] = []
 
   newUser: UserCreate = {
-    firstname: '',
-    lastname: '',
     email: '',
+    lastname: '',
+    firstname: '',
     password: '',
     id_role: '',
   };

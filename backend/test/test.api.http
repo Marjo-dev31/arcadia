@@ -244,7 +244,7 @@ authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VwY
 {
     "firstname":"tes",
     "lastname":"test",
-    "email":"test@test3.com",
+    "email":"marjory.bravo.dev@gmail.com",
     "password":"veto",
     "id_role":"4df4dee1-1510-11ef-9b15-0654193ea06b"
 }
