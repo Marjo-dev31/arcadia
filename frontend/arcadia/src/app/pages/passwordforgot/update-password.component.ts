@@ -1,5 +1,8 @@
-import { Component } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { Component, OnInit, inject } from "@angular/core";
+import { FormsModule, NgForm } from "@angular/forms";
+import { UserLogin } from "../../shared/models/user.interface";
+import { UserService } from "../login/service/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
     selector: 'app-update-password',
@@ -7,10 +10,12 @@ import { FormsModule } from "@angular/forms";
     imports: [FormsModule],
     template: `
     <h3>Changer mon mot de passe ?</h3>
-    <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <label for="emailForNewPassword">Email :</label>
+        <input type="email" id="emailForNewPassword" name="emailForNewPassword" #emailForNewPassword="ngModel" [(ngModel)]="user.email" required>
         <label for="newPassword"  >Nouveau mot de passe :</label>
-        <input type="password" id="newPassword" name="newPassword" #newPassword="ngModel" [(ngModel)]="newPasswordToSent" required>
-        <button>Envoyer</button>
+        <input type="password" id="newPassword" name="newPassword" #newPassword="ngModel" [(ngModel)]="user.password" required>
+        <button [disabled]="form.invalid">Envoyer</button>
     </form>
     `,
     styles: `
@@ -27,10 +32,30 @@ import { FormsModule } from "@angular/forms";
     }`
 })
 
-export class UpdatePasswordComponent {
+export class UpdatePasswordComponent implements OnInit{
+    private route = inject(ActivatedRoute);
+    private router = inject(Router)
 
-newPasswordToSent! : string
+user: UserLogin = {
+    email: '',
+    password: ''
+}
 
-onSubmit(){}
+private readonly userService = inject(UserService);
+
+ngOnInit() {
+    this.setToken()
+}
+
+setToken() {
+    const urlSplit = this.router.url.split('/');
+    const token = urlSplit[2]
+    localStorage.setItem('accessToken', token)
+}
+
+onSubmit(form: NgForm){
+    this.userService.updatePassword(this.user).subscribe();
+    form.reset()
+}
 
 }

@@ -9,6 +9,6 @@ const userRoutes = express.Router()
 userRoutes.route('/')
 .get(authenticateToken, getUsers)
 .post(authenticateToken, verifyRoles('Admin'), sendEmailToNewUser, addUser)
-.put( updatePassword)
+.put(authenticateToken, updatePassword)
 
 export default userRoutes;
