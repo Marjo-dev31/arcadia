@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Animal } from '../../shared/models';
 import {
   MAT_DIALOG_DATA,
