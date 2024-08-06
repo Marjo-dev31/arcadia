@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import {
     EmployeeReport,
@@ -10,17 +10,17 @@ import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class EmployeeService {
-    url = `${environment.serverUrl}/employees`;
+    private readonly url = `${environment.serverUrl}/employees`;
 
-    constructor(private http: HttpClient) {}
+    private readonly http = inject(HttpClient);
 
     getEmployeeReports(id: string): Observable<EmployeeReport[]> {
         return this.http
             .get<Response<EmployeeReport>>(`${this.url}/${id}`)
             .pipe(
-                map((r) => {
-                    if (r.data) {
-                        return r.data;
+                map((response) => {
+                    if (response.data) {
+                        return response.data;
                     } else {
                         return [];
                     }
@@ -32,9 +32,9 @@ export class EmployeeService {
         report: EmployeeReportCreate
     ): Observable<EmployeeReport[]> {
         return this.http.post<Response<EmployeeReport>>(this.url, report).pipe(
-            map((r) => {
-                if (r.data) {
-                    return r.data;
+            map((response) => {
+                if (response.data) {
+                    return response.data;
                 } else {
                     return [];
                 }

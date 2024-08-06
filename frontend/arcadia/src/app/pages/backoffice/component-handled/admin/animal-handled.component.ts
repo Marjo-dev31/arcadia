@@ -143,7 +143,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #breed="ngModel"
                     required
                 >
-                    <option value="null">--Choissisez une race--</option>
+                    <option>--Choissisez une race--</option>
                     @for(breed of breeds; track breed) {
                     <option [value]="breed.id">
                         {{ breed.name | lowercase }}
@@ -165,7 +165,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     }
                 </select>
                 @if(habitat.invalid && habitat.touched){
-                <p class="alert">Un type de nourriture est requis</p>
+                <p class="alert">Un habitat est requis</p>
                 }
                 <button class="add-btn" [disabled]="form.invalid">
                     Enregistrer nouvel animal
@@ -243,9 +243,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class AnimalHandledComponent implements OnInit {
-    public updateForm: FormGroup;
-    public breedForm: FormGroup;
-
+    
     displayColums: string[] = [
         "firstname",
         "race",
@@ -255,17 +253,18 @@ export class AnimalHandledComponent implements OnInit {
         "image",
     ];
 
-    constructor(public fb: FormBuilder) {
-        this.updateForm = this.fb.group({
-            firstname: new FormControl("", [Validators.required]),
-            habitat: new FormControl("", [Validators.required]),
-            breed: new FormControl("", [Validators.required]),
-            id: new FormControl(""),
-        });
-        this.breedForm = this.fb.group({
-            name: new FormControl("", [Validators.required]),
-        });
-    }
+    private readonly fb = inject(FormBuilder);
+
+    updateForm: FormGroup = this.fb.group({
+        firstname: new FormControl("", [Validators.required]),
+        habitat: new FormControl("", [Validators.required]),
+        breed: new FormControl("", [Validators.required]),
+        id: new FormControl(""),
+    });
+
+    breedForm: FormGroup = this.fb.group({
+        name: new FormControl("", [Validators.required]),
+    });
 
     private readonly animalService = inject(AnimalService);
     private readonly imageService = inject(ImageService);
@@ -329,18 +328,6 @@ export class AnimalHandledComponent implements OnInit {
             .subscribe();
     }
 
-    deleteAnimal(id: string) {
-        this.animalService
-            .deleteAnimal(id)
-            .pipe(
-                tap(() => {
-                    this.getAnimals();
-                }),
-                takeUntilDestroyed(this.destroyRef)
-            )
-            .subscribe();
-    }
-
     toggleAddForm() {
         this.addFormIsDisplay = !this.addFormIsDisplay;
     }
@@ -386,6 +373,23 @@ export class AnimalHandledComponent implements OnInit {
         this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 
+    deleteAnimal(id: string) {
+        this.animalService
+            .deleteAnimal(id)
+            .pipe(
+                tap(() => {
+                    this.getAnimals();
+                }),
+                takeUntilDestroyed(this.destroyRef)
+            )
+            .subscribe();
+    }
+    getHabitat() {
+        this.habitatService.getHabitats().then((response) => {
+            this.habitats = response;
+        });
+    }
+
     getBreed() {
         this.breedService
             .getBreeds()
@@ -393,12 +397,6 @@ export class AnimalHandledComponent implements OnInit {
             .subscribe((response) => {
                 this.breeds = response;
             });
-    }
-
-    getHabitat() {
-        this.habitatService.getHabitats().then((response) => {
-            this.habitats = response;
-        });
     }
 
     addBreed() {

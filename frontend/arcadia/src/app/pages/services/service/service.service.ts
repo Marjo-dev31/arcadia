@@ -10,6 +10,7 @@ export class ServiceService {
 
     constructor(private http: HttpClient) {}
 
+     // fetch required for exam
     async getServices(): Promise<Service[]> {
         try {
             const servicesList = await fetch(this.url).then((response) =>

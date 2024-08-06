@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Animal, AnimalCreate, Response } from "../../../shared/models";
 import { HttpClient } from "@angular/common/http";
 import { Observable, map } from "rxjs";
@@ -8,8 +8,9 @@ import { environment } from "../../../environments/environment";
 export class AnimalService {
     private readonly url = `${environment.serverUrl}/animals`;
 
-    constructor(private http: HttpClient) {}
+    private readonly http = inject(HttpClient);
 
+    // fetch required for the exam
     async getAnimals(): Promise<Animal[]> {
         try {
             const animalsList = await fetch(this.url).then((response) =>
@@ -23,9 +24,9 @@ export class AnimalService {
 
     getHandleAnimals(): Observable<Animal[]> {
         return this.http.get<Response<Animal>>(`${this.url}/backoffice`).pipe(
-            map((r) => {
-                if (r.data) {
-                    return r.data;
+            map((response) => {
+                if (response.data) {
+                    return response.data;
                 } else {
                     return [];
                 }
@@ -52,9 +53,9 @@ export class AnimalService {
         return this.http
             .get<Response<Animal>>(`${this.url}/habitats/${id}`)
             .pipe(
-                map((r) => {
-                    if (r.data) {
-                        return r.data;
+                map((response) => {
+                    if (response.data) {
+                        return response.data;
                     } else {
                         return [];
                     }

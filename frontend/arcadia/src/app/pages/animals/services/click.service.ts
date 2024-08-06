@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Observable } from "rxjs";
 import {
     AnimalOnMongo,
@@ -10,9 +10,9 @@ import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class ClickService {
-    url = `${environment.serverUrl}/click`;
+    private readonly url = `${environment.serverUrl}/click`;
 
-    constructor(private http: HttpClient) {}
+    private readonly http = inject(HttpClient);
 
     addClick(firstname: string): Observable<Response<AnimalOnMongo>> {
         return this.http.put<Response<AnimalOnMongo>>(

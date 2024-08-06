@@ -1,20 +1,20 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { Breed, BreedCreate, Response } from "../../../shared/models";
 import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class BreedService {
-    url = `${environment.serverUrl}/breeds`;
+    private readonly url = `${environment.serverUrl}/breeds`;
 
-    constructor(private http: HttpClient) {}
-
+    private readonly http = inject(HttpClient);
+    
     getBreeds(): Observable<Breed[]> {
         return this.http.get<Response<Breed>>(this.url).pipe(
-            map((r) => {
-                if (r.data) {
-                    return r.data;
+            map((response) => {
+                if (response.data) {
+                    return response.data;
                 } else {
                     return [];
                 }
