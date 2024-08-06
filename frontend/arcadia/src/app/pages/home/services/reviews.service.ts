@@ -9,6 +9,7 @@ export class ReviewsService {
     url = `${environment.serverUrl}/reviews`;
     constructor(private http: HttpClient) {}
 
+     // fetch required for exam
     async getReviews(): Promise<Review[]> {
         const reviewsList = await fetch(this.url).then((response) =>
             response.json()
