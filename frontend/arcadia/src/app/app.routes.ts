@@ -46,9 +46,9 @@ export const routes: Routes = [
     {
         path: "espacepersonnel",
         component: BackofficeComponent,
+        data: { title: "Espace Personnel" },
         canActivate: [AuthGuard],
         canActivateChild: [RoleGuard],
-        data: { title: "Espace Personnel" },
         children: [
             {
                 path: "services",

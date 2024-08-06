@@ -50,11 +50,11 @@ export class PasswordForgotComponent {
     email: string = "";
 
     private readonly mailService = inject(MailService);
-    private destroyRef = inject(DestroyRef);
+    private readonly destroyRef = inject(DestroyRef);
 
     onSubmit(form: NgForm) {
         this.mailService
-            .sendEmailToNewPassword(this.email)
+            .sendEmailForNewPassword(this.email)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe();
         form.reset();

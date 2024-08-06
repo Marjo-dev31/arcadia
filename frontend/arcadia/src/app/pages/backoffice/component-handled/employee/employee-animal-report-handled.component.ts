@@ -206,6 +206,22 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 [formGroup]="updateForm"
                 (ngSubmit)="updateReport(selectedAnimalOption)"
             >
+                <label for="animal-update-employee"
+                    >Sélectionner un animal :
+                </label>
+                <select
+                    name="selected-animal"
+                    id="animal-update-employee"
+                    formControlName="id_animal"
+                >
+                    @for(animal of animals; track animal) {
+                    <option [value]="animal.id">{{ animal.firstname }}</option>
+                    }
+                </select>
+                @if(updateForm.controls['id_animal'].invalid &&
+                updateForm.controls['id_animal'].touched){
+                <div class="alert">Un animal est requis</div>
+                }
                 <label for="food-update-employee"
                     >Nourriture recommandée :</label
                 >
@@ -228,22 +244,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 updateForm.controls['grammage'].touched){
                 <div class="alert">Un grammage est requis</div>
                 }
-                <label for="animal-update-employee"
-                    >Sélectionner un animal :
-                </label>
-                <select
-                    name="selected-animal"
-                    id="animal-update-employee"
-                    formControlName="id_animal"
-                >
-                    @for(animal of animals; track animal) {
-                    <option [value]="animal.id">{{ animal.firstname }}</option>
-                    }
-                </select>
-                @if(updateForm.controls['id_animal'].invalid &&
-                updateForm.controls['id_animal'].touched){
-                <div class="alert">Un animal est requis</div>
-                }
+
                 <label for="selected-user-update-employee"
                     >Sélectionner un rapporteur :
                 </label>
@@ -275,19 +276,17 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class EmployeeReportHandledComponent implements OnInit {
-    updateForm!: FormGroup;
-
-    constructor(public fb: FormBuilder) {
-        this.updateForm = fb.group({
-            food: new FormControl("", [Validators.required]),
-            grammage: new FormControl("", [Validators.required]),
-            id_user: new FormControl("", [Validators.required]),
-            id_animal: new FormControl("", [Validators.required]),
-            id: new FormControl(""),
-        });
-    }
-
     displayColums: string[] = ["date", "food", "grammage", "actions"];
+
+    private readonly fb = inject(FormBuilder);
+
+    updateForm: FormGroup = this.fb.group({
+        food: new FormControl("", [Validators.required]),
+        grammage: new FormControl("", [Validators.required]),
+        id_user: new FormControl("", [Validators.required]),
+        id_animal: new FormControl("", [Validators.required]),
+        id: new FormControl(""),
+    });
 
     animals!: Animal[];
     users!: User[];

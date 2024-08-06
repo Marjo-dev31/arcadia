@@ -93,15 +93,14 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class VeterinaryHabitatReportHandledComponent implements OnInit {
-    public commentForm: FormGroup;
-
-    constructor(private fb: FormBuilder) {
-        this.commentForm = this.fb.group({
-            comment: new FormControl("", [Validators.required]),
-        });
-    }
-
     displayColums: string[] = ["habitat", "comment", "actions"];
+
+    private readonly fb = inject(FormBuilder);
+
+    commentForm: FormGroup = this.fb.group({
+        comment: new FormControl("", [Validators.required]),
+    });
+
     datasource!: Habitat[];
     report!: string[];
     role: string = localStorage.getItem("role") || "";

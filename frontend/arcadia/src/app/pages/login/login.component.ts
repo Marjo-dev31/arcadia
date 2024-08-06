@@ -81,15 +81,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrls: [`./login.component.css`],
 })
 export class LoginComponent {
-    title: string;
-    constructor(route: ActivatedRoute) {
-        this.title = route.snapshot.data["title"];
-    }
-
+    private readonly route = inject(ActivatedRoute);
     private readonly loginService = inject(LoginService);
     private readonly router = inject(Router);
     private readonly destroyRef = inject(DestroyRef);
 
+    title: string = this.route.snapshot.data["title"];
+    
     user: UserLogin = {
         email: "",
         password: "",

@@ -13,6 +13,7 @@ import {
     FormsModule,
     FormBuilder,
     Validators,
+    NgForm,
 } from "@angular/forms";
 import { NgStyle } from "@angular/common";
 import { tap } from "rxjs";
@@ -99,7 +100,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 class="add-form"
                 #form="ngForm"
                 name="addform"
-                (ngSubmit)="onSubmit()"
+                (ngSubmit)="onSubmit(form)"
             >
                 <input
                     type="text"
@@ -110,7 +111,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     required
                 />
                 @if(title.invalid && title.touched){
-                <p class="alert">Un type de nourriture est requis</p>
+                <p class="alert">Un titre est requis</p>
                 }
                 <textarea
                     name="description"
@@ -122,7 +123,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     required
                 ></textarea>
                 @if(description.invalid && description.touched){
-                <p class="alert">Un type de nourriture est requis</p>
+                <p class="alert">Une description est requise</p>
                 }
                 <button class="add-btn" [disabled]="form.invalid">
                     Enregistrer nouveau service
@@ -149,7 +150,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 ></textarea>
                 @if(serviceForm.controls['description'].invalid &&
                 serviceForm.controls['description'].touched){
-                <div class="alert">Un titre est requis</div>
+                <div class="alert">Une description est requise</div>
                 }
                 <button class="add-btn" [disabled]="serviceForm.invalid">
                     Modifier service
@@ -163,21 +164,19 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrls: [`../component-handled.component.css`],
 })
 export class ServiceHandledComponent implements OnInit {
-    public serviceForm: FormGroup;
+    displayColums: string[] = ["title", "description", "actions", "image"];
 
-    constructor(private fb: FormBuilder) {
-        this.serviceForm = this.fb.group({
-            title: new FormControl("", [Validators.required]),
-            description: new FormControl("", [Validators.required]),
-            id: new FormControl(""),
-        });
-    }
+    private readonly fb = inject(FormBuilder);
+
+    serviceForm: FormGroup = this.fb.group({
+        title: new FormControl("", [Validators.required]),
+        description: new FormControl("", [Validators.required]),
+        id: new FormControl(""),
+    });
 
     private readonly serviceService = inject(ServiceService);
     private readonly imageService = inject(ImageService);
     private readonly destroyRef = inject(DestroyRef);
-
-    displayColums: string[] = ["title", "description", "actions", "image"];
 
     datasource!: Service[];
 
@@ -206,7 +205,7 @@ export class ServiceHandledComponent implements OnInit {
         this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
-    onSubmit(): void {
+    onSubmit(form: NgForm): void {
         this.serviceService
             .addService(this.newService)
             .pipe(
@@ -216,8 +215,7 @@ export class ServiceHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.newService.title = "";
-        this.newService.description = "";
+        form.reset();
         this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
