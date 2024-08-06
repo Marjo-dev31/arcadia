@@ -1,8 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core'
-import { Animal } from '../../shared/models'
-import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog'
-import { TitleCasePipe } from '@angular/common'
-import { environment } from '../../environments/environment'
+import { Component, Inject } from '@angular/core';
+import { Animal } from '../../shared/models';
+import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
+import { TitleCasePipe } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-animals',
@@ -35,7 +35,7 @@ import { environment } from '../../environments/environment'
                         }
                     </div>
                     <div mat-dialog-actions class="mat-dialog-actions">
-                        <button mat-dialog-close>Fermer</button>
+                        <button mat-dialog-close cdkFocusInitial>Fermer</button>
                     </div>
                 </div>
 
@@ -48,6 +48,6 @@ import { environment } from '../../environments/environment'
 export class AnimalsComponent {
     constructor(@Inject(MAT_DIALOG_DATA) public data: { animal: Animal }) {}
 
-    url = `${environment.serverUrl}/upload/`
-    animal: Animal = this.data.animal
+    url = `${environment.serverUrl}/upload/`;
+    animal: Animal = this.data.animal;
 }

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
+import { Component, DestroyRef, inject } from '@angular/core'
 import { MailService } from './services/mail.service'
 import {
     FormBuilder,
@@ -68,7 +68,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     `,
     styles: `
 body {
-  background-image: url("/images/feuilles\ volantes.png");
+  background-image: url("/images/feuilles volantes.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 30%;

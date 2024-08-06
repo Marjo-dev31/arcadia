@@ -30,13 +30,13 @@ import { LoginService } from '../../../pages/login/service/login.service'
                 </nav>
                 <div class="login-btn">
                     @if(loginService.isLoggin === true){
-                    <a (click)="logout()">Déconnexion</a>
+                    <a (click)="logout()" tabindex="0" role="button" (keyup.enter)="logout()">Déconnexion</a>
                     } @else {
                     <a [routerLink]="['/connexion']">Connexion</a>
                     }
                 </div>
                 <div class="menu-btn">
-                    <a (click)="toggleSideDrawer()">
+                    <a (click)="toggleSideDrawer()" tabindex="0" role="button" (keyup.enter)="toggleSideDrawer()">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -48,6 +48,9 @@ import { LoginService } from '../../../pages/login/service/login.service'
             id="side-drawer"
             [ngStyle]="{ display: showSideDrawer ? 'block' : 'none' }"
             (click)="toggleSideDrawer()"
+            tabindex="0"
+            role="button"
+            (keyup.enter)="toggleSideDrawer()"
         >
             <nav>
                 <ul>
@@ -67,7 +70,7 @@ import { LoginService } from '../../../pages/login/service/login.service'
                             >EspacePersonnel</a
                         >
                     </li>
-                    <li><a (click)="logout()">Déconnexion</a></li>
+                    <li><a (click)="logout()" tabindex="0" role="button" (keyup.enter)="logout()">Déconnexion</a></li>
                     } @else {
                     <li><a [routerLink]="['/connexion']">Connexion</a></li>
                     }

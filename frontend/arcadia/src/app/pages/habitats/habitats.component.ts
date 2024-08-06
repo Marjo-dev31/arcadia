@@ -24,7 +24,7 @@ import { environment } from '../../environments/environment'
             <section class="habitats">
                 @if(habitats && habitats.length) { @for (habitat of habitats;
                 track habitat) {
-                <div class="habitat-item" (click)="toggleDetails(habitat.id)">
+                <div class="habitat-item" (click)="toggleDetails(habitat.id)" tabindex="0" role="button" (keyup.enter)="toggleDetails(habitat.id)">
                     <img
                         [src]="this.url + habitat.image_url"
                         alt="photo représentative de l'habitat"
@@ -34,7 +34,7 @@ import { environment } from '../../environments/environment'
                         <h3 class="habitat-title">
                             {{ habitat.title | titlecase }}
                         </h3>
-                        @if (showDetails == habitat.id) {
+                        @if (showDetails === habitat.id) {
                         <p>{{ habitat.description }}</p>
                         @if(animals) {
                         <ul>
@@ -42,6 +42,9 @@ import { environment } from '../../environments/environment'
                             <li
                                 class="animal-item"
                                 (click)="openDialog(animal)"
+                                role="button"
+                                tabindex="0"
+                                (keyup.enter)="openDialog(animal)"
                             >
                                 {{ animal.firstname }}
                             </li>

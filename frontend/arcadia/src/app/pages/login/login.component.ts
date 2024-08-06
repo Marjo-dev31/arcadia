@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
+import { Component, DestroyRef, inject } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { UserLogin } from '../../shared/models/user.interface'
 import { ActivatedRoute, Router, RouterLink } from '@angular/router'

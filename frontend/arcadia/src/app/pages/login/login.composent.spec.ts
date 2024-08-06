@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http'
 describe('LoginComponent', () => {
     let component: LoginComponent
     let fixture: ComponentFixture<LoginComponent>
-    let service: LoginService
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -31,7 +30,6 @@ describe('LoginComponent', () => {
         component = fixture.componentInstance
         fixture.detectChanges()
 
-        service = TestBed.inject(LoginService)
     })
 
     it('should create', () => {

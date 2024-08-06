@@ -353,7 +353,7 @@ export class EmployeeReportHandledComponent implements OnInit {
         this.employeeService
             .addEmployeeReport(this.newReport)
             .pipe(
-                tap((res) => {
+                tap(() => {
                     this.getEmployeeReports(this.selectedAnimalOption)
                 }),
                 takeUntilDestroyed(this.destroyRef)

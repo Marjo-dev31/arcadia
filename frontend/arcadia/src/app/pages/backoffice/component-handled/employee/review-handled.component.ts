@@ -30,7 +30,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Etat actuel</th>
                 <td mat-cell *matCellDef="let review">
-                    @if(review.status == true){
+                    @if(review.status === true){
                     <div>Publié</div>
                     } @else {
                     <div>Refusé</div>
