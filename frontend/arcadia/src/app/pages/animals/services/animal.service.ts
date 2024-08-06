@@ -7,7 +7,7 @@ import { Response } from '../../../shared/models/response.interface';
 
 @Injectable()
 export class AnimalService {
-    url = `${environment.serverUrl}/animals`;
+    private readonly url = `${environment.serverUrl}/animals`;
 
     constructor(private http: HttpClient) {}
 
