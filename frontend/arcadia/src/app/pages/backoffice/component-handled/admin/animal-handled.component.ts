@@ -1,11 +1,16 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { MatIconModule } from '@angular/material/icon'
-import { MatTableModule } from '@angular/material/table'
-import { Animal, AnimalCreate, Habitat, Breed } from '../../../../shared/models'
-import { AnimalService } from '../../../animals/services/animal.service'
-import { ImageService } from '../../../home/services/image.service'
-import { tap } from 'rxjs'
-import { LowerCasePipe, NgStyle, TitleCasePipe } from '@angular/common'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableModule } from "@angular/material/table";
+import {
+    Animal,
+    AnimalCreate,
+    Habitat,
+    Breed,
+} from "../../../../shared/models";
+import { AnimalService } from "../../../animals/services/animal.service";
+import { ImageService } from "../../../home/services/image.service";
+import { tap } from "rxjs";
+import { LowerCasePipe, NgStyle, TitleCasePipe } from "@angular/common";
 import {
     FormBuilder,
     FormControl,
@@ -14,13 +19,13 @@ import {
     NgForm,
     ReactiveFormsModule,
     Validators,
-} from '@angular/forms'
-import { HabitatsService } from '../../../habitats/services/habitat.service'
-import { BreedService } from '../../../animals/services/breed.service'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "@angular/forms";
+import { HabitatsService } from "../../../habitats/services/habitat.service";
+import { BreedService } from "../../../animals/services/breed.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-animal-handled',
+    selector: "app-animal-handled",
     standalone: true,
     imports: [
         MatTableModule,
@@ -238,54 +243,54 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class AnimalHandledComponent implements OnInit {
-    public updateForm: FormGroup
-    public breedForm: FormGroup
+    public updateForm: FormGroup;
+    public breedForm: FormGroup;
 
     displayColums: string[] = [
-        'firstname',
-        'race',
-        'habitat',
-        'condition',
-        'actions',
-        'image',
-    ]
+        "firstname",
+        "race",
+        "habitat",
+        "condition",
+        "actions",
+        "image",
+    ];
 
     constructor(public fb: FormBuilder) {
         this.updateForm = this.fb.group({
-            firstname: new FormControl('', [Validators.required]),
-            habitat: new FormControl('', [Validators.required]),
-            breed: new FormControl('', [Validators.required]),
-            id: new FormControl(''),
-        })
+            firstname: new FormControl("", [Validators.required]),
+            habitat: new FormControl("", [Validators.required]),
+            breed: new FormControl("", [Validators.required]),
+            id: new FormControl(""),
+        });
         this.breedForm = this.fb.group({
-            name: new FormControl('', [Validators.required]),
-        })
+            name: new FormControl("", [Validators.required]),
+        });
     }
 
-    private readonly animalService = inject(AnimalService)
-    private readonly imageService = inject(ImageService)
-    private readonly habitatService = inject(HabitatsService)
-    private readonly breedService = inject(BreedService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly animalService = inject(AnimalService);
+    private readonly imageService = inject(ImageService);
+    private readonly habitatService = inject(HabitatsService);
+    private readonly breedService = inject(BreedService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    datasource!: Animal[] | undefined
-    habitats!: Habitat[]
-    breeds!: Breed[] | undefined
+    datasource!: Animal[] | undefined;
+    habitats!: Habitat[];
+    breeds!: Breed[] | undefined;
 
     newAnimal: AnimalCreate = {
-        firstname: '',
-        habitat: '',
-        breed: '',
-    }
+        firstname: "",
+        habitat: "",
+        breed: "",
+    };
 
-    addFormIsDisplay: boolean = false
-    updateFormIsDisplay: boolean = false
-    submitted: boolean = false
+    addFormIsDisplay: boolean = false;
+    updateFormIsDisplay: boolean = false;
+    submitted: boolean = false;
 
     ngOnInit() {
-        this.getAnimals()
-        this.getHabitat()
-        this.getBreed()
+        this.getAnimals();
+        this.getHabitat();
+        this.getBreed();
     }
 
     getAnimals() {
@@ -293,23 +298,23 @@ export class AnimalHandledComponent implements OnInit {
             .getHandleAnimals()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.datasource = response
-            })
+                this.datasource = response;
+            });
     }
 
     onFileChange(event: any, id: string) {
-        const file: File = event.target.files[0]
-        const formData = new FormData()
-        formData.append('myImg', file)
+        const file: File = event.target.files[0];
+        const formData = new FormData();
+        formData.append("myImg", file);
         this.imageService
             .addAnimalImage(formData, id)
             .pipe(
                 tap(() => {
-                    this.getAnimals()
+                    this.getAnimals();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     deleteImage(id: string) {
@@ -317,11 +322,11 @@ export class AnimalHandledComponent implements OnInit {
             .deleteImage(id)
             .pipe(
                 tap(() => {
-                    this.getAnimals()
+                    this.getAnimals();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     deleteAnimal(id: string) {
@@ -329,15 +334,15 @@ export class AnimalHandledComponent implements OnInit {
             .deleteAnimal(id)
             .pipe(
                 tap(() => {
-                    this.getAnimals()
+                    this.getAnimals();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     onSubmit(form: NgForm) {
@@ -345,25 +350,25 @@ export class AnimalHandledComponent implements OnInit {
             .addAnimal(this.newAnimal)
             .pipe(
                 tap(() => {
-                    this.getAnimals()
+                    this.getAnimals();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.addFormIsDisplay = !this.addFormIsDisplay
-        form.reset()
+            .subscribe();
+        this.addFormIsDisplay = !this.addFormIsDisplay;
+        form.reset();
     }
 
     editAnimal(id: string) {
-        this.updateFormIsDisplay = true
+        this.updateFormIsDisplay = true;
         if (this.datasource) {
-            const animalToUpdate = this.datasource.find((el) => el.id === id)
+            const animalToUpdate = this.datasource.find((el) => el.id === id);
             this.updateForm.patchValue({
                 firstname: animalToUpdate?.firstname,
                 habitat: animalToUpdate?.id_habitat,
                 breed: animalToUpdate?.id_breed,
                 id: animalToUpdate?.id,
-            })
+            });
         }
     }
 
@@ -372,13 +377,13 @@ export class AnimalHandledComponent implements OnInit {
             .updateAnimal(this.updateForm.value)
             .pipe(
                 tap(() => {
-                    this.getAnimals()
+                    this.getAnimals();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.updateForm.reset()
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+            .subscribe();
+        this.updateForm.reset();
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 
     getBreed() {
@@ -386,14 +391,14 @@ export class AnimalHandledComponent implements OnInit {
             .getBreeds()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.breeds = response
-            })
+                this.breeds = response;
+            });
     }
 
     getHabitat() {
         this.habitatService.getHabitats().then((response) => {
-            this.habitats = response
-        })
+            this.habitats = response;
+        });
     }
 
     addBreed() {
@@ -401,15 +406,15 @@ export class AnimalHandledComponent implements OnInit {
             .addBreed(this.breedForm.value)
             .pipe(
                 tap(() => {
-                    this.getBreed()
+                    this.getBreed();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.submitted = true
+            .subscribe();
+        this.submitted = true;
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 }

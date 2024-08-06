@@ -1,5 +1,11 @@
-import { CommonModule } from '@angular/common'
-import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core'
+import { CommonModule } from "@angular/common";
+import {
+    Component,
+    DestroyRef,
+    OnInit,
+    ViewChild,
+    inject,
+} from "@angular/core";
 import {
     FormBuilder,
     FormControl,
@@ -8,24 +14,24 @@ import {
     NgForm,
     ReactiveFormsModule,
     Validators,
-} from '@angular/forms'
-import { MatIconModule } from '@angular/material/icon'
-import { MatTableDataSource, MatTableModule } from '@angular/material/table'
+} from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import {
     Animal,
     VeterinaryReport,
     VeterinaryReportCreate,
     User,
-} from '../../../../shared/models'
-import { AnimalService } from '../../../animals/services/animal.service'
-import { MatSortModule, MatSort } from '@angular/material/sort'
-import { VeterinaryService } from '../../../animals/services/veterinary.service'
-import { tap } from 'rxjs'
-import { UserService } from '../../../login/service/user.service'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "../../../../shared/models";
+import { AnimalService } from "../../../animals/services/animal.service";
+import { MatSortModule, MatSort } from "@angular/material/sort";
+import { VeterinaryService } from "../../../animals/services/veterinary.service";
+import { tap } from "rxjs";
+import { UserService } from "../../../login/service/user.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-veterinary-animal-report-handled',
+    selector: "app-veterinary-animal-report-handled",
     standalone: true,
     imports: [
         MatTableModule,
@@ -335,73 +341,73 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class VeterinaryAnimalReportHandledComponent implements OnInit {
-    updateForm!: FormGroup
+    updateForm!: FormGroup;
 
     constructor(public fb: FormBuilder) {
         this.updateForm = fb.group({
-            food: new FormControl('', [Validators.required]),
-            grammage: new FormControl('', [Validators.required]),
-            health: new FormControl('', [Validators.required]),
-            details_condition: new FormControl(''),
-            id_user: new FormControl('', [Validators.required]),
-            id_animal: new FormControl('', [Validators.required]),
-            id: new FormControl(''),
-        })
+            food: new FormControl("", [Validators.required]),
+            grammage: new FormControl("", [Validators.required]),
+            health: new FormControl("", [Validators.required]),
+            details_condition: new FormControl(""),
+            id_user: new FormControl("", [Validators.required]),
+            id_animal: new FormControl("", [Validators.required]),
+            id: new FormControl(""),
+        });
     }
 
     displayColums: string[] = [
-        'date',
-        'healthcondition',
-        'food',
-        'grammage',
-        'healthconditiondetails',
-        'actions',
-    ]
+        "date",
+        "healthcondition",
+        "food",
+        "grammage",
+        "healthconditiondetails",
+        "actions",
+    ];
 
-    animals!: Animal[]
-    veterinaryReports: VeterinaryReport[] = []
-    users!: User[]
+    animals!: Animal[];
+    veterinaryReports: VeterinaryReport[] = [];
+    users!: User[];
 
-    selectedAnimalOption!: string
+    selectedAnimalOption!: string;
 
-    dataSource = new MatTableDataSource(this.veterinaryReports)
+    dataSource = new MatTableDataSource(this.veterinaryReports);
 
-    addFormIsDisplay: boolean = false
-    updateFormIsDisplay: boolean = false
+    addFormIsDisplay: boolean = false;
+    updateFormIsDisplay: boolean = false;
 
     newReport: VeterinaryReportCreate = {
-        food: '',
+        food: "",
         grammage: 0,
-        health: '',
-        details_condition: '',
-        id_user: '',
-        id_animal: '',
-    }
+        health: "",
+        details_condition: "",
+        id_user: "",
+        id_animal: "",
+    };
 
-    role: string = localStorage.getItem('role') || ''
+    role: string = localStorage.getItem("role") || "";
 
-    responsemessage: string = ''
+    responsemessage: string = "";
 
-    private readonly animalService = inject(AnimalService)
-    private readonly veterinaryService = inject(VeterinaryService)
-    private readonly userService = inject(UserService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly animalService = inject(AnimalService);
+    private readonly veterinaryService = inject(VeterinaryService);
+    private readonly userService = inject(UserService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    @ViewChild(MatSort) sort!: MatSort
+    @ViewChild(MatSort) sort!: MatSort;
 
     ngOnInit() {
-        this.getAnimals()
-        this.getUsers()
+        this.getAnimals();
+        this.getUsers();
     }
 
     ngAfterOnInit() {
-        this.dataSource.sort = this.sort
+        this.dataSource.sort = this.sort;
     }
 
     getAnimals() {
         this.animalService.getAnimals().then((response) => {
-            this.animals = response
-        })
+            this.animals = response;
+        });
     }
 
     getUsers() {
@@ -409,8 +415,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
             .getUsers()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.users = response
-            })
+                this.users = response;
+            });
     }
 
     getVeterinaryReports(id: string) {
@@ -418,10 +424,12 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
             .getVeterinaryReports(id)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.veterinaryReports = response
-                this.dataSource = new MatTableDataSource(this.veterinaryReports)
-                this.dataSource.sort = this.sort
-            })
+                this.veterinaryReports = response;
+                this.dataSource = new MatTableDataSource(
+                    this.veterinaryReports
+                );
+                this.dataSource.sort = this.sort;
+            });
     }
 
     deleteReport(id: string) {
@@ -429,15 +437,15 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
             .deleteReport(id)
             .pipe(
                 tap(() => {
-                    this.getVeterinaryReports(id)
+                    this.getVeterinaryReports(id);
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     onSubmit(form: NgForm) {
@@ -445,17 +453,19 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
             .addVeterinaryReport(this.newReport)
             .pipe(
                 tap(() => {
-                    this.getVeterinaryReports(this.selectedAnimalOption)
+                    this.getVeterinaryReports(this.selectedAnimalOption);
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        form.reset()
+            .subscribe();
+        form.reset();
     }
 
     editReport(id: string) {
-        this.updateFormIsDisplay = true
-        const reportToUpdate = this.veterinaryReports.find((el) => el.id === id)
+        this.updateFormIsDisplay = true;
+        const reportToUpdate = this.veterinaryReports.find(
+            (el) => el.id === id
+        );
         this.updateForm.patchValue({
             food: reportToUpdate?.food,
             grammage: reportToUpdate?.grammage,
@@ -464,7 +474,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
             id_user: reportToUpdate?.id_user,
             id_animal: reportToUpdate?.id_animal,
             id: reportToUpdate?.id,
-        })
+        });
     }
 
     updateReport(id: string) {
@@ -472,15 +482,15 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
             .updateReport(this.updateForm.value)
             .pipe(
                 tap(() => {
-                    this.getVeterinaryReports(id)
+                    this.getVeterinaryReports(id);
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+            .subscribe();
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 }

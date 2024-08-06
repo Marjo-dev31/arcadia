@@ -1,16 +1,16 @@
-import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { Observable, map } from 'rxjs'
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, map } from "rxjs";
 import {
     VeterinaryReport,
     VeterinaryReportCreate,
     Response,
-} from '../../../shared/models'
-import { environment } from '../../../environments/environment'
+} from "../../../shared/models";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class VeterinaryService {
-    url = `${environment.serverUrl}/veterinaries`
+    url = `${environment.serverUrl}/veterinaries`;
 
     constructor(private http: HttpClient) {}
 
@@ -20,28 +20,32 @@ export class VeterinaryService {
             .pipe(
                 map((r) => {
                     if (r.data) {
-                        return r.data
+                        return r.data;
                     } else {
-                        return []
+                        return [];
                     }
                 })
-            )
+            );
     }
 
     addVeterinaryReport(
         report: VeterinaryReportCreate
     ): Observable<Response<VeterinaryReport>> {
-        return this.http.post<Response<VeterinaryReport>>(this.url, report)
+        return this.http.post<Response<VeterinaryReport>>(this.url, report);
     }
 
-    updateReport(report: VeterinaryReport): Observable<Response<VeterinaryReport>> {
+    updateReport(
+        report: VeterinaryReport
+    ): Observable<Response<VeterinaryReport>> {
         return this.http.put<Response<VeterinaryReport>>(
             `${this.url}/${report.id}`,
             report
-        )
+        );
     }
 
     deleteReport(id: string): Observable<Response<VeterinaryReport>> {
-        return this.http.delete<Response<VeterinaryReport>>(`${this.url}/${id}`)
+        return this.http.delete<Response<VeterinaryReport>>(
+            `${this.url}/${id}`
+        );
     }
 }

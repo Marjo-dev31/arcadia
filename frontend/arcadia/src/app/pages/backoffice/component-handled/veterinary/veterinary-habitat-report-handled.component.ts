@@ -1,21 +1,21 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { MatIconModule } from '@angular/material/icon'
-import { MatTableModule } from '@angular/material/table'
-import { HabitatsService } from '../../../habitats/services/habitat.service'
-import { Habitat } from '../../../../shared/models'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableModule } from "@angular/material/table";
+import { HabitatsService } from "../../../habitats/services/habitat.service";
+import { Habitat } from "../../../../shared/models";
 import {
     FormBuilder,
     FormControl,
     FormGroup,
     ReactiveFormsModule,
     Validators,
-} from '@angular/forms'
-import { tap } from 'rxjs'
-import { NgStyle } from '@angular/common'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "@angular/forms";
+import { tap } from "rxjs";
+import { NgStyle } from "@angular/common";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-veterinary-habitat-report-handled',
+    selector: "app-veterinary-habitat-report-handled",
     standalone: true,
     imports: [MatTableModule, MatIconModule, ReactiveFormsModule, NgStyle],
     template: `
@@ -93,36 +93,36 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class VeterinaryHabitatReportHandledComponent implements OnInit {
-    public commentForm: FormGroup
+    public commentForm: FormGroup;
 
     constructor(private fb: FormBuilder) {
         this.commentForm = this.fb.group({
-            comment: new FormControl('', [Validators.required]),
-        })
+            comment: new FormControl("", [Validators.required]),
+        });
     }
 
-    displayColums: string[] = ['habitat', 'comment', 'actions']
-    datasource!: Habitat[]
-    report!: string[]
-    role: string = localStorage.getItem('role') || ''
+    displayColums: string[] = ["habitat", "comment", "actions"];
+    datasource!: Habitat[];
+    report!: string[];
+    role: string = localStorage.getItem("role") || "";
 
-    private readonly habitatService = inject(HabitatsService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly habitatService = inject(HabitatsService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    addFormIsDisplay: boolean = false
+    addFormIsDisplay: boolean = false;
 
     ngOnInit() {
-        this.getHabitats()
+        this.getHabitats();
     }
 
     getHabitats() {
         this.habitatService.getHabitats().then((response) => {
-            this.datasource = response
-        })
+            this.datasource = response;
+        });
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     onSubmit(id: string) {
@@ -130,13 +130,13 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
             .addComment(this.commentForm.value, id)
             .pipe(
                 tap(() => {
-                    this.getHabitats()
+                    this.getHabitats();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.commentForm.reset()
-        this.addFormIsDisplay = !this.addFormIsDisplay
+            .subscribe();
+        this.commentForm.reset();
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     deleteComment(id: string) {
@@ -144,10 +144,10 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
             .deleteComment(id)
             .pipe(
                 tap(() => {
-                    this.getHabitats()
+                    this.getHabitats();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 }

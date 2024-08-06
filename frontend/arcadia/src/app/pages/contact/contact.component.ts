@@ -1,17 +1,17 @@
-import { Component, DestroyRef, inject } from '@angular/core'
-import { MailService } from './services/mail.service'
+import { Component, DestroyRef, inject } from "@angular/core";
+import { MailService } from "./services/mail.service";
 import {
     FormBuilder,
     FormControl,
     FormGroup,
     ReactiveFormsModule,
     Validators,
-} from '@angular/forms'
-import { ActivatedRoute } from '@angular/router'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-contact',
+    selector: "app-contact",
     standalone: true,
     imports: [ReactiveFormsModule],
     template: `
@@ -109,33 +109,33 @@ body {
   `,
 })
 export class ContactComponent {
-    public contactForm: FormGroup
-    title: string
+    public contactForm: FormGroup;
+    title: string;
 
     constructor(public fb: FormBuilder, route: ActivatedRoute) {
         this.contactForm = this.fb.group({
-            title: new FormControl('', [Validators.required]),
-            text: new FormControl('', [Validators.required]),
-            emailToResponse: new FormControl('', [
+            title: new FormControl("", [Validators.required]),
+            text: new FormControl("", [Validators.required]),
+            emailToResponse: new FormControl("", [
                 Validators.required,
                 Validators.email,
             ]),
-        })
+        });
 
-        this.title = route.snapshot.data['title']
+        this.title = route.snapshot.data["title"];
     }
 
-    private readonly mailService = inject(MailService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly mailService = inject(MailService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    submitted = false
+    submitted = false;
 
     onSubmit() {
         this.mailService
             .sendEmail(this.contactForm.value)
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe()
-        this.submitted = true
-        this.contactForm.reset()
+            .subscribe();
+        this.submitted = true;
+        this.contactForm.reset();
     }
 }

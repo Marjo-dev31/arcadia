@@ -1,11 +1,11 @@
-import { Component, OnInit, inject, effect, DestroyRef } from '@angular/core'
-import { RouterLink } from '@angular/router'
-import { OpeningService } from '../../../pages/services/service/opening.service'
-import { Opening } from '../../models/opening.interface'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { Component, OnInit, inject, effect, DestroyRef } from "@angular/core";
+import { RouterLink } from "@angular/router";
+import { OpeningService } from "../../../pages/services/service/opening.service";
+import { Opening } from "../../models/opening.interface";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-footer',
+    selector: "app-footer",
     imports: [RouterLink],
     standalone: true,
     template: `
@@ -68,17 +68,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 export class FooterComponent implements OnInit {
     constructor() {
         effect(() => {
-            this.openToPublic = this.openingService.schedule()
-        })
+            this.openToPublic = this.openingService.schedule();
+        });
     }
 
-    public readonly openingService = inject(OpeningService)
-    destroyRef = inject(DestroyRef)
+    public readonly openingService = inject(OpeningService);
+    destroyRef = inject(DestroyRef);
 
-    openToPublic!: Opening
+    openToPublic!: Opening;
 
     ngOnInit() {
-        this.getOpeningToPublic()
+        this.getOpeningToPublic();
     }
 
     getOpeningToPublic() {
@@ -86,7 +86,7 @@ export class FooterComponent implements OnInit {
             .getOpeningToPublic()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.openToPublic = response[0]
-            })
+                this.openToPublic = response[0];
+            });
     }
 }

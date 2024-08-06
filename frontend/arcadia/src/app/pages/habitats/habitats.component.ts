@@ -1,17 +1,17 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { HabitatsService } from './services/habitat.service'
-import { Animal, AnimalOnMongo, Habitat } from '../../shared/models'
-import { AnimalsComponent } from '../animals/animals.component'
-import { MatDialog, MatDialogModule } from '@angular/material/dialog'
-import { AnimalService } from '../animals/services/animal.service'
-import { ClickService } from '../animals/services/click.service'
-import { ActivatedRoute } from '@angular/router'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { TitleCasePipe } from '@angular/common'
-import { environment } from '../../environments/environment'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { HabitatsService } from "./services/habitat.service";
+import { Animal, AnimalOnMongo, Habitat } from "../../shared/models";
+import { AnimalsComponent } from "../animals/animals.component";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { AnimalService } from "../animals/services/animal.service";
+import { ClickService } from "../animals/services/click.service";
+import { ActivatedRoute } from "@angular/router";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { TitleCasePipe } from "@angular/common";
+import { environment } from "../../environments/environment";
 
 @Component({
-    selector: 'app-habitats',
+    selector: "app-habitats",
     standalone: true,
     imports: [MatDialogModule, TitleCasePipe],
     template: `
@@ -24,7 +24,13 @@ import { environment } from '../../environments/environment'
             <section class="habitats">
                 @if(habitats && habitats.length) { @for (habitat of habitats;
                 track habitat) {
-                <div class="habitat-item" (click)="toggleDetails(habitat.id)" tabindex="0" role="button" (keyup.enter)="toggleDetails(habitat.id)">
+                <div
+                    class="habitat-item"
+                    (click)="toggleDetails(habitat.id)"
+                    tabindex="0"
+                    role="button"
+                    (keyup.enter)="toggleDetails(habitat.id)"
+                >
                     <img
                         [src]="this.url + habitat.image_url"
                         alt="photo représentative de l'habitat"
@@ -64,30 +70,30 @@ import { environment } from '../../environments/environment'
     styleUrls: [`./habitats.component.css`],
 })
 export class HabitatsComponent implements OnInit {
-    habitats!: Habitat[]
-    animals!: Animal[] | undefined
-    animalsOnMongoByFirstname!: AnimalOnMongo
-    showDetails: string | undefined = undefined
-    title: string
-    url = `${environment.serverUrl}/upload/`
+    habitats!: Habitat[];
+    animals!: Animal[] | undefined;
+    animalsOnMongoByFirstname!: AnimalOnMongo;
+    showDetails: string | undefined = undefined;
+    title: string;
+    url = `${environment.serverUrl}/upload/`;
 
-    private readonly habitatService = inject(HabitatsService)
-    private readonly animalService = inject(AnimalService)
-    private readonly clickService = inject(ClickService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly habitatService = inject(HabitatsService);
+    private readonly animalService = inject(AnimalService);
+    private readonly clickService = inject(ClickService);
+    private readonly destroyRef = inject(DestroyRef);
 
     constructor(private matdialog: MatDialog, route: ActivatedRoute) {
-        this.title = route.snapshot.data['title']
+        this.title = route.snapshot.data["title"];
     }
 
     ngOnInit() {
-        this.getHabitats()
+        this.getHabitats();
     }
 
     getHabitats() {
         this.habitatService.getHabitats().then((response) => {
-            this.habitats = response
-        })
+            this.habitats = response;
+        });
     }
 
     getAnimalsByHabitat(id: string) {
@@ -95,27 +101,27 @@ export class HabitatsComponent implements OnInit {
             .getAnimalsByHabitat(id)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.animals = response
-            })
+                this.animals = response;
+            });
     }
 
     toggleDetails(id: string) {
-        this.showDetails = id
-        this.getAnimalsByHabitat(id)
+        this.showDetails = id;
+        this.getAnimalsByHabitat(id);
     }
 
     openDialog(animal: Animal) {
         const dialogRef = this.matdialog.open(AnimalsComponent, {
-            width: '400px',
+            width: "400px",
             data: { animal: animal },
-        })
-        this.addClick(animal.firstname)
+        });
+        this.addClick(animal.firstname);
     }
 
     addClick(firstname: string) {
         this.clickService
             .addClick(firstname)
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe()
+            .subscribe();
     }
 }
