@@ -18,7 +18,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { RoleGuard } from './shared/guards/role.guard';
 import { ForbiddenComponent } from './pages/backoffice/component-handled/shared/forbidden.component';
 import { ErrorComponent } from './shared/components/errors/error.component';
-import { PasswordForgotComponent } from './pages/passwordforgot/passwordforgot';
+import { PasswordForgotComponent } from './pages/passwordforgot/passwordforgot.component';
 import { UpdatePasswordComponent } from './pages/passwordforgot/update-password.component';
 
 export const routes: Routes = [
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: 'habitats', component: HabitatsComponent, data: {title: 'Habitats'} },
   { path: 'connexion', component: LoginComponent, data: {title:'Connexion'} },
   {
-    path: 'espacepersonnel', component: BackofficeComponent, canActivate:[AuthGuard],canActivateChild:[RoleGuard],
+    path: 'espacepersonnel', component: BackofficeComponent, canActivate:[AuthGuard],canActivateChild:[RoleGuard], data: {title:'Espace Personnel'},
     children: [
       { path: 'services', component: ServiceHandledComponent, data: {expectedRoles: ['Admin', 'Employé']} },
       { path: 'habitats', component: HabitatHandledComponent, data: {expectedRoles: ['Admin']} },

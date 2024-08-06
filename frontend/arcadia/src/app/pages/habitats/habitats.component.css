@@ -1,15 +1,15 @@
- /* style habitat card */
+/* style habitat card */
 
- .habitats {
+.habitats {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
     margin: auto;
-  }
-  
-  .habitat-item {
+}
+
+.habitat-item {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -19,50 +19,48 @@
     box-shadow: 0 3px 6px rgba(70, 46, 1, 0.2);
     margin: 4rem 0;
     cursor: default;
-  }
-  
-  .habitat-img {
+}
+
+.habitat-img {
     max-width: 325px;
     height: auto;
     object-fit: cover;
     object-position: right;
-  }
-  
-  .habitat-content {
+}
+
+.habitat-content {
     display: flex;
     flex-direction: column;
     text-align: justify;
     justify-content: center;
     max-width: 325px;
     overflow: hidden;
-  }
+}
 
-  .habitat-title:hover {
-    /* background-color: var(--color-call-to-action); */
+.habitat-title:hover {
     border: solid 0.2rem var(--color-call-to-action);
     border-radius: 20px;
-  }
-  
-  .habitat-content > * {
+}
+
+.habitat-content > * {
     margin: 0;
     padding: 0.5rem;
-  }
-  
-  li {
+}
+
+li {
     list-style: none;
     padding: 0.5rem;
-  }
+}
 
-  .animal-item {
+.animal-item {
     text-decoration: underline;
     cursor: pointer;
-  }
+}
 
+/* responsive */
 
-  /* responsive */
-  
-  @media screen and (max-width:700px ){
-      .habitat-item {
-          width: 325px;
-      }
-  }
+@media screen and (max-width: 700px) {
+    .habitat-item {
+        width: 325px;
+    }
+}

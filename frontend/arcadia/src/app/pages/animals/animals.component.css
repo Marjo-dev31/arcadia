@@ -1,42 +1,42 @@
-  /* style ID card animal */
-  
+/* style ID card animal */
+
 .id-card-animal {
-  flex-wrap: wrap;
-  background-color: var(--color-primary);
-  color: var(--color-background);
-  width: 100%;
-  padding-bottom: 2rem;
+    flex-wrap: wrap;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    width: 100%;
+    padding-bottom: 2rem;
 }
 
 .id-card-animal-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .id-card-animal img {
-  overflow: hidden;
-  max-height: 300px;
-  max-width: 400px;
+    overflow: hidden;
+    max-height: 300px;
+    max-width: 400px;
 }
 
 .id-card-animal-content {
-  text-align: center;
+    text-align: center;
 }
 
 .mat-dialog-actions {
-  width: 100%;
-  text-align: center;
+    width: 100%;
+    text-align: center;
 }
 
 .mat-dialog-actions button {
-  background-color: var(--color-background);
-  color: var(--color-primary);
-  border: none;
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    border: none;
 }
 
 .mat-dialog-actions button:hover {
-  background-color: var(--color-call-to-action);
-  color: var(--color-font);
+    background-color: var(--color-call-to-action);
+    color: var(--color-font);
 }

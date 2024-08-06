@@ -1,84 +1,95 @@
-import { AsyncPipe, NgStyle } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { LoginService } from '../../../pages/login/service/login.service';
+import { AsyncPipe, NgStyle } from '@angular/common'
+import { Component, inject } from '@angular/core'
+import { Router, RouterLink } from '@angular/router'
+import { LoginService } from '../../../pages/login/service/login.service'
 
 @Component({
-  selector: 'app-header',
-  imports: [RouterLink, NgStyle, AsyncPipe],
-  standalone: true,
-  template: `
-    <header>
-      <div class="links">
-        <a [routerLink]="['/']" id="logo">
-          <img src="assets/images/logo L.png" alt="logo Arcadia" />
-        </a>
-        <nav class="navbar">
-          <ul class="links-pages">
-            <li><a [routerLink]="['/']">Accueil</a></li>
-            <li><a [routerLink]="['/habitats']">Habitats</a></li>
-            <li><a [routerLink]="['/services']">Services</a></li>
-            <li><a [routerLink]="['/contact']">Contact</a></li>
-            @if(loginService.isLoggin === true){
-            <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
-            }
-          </ul>
-        </nav>
-        <div class="login-btn">
-          @if(loginService.isLoggin === true){
-          <a  (click)="logout()">Déconnexion</a>
-          } @else {
-          <a [routerLink]="['/connexion']">Connexion</a>
-          }
-        </div>
-        <div class="menu-btn">
-          <a (click)="toggleSideDrawer()">
-            <span></span>
-            <span></span>
-            <span></span>
-          </a>
-        </div>
-      </div>
-    </header>
-    <aside
-      id="side-drawer"
-      [ngStyle]="{ display: showSideDrawer ? 'block' : 'none' }"
-      (click)="toggleSideDrawer()"
-    >
-      <nav>
-        <ul>
-          <li><a [routerLink]="['/']">Accueil</a></li>
-          <li><a [routerLink]="['/habitats']" [state]="{title:'Habitats'}">Habitats</a></li>
-          <li><a [routerLink]="['/services']">Services</a></li>
-          <li><a [routerLink]="['/contact']">Contact</a></li>
-          @if(loginService.isLoggin === true){
-          <li><a [routerLink]="['/espacepersonnel']">EspacePersonnel</a></li>
-          <li><a (click)="logout()">Déconnexion</a></li>
-          } @else {
-          <li><a [routerLink]="['/connexion']">Connexion</a></li>
-          }
-        </ul>
-      </nav>
-    </aside>
-  `,
-  styleUrl: './header.component.css',
+    selector: 'app-header',
+    imports: [RouterLink, NgStyle, AsyncPipe],
+    standalone: true,
+    template: `
+        <header>
+            <div class="links">
+                <a [routerLink]="['/']" id="logo">
+                    <img src="assets/images/logo L.png" alt="logo Arcadia" />
+                </a>
+                <nav class="navbar">
+                    <ul class="links-pages">
+                        <li><a [routerLink]="['/']">Accueil</a></li>
+                        <li><a [routerLink]="['/habitats']">Habitats</a></li>
+                        <li><a [routerLink]="['/services']">Services</a></li>
+                        <li><a [routerLink]="['/contact']">Contact</a></li>
+                        @if(loginService.isLoggin === true){
+                        <li>
+                            <a [routerLink]="['/espacepersonnel']"
+                                >EspacePersonnel</a
+                            >
+                        </li>
+                        }
+                    </ul>
+                </nav>
+                <div class="login-btn">
+                    @if(loginService.isLoggin === true){
+                    <a (click)="logout()">Déconnexion</a>
+                    } @else {
+                    <a [routerLink]="['/connexion']">Connexion</a>
+                    }
+                </div>
+                <div class="menu-btn">
+                    <a (click)="toggleSideDrawer()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <aside
+            id="side-drawer"
+            [ngStyle]="{ display: showSideDrawer ? 'block' : 'none' }"
+            (click)="toggleSideDrawer()"
+        >
+            <nav>
+                <ul>
+                    <li><a [routerLink]="['/']">Accueil</a></li>
+                    <li>
+                        <a
+                            [routerLink]="['/habitats']"
+                            [state]="{ title: 'Habitats' }"
+                            >Habitats</a
+                        >
+                    </li>
+                    <li><a [routerLink]="['/services']">Services</a></li>
+                    <li><a [routerLink]="['/contact']">Contact</a></li>
+                    @if(loginService.isLoggin === true){
+                    <li>
+                        <a [routerLink]="['/espacepersonnel']"
+                            >EspacePersonnel</a
+                        >
+                    </li>
+                    <li><a (click)="logout()">Déconnexion</a></li>
+                    } @else {
+                    <li><a [routerLink]="['/connexion']">Connexion</a></li>
+                    }
+                </ul>
+            </nav>
+        </aside>
+    `,
+    styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  showSideDrawer = false;
+    showSideDrawer = false
 
-  constructor(public route: Router) {}
+    constructor(public route: Router) {}
 
-  loginService = inject(LoginService);
+    loginService = inject(LoginService)
 
-  ngOnInit(){ 
-  }
+    toggleSideDrawer() {
+        this.showSideDrawer = !this.showSideDrawer
+    }
 
-  toggleSideDrawer() {
-    this.showSideDrawer = !this.showSideDrawer;
-  }
-
-  logout() {
-    this.loginService.logout();
-    this.route.navigateByUrl('/');
-  }
+    logout() {
+        this.loginService.logout()
+        this.route.navigateByUrl('/')
+    }
 }

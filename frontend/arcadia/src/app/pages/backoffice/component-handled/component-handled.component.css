@@ -1,102 +1,102 @@
 img {
-  width: 100px;
+    width: 100px;
 }
 
 mat-icon {
-  margin: 0 1rem;
-  display: inline;
+    margin: 0 1rem;
+    display: inline;
 }
 
 .add-icon {
-  display: flex;
-  margin: auto;
-  color: var(--color-primary);
-  transform: scale(2);
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+    display: flex;
+    margin: auto;
+    color: var(--color-primary);
+    transform: scale(2);
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .add-icon:hover {
-  color: var(--color-call-to-action);
+    color: var(--color-call-to-action);
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 3rem;
-  max-width: 300px;
-  margin: auto;
-  align-items: center;
-  border: solid 0.2rem var(--color-font);
-  border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    max-width: 300px;
+    margin: auto;
+    align-items: center;
+    border: solid 0.2rem var(--color-font);
+    border-radius: 10px;
 }
 
 form > * {
-  margin: 0.5rem;
+    margin: 0.5rem;
 }
 
 .delete-img,
 .add-img {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .mat-icon-clear {
-  color: var(--color-secondary);
+    color: var(--color-secondary);
 }
 
 p {
-  text-align: center;
+    text-align: center;
 }
 
 /* style account creation form */
 
 .account-creation-form {
-  align-content: center;
-  margin: 2rem auto;
+    align-content: center;
+    margin: 2rem auto;
 }
 
 .account-creation-form input,
 .account-creation-form select {
-  border-radius: 15px;
-  margin: 0;
-  padding: 0.5rem;
+    border-radius: 15px;
+    margin: 0;
+    padding: 0.5rem;
 }
 
 .btn-section {
-  width: 300px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 2rem;
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 2rem;
 }
 
 .btn {
-  width: 100px;
+    width: 100px;
 }
 
 #alert-account-created,
 #alert-account-already-exist {
-  display: none;
-  text-align: center;
+    display: none;
+    text-align: center;
 }
 
 /* veterinary component */
 
-section{
-  border-bottom: solid 0.5rem var(--color-secondary);
-  border-top: solid 0.5rem var(--color-secondary);
-  padding-bottom: 2rem;
+section {
+    border-bottom: solid 0.5rem var(--color-secondary);
+    border-top: solid 0.5rem var(--color-secondary);
+    padding-bottom: 2rem;
 }
 /* employee component */
 
 .animal-choice {
-  margin-left: 2rem;
+    margin-left: 2rem;
 }
 
 /* opening component*/
 
 .current {
-  text-align: center;
-  margin-bottom: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
 }

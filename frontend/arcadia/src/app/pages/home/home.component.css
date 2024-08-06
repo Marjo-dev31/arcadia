@@ -1,47 +1,46 @@
-  
-  /* section welcome style */
-  
-  .text-presentation p {
+/* section welcome style */
+
+.text-presentation p {
     text-align: justify;
-  }
-  
-  #signature {
+}
+
+#signature {
     font-family: var(--font-family-signature);
     text-align: end;
-  }
-  
-  .welcome {
+}
+
+.welcome {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     align-items: center;
     justify-items: center;
-  }
-  
-  .text-presentation {
+}
+
+.text-presentation {
     padding: 1rem;
     z-index: 1;
-  }
-  
-  /* accordion style */
-  
-  .accordion {
+}
+
+/* accordion style */
+
+.accordion {
     width: 500px;
     height: 400px;
     display: flex;
     justify-content: space-evenly;
     overflow: auto;
     z-index: 1;
-  }
-  
-  .accordion-content {
+}
+
+.accordion-content {
     position: relative;
     width: 20%;
     height: inherit;
     cursor: pointer;
     transition: all 2s ease;
-  }
-  
-  .accordion-img {
+}
+
+.accordion-img {
     border-radius: 50px;
     position: absolute;
     top: 0;
@@ -49,27 +48,27 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .accordion-content:hover {
+}
+
+.accordion-content:hover {
     width: 200%;
-  }
-  
-  /* discovery-section style */
-  
-  .discovery-section {
+}
+
+/* discovery-section style */
+
+.discovery-section {
     position: relative;
-  }
-  
-  .bird-img {
+}
+
+.bird-img {
     max-width: 300px;
     position: absolute;
     top: 0;
     left: 0;
     transform: translate(0, -75%);
     z-index: -1;
-  }
-  .container {
+}
+.container {
     min-height: 400px;
     background-color: var(--color-primary);
     display: grid;
@@ -78,40 +77,40 @@
     justify-items: center;
     align-items: center;
     padding: 1rem 10%;
-  }
-  
-  .stork {
-    position: relative;
-    background-image: url("/assets/images/storks-6519599_1280.jpg");
-    width: 350px;
-    height: 350px;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    border: 0.5rem solid var(--color-secondary);
-    color: var(--color-font);
-    text-shadow: none;
-  }
-  
-  .visit {
-    position: relative;
-    background-image: url("/assets/images/tour-guide-6816049_1280.jpg");
-    width: 350px;
-    height: 350px;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    border: 0.5rem solid var(--color-secondary);
-    color: var(--color-font);
-    text-shadow: none;
-  }
-  
-  .stork:hover,
-  .visit:hover {
-    border: 0.5rem solid var(--color-call-to-action);
-  }
+}
 
-  .stork h3 {
+.stork {
+    position: relative;
+    background-image: url('/assets/images/storks-6519599_1280.jpg');
+    width: 350px;
+    height: 350px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    border: 0.5rem solid var(--color-secondary);
+    color: var(--color-font);
+    text-shadow: none;
+}
+
+.visit {
+    position: relative;
+    background-image: url('/assets/images/tour-guide-6816049_1280.jpg');
+    width: 350px;
+    height: 350px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    border: 0.5rem solid var(--color-secondary);
+    color: var(--color-font);
+    text-shadow: none;
+}
+
+.stork:hover,
+.visit:hover {
+    border: 0.5rem solid var(--color-call-to-action);
+}
+
+.stork h3 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -120,9 +119,9 @@
     text-align: center;
     background-color: rgb(255, 252, 239, 0.8);
     padding: 0.8rem;
-  }
-  
-  .visit h3 {
+}
+
+.visit h3 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -131,12 +130,12 @@
     text-align: center;
     background-color: rgb(255, 252, 239, 0.8);
     padding: 0.8rem;
-  }
-  
-  /* reviews-section style */
-  
-  .reviews-section {
-    background-image: url("/assets/images/little-egret-2591578_1280.jpg");
+}
+
+/* reviews-section style */
+
+.reviews-section {
+    background-image: url('/assets/images/little-egret-2591578_1280.jpg');
     background-size: cover;
     background-position: center;
     min-height: 650px;
@@ -144,13 +143,13 @@
     flex-direction: column;
     justify-content: flex-end;
     color: var(--color-background);
-  }
-  
-  .reviews {
+}
+
+.reviews {
     background-color: rgb(70, 46, 1, 0.6);
-  }
-  
-  .review {
+}
+
+.review {
     text-align: center;
     background-color: var(--color-primary);
     max-width: 350px;
@@ -158,35 +157,35 @@
     margin: auto;
     border: 2px solid var(--color-font);
     border-radius: 20px;
-  }
-  
-  .review p {
+}
+
+.review p {
     margin: 0;
-  }
-  
-  .review-content {
+}
+
+.review-content {
     text-align: justify;
     padding: 1.5rem;
     padding-top: 2rem;
-  }
-  
-  .review-name,
-  .review-date {
+}
+
+.review-name,
+.review-date {
     text-align: end;
     padding-right: 1.5rem;
-  }
-  
-  .more-review-btn {
+}
+
+.more-review-btn {
     background-color: var(--color-background);
     color: var(--color-primary);
     margin: 1rem;
-  }
+}
 
-  .more-review-btn:hover {
+.more-review-btn:hover {
     background-color: var(--color-call-to-action);
-  }
-  
-  .form-review {
+}
+
+.form-review {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -196,21 +195,21 @@
     backdrop-filter: blur(2px);
     border-radius: 20px;
     padding: 1rem;
-  }
-  
-  #new-review:target {
-    display: block;
-  }
-  
-  .new-review {
-    display: none;
-  }
-  
-  .form-review > * {
-    margin: 0.5rem;
-  }
+}
 
-  .leaf {
+#new-review:target {
+    display: block;
+}
+
+.new-review {
+    display: none;
+}
+
+.form-review > * {
+    margin: 0.5rem;
+}
+
+.leaf {
     position: absolute;
     top: 30%;
     right: 0;
@@ -218,38 +217,37 @@
     /* Parallax ne fonctionne pas sur safari et firefox */
     animation: parallax linear;
     animation-timeline: scroll();
-  }
-  
-  @keyframes parallax {
+}
+
+@keyframes parallax {
     to {
-      transform: translateY(400px);
+        transform: translateY(400px);
     }
-  }
-  
-  @media (min-width: 600px) {
+}
+
+@media (min-width: 600px) {
     .text-presentation {
-      padding-left: 40%;
+        padding-left: 40%;
     }
-  }
-  
-  @media (max-width: 1000px) {
+}
+
+@media (max-width: 1000px) {
     .bird-img {
-      display: none;
+        display: none;
     }
     .accordion {
-      width: 300px;
-      scroll-snap-type: x mandatory;
-      justify-content: flex-start;
-      gap: 1rem;
+        width: 300px;
+        scroll-snap-type: x mandatory;
+        justify-content: flex-start;
+        gap: 1rem;
     }
-  
+
     .accordion-content {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
     }
     .accordion-img {
-      object-position: right;
+        object-position: right;
     }
-  }
-  
+}

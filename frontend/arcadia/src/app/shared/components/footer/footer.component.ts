@@ -1,36 +1,41 @@
-import { Component, OnInit, inject, effect, Signal, computed, DestroyRef } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { OpeningService } from '../../../pages/services/service/opening.service';
-import { Opening } from '../../models/opening.interface';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
+import { Component, OnInit, inject, effect, DestroyRef } from '@angular/core'
+import { RouterLink } from '@angular/router'
+import { OpeningService } from '../../../pages/services/service/opening.service'
+import { Opening } from '../../models/opening.interface'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
-  selector: 'app-footer',
-  imports: [RouterLink],
-  standalone: true,
-  template: `
-    <footer>
-      <div class="contact">
-        <div>
-          <p>Où nous trouver :</p>
-          <p>Arcadia Parc Zoologique</p>
-          <p>32 route de la fôret de Brocéliande</p>
-          <p>56001 Brocéliande Ville</p>
-        </div>
-        <div>
-          <p>Nos horaires et jours d'ouvertures :</p>
-          @if(openToPublic){
-          <p>De {{ openToPublic.openingTime }} à {{ openToPublic.closingTime }}</p>
-          <p>Du {{ openToPublic.openingDay }} au {{ openToPublic.closingDay }}</p>
-        }
-        </div>
-        <div><a [routerLink]="['/contact']">Nous contacter</a></div>
-      </div>
-      <div id="copyright">by MB2024</div>
-    </footer>
-  `,
-  styles: `
+    selector: 'app-footer',
+    imports: [RouterLink],
+    standalone: true,
+    template: `
+        <footer>
+            <div class="contact">
+                <div>
+                    <p>Où nous trouver :</p>
+                    <p>Arcadia Parc Zoologique</p>
+                    <p>32 route de la fôret de Brocéliande</p>
+                    <p>56001 Brocéliande Ville</p>
+                </div>
+                <div>
+                    <p>Nos horaires et jours d'ouvertures :</p>
+                    @if(openToPublic){
+                    <p>
+                        De {{ openToPublic.openingTime }} à
+                        {{ openToPublic.closingTime }}
+                    </p>
+                    <p>
+                        Du {{ openToPublic.openingDay }} au
+                        {{ openToPublic.closingDay }}
+                    </p>
+                    }
+                </div>
+                <div><a [routerLink]="['/contact']">Nous contacter</a></div>
+            </div>
+            <div id="copyright">by MB2024</div>
+        </footer>
+    `,
+    styles: `
   footer {
     background: linear-gradient(
       180deg,
@@ -61,25 +66,27 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     `,
 })
 export class FooterComponent implements OnInit {
-  constructor() {
-    effect(()=>{
-    this.openToPublic = this.openingService.schedule()
-  })
-}
+    constructor() {
+        effect(() => {
+            this.openToPublic = this.openingService.schedule()
+        })
+    }
 
-  public readonly openingService = inject(OpeningService)
-  destroyRef = inject(DestroyRef)
+    public readonly openingService = inject(OpeningService)
+    destroyRef = inject(DestroyRef)
 
-  openToPublic!: Opening
-  
-  ngOnInit() {
-    this.getOpeningToPublic();
-  };
+    openToPublic!: Opening
 
-  getOpeningToPublic(){
-    this.openingService.getOpeningToPublic().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((response)=>{
-      this.openToPublic = response[0]
-    })
-  };
+    ngOnInit() {
+        this.getOpeningToPublic()
+    }
 
+    getOpeningToPublic() {
+        this.openingService
+            .getOpeningToPublic()
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((response) => {
+                this.openToPublic = response[0]
+            })
+    }
 }
