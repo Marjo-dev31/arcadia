@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest"
+    "test": "jest",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -28,12 +29,23 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.2",
+    "@angular-eslint/builder": "17.5.2",
+    "@angular-eslint/eslint-plugin": "17.5.2",
+    "@angular-eslint/eslint-plugin-template": "17.5.2",
+    "@angular-eslint/schematics": "17.5.2",
+    "@angular-eslint/template-parser": "17.5.2",
     "@angular/cli": "^17.3.2",
     "@angular/compiler-cli": "^17.3.0",
+    "@eslint/js": "^9.8.0",
     "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "7.11.0",
+    "@typescript-eslint/parser": "7.11.0",
+    "eslint": "^8.57.0",
+    "globals": "^15.9.0",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.1.1",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "typescript-eslint": "^8.0.1"
   },
   "jest": {
     "preset": "jest-preset-angular",
@@ -44,6 +56,5 @@
       "<rootDir>/node_modules/",
       "<rootDir>/dist/"
     ]
-    
   }
 }

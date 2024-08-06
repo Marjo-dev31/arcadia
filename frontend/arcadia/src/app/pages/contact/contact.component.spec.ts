@@ -7,7 +7,6 @@ import { MailService } from './services/mail.service'
 describe('LoginComponent', () => {
     let component: ContactComponent
     let fixture: ComponentFixture<ContactComponent>
-    let service: MailService
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -30,7 +29,6 @@ describe('LoginComponent', () => {
         component = fixture.componentInstance
         fixture.detectChanges()
 
-        service = TestBed.inject(MailService)
     })
 
     it('should create', () => {

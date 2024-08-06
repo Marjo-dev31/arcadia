@@ -7,7 +7,6 @@ import { ReviewsService } from './services/reviews.service'
 describe('LoginComponent', () => {
     let component: HomeComponent
     let fixture: ComponentFixture<HomeComponent>
-    let service: ReviewsService
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -27,7 +26,6 @@ describe('LoginComponent', () => {
         component = fixture.componentInstance
         fixture.detectChanges()
 
-        service = TestBed.inject(ReviewsService)
     })
 
     it('should create', () => {
