@@ -1,18 +1,18 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
 import {
     FormBuilder,
     FormControl,
     FormGroup,
     ReactiveFormsModule,
     Validators,
-} from '@angular/forms'
-import { OpeningService } from '../../../services/service/opening.service'
-import { Opening } from '../../../../shared/models/opening.interface'
-import { tap } from 'rxjs'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "@angular/forms";
+import { OpeningService } from "../../../services/service/opening.service";
+import { Opening } from "../../../../shared/models/opening.interface";
+import { tap } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-opening',
+    selector: "app-opening",
     standalone: true,
     imports: [ReactiveFormsModule],
     template: `
@@ -73,24 +73,24 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class OpeningComponent implements OnInit {
-    public updateForm: FormGroup
+    public updateForm: FormGroup;
 
     constructor(private fb: FormBuilder) {
         this.updateForm = this.fb.group({
-            openingTime: new FormControl('', [Validators.required]),
-            closingTime: new FormControl('', [Validators.required]),
-            openingDay: new FormControl('', [Validators.required]),
-            closingDay: new FormControl('', [Validators.required]),
-        })
+            openingTime: new FormControl("", [Validators.required]),
+            closingTime: new FormControl("", [Validators.required]),
+            openingDay: new FormControl("", [Validators.required]),
+            closingDay: new FormControl("", [Validators.required]),
+        });
     }
 
-    private readonly openingService = inject(OpeningService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly openingService = inject(OpeningService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    openToPublic!: Opening
+    openToPublic!: Opening;
 
     ngOnInit() {
-        this.getOpeningToPublic()
+        this.getOpeningToPublic();
     }
 
     getOpeningToPublic() {
@@ -98,14 +98,14 @@ export class OpeningComponent implements OnInit {
             .getHandleOpeningToPublic()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.openToPublic = response[0]
+                this.openToPublic = response[0];
                 this.updateForm.patchValue({
                     openingTime: this.openToPublic.openingTime,
                     closingTime: this.openToPublic.closingTime,
                     openingDay: this.openToPublic.openingDay,
                     closingDay: this.openToPublic.closingDay,
-                })
-            })
+                });
+            });
     }
 
     updateOpeningToPublic(id: string) {
@@ -113,10 +113,10 @@ export class OpeningComponent implements OnInit {
             .updateOpeningToPublic(this.updateForm.value, id)
             .pipe(
                 tap(() => {
-                    this.getOpeningToPublic()
+                    this.getOpeningToPublic();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 }

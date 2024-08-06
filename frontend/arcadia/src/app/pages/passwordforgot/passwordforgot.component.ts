@@ -1,10 +1,10 @@
-import { Component, DestroyRef, inject } from '@angular/core'
-import { MailService } from '../contact/services/mail.service'
-import { FormsModule, NgForm } from '@angular/forms'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { Component, DestroyRef, inject } from "@angular/core";
+import { MailService } from "../contact/services/mail.service";
+import { FormsModule, NgForm } from "@angular/forms";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-passwordforgot',
+    selector: "app-passwordforgot",
     standalone: true,
     imports: [FormsModule],
     template: `
@@ -47,17 +47,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     `,
 })
 export class PasswordForgotComponent {
+    email: string = "";
 
-    email: string = ''
-
-    private readonly mailService = inject(MailService)
-    private destroyRef = inject(DestroyRef)
+    private readonly mailService = inject(MailService);
+    private destroyRef = inject(DestroyRef);
 
     onSubmit(form: NgForm) {
         this.mailService
             .sendEmailToNewPassword(this.email)
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe()
-        form.reset()
+            .subscribe();
+        form.reset();
     }
 }

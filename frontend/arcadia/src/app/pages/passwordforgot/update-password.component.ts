@@ -1,12 +1,12 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { FormsModule, NgForm } from '@angular/forms'
-import { UserLogin } from '../../shared/models/user.interface'
-import { UserService } from '../login/service/user.service'
-import { Router } from '@angular/router'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { FormsModule, NgForm } from "@angular/forms";
+import { UserLogin } from "../../shared/models/user.interface";
+import { UserService } from "../login/service/user.service";
+import { Router } from "@angular/router";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-update-password',
+    selector: "app-update-password",
     standalone: true,
     imports: [FormsModule],
     template: `
@@ -64,31 +64,31 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     }`,
 })
 export class UpdatePasswordComponent implements OnInit {
-    private router = inject(Router)
-    private readonly destroyRef = inject(DestroyRef)
+    private router = inject(Router);
+    private readonly destroyRef = inject(DestroyRef);
 
     user: UserLogin = {
-        email: '',
-        password: '',
-    }
+        email: "",
+        password: "",
+    };
 
-    private readonly userService = inject(UserService)
+    private readonly userService = inject(UserService);
 
     ngOnInit() {
-        this.setToken()
+        this.setToken();
     }
 
     setToken() {
-        const urlSplit = this.router.url.split('/')
-        const token = urlSplit[2]
-        localStorage.setItem('accessToken', token)
+        const urlSplit = this.router.url.split("/");
+        const token = urlSplit[2];
+        localStorage.setItem("accessToken", token);
     }
 
     onSubmit(form: NgForm) {
         this.userService
             .updatePassword(this.user)
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe()
-        form.reset()
+            .subscribe();
+        form.reset();
     }
 }

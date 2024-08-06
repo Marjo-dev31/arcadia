@@ -1,16 +1,16 @@
-import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { Observable, map } from 'rxjs'
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, map } from "rxjs";
 import {
     EmployeeReport,
     EmployeeReportCreate,
     Response,
-} from '../../../shared/models'
-import { environment } from '../../../environments/environment'
+} from "../../../shared/models";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class EmployeeService {
-    url = `${environment.serverUrl}/employees`
+    url = `${environment.serverUrl}/employees`;
 
     constructor(private http: HttpClient) {}
 
@@ -20,34 +20,36 @@ export class EmployeeService {
             .pipe(
                 map((r) => {
                     if (r.data) {
-                        return r.data
+                        return r.data;
                     } else {
-                        return []
+                        return [];
                     }
                 })
-            )
+            );
     }
 
-    addEmployeeReport(report: EmployeeReportCreate): Observable<EmployeeReport[]> {
+    addEmployeeReport(
+        report: EmployeeReportCreate
+    ): Observable<EmployeeReport[]> {
         return this.http.post<Response<EmployeeReport>>(this.url, report).pipe(
             map((r) => {
                 if (r.data) {
-                    return r.data
+                    return r.data;
                 } else {
-                    return []
+                    return [];
                 }
             })
-        )
+        );
     }
 
     updateReport(report: EmployeeReport): Observable<Response<EmployeeReport>> {
         return this.http.put<Response<EmployeeReport>>(
             `${this.url}/${report.id}`,
             report
-        )
+        );
     }
 
     deleteEmployeeReport(id: string): Observable<Response<EmployeeReport>> {
-        return this.http.delete<Response<EmployeeReport>>(`${this.url}/${id}`)
+        return this.http.delete<Response<EmployeeReport>>(`${this.url}/${id}`);
     }
 }

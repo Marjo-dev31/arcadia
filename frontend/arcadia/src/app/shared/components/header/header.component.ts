@@ -1,10 +1,10 @@
-import { AsyncPipe, NgStyle } from '@angular/common'
-import { Component, inject } from '@angular/core'
-import { Router, RouterLink } from '@angular/router'
-import { LoginService } from '../../../pages/login/service/login.service'
+import { AsyncPipe, NgStyle } from "@angular/common";
+import { Component, inject } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
+import { LoginService } from "../../../pages/login/service/login.service";
 
 @Component({
-    selector: 'app-header',
+    selector: "app-header",
     imports: [RouterLink, NgStyle, AsyncPipe],
     standalone: true,
     template: `
@@ -30,13 +30,24 @@ import { LoginService } from '../../../pages/login/service/login.service'
                 </nav>
                 <div class="login-btn">
                     @if(loginService.isLoggin === true){
-                    <a (click)="logout()" tabindex="0" role="button" (keyup.enter)="logout()">Déconnexion</a>
+                    <a
+                        (click)="logout()"
+                        tabindex="0"
+                        role="button"
+                        (keyup.enter)="logout()"
+                        >Déconnexion</a
+                    >
                     } @else {
                     <a [routerLink]="['/connexion']">Connexion</a>
                     }
                 </div>
                 <div class="menu-btn">
-                    <a (click)="toggleSideDrawer()" tabindex="0" role="button" (keyup.enter)="toggleSideDrawer()">
+                    <a
+                        (click)="toggleSideDrawer()"
+                        tabindex="0"
+                        role="button"
+                        (keyup.enter)="toggleSideDrawer()"
+                    >
                         <span></span>
                         <span></span>
                         <span></span>
@@ -70,7 +81,15 @@ import { LoginService } from '../../../pages/login/service/login.service'
                             >EspacePersonnel</a
                         >
                     </li>
-                    <li><a (click)="logout()" tabindex="0" role="button" (keyup.enter)="logout()">Déconnexion</a></li>
+                    <li>
+                        <a
+                            (click)="logout()"
+                            tabindex="0"
+                            role="button"
+                            (keyup.enter)="logout()"
+                            >Déconnexion</a
+                        >
+                    </li>
                     } @else {
                     <li><a [routerLink]="['/connexion']">Connexion</a></li>
                     }
@@ -78,21 +97,21 @@ import { LoginService } from '../../../pages/login/service/login.service'
             </nav>
         </aside>
     `,
-    styleUrl: './header.component.css',
+    styleUrl: "./header.component.css",
 })
 export class HeaderComponent {
-    showSideDrawer = false
+    showSideDrawer = false;
 
     constructor(public route: Router) {}
 
-    loginService = inject(LoginService)
+    loginService = inject(LoginService);
 
     toggleSideDrawer() {
-        this.showSideDrawer = !this.showSideDrawer
+        this.showSideDrawer = !this.showSideDrawer;
     }
 
     logout() {
-        this.loginService.logout()
-        this.route.navigateByUrl('/')
+        this.loginService.logout();
+        this.route.navigateByUrl("/");
     }
 }

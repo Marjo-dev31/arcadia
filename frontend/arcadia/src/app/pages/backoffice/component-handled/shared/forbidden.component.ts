@@ -1,7 +1,7 @@
-import { Component } from '@angular/core'
+import { Component } from "@angular/core";
 
 @Component({
-    selector: 'app-forbidden',
+    selector: "app-forbidden",
     standalone: true,
     template: `
         <h3>Accès interdit</h3>
@@ -10,4 +10,3 @@ import { Component } from '@angular/core'
     styleUrl: `../component-handled.component.css`,
 })
 export class ForbiddenComponent {}
-

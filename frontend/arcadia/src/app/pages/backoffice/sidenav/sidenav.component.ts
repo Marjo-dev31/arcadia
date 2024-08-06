@@ -1,12 +1,12 @@
-import { NgStyle, TitleCasePipe } from '@angular/common'
-import { Component } from '@angular/core'
-import { MatIcon } from '@angular/material/icon'
-import { MatSidenavModule } from '@angular/material/sidenav'
-import { MatToolbarModule } from '@angular/material/toolbar'
-import { RouterLink, RouterOutlet } from '@angular/router'
+import { NgStyle, TitleCasePipe } from "@angular/common";
+import { Component } from "@angular/core";
+import { MatIcon } from "@angular/material/icon";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { RouterLink, RouterOutlet } from "@angular/router";
 
 @Component({
-    selector: 'app-sidenav',
+    selector: "app-sidenav",
     standalone: true,
     imports: [
         MatSidenavModule,
@@ -89,8 +89,8 @@ import { RouterLink, RouterOutlet } from '@angular/router'
             </mat-sidenav-content>
         </mat-sidenav-container>
     `,
-    styleUrls: ['./sidenav.component.css'],
+    styleUrls: ["./sidenav.component.css"],
 })
 export class SidenavComponent {
-    userFirstname: string = localStorage.getItem('firstname') || ''
+    userFirstname: string = localStorage.getItem("firstname") || "";
 }

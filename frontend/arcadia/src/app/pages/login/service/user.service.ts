@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { Observable, map } from 'rxjs'
-import { User, UserCreate, UserLogin, Response } from '../../../shared/models/'
-import { environment } from '../../../environments/environment'
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, map } from "rxjs";
+import { User, UserCreate, UserLogin, Response } from "../../../shared/models/";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class UserService {
-    url = `${environment.serverUrl}/users`
+    url = `${environment.serverUrl}/users`;
 
     constructor(private http: HttpClient) {}
 
@@ -14,19 +14,19 @@ export class UserService {
         return this.http.get<Response<User>>(this.url).pipe(
             map((r) => {
                 if (r.data) {
-                    return r.data
+                    return r.data;
                 } else {
-                    return []
+                    return [];
                 }
             })
-        )
+        );
     }
 
     addUser(user: UserCreate): Observable<Response<UserCreate>> {
-        return this.http.post<Response<UserCreate>>(this.url, user)
+        return this.http.post<Response<UserCreate>>(this.url, user);
     }
 
     updatePassword(user: UserLogin): Observable<Response<UserLogin>> {
-        return this.http.put<Response<UserLogin>>(this.url, user)
+        return this.http.put<Response<UserLogin>>(this.url, user);
     }
 }

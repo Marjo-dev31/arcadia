@@ -1,11 +1,11 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { MatIconModule } from '@angular/material/icon'
-import { MatTableModule } from '@angular/material/table'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableModule } from "@angular/material/table";
 import {
     Service,
     ServiceCreate,
-} from '../../../../shared/models/service.interface'
-import { ServiceService } from '../../../services/service/service.service'
+} from "../../../../shared/models/service.interface";
+import { ServiceService } from "../../../services/service/service.service";
 import {
     FormControl,
     FormGroup,
@@ -13,14 +13,14 @@ import {
     FormsModule,
     FormBuilder,
     Validators,
-} from '@angular/forms'
-import { NgStyle } from '@angular/common'
-import { tap } from 'rxjs'
-import { ImageService } from '../../../home/services/image.service'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "@angular/forms";
+import { NgStyle } from "@angular/common";
+import { tap } from "rxjs";
+import { ImageService } from "../../../home/services/image.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-service-handled',
+    selector: "app-service-handled",
     standalone: true,
     imports: [
         MatTableModule,
@@ -163,34 +163,34 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrls: [`../component-handled.component.css`],
 })
 export class ServiceHandledComponent implements OnInit {
-    public serviceForm: FormGroup
+    public serviceForm: FormGroup;
 
     constructor(private fb: FormBuilder) {
         this.serviceForm = this.fb.group({
-            title: new FormControl('', [Validators.required]),
-            description: new FormControl('', [Validators.required]),
-            id: new FormControl(''),
-        })
+            title: new FormControl("", [Validators.required]),
+            description: new FormControl("", [Validators.required]),
+            id: new FormControl(""),
+        });
     }
 
-    private readonly serviceService = inject(ServiceService)
-    private readonly imageService = inject(ImageService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly serviceService = inject(ServiceService);
+    private readonly imageService = inject(ImageService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    displayColums: string[] = ['title', 'description', 'actions', 'image']
+    displayColums: string[] = ["title", "description", "actions", "image"];
 
-    datasource!: Service[]
+    datasource!: Service[];
 
-    addFormIsDisplay: boolean = false
-    updateFormIsDisplay: boolean = false
+    addFormIsDisplay: boolean = false;
+    updateFormIsDisplay: boolean = false;
 
     newService: ServiceCreate = {
-        title: '',
-        description: '',
-    }
+        title: "",
+        description: "",
+    };
 
     ngOnInit() {
-        this.getServices()
+        this.getServices();
     }
 
     getServices() {
@@ -198,12 +198,12 @@ export class ServiceHandledComponent implements OnInit {
             .getHandleServices()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.datasource = response
-            })
+                this.datasource = response;
+            });
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     onSubmit(): void {
@@ -211,24 +211,24 @@ export class ServiceHandledComponent implements OnInit {
             .addService(this.newService)
             .pipe(
                 tap(() => {
-                    this.getServices()
+                    this.getServices();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.newService.title = ''
-        this.newService.description = ''
-        this.addFormIsDisplay = !this.addFormIsDisplay
+            .subscribe();
+        this.newService.title = "";
+        this.newService.description = "";
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     editService(id: string) {
-        this.updateFormIsDisplay = true
-        const serviceToUpdate = this.datasource.find((el) => el.id === id)
+        this.updateFormIsDisplay = true;
+        const serviceToUpdate = this.datasource.find((el) => el.id === id);
         this.serviceForm.patchValue({
             id: serviceToUpdate?.id,
             title: serviceToUpdate?.title,
             description: serviceToUpdate?.description,
-        })
+        });
     }
 
     updateService() {
@@ -236,13 +236,13 @@ export class ServiceHandledComponent implements OnInit {
             .updateService(this.serviceForm.value)
             .pipe(
                 tap(() => {
-                    this.getServices()
+                    this.getServices();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.serviceForm.reset()
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+            .subscribe();
+        this.serviceForm.reset();
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 
     deleteService(id: string) {
@@ -250,26 +250,26 @@ export class ServiceHandledComponent implements OnInit {
             .deleteService(id)
             .pipe(
                 tap(() => {
-                    this.getServices()
+                    this.getServices();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     onFileChange(event: any, id: string) {
-        const file: File = event.target.files[0]
-        const formData = new FormData()
-        formData.append('myImg', file)
+        const file: File = event.target.files[0];
+        const formData = new FormData();
+        formData.append("myImg", file);
         this.imageService
             .addServiceImage(formData, id)
             .pipe(
                 tap(() => {
-                    this.getServices()
+                    this.getServices();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     deleteImage(id: string) {
@@ -277,14 +277,14 @@ export class ServiceHandledComponent implements OnInit {
             .deleteImage(id)
             .pipe(
                 tap(() => {
-                    this.getServices()
+                    this.getServices();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 }

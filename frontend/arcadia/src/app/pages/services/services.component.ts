@@ -1,14 +1,14 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { ServiceService } from './service/service.service'
-import { JsonPipe, TitleCasePipe } from '@angular/common'
-import { Service, Opening } from '../../shared/models'
-import { OpeningService } from './service/opening.service'
-import { ActivatedRoute } from '@angular/router'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { environment } from '../../environments/environment'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { ServiceService } from "./service/service.service";
+import { JsonPipe, TitleCasePipe } from "@angular/common";
+import { Service, Opening } from "../../shared/models";
+import { OpeningService } from "./service/opening.service";
+import { ActivatedRoute } from "@angular/router";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { environment } from "../../environments/environment";
 
 @Component({
-    selector: 'app-services',
+    selector: "app-services",
     imports: [JsonPipe, TitleCasePipe],
     standalone: true,
     template: `
@@ -62,28 +62,28 @@ import { environment } from '../../environments/environment'
     styleUrls: [`./services.component.css`],
 })
 export class ServicesComponent implements OnInit {
-    title: string
-    services!: Service[]
-    openToPublic!: Opening[]
-    url = `${environment.serverUrl}/upload/`
+    title: string;
+    services!: Service[];
+    openToPublic!: Opening[];
+    url = `${environment.serverUrl}/upload/`;
 
     constructor(route: ActivatedRoute) {
-        this.title = route.snapshot.data['title']
+        this.title = route.snapshot.data["title"];
     }
 
-    private readonly serviceService = inject(ServiceService)
-    private readonly openingService = inject(OpeningService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly serviceService = inject(ServiceService);
+    private readonly openingService = inject(OpeningService);
+    private readonly destroyRef = inject(DestroyRef);
 
     ngOnInit() {
-        this.getServices()
-        this.getOpeningToPublic()
+        this.getServices();
+        this.getOpeningToPublic();
     }
 
     getServices() {
         this.serviceService.getServices().then((response) => {
-            this.services = response
-        })
+            this.services = response;
+        });
     }
 
     getOpeningToPublic() {
@@ -91,7 +91,7 @@ export class ServicesComponent implements OnInit {
             .getOpeningToPublic()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.openToPublic = response
-            })
+                this.openToPublic = response;
+            });
     }
 }

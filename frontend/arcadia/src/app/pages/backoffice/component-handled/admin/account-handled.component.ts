@@ -1,13 +1,13 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { FormsModule, NgForm } from '@angular/forms'
-import { UserCreate, Role } from '../../../../shared/models'
-import { CommonModule } from '@angular/common'
-import { RoleService } from '../../../login/service/role.service'
-import { UserService } from '../../../login/service/user.service'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { FormsModule, NgForm } from "@angular/forms";
+import { UserCreate, Role } from "../../../../shared/models";
+import { CommonModule } from "@angular/common";
+import { RoleService } from "../../../login/service/role.service";
+import { UserService } from "../../../login/service/user.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-account-handled',
+    selector: "app-account-handled",
     standalone: true,
     imports: [FormsModule, CommonModule],
     template: `
@@ -129,23 +129,22 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class AccountHandledComponent implements OnInit {
+    private roleService = inject(RoleService);
+    private userService = inject(UserService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    private roleService = inject(RoleService)
-    private userService = inject(UserService)
-    private readonly destroyRef = inject(DestroyRef)
-
-    roles: Role[] = []
+    roles: Role[] = [];
 
     newUser: UserCreate = {
-        email: '',
-        lastname: '',
-        firstname: '',
-        password: '',
-        id_role: '',
-    }
+        email: "",
+        lastname: "",
+        firstname: "",
+        password: "",
+        id_role: "",
+    };
 
     ngOnInit() {
-        this.getRolesWithoutAdmin()
+        this.getRolesWithoutAdmin();
     }
 
     getRolesWithoutAdmin() {
@@ -153,27 +152,27 @@ export class AccountHandledComponent implements OnInit {
             .getRolesWithoutAdmin()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.roles = response
-            })
+                this.roles = response;
+            });
     }
 
     onSubmit(form: NgForm) {
-        const alertOk = document.getElementById('alert-account-created')
+        const alertOk = document.getElementById("alert-account-created");
         const alertNotOk = document.getElementById(
-            'alert-account-already-exist'
-        )
+            "alert-account-already-exist"
+        );
         if (alertOk && alertNotOk && form.submitted) {
             this.userService
                 .addUser(this.newUser)
                 .pipe(takeUntilDestroyed(this.destroyRef))
                 .subscribe((response) => {
                     if (response.data) {
-                        alertOk.style.display = 'block'
-                        form.reset()
+                        alertOk.style.display = "block";
+                        form.reset();
                     } else {
-                        alertNotOk.style.display = 'block'
+                        alertNotOk.style.display = "block";
                     }
-                })
+                });
         }
     }
 }

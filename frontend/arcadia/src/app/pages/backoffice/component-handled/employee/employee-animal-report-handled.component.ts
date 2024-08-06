@@ -1,5 +1,11 @@
-import { CommonModule } from '@angular/common'
-import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core'
+import { CommonModule } from "@angular/common";
+import {
+    Component,
+    DestroyRef,
+    OnInit,
+    ViewChild,
+    inject,
+} from "@angular/core";
 import {
     FormBuilder,
     FormControl,
@@ -8,24 +14,24 @@ import {
     NgForm,
     ReactiveFormsModule,
     Validators,
-} from '@angular/forms'
-import { MatIconModule } from '@angular/material/icon'
-import { MatTableDataSource, MatTableModule } from '@angular/material/table'
+} from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import {
     Animal,
     User,
     EmployeeReport,
     EmployeeReportCreate,
-} from '../../../../shared/models'
-import { AnimalService } from '../../../animals/services/animal.service'
-import { EmployeeService } from '../../../animals/services/employee.service'
-import { UserService } from '../../../login/service/user.service'
-import { MatSort, MatSortModule } from '@angular/material/sort'
-import { tap } from 'rxjs'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "../../../../shared/models";
+import { AnimalService } from "../../../animals/services/animal.service";
+import { EmployeeService } from "../../../animals/services/employee.service";
+import { UserService } from "../../../login/service/user.service";
+import { MatSort, MatSortModule } from "@angular/material/sort";
+import { tap } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-veterinary-animal-report-handled',
+    selector: "app-veterinary-animal-report-handled",
     standalone: true,
     imports: [
         MatTableModule,
@@ -269,60 +275,60 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class EmployeeReportHandledComponent implements OnInit {
-    updateForm!: FormGroup
+    updateForm!: FormGroup;
 
     constructor(public fb: FormBuilder) {
         this.updateForm = fb.group({
-            food: new FormControl('', [Validators.required]),
-            grammage: new FormControl('', [Validators.required]),
-            id_user: new FormControl('', [Validators.required]),
-            id_animal: new FormControl('', [Validators.required]),
-            id: new FormControl(''),
-        })
+            food: new FormControl("", [Validators.required]),
+            grammage: new FormControl("", [Validators.required]),
+            id_user: new FormControl("", [Validators.required]),
+            id_animal: new FormControl("", [Validators.required]),
+            id: new FormControl(""),
+        });
     }
 
-    displayColums: string[] = ['date', 'food', 'grammage', 'actions']
+    displayColums: string[] = ["date", "food", "grammage", "actions"];
 
-    animals!: Animal[]
-    users!: User[]
-    employeeReports: EmployeeReport[] = []
+    animals!: Animal[];
+    users!: User[];
+    employeeReports: EmployeeReport[] = [];
 
-    selectedAnimalOption!: string
+    selectedAnimalOption!: string;
 
-    datasource = new MatTableDataSource(this.employeeReports)
+    datasource = new MatTableDataSource(this.employeeReports);
 
-    private readonly animalService = inject(AnimalService)
-    private readonly employeeService = inject(EmployeeService)
-    private readonly userService = inject(UserService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly animalService = inject(AnimalService);
+    private readonly employeeService = inject(EmployeeService);
+    private readonly userService = inject(UserService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    addFormIsDisplay: boolean = false
-    updateFormIsDisplay: boolean = false
-    role: string = localStorage.getItem('role') || ''
-    responsemessage: string = ''
+    addFormIsDisplay: boolean = false;
+    updateFormIsDisplay: boolean = false;
+    role: string = localStorage.getItem("role") || "";
+    responsemessage: string = "";
 
     newReport: EmployeeReportCreate = {
-        food: '',
+        food: "",
         grammage: 0,
-        id_user: '',
-        id_animal: '',
-    }
+        id_user: "",
+        id_animal: "",
+    };
 
-    @ViewChild(MatSort) sort!: MatSort
+    @ViewChild(MatSort) sort!: MatSort;
 
     ngOnInit() {
-        this.getAnimals()
-        this.getUsers()
+        this.getAnimals();
+        this.getUsers();
     }
 
     ngAfterOnInit() {
-        this.datasource.sort = this.sort
+        this.datasource.sort = this.sort;
     }
 
     getAnimals() {
         this.animalService.getAnimals().then((response) => {
-            this.animals = response
-        })
+            this.animals = response;
+        });
     }
 
     getUsers() {
@@ -330,8 +336,8 @@ export class EmployeeReportHandledComponent implements OnInit {
             .getUsers()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.users = response
-            })
+                this.users = response;
+            });
     }
 
     getEmployeeReports(id: string) {
@@ -339,14 +345,14 @@ export class EmployeeReportHandledComponent implements OnInit {
             .getEmployeeReports(id)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.employeeReports = response
-                this.datasource = new MatTableDataSource(this.employeeReports)
-                this.datasource.sort = this.sort
-            })
+                this.employeeReports = response;
+                this.datasource = new MatTableDataSource(this.employeeReports);
+                this.datasource.sort = this.sort;
+            });
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     onSubmit(form: NgForm) {
@@ -354,25 +360,25 @@ export class EmployeeReportHandledComponent implements OnInit {
             .addEmployeeReport(this.newReport)
             .pipe(
                 tap(() => {
-                    this.getEmployeeReports(this.selectedAnimalOption)
+                    this.getEmployeeReports(this.selectedAnimalOption);
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.addFormIsDisplay = !this.addFormIsDisplay
-        form.reset()
+            .subscribe();
+        this.addFormIsDisplay = !this.addFormIsDisplay;
+        form.reset();
     }
 
     editReport(id: string) {
-        this.updateFormIsDisplay = true
-        const reportToUpdate = this.employeeReports.find((el) => el.id === id)
+        this.updateFormIsDisplay = true;
+        const reportToUpdate = this.employeeReports.find((el) => el.id === id);
         this.updateForm.patchValue({
             food: reportToUpdate?.food,
             grammage: reportToUpdate?.grammage,
             id_user: reportToUpdate?.id_user,
             id_animal: reportToUpdate?.id_animal,
             id: reportToUpdate?.id,
-        })
+        });
     }
 
     updateReport(id: string) {
@@ -380,12 +386,12 @@ export class EmployeeReportHandledComponent implements OnInit {
             .updateReport(this.updateForm.value)
             .pipe(
                 tap(() => {
-                    this.getEmployeeReports(id)
+                    this.getEmployeeReports(id);
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+            .subscribe();
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 
     deleteReport(id: string) {
@@ -393,14 +399,14 @@ export class EmployeeReportHandledComponent implements OnInit {
             .deleteEmployeeReport(id)
             .pipe(
                 tap(() => {
-                    this.getEmployeeReports(id)
+                    this.getEmployeeReports(id);
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 }

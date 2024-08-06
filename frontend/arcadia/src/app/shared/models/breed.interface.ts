@@ -1,8 +1,8 @@
 export interface Breed {
-    id: string,
-    name: string
+    id: string;
+    name: string;
 }
 
 export interface BreedCreate {
-    name: string
+    name: string;
 }

@@ -1,9 +1,9 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core'
-import { MatIconModule } from '@angular/material/icon'
-import { MatTableModule } from '@angular/material/table'
-import { Habitat, HabitatCreate } from '../../../../shared/models'
-import { HabitatsService } from '../../../habitats/services/habitat.service'
-import { tap } from 'rxjs'
+import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableModule } from "@angular/material/table";
+import { Habitat, HabitatCreate } from "../../../../shared/models";
+import { HabitatsService } from "../../../habitats/services/habitat.service";
+import { tap } from "rxjs";
 import {
     FormBuilder,
     FormControl,
@@ -11,13 +11,13 @@ import {
     FormsModule,
     ReactiveFormsModule,
     Validators,
-} from '@angular/forms'
-import { NgStyle } from '@angular/common'
-import { ImageService } from '../../../home/services/image.service'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+} from "@angular/forms";
+import { NgStyle } from "@angular/common";
+import { ImageService } from "../../../home/services/image.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-habitat-handled',
+    selector: "app-habitat-handled",
     standalone: true,
     imports: [
         MatTableModule,
@@ -163,34 +163,34 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class HabitatHandledComponent implements OnInit {
-    public habitatForm: FormGroup
+    public habitatForm: FormGroup;
 
     constructor(private fb: FormBuilder) {
         this.habitatForm = this.fb.group({
-            title: new FormControl('', [Validators.required]),
-            description: new FormControl('', [Validators.required]),
-            id: new FormControl(''),
-        })
+            title: new FormControl("", [Validators.required]),
+            description: new FormControl("", [Validators.required]),
+            id: new FormControl(""),
+        });
     }
 
-    private readonly habitatService = inject(HabitatsService)
-    private readonly imageService = inject(ImageService)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly habitatService = inject(HabitatsService);
+    private readonly imageService = inject(ImageService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    displayColums: string[] = ['title', 'description', 'actions', 'image']
+    displayColums: string[] = ["title", "description", "actions", "image"];
 
-    datasource!: Habitat[]
+    datasource!: Habitat[];
 
     newHabitat: HabitatCreate = {
-        title: '',
-        description: '',
-    }
+        title: "",
+        description: "",
+    };
 
-    addFormIsDisplay: boolean = false
-    updateFormIsDisplay: boolean = false
+    addFormIsDisplay: boolean = false;
+    updateFormIsDisplay: boolean = false;
 
     ngOnInit() {
-        this.getHabitats()
+        this.getHabitats();
     }
 
     getHabitats() {
@@ -198,18 +198,18 @@ export class HabitatHandledComponent implements OnInit {
             .getHandleHabitats()
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                this.datasource = response
-            })
+                this.datasource = response;
+            });
     }
 
     editHabitat(id: string) {
-        this.updateFormIsDisplay = true
-        const habitatToUpdate = this.datasource.find((el) => el.id === id)
+        this.updateFormIsDisplay = true;
+        const habitatToUpdate = this.datasource.find((el) => el.id === id);
         this.habitatForm.patchValue({
             id: habitatToUpdate?.id,
             title: habitatToUpdate?.title,
             description: habitatToUpdate?.description,
-        })
+        });
     }
 
     updateHabitat() {
@@ -217,17 +217,17 @@ export class HabitatHandledComponent implements OnInit {
             .updateHabitat(this.habitatForm.value)
             .pipe(
                 tap(() => {
-                    this.getHabitats()
+                    this.getHabitats();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.habitatForm.reset()
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+            .subscribe();
+        this.habitatForm.reset();
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     onSubmit() {
@@ -235,14 +235,14 @@ export class HabitatHandledComponent implements OnInit {
             .addHabitat(this.newHabitat)
             .pipe(
                 tap(() => {
-                    this.getHabitats()
+                    this.getHabitats();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.newHabitat.description = ''
-        this.newHabitat.title = ''
-        this.addFormIsDisplay = !this.addFormIsDisplay
+            .subscribe();
+        this.newHabitat.description = "";
+        this.newHabitat.title = "";
+        this.addFormIsDisplay = !this.addFormIsDisplay;
     }
 
     deleteHabitat(id: string) {
@@ -250,26 +250,26 @@ export class HabitatHandledComponent implements OnInit {
             .deleteHabitat(id)
             .pipe(
                 tap(() => {
-                    this.getHabitats()
+                    this.getHabitats();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     onFileChange(event: any, id: string) {
-        const file: File = event.target.files[0]
-        const formData = new FormData()
-        formData.append('myImg', file)
+        const file: File = event.target.files[0];
+        const formData = new FormData();
+        formData.append("myImg", file);
         this.imageService
             .addHabitatImage(formData, id)
             .pipe(
                 tap(() => {
-                    this.getHabitats()
+                    this.getHabitats();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     deleteImage(id: string) {
@@ -277,14 +277,14 @@ export class HabitatHandledComponent implements OnInit {
             .deleteImage(id)
             .pipe(
                 tap(() => {
-                    this.getHabitats()
+                    this.getHabitats();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay
+        this.updateFormIsDisplay = !this.updateFormIsDisplay;
     }
 }
