@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { SidenavComponent } from './sidenav/sidenav.component'
 import { ActivatedRoute, RouterOutlet } from '@angular/router'
 
