@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { Component, DestroyRef, OnInit, inject, signal } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import {
@@ -109,17 +109,17 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
             </table>
-            } @if(!addFormIsDisplay){
+            } @if(!addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon
             >
-            } @if(addFormIsDisplay){
+            } @if(addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >remove_circle_outline</mat-icon
             >
             }
         </section>
-        <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
                 class="add-form"
                 #form="ngForm"
@@ -177,7 +177,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             </form>
         </section>
         <section
-            [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }"
+            [ngStyle]="{ display: updateFormIsDisplay() ? 'block' : 'none' }"
         >
             <form
                 class="update-form"
@@ -235,7 +235,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 }
                 <button [disabled]="breedForm.invalid">Ajouter la race</button>
             </form>
-            @if(submitted){
+            @if(submitted()){
             <p>Nouvelle race créée !</p>
             }
         </section>
@@ -282,9 +282,9 @@ export class AnimalHandledComponent implements OnInit {
         breed: "",
     };
 
-    addFormIsDisplay: boolean = false;
-    updateFormIsDisplay: boolean = false;
-    submitted: boolean = false;
+    addFormIsDisplay= signal(false);
+    updateFormIsDisplay= signal(false);
+    submitted = signal(false);
 
     ngOnInit() {
         this.getAnimals();
@@ -329,7 +329,7 @@ export class AnimalHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value)
     }
 
     onSubmit(form: NgForm) {
@@ -342,12 +342,12 @@ export class AnimalHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value)
         form.reset();
     }
 
     editAnimal(id: string) {
-        this.updateFormIsDisplay = true;
+        this.updateFormIsDisplay.update((value)=> value = true)
         if (this.datasource) {
             const animalToUpdate = this.datasource.find((el) => el.id === id);
             this.updateForm.patchValue({
@@ -370,7 +370,7 @@ export class AnimalHandledComponent implements OnInit {
             )
             .subscribe();
         this.updateForm.reset();
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value)
     }
 
     deleteAnimal(id: string) {
@@ -409,10 +409,10 @@ export class AnimalHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.submitted = true;
+        this.submitted.update((value)=> value = true);
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value)
     }
 }
