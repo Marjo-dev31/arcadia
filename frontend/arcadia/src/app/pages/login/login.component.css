@@ -6,8 +6,8 @@
     align-content: center;
     margin: 3rem auto 0;
     border: 0.3rem solid var(--color-font);
-    border-radius: 20px ;
-    padding: 2rem 2rem 0 2rem ;  
+    border-radius: 20px;
+    padding: 2rem 2rem 0 2rem;
 }
 
 .login-form > * {

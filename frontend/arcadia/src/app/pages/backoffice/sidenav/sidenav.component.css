@@ -1,47 +1,47 @@
 mat-sidenav-container {
-  height: 100vh;
-  background-color: var(--color-background);
+    height: 100vh;
+    background-color: var(--color-background);
 }
 
 mat-sidenav {
-  background-color: var(--color-primary);
-  max-width: 300px;
+    background-color: var(--color-primary);
+    max-width: 300px;
 }
 
 ul {
-  margin-top: 3rem;
-  padding: 0;
+    margin-top: 3rem;
+    padding: 0;
 }
 
 li {
-  padding: 1rem;
-  list-style: none;
+    padding: 1rem;
+    list-style: none;
 }
 
 li:hover {
-  background-color: var(--color-background);
-  border-radius: 6px;
+    background-color: var(--color-background);
+    border-radius: 6px;
 }
 
 a {
-  text-shadow: none;
+    text-shadow: none;
 }
 
 a:hover {
-  color: var(--color-font);
-  box-shadow: none;
-  border-radius: 0;
+    color: var(--color-font);
+    box-shadow: none;
+    border-radius: 0;
 }
 
 mat-toolbar {
-  padding: 0;
-  background-color: var(--color-background);
+    padding: 0;
+    background-color: var(--color-background);
 }
 
 .icon-btn {
-  position: absolute;
-  top: 0;
-  border-radius: 0 ;
-  border-bottom-right-radius: 20px;
-  width: 50px;
+    position: absolute;
+    top: 0;
+    border-radius: 0;
+    border-bottom-right-radius: 20px;
+    width: 50px;
 }
