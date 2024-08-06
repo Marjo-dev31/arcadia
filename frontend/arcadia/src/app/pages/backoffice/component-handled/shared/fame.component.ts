@@ -26,7 +26,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     ],
     template: `
         <h3>Popularité des animaux</h3>
-        @if(responsemessage === 'No animal found'){
+        @if(responseMessage === 'No animal found'){
         <p>Il n'y a pas d'animal</p>
         }
         <table
@@ -100,7 +100,7 @@ export class FameComponent implements OnInit {
     };
 
     role: string = localStorage.getItem("role") || "";
-    responsemessage: string = "";
+    responseMessage: string = "";
 
     @ViewChild(MatSort) sort!: MatSort;
 
@@ -121,9 +121,9 @@ export class FameComponent implements OnInit {
                     this.animals = response.data;
                     this.datasource = new MatTableDataSource(this.animals);
                     this.datasource.sort = this.sort;
-                    this.responsemessage = response.message;
+                    this.responseMessage = response.message;
                 } else {
-                    this.responsemessage = response.message;
+                    this.responseMessage = response.message;
                 }
             });
     }

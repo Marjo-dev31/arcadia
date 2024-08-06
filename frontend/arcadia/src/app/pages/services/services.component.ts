@@ -54,7 +54,9 @@ import { environment } from "../../environments/environment";
                     </div>
                 </div>
                 } } @else {
-                <h3 class="no-services">Il n'y a pas de service disponible</h3>
+                <h3 class="no-services">
+                    Il n'y a pas de service disponible !
+                </h3>
                 }
             </section>
         </main>
@@ -62,19 +64,16 @@ import { environment } from "../../environments/environment";
     styleUrls: [`./services.component.css`],
 })
 export class ServicesComponent implements OnInit {
-    title: string;
-    services!: Service[];
-    openToPublic!: Opening[];
-    url = `${environment.serverUrl}/upload/`;
-
-    constructor(route: ActivatedRoute) {
-        this.title = route.snapshot.data["title"];
-    }
-
+    private readonly route = inject(ActivatedRoute);
     private readonly serviceService = inject(ServiceService);
     private readonly openingService = inject(OpeningService);
     private readonly destroyRef = inject(DestroyRef);
 
+    title: string = this.route.snapshot.data["title"];
+    services!: Service[];
+    openToPublic!: Opening[];
+    url = `${environment.serverUrl}/upload/`;
+    
     ngOnInit() {
         this.getServices();
         this.getOpeningToPublic();

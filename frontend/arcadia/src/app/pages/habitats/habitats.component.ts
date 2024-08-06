@@ -74,17 +74,16 @@ export class HabitatsComponent implements OnInit {
     animals!: Animal[] | undefined;
     animalsOnMongoByFirstname!: AnimalOnMongo;
     showDetails: string | undefined = undefined;
-    title: string;
     url = `${environment.serverUrl}/upload/`;
 
     private readonly habitatService = inject(HabitatsService);
     private readonly animalService = inject(AnimalService);
     private readonly clickService = inject(ClickService);
     private readonly destroyRef = inject(DestroyRef);
-
-    constructor(private matdialog: MatDialog, route: ActivatedRoute) {
-        this.title = route.snapshot.data["title"];
-    }
+    private readonly route = inject(ActivatedRoute);
+    private readonly matdialog = inject(MatDialog)
+    
+    title: string = this.route.snapshot.data["title"];
 
     ngOnInit() {
         this.getHabitats();

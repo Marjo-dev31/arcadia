@@ -73,7 +73,7 @@ export class FooterComponent implements OnInit {
     }
 
     public readonly openingService = inject(OpeningService);
-    destroyRef = inject(DestroyRef);
+    private readonly destroyRef = inject(DestroyRef);
 
     openToPublic!: Opening;
 

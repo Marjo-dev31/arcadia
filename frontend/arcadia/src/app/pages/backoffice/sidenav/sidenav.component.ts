@@ -18,7 +18,6 @@ import { RouterLink, RouterOutlet } from "@angular/router";
         TitleCasePipe,
     ],
     template: `
-        <h1 class="title">ARCADIA</h1>
         <mat-sidenav-container autosize>
             <mat-sidenav #drawer mode="side" class="sidenav" opened>
                 <h3>Bonjour {{ this.userFirstname | titlecase }}</h3>
