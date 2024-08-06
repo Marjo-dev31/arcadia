@@ -1,20 +1,19 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { User, UserCreate, UserLogin, Response } from "../../../shared/models/";
 import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class UserService {
-    url = `${environment.serverUrl}/users`;
-
-    constructor(private http: HttpClient) {}
+    private readonly http = inject(HttpClient);
+    private readonly url = `${environment.serverUrl}/users`;
 
     getUsers(): Observable<User[]> {
         return this.http.get<Response<User>>(this.url).pipe(
-            map((r) => {
-                if (r.data) {
-                    return r.data;
+            map((response) => {
+                if (response.data) {
+                    return response.data;
                 } else {
                     return [];
                 }

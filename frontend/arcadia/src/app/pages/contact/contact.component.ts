@@ -109,24 +109,21 @@ body {
   `,
 })
 export class ContactComponent {
-    public contactForm: FormGroup;
-    title: string;
-
-    constructor(public fb: FormBuilder, route: ActivatedRoute) {
-        this.contactForm = this.fb.group({
-            title: new FormControl("", [Validators.required]),
-            text: new FormControl("", [Validators.required]),
-            emailToResponse: new FormControl("", [
-                Validators.required,
-                Validators.email,
-            ]),
-        });
-
-        this.title = route.snapshot.data["title"];
-    }
-
+    private readonly fb = inject(FormBuilder);
+    private readonly route = inject(ActivatedRoute);
     private readonly mailService = inject(MailService);
     private readonly destroyRef = inject(DestroyRef);
+
+    title: string = this.route.snapshot.data["title"];
+
+    contactForm: FormGroup = this.fb.group({
+        title: new FormControl("", [Validators.required]),
+        text: new FormControl("", [Validators.required]),
+        emailToResponse: new FormControl("", [
+            Validators.required,
+            Validators.email,
+        ]),
+    });
 
     submitted = false;
 

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { SidenavComponent } from "./sidenav/sidenav.component";
 import { ActivatedRoute, RouterOutlet } from "@angular/router";
 
@@ -7,13 +7,12 @@ import { ActivatedRoute, RouterOutlet } from "@angular/router";
     standalone: true,
     imports: [SidenavComponent, RouterOutlet],
     template: ` <main>
+        <h1 class="title">{{ title }}</h1>
         <app-sidenav></app-sidenav>
     </main>`,
 })
 export class BackofficeComponent {
-    title: string;
-
-    constructor(public route: ActivatedRoute) {
-        this.title = route.snapshot.data["title"];
-    }
+    private readonly route = inject(ActivatedRoute)
+    
+    title: string = this.route.snapshot.data["title"];
 }

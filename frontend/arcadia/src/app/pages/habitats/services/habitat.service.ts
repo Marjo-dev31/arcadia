@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Habitat, HabitatCreate, Response } from "../../../shared/models";
 import { HttpClient } from "@angular/common/http";
 import { Observable, map } from "rxjs";
@@ -6,9 +6,8 @@ import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class HabitatsService {
-    url = `${environment.serverUrl}/habitats`;
-
-    constructor(private http: HttpClient) {}
+    private readonly http = inject(HttpClient);
+    private readonly url = `${environment.serverUrl}/habitats`;
 
     // fetch required for exam
     async getHabitats(): Promise<Habitat[]> {
@@ -24,9 +23,9 @@ export class HabitatsService {
 
     getHandleHabitats(): Observable<Habitat[]> {
         return this.http.get<Response<Habitat>>(`${this.url}/backoffice`).pipe(
-            map((r) => {
-                if (r.data) {
-                    return r.data;
+            map((response) => {
+                if (response.data) {
+                    return response.data;
                 } else {
                     return [];
                 }

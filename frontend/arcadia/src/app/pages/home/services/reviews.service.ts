@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { ReviewPost, Review, Response } from "../../../shared/models";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -6,9 +6,10 @@ import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class ReviewsService {
-    url = `${environment.serverUrl}/reviews`;
-    constructor(private http: HttpClient) {}
-
+    
+    private readonly http = inject(HttpClient)
+    private readonly url = `${environment.serverUrl}/reviews`;
+    
      // fetch required for exam
     async getReviews(): Promise<Review[]> {
         const reviewsList = await fetch(this.url).then((response) =>

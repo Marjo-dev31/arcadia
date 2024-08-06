@@ -73,16 +73,15 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class OpeningComponent implements OnInit {
-    public updateForm: FormGroup;
 
-    constructor(private fb: FormBuilder) {
-        this.updateForm = this.fb.group({
-            openingTime: new FormControl("", [Validators.required]),
-            closingTime: new FormControl("", [Validators.required]),
-            openingDay: new FormControl("", [Validators.required]),
-            closingDay: new FormControl("", [Validators.required]),
-        });
-    }
+    private readonly fb = inject(FormBuilder);
+
+    updateForm: FormGroup = this.fb.group({
+        openingTime: new FormControl("", [Validators.required]),
+        closingTime: new FormControl("", [Validators.required]),
+        openingDay: new FormControl("", [Validators.required]),
+        closingDay: new FormControl("", [Validators.required]),
+    });
 
     private readonly openingService = inject(OpeningService);
     private readonly destroyRef = inject(DestroyRef);

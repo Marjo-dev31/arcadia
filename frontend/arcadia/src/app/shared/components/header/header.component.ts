@@ -100,11 +100,10 @@ import { LoginService } from "../../../pages/login/service/login.service";
     styleUrl: "./header.component.css",
 })
 export class HeaderComponent {
+    public readonly loginService = inject(LoginService);
+    private readonly route = inject(Router);
+
     showSideDrawer = false;
-
-    constructor(public route: Router) {}
-
-    loginService = inject(LoginService);
 
     toggleSideDrawer() {
         this.showSideDrawer = !this.showSideDrawer;

@@ -341,20 +341,6 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class VeterinaryAnimalReportHandledComponent implements OnInit {
-    updateForm!: FormGroup;
-
-    constructor(public fb: FormBuilder) {
-        this.updateForm = fb.group({
-            food: new FormControl("", [Validators.required]),
-            grammage: new FormControl("", [Validators.required]),
-            health: new FormControl("", [Validators.required]),
-            details_condition: new FormControl(""),
-            id_user: new FormControl("", [Validators.required]),
-            id_animal: new FormControl("", [Validators.required]),
-            id: new FormControl(""),
-        });
-    }
-
     displayColums: string[] = [
         "date",
         "healthcondition",
@@ -364,17 +350,27 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
         "actions",
     ];
 
+    private readonly fb = inject(FormBuilder);
+
+    updateForm: FormGroup = this.fb.group({
+        food: new FormControl("", [Validators.required]),
+        grammage: new FormControl("", [Validators.required]),
+        health: new FormControl("", [Validators.required]),
+        details_condition: new FormControl(""),
+        id_user: new FormControl("", [Validators.required]),
+        id_animal: new FormControl("", [Validators.required]),
+        id: new FormControl(""),
+    });
+
     animals!: Animal[];
     veterinaryReports: VeterinaryReport[] = [];
     users!: User[];
-
     selectedAnimalOption!: string;
-
     dataSource = new MatTableDataSource(this.veterinaryReports);
-
+    role: string = localStorage.getItem("role") || "";
     addFormIsDisplay: boolean = false;
     updateFormIsDisplay: boolean = false;
-
+    
     newReport: VeterinaryReportCreate = {
         food: "",
         grammage: 0,
@@ -383,10 +379,6 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
         id_user: "",
         id_animal: "",
     };
-
-    role: string = localStorage.getItem("role") || "";
-
-    responsemessage: string = "";
 
     private readonly animalService = inject(AnimalService);
     private readonly veterinaryService = inject(VeterinaryService);

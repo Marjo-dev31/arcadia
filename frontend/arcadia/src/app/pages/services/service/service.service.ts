@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Service, ServiceCreate, Response } from "../../../shared/models";
 import { Observable, map } from "rxjs";
 import { HttpClient } from "@angular/common/http";
@@ -6,9 +6,10 @@ import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class ServiceService {
-    url = `${environment.serverUrl}/services`;
+    
 
-    constructor(private http: HttpClient) {}
+    private readonly http = inject(HttpClient)
+    private readonly url = `${environment.serverUrl}/services`;
 
      // fetch required for exam
     async getServices(): Promise<Service[]> {
@@ -24,9 +25,9 @@ export class ServiceService {
 
     getHandleServices(): Observable<Service[]> {
         return this.http.get<Response<Service>>(`${this.url}/backoffice`).pipe(
-            map((r) => {
-                if (r.data) {
-                    return r.data;
+            map((response) => {
+                if (response.data) {
+                    return response.data;
                 } else {
                     return [];
                 }

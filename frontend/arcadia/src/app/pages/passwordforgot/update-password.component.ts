@@ -64,15 +64,14 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     }`,
 })
 export class UpdatePasswordComponent implements OnInit {
-    private router = inject(Router);
+    private readonly router = inject(Router);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly userService = inject(UserService);
 
     user: UserLogin = {
         email: "",
         password: "",
     };
-
-    private readonly userService = inject(UserService);
 
     ngOnInit() {
         this.setToken();
