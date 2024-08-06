@@ -48,6 +48,6 @@ import { environment } from "../../environments/environment";
 export class AnimalsComponent {
     constructor(@Inject(MAT_DIALOG_DATA) public data: { animal: Animal }) {}
 
-    url = `${environment.serverUrl}/upload/`;
+    public readonly url = `${environment.serverUrl}/upload/`;
     animal: Animal = this.data.animal;
 }

@@ -10,6 +10,7 @@ export class HabitatsService {
 
     constructor(private http: HttpClient) {}
 
+    // fetch required for exam
     async getHabitats(): Promise<Habitat[]> {
         try {
             const habitatsList = await fetch(this.url).then((response) =>

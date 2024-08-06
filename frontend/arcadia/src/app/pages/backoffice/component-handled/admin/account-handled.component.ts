@@ -129,8 +129,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class AccountHandledComponent implements OnInit {
-    private roleService = inject(RoleService);
-    private userService = inject(UserService);
+    private readonly roleService = inject(RoleService);
+    private readonly userService = inject(UserService);
     private readonly destroyRef = inject(DestroyRef);
 
     roles: Role[] = [];
