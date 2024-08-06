@@ -1,12 +1,12 @@
-import { Component, DestroyRef, inject } from '@angular/core'
-import { FormsModule } from '@angular/forms'
-import { UserLogin } from '../../shared/models/user.interface'
-import { ActivatedRoute, Router, RouterLink } from '@angular/router'
-import { LoginService } from './service/login.service'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { Component, DestroyRef, inject } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { UserLogin } from "../../shared/models/user.interface";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { LoginService } from "./service/login.service";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-connexion',
+    selector: "app-connexion",
     imports: [FormsModule, RouterLink],
     standalone: true,
     template: `
@@ -81,21 +81,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrls: [`./login.component.css`],
 })
 export class LoginComponent {
-    title: string
+    title: string;
     constructor(route: ActivatedRoute) {
-        this.title = route.snapshot.data['title']
+        this.title = route.snapshot.data["title"];
     }
 
-    private readonly loginService = inject(LoginService)
-    private readonly router = inject(Router)
-    private readonly destroyRef = inject(DestroyRef)
+    private readonly loginService = inject(LoginService);
+    private readonly router = inject(Router);
+    private readonly destroyRef = inject(DestroyRef);
 
     user: UserLogin = {
-        email: '',
-        password: '',
-    }
+        email: "",
+        password: "",
+    };
 
-    responseMessage!: string
+    responseMessage!: string;
 
     onSubmit(): void {
         this.loginService
@@ -104,20 +104,20 @@ export class LoginComponent {
             .subscribe((response) => {
                 if (response.data) {
                     localStorage.setItem(
-                        'accessToken',
+                        "accessToken",
                         response.data.accessToken
-                    )
-                    localStorage.setItem('role', response.data.user.name)
+                    );
+                    localStorage.setItem("role", response.data.user.name);
                     localStorage.setItem(
-                        'firstname',
+                        "firstname",
                         response.data.user.firstname
-                    )
-                    this.router.navigate(['/espacepersonnel'])
+                    );
+                    this.router.navigate(["/espacepersonnel"]);
                 } else {
-                    this.responseMessage = response.message
+                    this.responseMessage = response.message;
                 }
-            })
-        this.user.email = ''
-        this.user.password = ''
+            });
+        this.user.email = "";
+        this.user.password = "";
     }
 }

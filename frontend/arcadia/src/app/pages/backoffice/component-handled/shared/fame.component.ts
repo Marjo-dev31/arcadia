@@ -1,15 +1,21 @@
-import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core'
-import { ClickService } from '../../../animals/services/click.service'
-import { AnimalOnMongo, AnimalOnMongoCreate } from '../../../../shared/models'
-import { MatTableDataSource, MatTableModule } from '@angular/material/table'
-import { MatSortModule, MatSort } from '@angular/material/sort'
-import { FormsModule } from '@angular/forms'
-import { tap } from 'rxjs'
-import { MatIconModule } from '@angular/material/icon'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import {
+    Component,
+    DestroyRef,
+    OnInit,
+    ViewChild,
+    inject,
+} from "@angular/core";
+import { ClickService } from "../../../animals/services/click.service";
+import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../shared/models";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatSortModule, MatSort } from "@angular/material/sort";
+import { FormsModule } from "@angular/forms";
+import { tap } from "rxjs";
+import { MatIconModule } from "@angular/material/icon";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
-    selector: 'app-fame',
+    selector: "app-fame",
     standalone: true,
     imports: [
         MatTableModule,
@@ -81,30 +87,29 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     styleUrl: `../component-handled.component.css`,
 })
 export class FameComponent implements OnInit {
+    displayColums: string[] = ["firstname", "clickCount", "delete"];
 
-    displayColums: string[] = ['firstname', 'clickCount', 'delete']
+    private readonly clickService = inject(ClickService);
+    private readonly destroyRef = inject(DestroyRef);
 
-    private readonly clickService = inject(ClickService)
-    private readonly destroyRef = inject(DestroyRef)
-
-    animals!: AnimalOnMongo[]
-    datasource = new MatTableDataSource(this.animals)
+    animals!: AnimalOnMongo[];
+    datasource = new MatTableDataSource(this.animals);
 
     newAnimal: AnimalOnMongoCreate = {
-        firstname: '',
-    }
+        firstname: "",
+    };
 
-    role: string = localStorage.getItem('role') || ''
-    responsemessage: string = ''
+    role: string = localStorage.getItem("role") || "";
+    responsemessage: string = "";
 
-    @ViewChild(MatSort) sort!: MatSort
+    @ViewChild(MatSort) sort!: MatSort;
 
     ngOnInit() {
-        this.getAnimals()
+        this.getAnimals();
     }
 
     ngAfterOnInit() {
-        this.datasource.sort = this.sort
+        this.datasource.sort = this.sort;
     }
 
     getAnimals() {
@@ -113,14 +118,14 @@ export class FameComponent implements OnInit {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
                 if (response.data) {
-                    this.animals = response.data
-                    this.datasource = new MatTableDataSource(this.animals)
-                    this.datasource.sort = this.sort
-                    this.responsemessage = response.message
+                    this.animals = response.data;
+                    this.datasource = new MatTableDataSource(this.animals);
+                    this.datasource.sort = this.sort;
+                    this.responsemessage = response.message;
                 } else {
-                    this.responsemessage = response.message
+                    this.responsemessage = response.message;
                 }
-            })
+            });
     }
 
     addAnimalOnMongo() {
@@ -128,12 +133,12 @@ export class FameComponent implements OnInit {
             .addAnimalOnMongo(this.newAnimal)
             .pipe(
                 tap(() => {
-                    this.getAnimals()
+                    this.getAnimals();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
-        this.newAnimal.firstname = ''
+            .subscribe();
+        this.newAnimal.firstname = "";
     }
 
     deleteAnimal(id: string) {
@@ -141,10 +146,10 @@ export class FameComponent implements OnInit {
             .deleteAnimal(id)
             .pipe(
                 tap(() => {
-                    this.getAnimals()
+                    this.getAnimals();
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe()
+            .subscribe();
     }
 }

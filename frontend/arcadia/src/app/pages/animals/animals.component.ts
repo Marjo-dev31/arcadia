@@ -1,11 +1,11 @@
-import { Component, Inject } from '@angular/core';
-import { Animal } from '../../shared/models';
-import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
-import { TitleCasePipe } from '@angular/common';
-import { environment } from '../../environments/environment';
+import { Component, Inject } from "@angular/core";
+import { Animal } from "../../shared/models";
+import { MAT_DIALOG_DATA, MatDialogClose } from "@angular/material/dialog";
+import { TitleCasePipe } from "@angular/common";
+import { environment } from "../../environments/environment";
 
 @Component({
-    selector: 'app-animals',
+    selector: "app-animals",
     standalone: true,
     imports: [MatDialogClose, TitleCasePipe],
     template: `

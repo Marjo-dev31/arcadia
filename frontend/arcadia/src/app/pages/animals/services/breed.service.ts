@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { Observable, map } from 'rxjs'
-import { Breed, BreedCreate, Response } from '../../../shared/models'
-import { environment } from '../../../environments/environment'
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, map } from "rxjs";
+import { Breed, BreedCreate, Response } from "../../../shared/models";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class BreedService {
-    url = `${environment.serverUrl}/breeds`
+    url = `${environment.serverUrl}/breeds`;
 
     constructor(private http: HttpClient) {}
 
@@ -14,15 +14,15 @@ export class BreedService {
         return this.http.get<Response<Breed>>(this.url).pipe(
             map((r) => {
                 if (r.data) {
-                    return r.data
+                    return r.data;
                 } else {
-                    return []
+                    return [];
                 }
             })
-        )
+        );
     }
 
     addBreed(breed: BreedCreate): Observable<Response<Breed>> {
-        return this.http.post<Response<Breed>>(this.url, breed)
+        return this.http.post<Response<Breed>>(this.url, breed);
     }
 }

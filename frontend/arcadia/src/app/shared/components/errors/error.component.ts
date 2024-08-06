@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core'
-import { LoginService } from '../../../pages/login/service/login.service'
+import { Component, OnInit, inject } from "@angular/core";
+import { LoginService } from "../../../pages/login/service/login.service";
 
 @Component({
-    selector: 'app-error',
+    selector: "app-error",
     template: `
         <h1 class="title">ARCADIA</h1>
         <h3>
@@ -12,9 +12,9 @@ import { LoginService } from '../../../pages/login/service/login.service'
     `,
 })
 export class ErrorComponent implements OnInit {
-    public readonly loginService = inject(LoginService)
+    public readonly loginService = inject(LoginService);
 
     ngOnInit() {
-        this.loginService.logout()
+        this.loginService.logout();
     }
 }
