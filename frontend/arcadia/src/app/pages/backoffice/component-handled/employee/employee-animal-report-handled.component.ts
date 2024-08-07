@@ -5,6 +5,7 @@ import {
     OnInit,
     ViewChild,
     inject,
+    signal,
 } from "@angular/core";
 import {
     FormBuilder,
@@ -114,13 +115,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon
             >
-            } @if(addFormIsDisplay){
+            } @if(addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >remove_circle_outline</mat-icon
             >
             }}
         </section>
-        <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
                 class="add-form"
                 #form="ngForm"
@@ -199,7 +200,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             </form>
         </section>
         <section
-            [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }"
+            [ngStyle]="{ display: updateFormIsDisplay() ? 'block' : 'none' }"
         >
             <form
                 class="add-form"
@@ -301,10 +302,10 @@ export class EmployeeReportHandledComponent implements OnInit {
     private readonly userService = inject(UserService);
     private readonly destroyRef = inject(DestroyRef);
 
-    addFormIsDisplay: boolean = false;
-    updateFormIsDisplay: boolean = false;
+    addFormIsDisplay = signal(false);
+    updateFormIsDisplay = signal(false);
+
     role: string = localStorage.getItem("role") || "";
-    responsemessage: string = "";
 
     newReport: EmployeeReportCreate = {
         food: "",
@@ -351,7 +352,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value) => !value);
     }
 
     onSubmit(form: NgForm) {
@@ -364,12 +365,12 @@ export class EmployeeReportHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value) => !value);
         form.reset();
     }
 
     editReport(id: string) {
-        this.updateFormIsDisplay = true;
+        this.updateFormIsDisplay.set(true);
         const reportToUpdate = this.employeeReports.find((el) => el.id === id);
         this.updateForm.patchValue({
             food: reportToUpdate?.food,
@@ -390,7 +391,7 @@ export class EmployeeReportHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value);
     }
 
     deleteReport(id: string) {
@@ -406,6 +407,6 @@ export class EmployeeReportHandledComponent implements OnInit {
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value);
     }
 }

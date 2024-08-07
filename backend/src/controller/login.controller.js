@@ -39,7 +39,8 @@ export const login =  (req, res) => {
             return
             }
 
-        const accessToken = generatedAccessToken(user.email, user.name)
+        const accessToken = generatedAccessToken(user.email, user.name);
+        user.accessToken = accessToken;
             res
             .status(httpStatus.OK.code)
             .send(
@@ -47,7 +48,7 @@ export const login =  (req, res) => {
                     httpStatus.OK.code,
                     httpStatus.OK.status,
                     `User is log in`,
-                    {user, accessToken}
+                    user
                 )
             )
         }

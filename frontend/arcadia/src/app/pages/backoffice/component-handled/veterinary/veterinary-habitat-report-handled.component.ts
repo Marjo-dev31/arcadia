@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { Component, DestroyRef, OnInit, inject, signal } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { HabitatsService } from "../../../habitats/services/habitat.service";
@@ -55,13 +55,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon
             >
-            } @if(addFormIsDisplay){
+            } @if(addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >remove_circle_outline</mat-icon
             >
             } }
         </section>
-        <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
                 [formGroup]="commentForm"
                 (ngSubmit)="onSubmit(habitatSelected.value)"
@@ -108,7 +108,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
     private readonly habitatService = inject(HabitatsService);
     private readonly destroyRef = inject(DestroyRef);
 
-    addFormIsDisplay: boolean = false;
+    addFormIsDisplay = signal(false);
 
     ngOnInit() {
         this.getHabitats();
@@ -121,7 +121,8 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value)
+
     }
 
     onSubmit(id: string) {
@@ -135,7 +136,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
             )
             .subscribe();
         this.commentForm.reset();
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value)
     }
 
     deleteComment(id: string) {

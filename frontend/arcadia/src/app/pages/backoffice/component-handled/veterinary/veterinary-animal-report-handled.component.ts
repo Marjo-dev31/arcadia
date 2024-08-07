@@ -5,6 +5,7 @@ import {
     OnInit,
     ViewChild,
     inject,
+    signal,
 } from "@angular/core";
 import {
     FormBuilder,
@@ -132,13 +133,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon
             >
-            } @if(addFormIsDisplay){
+            } @if(addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >remove_circle_outline</mat-icon
             >
             }}
         </section>
-        <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
                 class="add-form"
                 #form="ngForm"
@@ -243,7 +244,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             </form>
         </section>
         <section
-            [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }"
+            [ngStyle]="{ display: updateFormIsDisplay() ? 'block' : 'none' }"
         >
             <form
                 class="add-form"
@@ -368,8 +369,9 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     selectedAnimalOption!: string;
     dataSource = new MatTableDataSource(this.veterinaryReports);
     role: string = localStorage.getItem("role") || "";
-    addFormIsDisplay: boolean = false;
-    updateFormIsDisplay: boolean = false;
+
+    addFormIsDisplay = signal(false);
+    updateFormIsDisplay = signal(false);
     
     newReport: VeterinaryReportCreate = {
         food: "",
@@ -437,7 +439,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value)
+
     }
 
     onSubmit(form: NgForm) {
@@ -454,7 +457,7 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     }
 
     editReport(id: string) {
-        this.updateFormIsDisplay = true;
+        this.updateFormIsDisplay.set(true)
         const reportToUpdate = this.veterinaryReports.find(
             (el) => el.id === id
         );
@@ -479,10 +482,10 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+            this.updateFormIsDisplay.update((value)=> !value)
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value)
     }
 }

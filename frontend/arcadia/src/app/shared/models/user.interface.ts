@@ -1,5 +1,5 @@
 export interface User {
-    id: string
+    id: string,
     email: string,
     lastname: string,
     firstname: string,
@@ -12,10 +12,21 @@ export interface UserCreate {
     lastname: string,
     firstname: string,
     password: string,
-    id_role: string,
+    id_role: string
 }
 
 export interface UserLogin {
     email: string,
+    password: string
+}
+
+export interface CurrentUser {
+    id: string,
+    firstname: string,
+    lastname: string,
+    email: string,
     password: string,
+    id_role: string,
+    name: string,
+    accessToken: string
 }
