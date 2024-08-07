@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, NgForm } from "@angular/forms";
 import { UserLogin } from "../../shared/models/user.interface";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { LoginService } from "./service/login.service";
@@ -24,7 +24,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 name="loginForm"
                 id="loginForm"
                 #form="ngForm"
-                (ngSubmit)="onSubmit()"
+                (ngSubmit)="onSubmit(form)"
             >
                 <p>Connexion</p>
                 @if(responseMessage === 'User doesn t exists'){
@@ -95,7 +95,7 @@ export class LoginComponent {
 
     responseMessage!: string;
 
-    onSubmit(): void {
+    onSubmit(form: NgForm): void {
         this.loginService
             .login(this.user)
             .pipe(takeUntilDestroyed(this.destroyRef))
@@ -103,19 +103,18 @@ export class LoginComponent {
                 if (response.data) {
                     localStorage.setItem(
                         "accessToken",
-                        response.data.accessToken
+                        response.data[0].accessToken
                     );
-                    localStorage.setItem("role", response.data.user.name);
+                    localStorage.setItem("role", response.data[0].name);
                     localStorage.setItem(
                         "firstname",
-                        response.data.user.firstname
+                        response.data[0].firstname
                     );
                     this.router.navigate(["/espacepersonnel"]);
                 } else {
                     this.responseMessage = response.message;
                 }
             });
-        this.user.email = "";
-        this.user.password = "";
+        form.reset()
     }
 }

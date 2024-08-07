@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { Component, DestroyRef, OnInit, inject, signal } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import {
@@ -89,13 +89,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon
             >
-            } @if(addFormIsDisplay){
+            } @if(addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >remove_circle_outline</mat-icon
             >
             }
         </section>
-        <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
                 class="add-form"
                 #form="ngForm"
@@ -131,7 +131,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             </form>
         </section>
         <section
-            [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }"
+            [ngStyle]="{ display: updateFormIsDisplay() ? 'block' : 'none' }"
         >
             <form
                 class="update-form"
@@ -180,8 +180,8 @@ export class ServiceHandledComponent implements OnInit {
 
     datasource!: Service[];
 
-    addFormIsDisplay: boolean = false;
-    updateFormIsDisplay: boolean = false;
+    addFormIsDisplay = signal(false);
+    updateFormIsDisplay = signal(false);
 
     newService: ServiceCreate = {
         title: "",
@@ -202,7 +202,7 @@ export class ServiceHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value);
     }
 
     onSubmit(form: NgForm): void {
@@ -216,11 +216,11 @@ export class ServiceHandledComponent implements OnInit {
             )
             .subscribe();
         form.reset();
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value);
     }
 
     editService(id: string) {
-        this.updateFormIsDisplay = true;
+        this.updateFormIsDisplay.set(true);
         const serviceToUpdate = this.datasource.find((el) => el.id === id);
         this.serviceForm.patchValue({
             id: serviceToUpdate?.id,
@@ -240,7 +240,7 @@ export class ServiceHandledComponent implements OnInit {
             )
             .subscribe();
         this.serviceForm.reset();
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value)
     }
 
     deleteService(id: string) {
@@ -286,6 +286,6 @@ export class ServiceHandledComponent implements OnInit {
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value)
     }
 }

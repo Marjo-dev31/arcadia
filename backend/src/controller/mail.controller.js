@@ -11,8 +11,8 @@ import generatedAccessToken from "../util/jwt.js";
 export const sendEmail = (req, res) => {
    const title = req.body.title;
    const text = req.body.text;
-   const email = req.body.emailToResponse;
-   const message = `${title}, mon message: ${text}, mon email: ${email}`;
+   const emailToResponse = req.body.emailToResponse;
+   const message = `${title}, mon message: ${text}, mon email: ${emailToResponse}`;
 
    const TOKEN = "d508c20e9958a513857dcf7d7954bcce";
    const ENDPOINT = "https://send.api.mailtrap.io/";

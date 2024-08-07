@@ -1,5 +1,5 @@
 import { AsyncPipe, NgStyle } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { LoginService } from "../../../pages/login/service/login.service";
 
@@ -19,7 +19,7 @@ import { LoginService } from "../../../pages/login/service/login.service";
                         <li><a [routerLink]="['/habitats']">Habitats</a></li>
                         <li><a [routerLink]="['/services']">Services</a></li>
                         <li><a [routerLink]="['/contact']">Contact</a></li>
-                        @if(loginService.isLoggin === true){
+                        @if(loginService.isLoggin() === true){
                         <li>
                             <a [routerLink]="['/espacepersonnel']"
                                 >EspacePersonnel</a
@@ -29,7 +29,7 @@ import { LoginService } from "../../../pages/login/service/login.service";
                     </ul>
                 </nav>
                 <div class="login-btn">
-                    @if(loginService.isLoggin === true){
+                    @if(loginService.isLoggin() === true){
                     <a
                         (click)="logout()"
                         tabindex="0"
@@ -57,7 +57,7 @@ import { LoginService } from "../../../pages/login/service/login.service";
         </header>
         <aside
             id="side-drawer"
-            [ngStyle]="{ display: showSideDrawer ? 'block' : 'none' }"
+            [ngStyle]="{ display: showSideDrawer() ? 'block' : 'none' }"
             (click)="toggleSideDrawer()"
             tabindex="0"
             role="button"
@@ -75,7 +75,7 @@ import { LoginService } from "../../../pages/login/service/login.service";
                     </li>
                     <li><a [routerLink]="['/services']">Services</a></li>
                     <li><a [routerLink]="['/contact']">Contact</a></li>
-                    @if(loginService.isLoggin === true){
+                    @if(loginService.isLoggin() === true){
                     <li>
                         <a [routerLink]="['/espacepersonnel']"
                             >EspacePersonnel</a
@@ -103,10 +103,10 @@ export class HeaderComponent {
     public readonly loginService = inject(LoginService);
     private readonly route = inject(Router);
 
-    showSideDrawer = false;
+    showSideDrawer = signal(false);
 
     toggleSideDrawer() {
-        this.showSideDrawer = !this.showSideDrawer;
+        this.showSideDrawer.update((value)=> !value);
     }
 
     logout() {
