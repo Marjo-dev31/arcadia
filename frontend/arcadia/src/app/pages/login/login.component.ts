@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
-import { UserLogin } from "../../shared/models";
+import { CurrentUser, Response, UserLogin } from "../../shared/models";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { LoginService } from "../../shared/services/login.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -29,7 +29,7 @@ import { NgStyle } from "@angular/common";
             >
                 <p>Connexion</p>
                 @if(responseMessage === 'User doesn t exists'){
-                <p class="alert" >Utilisateur inconnu</p>
+                <p class="alert">Utilisateur inconnu</p>
                 } @if(responseMessage === 'Email and password does not match!'){
                 <p class="alert">Email ou mot de passe incorrect</p>
                 }
@@ -88,7 +88,7 @@ export class LoginComponent {
     private readonly destroyRef = inject(DestroyRef);
 
     title: string = this.route.snapshot.data["title"];
-    
+
     user: UserLogin = {
         email: "",
         password: "",
@@ -101,21 +101,19 @@ export class LoginComponent {
             .login(this.user)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                if(response.data){
-                    localStorage.setItem(
-                        "accessToken",
-                        response.data[0].accessToken
-                    );
-                    localStorage.setItem("role", response.data[0].name);
-                    localStorage.setItem(
-                        "firstname",
-                        response.data[0].firstname
-                    );
-                } else {
-        this.responseMessage = response.message
-                    this.router.navigate(["/espacepersonnel"]);
-        form.reset()
-    } 
-})}
+                this.setLocalStorage(response);
+                form.reset();
+            });
+    }
 
+    setLocalStorage(response: Response<CurrentUser>) {
+        if (response.data) {
+            localStorage.setItem("accessToken", response.data[0].accessToken);
+            localStorage.setItem("role", response.data[0].name);
+            localStorage.setItem("firstname", response.data[0].firstname);
+        } else {
+            this.responseMessage = response.message;
+            this.router.navigate(["/espacepersonnel"]);
+        }
+    }
 }

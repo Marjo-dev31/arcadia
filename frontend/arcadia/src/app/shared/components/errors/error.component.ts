@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from "@angular/core";
 import { LoginService } from "../../services/login.service";
+import { removeLocalStorage } from "../../utils/removeLocalStorage";
 
 @Component({
     selector: "app-error",
@@ -15,6 +16,7 @@ export class ErrorComponent implements OnInit {
     public readonly loginService = inject(LoginService);
 
     ngOnInit() {
-        this.loginService.logout();
+        this.loginService.isLoggin.set(false);
+        removeLocalStorage()
     }
 }
