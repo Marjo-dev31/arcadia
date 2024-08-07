@@ -2,7 +2,7 @@ import { Component, DestroyRef, OnInit, inject, signal } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { Habitat, HabitatCreate } from "../../../../shared/models";
-import { HabitatsService } from "../../../habitats/services/habitat.service";
+import { HabitatsService } from "../../../../shared/services/habitat.service";
 import { tap } from "rxjs";
 import {
     FormBuilder,
@@ -13,7 +13,7 @@ import {
     Validators,
 } from "@angular/forms";
 import { NgStyle } from "@angular/common";
-import { ImageService } from "../../../home/services/image.service";
+import { ImageService } from "../../../../shared/services/image.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({

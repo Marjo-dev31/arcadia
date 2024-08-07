@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, effect, DestroyRef } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { OpeningService } from "../../../pages/services/service/opening.service";
-import { Opening } from "../../models/opening.interface";
+import { OpeningService } from "../../services/opening.service";
+import { Opening } from "../../models";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({

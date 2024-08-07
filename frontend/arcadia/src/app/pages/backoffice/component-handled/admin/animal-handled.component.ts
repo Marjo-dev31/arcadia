@@ -7,8 +7,8 @@ import {
     Habitat,
     Breed,
 } from "../../../../shared/models";
-import { AnimalService } from "../../../animals/services/animal.service";
-import { ImageService } from "../../../home/services/image.service";
+import { AnimalService } from "../../../../shared/services/animal.service";
+import { ImageService } from "../../../../shared/services/image.service";
 import { tap } from "rxjs";
 import { LowerCasePipe, NgStyle, TitleCasePipe } from "@angular/common";
 import {
@@ -20,8 +20,8 @@ import {
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import { HabitatsService } from "../../../habitats/services/habitat.service";
-import { BreedService } from "../../../animals/services/breed.service";
+import { HabitatsService } from "../../../../shared/services/habitat.service";
+import { BreedService } from "../../../../shared/services/breed.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({

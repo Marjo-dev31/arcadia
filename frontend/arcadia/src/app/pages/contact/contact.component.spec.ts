@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ContactComponent } from "./contact.component";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
-import { MailService } from "./services/mail.service";
+import { MailService } from "../../shared/services/mail.service";
 
 describe("LoginComponent", () => {
     let component: ContactComponent;

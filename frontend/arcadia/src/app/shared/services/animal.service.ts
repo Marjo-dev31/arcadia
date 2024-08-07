@@ -1,8 +1,8 @@
 import { Injectable, inject } from "@angular/core";
-import { Animal, AnimalCreate, Response } from "../../../shared/models";
+import { Animal, AnimalCreate, Response } from "../models";
 import { HttpClient } from "@angular/common/http";
 import { Observable, map } from "rxjs";
-import { environment } from "../../../environments/environment";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class AnimalService {

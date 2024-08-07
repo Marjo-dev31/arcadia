@@ -24,9 +24,9 @@ import {
     EmployeeReport,
     EmployeeReportCreate,
 } from "../../../../shared/models";
-import { AnimalService } from "../../../animals/services/animal.service";
-import { EmployeeService } from "../../../animals/services/employee.service";
-import { UserService } from "../../../login/service/user.service";
+import { AnimalService } from "../../../../shared/services/animal.service";
+import { EmployeeService } from "../../../../shared/services/employee.service";
+import { UserService } from "../../../../shared/services/user.service";
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { tap } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";

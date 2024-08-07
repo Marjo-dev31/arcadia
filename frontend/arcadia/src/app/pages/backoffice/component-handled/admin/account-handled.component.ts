@@ -2,8 +2,8 @@ import { Component, DestroyRef, OnInit, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 import { UserCreate, Role } from "../../../../shared/models";
 import { CommonModule } from "@angular/common";
-import { RoleService } from "../../../login/service/role.service";
-import { UserService } from "../../../login/service/user.service";
+import { RoleService } from "../../../../shared/services/role.service";
+import { UserService } from "../../../../shared/services/user.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -166,12 +166,9 @@ export class AccountHandledComponent implements OnInit {
                 .addUser(this.newUser)
                 .pipe(takeUntilDestroyed(this.destroyRef))
                 .subscribe((response) => {
-                    if (response.data) {
-                        alertOk.style.display = "block";
-                        form.reset();
-                    } else {
-                        alertNotOk.style.display = "block";
-                    }
+                    response.data
+                        ? ((alertOk.style.display = "block"), form.reset())
+                        : (alertNotOk.style.display = "block");
                 });
         }
     }

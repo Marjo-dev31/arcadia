@@ -1,10 +1,10 @@
 import { Component, DestroyRef, OnInit, inject } from "@angular/core";
-import { HabitatsService } from "./services/habitat.service";
+import { HabitatsService } from "../../shared/services/habitat.service";
 import { Animal, AnimalOnMongo, Habitat } from "../../shared/models";
 import { AnimalsComponent } from "../animals/animals.component";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
-import { AnimalService } from "../animals/services/animal.service";
-import { ClickService } from "../animals/services/click.service";
+import { AnimalService } from "../../shared/services/animal.service";
+import { ClickService } from "../../shared/services/click.service";
 import { ActivatedRoute } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { TitleCasePipe } from "@angular/common";
