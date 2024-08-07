@@ -2,6 +2,7 @@ import { AsyncPipe, NgStyle } from "@angular/common";
 import { Component, inject, signal } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { LoginService } from "../../services/login.service";
+import { removeLocalStorage } from "../../utils/removeLocalStorage";
 
 @Component({
     selector: "app-header",
@@ -110,7 +111,8 @@ export class HeaderComponent {
     }
 
     logout() {
-        this.loginService.logout();
-        this.route.navigateByUrl("/");
+        removeLocalStorage()
+        this.loginService.isLoggin.set(false);
+        this.route.navigateByUrl('/')
     }
 }

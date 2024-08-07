@@ -4,6 +4,7 @@ import { UserLogin, Response, CurrentUser } from "../models";
 import { Observable} from "rxjs";
 import { environment } from "../../environments/environment";
 
+
 @Injectable()
 export class LoginService {
     private readonly http = inject(HttpClient)
@@ -14,12 +15,5 @@ export class LoginService {
     login(user: UserLogin): Observable<Response<CurrentUser>> {
         this.isLoggin.set(true);
         return this.http.post<Response<CurrentUser>>(this.url, user)
-    }
-
-    logout() {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("role");
-        localStorage.removeItem("firstname");
-        this.isLoggin.set(false);
     }
 }

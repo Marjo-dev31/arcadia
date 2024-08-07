@@ -85,15 +85,11 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
             </table>
-            @if(!addFormIsDisplay()){
-            <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >add_circle_outline</mat-icon
-            >
-            } @if(addFormIsDisplay()){
-            <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >remove_circle_outline</mat-icon
-            >
-            }
+            <mat-icon class="add-icon" (click)="toggleAddForm()">{{
+                addFormIsDisplay()
+                    ? "remove_circle_outline"
+                    : "add_circle_outline"
+            }}</mat-icon>
         </section>
         <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
@@ -178,6 +174,7 @@ export class ServiceHandledComponent implements OnInit {
     private readonly imageService = inject(ImageService);
     private readonly destroyRef = inject(DestroyRef);
 
+
     datasource!: Service[];
 
     addFormIsDisplay = signal(false);
@@ -202,7 +199,7 @@ export class ServiceHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay.update((value)=> !value);
+        this.addFormIsDisplay.update((value) => !value);
     }
 
     onSubmit(form: NgForm): void {
@@ -216,7 +213,7 @@ export class ServiceHandledComponent implements OnInit {
             )
             .subscribe();
         form.reset();
-        this.addFormIsDisplay.update((value)=> !value);
+        this.addFormIsDisplay.update((value) => !value);
     }
 
     editService(id: string) {
@@ -240,7 +237,7 @@ export class ServiceHandledComponent implements OnInit {
             )
             .subscribe();
         this.serviceForm.reset();
-        this.updateFormIsDisplay.update((value)=> !value)
+        this.updateFormIsDisplay.update((value) => !value);
     }
 
     deleteService(id: string) {
@@ -256,20 +253,20 @@ export class ServiceHandledComponent implements OnInit {
     }
 
     onFileChange(event: Event, id: string) {
-        const input = event.target as HTMLInputElement
+        const input = event.target as HTMLInputElement;
         const file = input?.files?.[0];
-        if(file){
-                const formData = new FormData();
-        formData.append("myImg", file);
-        this.imageService
-            .addServiceImage(formData, id)
-            .pipe(
-                tap(() => {
-                    this.getServices();
-                }),
-                takeUntilDestroyed(this.destroyRef)
-            )
-            .subscribe();
+        if (file) {
+            const formData = new FormData();
+            formData.append("myImg", file);
+            this.imageService
+                .addServiceImage(formData, id)
+                .pipe(
+                    tap(() => {
+                        this.getServices();
+                    }),
+                    takeUntilDestroyed(this.destroyRef)
+                )
+                .subscribe();
         }
     }
 
@@ -286,6 +283,6 @@ export class ServiceHandledComponent implements OnInit {
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay.update((value)=> !value)
+        this.updateFormIsDisplay.update((value) => !value);
     }
 }

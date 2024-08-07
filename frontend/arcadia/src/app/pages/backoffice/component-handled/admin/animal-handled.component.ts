@@ -243,7 +243,6 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class AnimalHandledComponent implements OnInit {
-    
     displayColums: string[] = [
         "firstname",
         "race",
@@ -282,8 +281,8 @@ export class AnimalHandledComponent implements OnInit {
         breed: "",
     };
 
-    addFormIsDisplay= signal(false);
-    updateFormIsDisplay= signal(false);
+    addFormIsDisplay = signal(false);
+    updateFormIsDisplay = signal(false);
     submitted = signal(false);
 
     ngOnInit() {
@@ -305,17 +304,17 @@ export class AnimalHandledComponent implements OnInit {
         const input = event.target as HTMLInputElement;
         const file = input?.files?.[0];
         const formData = new FormData();
-        if(file){
-          formData.append("myImg", file);
-        this.imageService
-            .addAnimalImage(formData, id)
-            .pipe(
-                tap(() => {
-                    this.getAnimals();
-                }),
-                takeUntilDestroyed(this.destroyRef)
-            )
-            .subscribe();   
+        if (file) {
+            formData.append("myImg", file);
+            this.imageService
+                .addAnimalImage(formData, id)
+                .pipe(
+                    tap(() => {
+                        this.getAnimals();
+                    }),
+                    takeUntilDestroyed(this.destroyRef)
+                )
+                .subscribe();
         }
     }
 
@@ -332,7 +331,7 @@ export class AnimalHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay.update((value)=> !value)
+        this.addFormIsDisplay.update((value) => !value);
     }
 
     onSubmit(form: NgForm) {
@@ -345,12 +344,12 @@ export class AnimalHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.addFormIsDisplay.update((value)=> !value)
+        this.addFormIsDisplay.update((value) => !value);
         form.reset();
     }
 
     editAnimal(id: string) {
-        this.updateFormIsDisplay.set(true)
+        this.updateFormIsDisplay.set(true);
         if (this.datasource) {
             const animalToUpdate = this.datasource.find((el) => el.id === id);
             this.updateForm.patchValue({
@@ -373,7 +372,7 @@ export class AnimalHandledComponent implements OnInit {
             )
             .subscribe();
         this.updateForm.reset();
-        this.updateFormIsDisplay.update((value)=> !value)
+        this.updateFormIsDisplay.update((value) => !value);
     }
 
     deleteAnimal(id: string) {
@@ -387,6 +386,7 @@ export class AnimalHandledComponent implements OnInit {
             )
             .subscribe();
     }
+
     getHabitat() {
         this.habitatService.getHabitats().then((response) => {
             this.habitats = response;
@@ -412,10 +412,10 @@ export class AnimalHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.submitted.set(true)
+        this.submitted.set(true);
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay.update((value)=> !value)
+        this.updateFormIsDisplay.update((value) => !value);
     }
 }
