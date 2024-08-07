@@ -110,7 +110,7 @@ export class HabitatsComponent implements OnInit {
     }
 
     openDialog(animal: Animal) {
-        const dialogRef = this.matdialog.open(AnimalsComponent, {
+        this.matdialog.open(AnimalsComponent, {
             width: "400px",
             data: { animal: animal },
         });

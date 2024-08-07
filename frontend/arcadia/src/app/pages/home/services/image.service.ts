@@ -9,21 +9,21 @@ export class ImageService {
     private readonly http = inject(HttpClient);
     private readonly url = `${environment.serverUrl}/images`;
     
-    addServiceImage(image: any, id: string): Observable<Response<Image>> {
+    addServiceImage(image: FormData, id: string): Observable<Response<Image>> {
         return this.http.post<Response<Image>>(
             `${this.url}/service/${id}`,
             image
         );
     }
 
-    addHabitatImage(image: any, id: string): Observable<Response<Image>> {
+    addHabitatImage(image: FormData, id: string): Observable<Response<Image>> {
         return this.http.post<Response<Image>>(
             `${this.url}/habitat/${id}`,
             image
         );
     }
 
-    addAnimalImage(image: any, id: string): Observable<Response<Image>> {
+    addAnimalImage(image: FormData, id: string): Observable<Response<Image>> {
         return this.http.post<Response<Image>>(
             `${this.url}/animal/${id}`,
             image

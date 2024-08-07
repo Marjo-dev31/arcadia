@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from "@angular/core";
+import { Component, DestroyRef, inject, signal } from "@angular/core";
 import { MailService } from "./services/mail.service";
 import {
     FormBuilder,
@@ -27,7 +27,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 id="contactForm"
                 (ngSubmit)="onSubmit()"
             >
-                @if(submitted){
+                @if(submitted()){
                 <p class="alert">Demande de contact envoyé !</p>
                 }
                 <input
@@ -125,14 +125,14 @@ export class ContactComponent {
         ]),
     });
 
-    submitted = false;
+    submitted = signal(false);
 
     onSubmit() {
         this.mailService
             .sendEmail(this.contactForm.value)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe();
-        this.submitted = true;
+        this.submitted.set(true);
         this.contactForm.reset();
     }
 }

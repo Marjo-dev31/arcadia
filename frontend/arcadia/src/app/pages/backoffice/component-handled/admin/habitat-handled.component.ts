@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { Component, DestroyRef, OnInit, inject, signal } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { Habitat, HabitatCreate } from "../../../../shared/models";
@@ -88,13 +88,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon
             >
-            } @if(addFormIsDisplay){
+            } @if(addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >remove_circle_outline</mat-icon
             >
             }
         </section>
-        <section [ngStyle]="{ display: addFormIsDisplay ? 'block' : 'none' }">
+        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
                 class="add-form"
                 #form="ngForm"
@@ -130,7 +130,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             </form>
         </section>
         <section
-            [ngStyle]="{ display: updateFormIsDisplay ? 'block' : 'none' }"
+            [ngStyle]="{ display: updateFormIsDisplay() ? 'block' : 'none' }"
         >
             <form
                 class="update-form"
@@ -184,8 +184,8 @@ export class HabitatHandledComponent implements OnInit {
         description: "",
     };
 
-    addFormIsDisplay: boolean = false;
-    updateFormIsDisplay: boolean = false;
+    addFormIsDisplay = signal(false);
+    updateFormIsDisplay = signal(false);
 
     ngOnInit() {
         this.getHabitats();
@@ -201,7 +201,7 @@ export class HabitatHandledComponent implements OnInit {
     }
 
     editHabitat(id: string) {
-        this.updateFormIsDisplay = true;
+        this.updateFormIsDisplay.set(true);
         const habitatToUpdate = this.datasource.find((el) => el.id === id);
         this.habitatForm.patchValue({
             id: habitatToUpdate?.id,
@@ -221,11 +221,11 @@ export class HabitatHandledComponent implements OnInit {
             )
             .subscribe();
         this.habitatForm.reset();
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value);
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value);
     }
 
     onSubmit() {
@@ -240,7 +240,7 @@ export class HabitatHandledComponent implements OnInit {
             .subscribe();
         this.newHabitat.description = "";
         this.newHabitat.title = "";
-        this.addFormIsDisplay = !this.addFormIsDisplay;
+        this.addFormIsDisplay.update((value)=> !value);
     }
 
     deleteHabitat(id: string) {
@@ -286,6 +286,6 @@ export class HabitatHandledComponent implements OnInit {
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay = !this.updateFormIsDisplay;
+        this.updateFormIsDisplay.update((value)=> !value);
     }
 }
