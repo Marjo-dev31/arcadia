@@ -5,8 +5,8 @@ import {
     VeterinaryReport,
     VeterinaryReportCreate,
     Response,
-} from "../../../shared/models";
-import { environment } from "../../../environments/environment";
+} from "../models";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class VeterinaryService {

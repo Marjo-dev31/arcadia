@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { Breed, BreedCreate, Response } from "../../../shared/models";
-import { environment } from "../../../environments/environment";
+import { Breed, BreedCreate, Response } from "../models";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class BreedService {

@@ -1,8 +1,8 @@
 import { Injectable, inject } from "@angular/core";
-import { Service, ServiceCreate, Response } from "../../../shared/models";
+import { Service, ServiceCreate, Response } from "../models";
 import { Observable, map } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class ServiceService {

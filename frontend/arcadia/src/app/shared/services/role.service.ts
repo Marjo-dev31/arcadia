@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { environment } from "../../../environments/environment";
-import { Role, Response } from "../../../shared/models";
+import { environment } from "../../environments/environment";
+import { Role, Response } from "../models";
 
 @Injectable()
 export class RoleService {

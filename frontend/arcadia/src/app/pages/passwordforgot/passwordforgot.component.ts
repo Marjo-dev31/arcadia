@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject } from "@angular/core";
-import { MailService } from "../contact/services/mail.service";
+import { MailService } from "../../shared/services/mail.service";
 import { FormsModule, NgForm } from "@angular/forms";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 

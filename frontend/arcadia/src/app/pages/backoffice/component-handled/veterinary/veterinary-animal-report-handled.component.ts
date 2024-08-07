@@ -24,11 +24,11 @@ import {
     VeterinaryReportCreate,
     User,
 } from "../../../../shared/models";
-import { AnimalService } from "../../../animals/services/animal.service";
+import { AnimalService } from "../../../../shared/services/animal.service";
 import { MatSortModule, MatSort } from "@angular/material/sort";
-import { VeterinaryService } from "../../../animals/services/veterinary.service";
+import { VeterinaryService } from "../../../../shared/services/veterinary.service";
 import { tap } from "rxjs";
-import { UserService } from "../../../login/service/user.service";
+import { UserService } from "../../../../shared/services/user.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -129,15 +129,11 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
             </table>
-            }} @if(role === 'Vétérinaire'){ @if(!addFormIsDisplay){
+            }} @if(role === 'Vétérinaire'){ 
             <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >add_circle_outline</mat-icon
+                >{{addFormIsDisplay()? 'remove_circle_outline' : 'add_circle_outline'}}</mat-icon
             >
-            } @if(addFormIsDisplay()){
-            <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >remove_circle_outline</mat-icon
-            >
-            }}
+           }
         </section>
         <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
             <form
@@ -440,7 +436,6 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
     toggleAddForm() {
         this.addFormIsDisplay.update((value)=> !value)
-
     }
 
     onSubmit(form: NgForm) {

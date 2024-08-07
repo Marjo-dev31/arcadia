@@ -1,8 +1,8 @@
 import { Component, DestroyRef, OnInit, inject } from "@angular/core";
-import { ServiceService } from "./service/service.service";
+import { ServiceService } from "../../shared/services/service.service";
 import { JsonPipe, TitleCasePipe } from "@angular/common";
 import { Service, Opening } from "../../shared/models";
-import { OpeningService } from "./service/opening.service";
+import { OpeningService } from "../../shared/services/opening.service";
 import { ActivatedRoute } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { environment } from "../../environments/environment";

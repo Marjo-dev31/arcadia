@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
-import { UserLogin } from "../../shared/models/user.interface";
-import { UserService } from "../login/service/user.service";
+import { UserLogin } from "../../shared/models";
+import { UserService } from "../../shared/services/user.service";
 import { Router } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 

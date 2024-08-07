@@ -1,8 +1,8 @@
 import { Injectable, inject } from "@angular/core";
-import { ReviewPost, Review, Response } from "../../../shared/models";
+import { ReviewPost, Review, Response } from "../models";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { environment } from "../../../environments/environment";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class ReviewsService {

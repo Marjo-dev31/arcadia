@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, signal } from "@angular/core";
-import { MailService } from "./services/mail.service";
+import { MailService } from "../../shared/services/mail.service";
 import {
     FormBuilder,
     FormControl,

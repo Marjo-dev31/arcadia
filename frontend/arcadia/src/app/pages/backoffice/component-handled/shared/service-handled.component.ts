@@ -5,7 +5,7 @@ import {
     Service,
     ServiceCreate,
 } from "../../../../shared/models/service.interface";
-import { ServiceService } from "../../../services/service/service.service";
+import { ServiceService } from "../../../../shared/services/service.service";
 import {
     FormControl,
     FormGroup,
@@ -17,7 +17,7 @@ import {
 } from "@angular/forms";
 import { NgStyle } from "@angular/common";
 import { tap } from "rxjs";
-import { ImageService } from "../../../home/services/image.service";
+import { ImageService } from "../../../../shared/services/image.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -52,7 +52,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 <ng-container matColumnDef="image">
                     <th mat-header-cell *matHeaderCellDef>Photo</th>
                     <td mat-cell *matCellDef="let service">
-                        @if( service.image_url){
+                        @if(service.image_url){
                         <div class="delete-img">
                             <div>{{ service.image_url }}</div>
                             <mat-icon
@@ -85,7 +85,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
             </table>
-            @if(!addFormIsDisplay){
+            @if(!addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon
             >

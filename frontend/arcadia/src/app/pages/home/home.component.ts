@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit, inject } from "@angular/core";
-import { Review, ReviewPost } from "../../shared/models/reviews.interface";
-import { ReviewsService } from "./services/reviews.service";
+import { Review, ReviewPost } from "../../shared/models";
+import { ReviewsService } from "../../shared/services/reviews.service";
 import { FormsModule, NgForm } from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
