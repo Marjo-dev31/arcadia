@@ -5,7 +5,7 @@ import {
     ViewChild,
     inject,
 } from "@angular/core";
-import { ClickService } from "../../../animals/services/click.service";
+import { ClickService } from "../../../../shared/services/click.service";
 import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../shared/models";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatSortModule, MatSort } from "@angular/material/sort";

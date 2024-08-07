@@ -6,8 +6,8 @@ import {
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import { OpeningService } from "../../../services/service/opening.service";
-import { Opening } from "../../../../shared/models/opening.interface";
+import { OpeningService } from "../../../../shared/services/opening.service";
+import { Opening } from "../../../../shared/models";
 import { tap } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 

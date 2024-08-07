@@ -2,7 +2,7 @@ import { Component, DestroyRef, OnInit, inject } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { Review } from "../../../../shared/models";
-import { ReviewsService } from "../../../home/services/reviews.service";
+import { ReviewsService } from "../../../../shared/services/reviews.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -30,7 +30,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Etat actuel</th>
                 <td mat-cell *matCellDef="let review">
-                    @if(review.status === true){
+                    @if(review.status){
                     <div>Publié</div>
                     } @else {
                     <div>Refusé</div>

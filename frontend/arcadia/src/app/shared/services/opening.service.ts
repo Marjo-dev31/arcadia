@@ -1,8 +1,8 @@
 import { Injectable, inject, signal } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { Opening, Response } from "../../../shared/models";
-import { environment } from "../../../environments/environment";
+import { Opening, Response } from "../models";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class OpeningService {

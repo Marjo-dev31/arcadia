@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit, inject, signal } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
-import { HabitatsService } from "../../../habitats/services/habitat.service";
+import { HabitatsService } from "../../../../shared/services/habitat.service";
 import { Habitat } from "../../../../shared/models";
 import {
     FormBuilder,
@@ -51,17 +51,16 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
             </table>
-            @if(role === "Vétérinaire"){ @if(!addFormIsDisplay){
+            @if(role === "Vétérinaire"){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >add_circle_outline</mat-icon
+                >{{addFormIsDisplay()? 'remove_circle_outline' : 'add_circle_outline'}} </mat-icon
             >
-            } @if(addFormIsDisplay()){
-            <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >remove_circle_outline</mat-icon
-            >
-            } }
+        }
         </section>
-        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
+        <section
+            [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }"
+            #formSection
+        >
             <form
                 [formGroup]="commentForm"
                 (ngSubmit)="onSubmit(habitatSelected.value)"
@@ -121,8 +120,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
     }
 
     toggleAddForm() {
-        this.addFormIsDisplay.update((value)=> !value)
-
+        this.addFormIsDisplay.update((value) => !value);
     }
 
     onSubmit(id: string) {
@@ -136,7 +134,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
             )
             .subscribe();
         this.commentForm.reset();
-        this.addFormIsDisplay.update((value)=> !value)
+        this.addFormIsDisplay.update((value) => !value);
     }
 
     deleteComment(id: string) {

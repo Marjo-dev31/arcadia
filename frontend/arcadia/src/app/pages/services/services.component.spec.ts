@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ServiceService } from "./service/service.service";
+import { ServiceService } from "../../shared/services/service.service";
 import { ServicesComponent } from "./services.component";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
-import { OpeningService } from "./service/opening.service";
+import { OpeningService } from "../../shared/services/opening.service";
 
 describe("ServiceService", () => {
     let component: ServicesComponent;

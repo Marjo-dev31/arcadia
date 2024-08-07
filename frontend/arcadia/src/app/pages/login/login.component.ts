@@ -1,13 +1,14 @@
 import { Component, DestroyRef, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
-import { UserLogin } from "../../shared/models/user.interface";
+import { UserLogin } from "../../shared/models";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { LoginService } from "./service/login.service";
+import { LoginService } from "../../shared/services/login.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { NgStyle } from "@angular/common";
 
 @Component({
     selector: "app-connexion",
-    imports: [FormsModule, RouterLink],
+    imports: [FormsModule, RouterLink, NgStyle],
     standalone: true,
     template: `
         <main>
@@ -28,7 +29,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             >
                 <p>Connexion</p>
                 @if(responseMessage === 'User doesn t exists'){
-                <p class="alert">Utilisateur inconnu</p>
+                <p class="alert" >Utilisateur inconnu</p>
                 } @if(responseMessage === 'Email and password does not match!'){
                 <p class="alert">Email ou mot de passe incorrect</p>
                 }
@@ -100,7 +101,7 @@ export class LoginComponent {
             .login(this.user)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) => {
-                if (response.data) {
+                if(response.data){
                     localStorage.setItem(
                         "accessToken",
                         response.data[0].accessToken
@@ -110,11 +111,11 @@ export class LoginComponent {
                         "firstname",
                         response.data[0].firstname
                     );
-                    this.router.navigate(["/espacepersonnel"]);
                 } else {
-                    this.responseMessage = response.message;
-                }
-            });
+        this.responseMessage = response.message
+                    this.router.navigate(["/espacepersonnel"]);
         form.reset()
-    }
+    } 
+})}
+
 }

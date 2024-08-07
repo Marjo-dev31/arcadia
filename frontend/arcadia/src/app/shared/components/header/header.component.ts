@@ -1,7 +1,7 @@
 import { AsyncPipe, NgStyle } from "@angular/common";
 import { Component, inject, signal } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { LoginService } from "../../../pages/login/service/login.service";
+import { LoginService } from "../../services/login.service";
 
 @Component({
     selector: "app-header",

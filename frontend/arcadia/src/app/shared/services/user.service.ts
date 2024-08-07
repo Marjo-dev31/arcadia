@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { User, UserCreate, UserLogin, Response } from "../../../shared/models/";
-import { environment } from "../../../environments/environment";
+import { User, UserCreate, UserLogin, Response } from "../models";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class UserService {

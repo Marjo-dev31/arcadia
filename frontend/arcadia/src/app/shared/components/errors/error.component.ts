@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { LoginService } from "../../../pages/login/service/login.service";
+import { LoginService } from "../../services/login.service";
 
 @Component({
     selector: "app-error",
