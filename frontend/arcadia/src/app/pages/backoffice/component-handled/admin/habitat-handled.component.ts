@@ -166,7 +166,7 @@ export class HabitatHandledComponent implements OnInit {
     displayColums: string[] = ["title", "description", "actions", "image"];
 
     private readonly fb = inject(FormBuilder);
-    
+
     habitatForm: FormGroup = this.fb.group({
         title: new FormControl("", [Validators.required]),
         description: new FormControl("", [Validators.required]),
@@ -255,19 +255,22 @@ export class HabitatHandledComponent implements OnInit {
             .subscribe();
     }
 
-    onFileChange(event: any, id: string) {
-        const file: File = event.target.files[0];
+    onFileChange(event: Event, id: string) {
+        const input = event.currentTarget as HTMLInputElement;
+        const file = input?.files?.[0];
         const formData = new FormData();
-        formData.append("myImg", file);
-        this.imageService
-            .addHabitatImage(formData, id)
-            .pipe(
-                tap(() => {
-                    this.getHabitats();
-                }),
-                takeUntilDestroyed(this.destroyRef)
-            )
-            .subscribe();
+        if (file) {
+            formData.append("myImg", file);
+            this.imageService
+                .addHabitatImage(formData, id)
+                .pipe(
+                    tap(() => {
+                        this.getHabitats();
+                    }),
+                    takeUntilDestroyed(this.destroyRef)
+                )
+                .subscribe();
+        }
     }
 
     deleteImage(id: string) {

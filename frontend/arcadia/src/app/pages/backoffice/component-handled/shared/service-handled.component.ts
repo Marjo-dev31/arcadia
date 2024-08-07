@@ -255,9 +255,11 @@ export class ServiceHandledComponent implements OnInit {
             .subscribe();
     }
 
-    onFileChange(event: any, id: string) {
-        const file: File = event.target.files[0];
-        const formData = new FormData();
+    onFileChange(event: Event, id: string) {
+        const input = event.target as HTMLInputElement
+        const file = input?.files?.[0];
+        if(file){
+                const formData = new FormData();
         formData.append("myImg", file);
         this.imageService
             .addServiceImage(formData, id)
@@ -268,6 +270,7 @@ export class ServiceHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
+        }
     }
 
     deleteImage(id: string) {
