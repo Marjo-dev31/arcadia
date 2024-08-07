@@ -301,10 +301,12 @@ export class AnimalHandledComponent implements OnInit {
             });
     }
 
-    onFileChange(event: any, id: string) {
-        const file: File = event.target.files[0];
+    onFileChange(event: Event, id: string) {
+        const input = event.target as HTMLInputElement;
+        const file = input?.files?.[0];
         const formData = new FormData();
-        formData.append("myImg", file);
+        if(file){
+          formData.append("myImg", file);
         this.imageService
             .addAnimalImage(formData, id)
             .pipe(
@@ -313,7 +315,8 @@ export class AnimalHandledComponent implements OnInit {
                 }),
                 takeUntilDestroyed(this.destroyRef)
             )
-            .subscribe();
+            .subscribe();   
+        }
     }
 
     deleteImage(id: string) {
@@ -347,7 +350,7 @@ export class AnimalHandledComponent implements OnInit {
     }
 
     editAnimal(id: string) {
-        this.updateFormIsDisplay.update((value)=> value = true)
+        this.updateFormIsDisplay.set(true)
         if (this.datasource) {
             const animalToUpdate = this.datasource.find((el) => el.id === id);
             this.updateForm.patchValue({
@@ -409,7 +412,7 @@ export class AnimalHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.submitted.update((value)=> value = true);
+        this.submitted.set(true)
     }
 
     closeUpdateForm() {
