@@ -194,9 +194,9 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #selectedBreed
                     formControlName="breed"
                 >
-                    @for(animal of datasource; track animal.id) {
-                    <option [value]="animal.id_breed">
-                        {{ animal.breed }}
+                    @for(breed of breeds; track breed.id) {
+                    <option [value]="breed.id">
+                        {{ breed.name | lowercase }}
                     </option>
                     }
                 </select>
