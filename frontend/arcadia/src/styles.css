@@ -79,7 +79,6 @@ h3 {
   font-size: var(--font-size-h3);
   font-weight: normal;
   text-align: center;
-  /* padding-bottom: 1.5rem; */
 }
 
 button {
@@ -109,7 +108,7 @@ button:hover {
   margin-bottom: 2rem;
   }
   
-.title{
+.title {
   text-align: center;
   margin-top: 0;
   padding: 2rem;

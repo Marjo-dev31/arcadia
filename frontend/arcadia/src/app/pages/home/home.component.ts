@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
         this.getReviews();
     }
 
+    // then required for exam
     getReviews() {
         this.reviewService.getReviews().then((response) => {
             this.reviews = response;

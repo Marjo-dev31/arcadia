@@ -70,12 +70,6 @@ import { environment } from "../../environments/environment";
     styleUrls: [`./habitats.component.css`],
 })
 export class HabitatsComponent implements OnInit {
-    habitats!: Habitat[];
-    animals!: Animal[] | undefined;
-    animalsOnMongoByFirstname!: AnimalOnMongo;
-    showDetails: string | undefined = undefined;
-    url = `${environment.serverUrl}/upload/`;
-
     private readonly habitatService = inject(HabitatsService);
     private readonly animalService = inject(AnimalService);
     private readonly clickService = inject(ClickService);
@@ -84,11 +78,19 @@ export class HabitatsComponent implements OnInit {
     private readonly matdialog = inject(MatDialog)
     
     title: string = this.route.snapshot.data["title"];
+    
+    habitats!: Habitat[];
+
+    animals!: Animal[] | undefined;
+    animalsOnMongoByFirstname!: AnimalOnMongo;
+    showDetails: string | undefined = undefined;
+    url = `${environment.serverUrl}/upload/`;
 
     ngOnInit() {
         this.getHabitats();
     }
 
+    // then required for exam
     getHabitats() {
         this.habitatService.getHabitats().then((response) => {
             this.habitats = response;
