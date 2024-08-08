@@ -1,11 +1,11 @@
-import database from '../config/mysql.config.js'
-import Response from '../domain/response.js'
-import logger from '../util/logger.js'
-import QUERYANIMALS from '../query/animal.query.js'
-import httpStatus from '../domain/httpstatus.js'
+import database from "../config/mysql.config.js";
+import Response from "../domain/response.js";
+import logger from "../util/logger.js";
+import QUERYANIMALS from "../query/animal.query.js";
+import httpStatus from "../domain/httpstatus.js";
 
 export const getAnimals = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching animals`)
+    logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
     database.query(QUERYANIMALS.SELECT_ANIMALS, (error, results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
@@ -14,7 +14,7 @@ export const getAnimals = (req, res) => {
                     httpStatus.OK.status,
                     `No animals found`
                 )
-            )
+            );
         } else {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -23,10 +23,10 @@ export const getAnimals = (req, res) => {
                     `Animals retrieved`,
                     results
                 )
-            )
+            );
         }
-    })
-}
+    });
+};
 
 // export const getAnimal = (req, res) => {
 //   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
@@ -57,22 +57,22 @@ export const getAnimals = (req, res) => {
 // };
 
 export const addAnimal = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, creating animal`)
+    logger.info(`${req.method} ${req.originalUrl}, creating animal`);
     database.query(
         QUERYANIMALS.CREATE_ANIMAL,
         Object.values(req.body),
         (error, results) => {
             if (!results) {
-                logger.error(error.message)
+                logger.error(error.message);
                 res.status(httpStatus.INTERNAL_SERVER_ERROR.code).send(
                     new Response(
                         httpStatus.INTERNAL_SERVER_ERROR.code,
                         httpStatus.INTERNAL_SERVER_ERROR.status,
                         `Error occured`
                     )
-                )
+                );
             } else {
-                const animal = { ...req.body }
+                const animal = { ...req.body };
                 res.status(httpStatus.CREATED.code).send(
                     new Response(
                         httpStatus.CREATED.code,
@@ -80,14 +80,14 @@ export const addAnimal = (req, res) => {
                         `Animal created`,
                         animal
                     )
-                )
+                );
             }
         }
-    )
-}
+    );
+};
 
 export const deleteAnimal = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, deleting animal`)
+    logger.info(`${req.method} ${req.originalUrl}, deleting animal`);
     database.query(
         QUERYANIMALS.DELETE_ANIMAL,
         [req.params.id],
@@ -100,7 +100,7 @@ export const deleteAnimal = (req, res) => {
                         `Animal deleted`,
                         results[0]
                     )
-                )
+                );
             } else {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -108,14 +108,14 @@ export const deleteAnimal = (req, res) => {
                         httpStatus.NOT_FOUND.status,
                         `Animal by id ${req.params.id} was not found !`
                     )
-                )
+                );
             }
         }
-    )
-}
+    );
+};
 
 export const updateAnimal = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching animal`)
+    logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
     database.query(
         QUERYANIMALS.SELECT_ANIMAL,
         [req.params.id],
@@ -127,9 +127,11 @@ export const updateAnimal = (req, res) => {
                         httpStatus.NOT_FOUND.status,
                         `Animal by id ${req.params.id} was not found !`
                     )
-                )
+                );
             } else {
-                logger.info(`${req.method} ${req.originalUrl}, updating animal`)
+                logger.info(
+                    `${req.method} ${req.originalUrl}, updating animal`
+                );
                 database.query(
                     QUERYANIMALS.UPDATE_ANIMAL,
                     [...Object.values(req.body), req.params.id],
@@ -142,9 +144,9 @@ export const updateAnimal = (req, res) => {
                                     `Habitat updated`,
                                     { ...req.body }
                                 )
-                            )
+                            );
                         } else {
-                            logger.error(error.message)
+                            logger.error(error.message);
                             res.status(
                                 httpStatus.INTERNAL_SERVER_ERROR.code
                             ).send(
@@ -153,17 +155,19 @@ export const updateAnimal = (req, res) => {
                                     httpStatus.INTERNAL_SERVER_ERROR.status,
                                     `Error occured`
                                 )
-                            )
+                            );
                         }
                     }
-                )
+                );
             }
         }
-    )
-}
+    );
+};
 
 export const getAnimalsByHabitat = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching animals by habitat`)
+    logger.info(
+        `${req.method} ${req.originalUrl}, fetching animals by habitat`
+    );
     database.query(
         QUERYANIMALS.SELECT_ANIMALS_HABITAT,
         [req.params.id],
@@ -175,7 +179,7 @@ export const getAnimalsByHabitat = (req, res) => {
                         httpStatus.OK.status,
                         `No animals found`
                     )
-                )
+                );
             } else {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -184,14 +188,16 @@ export const getAnimalsByHabitat = (req, res) => {
                         `Animals retrieved`,
                         results
                     )
-                )
+                );
             }
         }
-    )
-}
+    );
+};
 
 export const getAnimalsForFilter = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching animals by habitat`)
+    logger.info(
+        `${req.method} ${req.originalUrl}, fetching animals by habitat`
+    );
     database.query(QUERYANIMALS.SELECT_ANIMALS_GROUP_BY, (error, results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
@@ -200,7 +206,7 @@ export const getAnimalsForFilter = (req, res) => {
                     httpStatus.OK.status,
                     `No animals found`
                 )
-            )
+            );
         } else {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -209,7 +215,7 @@ export const getAnimalsForFilter = (req, res) => {
                     `Animals retrieved`,
                     results
                 )
-            )
+            );
         }
-    })
-}
+    });
+};

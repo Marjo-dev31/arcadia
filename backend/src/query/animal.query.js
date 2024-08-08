@@ -12,4 +12,4 @@ const QUERYANIMALS = {
         'SELECT animals.id, animals.firstname, animals.id_habitat, animals.id_breed, images.id AS image_id, images.image_url, habitats.title AS habitat, breeds.name AS breed, reports.details_condition AS details_condition FROM animals LEFT JOIN images ON images.id_animal = animals.id LEFT JOIN habitats ON habitats.id = animals.id_habitat LEFT JOIN breeds ON breeds.id = animals.id_breed LEFT JOIN (SELECT * FROM reports WHERE details_condition IS NOT NULL AND (SELECT MAX(date)) GROUP BY id_animal) AS reports ON reports.id_animal = animals.id GROUP BY firstname',
 }
 
-export default QUERYANIMALS
+export default QUERYANIMALS;
