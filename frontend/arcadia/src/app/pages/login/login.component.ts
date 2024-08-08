@@ -19,7 +19,6 @@ import { NgStyle } from "@angular/common";
                     (Réservé à la direction, aux vétérinaires et aux employés)
                 </h3>
             </div>
-
             <form
                 class="login-form"
                 name="loginForm"
@@ -70,7 +69,6 @@ import { NgStyle } from "@angular/common";
                     >
                 </div>
             </form>
-
             <div>
                 <h3>
                     Pour toutes questions, rendez-vous
@@ -111,9 +109,10 @@ export class LoginComponent {
             localStorage.setItem("accessToken", response.data[0].accessToken);
             localStorage.setItem("role", response.data[0].name);
             localStorage.setItem("firstname", response.data[0].firstname);
+            this.router.navigate(["/espacepersonnel"]);
         } else {
             this.responseMessage = response.message;
-            this.router.navigate(["/espacepersonnel"]);
+            
         }
     }
 }
