@@ -1,9 +1,9 @@
 import { Component, DestroyRef, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
-import { UserCreate, Role } from "../../../../shared/models";
+import { UserCreate, Role } from "../../../../../shared/models";
 import { AsyncPipe, CommonModule } from "@angular/common";
-import { RoleService } from "../../../../shared/services/role.service";
-import { UserService } from "../../../../shared/services/user.service";
+import { RoleService } from "../../../../../shared/services/role.service";
+import { UserService } from "../../../../../shared/services/user.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { Observable } from "rxjs";
 
@@ -129,7 +129,7 @@ import { Observable } from "rxjs";
             Un compte existe déjà avec cet email
         </p>
     `,
-    styleUrl: `../component-handled.component.css`,
+    styleUrl: `../../component-handled.component.css`,
 })
 export class AccountHandledComponent {
     private readonly roleService = inject(RoleService);
