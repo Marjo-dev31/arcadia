@@ -1,15 +1,16 @@
 import { Component, DestroyRef, OnInit, inject } from "@angular/core";
 import { ServiceService } from "../../shared/services/service.service";
-import { JsonPipe, TitleCasePipe } from "@angular/common";
+import { AsyncPipe, TitleCasePipe } from "@angular/common";
 import { Service, Opening } from "../../shared/models";
 import { OpeningService } from "../../shared/services/opening.service";
 import { ActivatedRoute } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { environment } from "../../environments/environment";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "app-services",
-    imports: [JsonPipe, TitleCasePipe],
+    imports: [TitleCasePipe, AsyncPipe],
     standalone: true,
     template: `
         <main>
@@ -21,14 +22,14 @@ import { environment } from "../../environments/environment";
                 </h2>
                 <div class="schedule">
                     <p>Nous vous accueillons</p>
-                    @if(openToPublic && openToPublic.length){
+                    @for (opening of openToPublic$ | async ; track openToPublic$) {
                     <p>
-                        du {{ openToPublic[0].openingDay }} au
-                        {{ openToPublic[0].closingDay }}
+                        du {{ opening.openingDay }} au
+                        {{ opening.closingDay }}
                     </p>
                     <p>
-                        De {{ openToPublic[0].openingTime }} à
-                        {{ openToPublic[0].closingTime }}
+                        De {{ opening.openingTime }} à
+                        {{ opening.closingTime }}
                     </p>
                     }
                     <p>
@@ -71,26 +72,18 @@ export class ServicesComponent implements OnInit {
 
     title: string = this.route.snapshot.data["title"];
     services!: Service[];
-    openToPublic!: Opening[];
     url = `${environment.serverUrl}/upload/`;
-    
+
+    openToPublic$: Observable<Opening[]> = this.openingService.getOpeningToPublic()
+
     ngOnInit() {
         this.getServices();
-        this.getOpeningToPublic();
     }
 
+    // then required for exam
     getServices() {
         this.serviceService.getServices().then((response) => {
             this.services = response;
         });
-    }
-
-    getOpeningToPublic() {
-        this.openingService
-            .getOpeningToPublic()
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((response) => {
-                this.openToPublic = response;
-            });
     }
 }

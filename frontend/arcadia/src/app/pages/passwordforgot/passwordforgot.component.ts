@@ -29,10 +29,6 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
         </form>
     `,
     styles: `
-    p {
-        text-align: center
-    }
-
     form {
         display: flex;
         flex-direction: column;
@@ -47,11 +43,11 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     `,
 })
 export class PasswordForgotComponent {
-    email: string = "";
-
     private readonly mailService = inject(MailService);
     private readonly destroyRef = inject(DestroyRef);
 
+    email: string = "";
+    
     onSubmit(form: NgForm) {
         this.mailService
             .sendEmailForNewPassword(this.email)
