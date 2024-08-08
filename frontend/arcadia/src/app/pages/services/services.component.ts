@@ -22,7 +22,7 @@ import { Observable } from "rxjs";
                 </h2>
                 <div class="schedule">
                     <p>Nous vous accueillons</p>
-                    @for (opening of openToPublic$ | async ; track openToPublic$) {
+                    @for (opening of openToPublic$ | async ; track opening._id) {
                     <p>
                         du {{ opening.openingDay }} au
                         {{ opening.closingDay }}
@@ -68,7 +68,6 @@ export class ServicesComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);
     private readonly serviceService = inject(ServiceService);
     private readonly openingService = inject(OpeningService);
-    private readonly destroyRef = inject(DestroyRef);
 
     title: string = this.route.snapshot.data["title"];
     services!: Service[];
