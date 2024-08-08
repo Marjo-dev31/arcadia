@@ -27,7 +27,7 @@ import {
 import { AnimalService } from "../../../../shared/services/animal.service";
 import { MatSortModule, MatSort } from "@angular/material/sort";
 import { VeterinaryService } from "../../../../shared/services/veterinary.service";
-import { tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { UserService } from "../../../../shared/services/user.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
@@ -57,9 +57,9 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     id="animal-veterinary"
                     [(ngModel)]="selectedAnimalOption"
                 >
-                    @for(animal of animals; track animal) {
+                    @for(animal of animals; track animal.id) {
                     <option [ngValue]="animal.id">
-                        {{ animal.firstname }}
+                        {{ animal.firstname }} ({{ animal.breed}})
                     </option>
                     }
                 </select>
@@ -68,7 +68,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             @if(animalchoice.submitted && selectedAnimalOption &&
             !veterinaryReports.length){
             <p>Il n'y pas encore de rapport associé à cet animal !</p>
-            } @for(animal of animals; track animal){ @if (selectedAnimalOption
+            } @for(animal of animals; track animal.id){ @if (selectedAnimalOption
             === animal.id) {
             <table
                 mat-table
@@ -152,9 +152,9 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #animal="ngModel"
                     required
                 >
-                    @for(animal of animals; track animal) {
+                    @for(animal of animals; track animal.id) {
                     <option [ngValue]="animal.id">
-                        {{ animal.firstname }}
+                        {{ animal.firstname }} {{ animal.breed }}
                     </option>
                     }
                 </select>
@@ -224,7 +224,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     [(ngModel)]="newReport.id_user"
                     #user="ngModel"
                 >
-                    @for(user of users; track user) {
+                    @for(user of users$ | async; track user.id) {
                     <option [ngValue]="user.id">
                         {{ user.firstname | titlecase }}
                         {{ user.lastname | titlecase }}
@@ -247,22 +247,10 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 [formGroup]="updateForm"
                 (ngSubmit)="updateReport(selectedAnimalOption)"
             >
-                <label for="animal-update-veterinary"
-                    >Sélectionner un animal :
-                </label>
-                <select
-                    name="selected-animal"
-                    id="animal-update-veterinary"
-                    formControlName="id_animal"
-                >
-                    @for(animal of animals; track animal) {
-                    <option [value]="animal.id">{{ animal.firstname }}</option>
-                    }
-                </select>
-                @if(updateForm.controls['id_animal'].invalid &&
-                updateForm.controls['id_animal'].touched){
-                <div class="alert">Un animal est requis</div>
-                }
+                @for(animal of animals; track animal.id){
+                    @if(animal.id === this.selectedAnimalOption){
+                        <p>Animal selectionné : {{ animal.firstname | titlecase }}</p>
+                    }}
                 <label for="food-update-veterinary"
                     >Nourriture recommandée :</label
                 >
@@ -314,7 +302,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     id="user-update-veterinary"
                     formControlName="id_user"
                 >
-                    @for(user of users; track user) {
+                    @for(user of users$ | async ; track user.id) {
                     <option [value]="user.id">
                         {{ user.firstname | titlecase }}
                         {{ user.lastname | titlecase }}
@@ -338,6 +326,12 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class VeterinaryAnimalReportHandledComponent implements OnInit {
+    private readonly fb = inject(FormBuilder);
+    private readonly animalService = inject(AnimalService);
+    private readonly veterinaryService = inject(VeterinaryService);
+    private readonly userService = inject(UserService);
+    private readonly destroyRef = inject(DestroyRef);
+
     displayColums: string[] = [
         "date",
         "healthcondition",
@@ -346,8 +340,6 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
         "healthconditiondetails",
         "actions",
     ];
-
-    private readonly fb = inject(FormBuilder);
 
     updateForm: FormGroup = this.fb.group({
         food: new FormControl("", [Validators.required]),
@@ -361,10 +353,11 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
 
     animals!: Animal[];
     veterinaryReports: VeterinaryReport[] = [];
-    users!: User[];
     selectedAnimalOption!: string;
     dataSource = new MatTableDataSource(this.veterinaryReports);
     role: string = localStorage.getItem("role") || "";
+
+    users$: Observable<User[]> =  this.userService.getUsers();
 
     addFormIsDisplay = signal(false);
     updateFormIsDisplay = signal(false);
@@ -378,16 +371,10 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
         id_animal: "",
     };
 
-    private readonly animalService = inject(AnimalService);
-    private readonly veterinaryService = inject(VeterinaryService);
-    private readonly userService = inject(UserService);
-    private readonly destroyRef = inject(DestroyRef);
-
     @ViewChild(MatSort) sort!: MatSort;
 
     ngOnInit() {
         this.getAnimals();
-        this.getUsers();
     }
 
     ngAfterOnInit() {
@@ -398,15 +385,6 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
         this.animalService.getAnimals().then((response) => {
             this.animals = response;
         });
-    }
-
-    getUsers() {
-        this.userService
-            .getUsers()
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((response) => {
-                this.users = response;
-            });
     }
 
     getVeterinaryReports(id: string) {
