@@ -127,7 +127,6 @@ export class AnimalHandledComponent implements OnInit {
             .subscribe();
     }
 
-
     onSubmit(form: NgForm) {
         this.animalService
             .addAnimal(this.newAnimal)
