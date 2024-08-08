@@ -66,47 +66,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             </form>
         </main>
     `,
-    styles: `
-body {
-  background-image: url("/images/feuilles volantes.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: 30%;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  align-items: center;
-  justify-content: center;
-  margin: 20px auto 50px;
-  padding: 2rem;
-  background-color: rgba(70, 46, 1, 0.2);
-  backdrop-filter: blur(2px);
-}
-
-.contact-form input,
-.contact-form textarea {
-  margin: 1rem;
-  border: none;
-  border-bottom: 2px solid var(--color-font);
-  width: 100%;
-  padding: 0 0.5rem;
-  background-color: rgba(70, 46, 1, 0);
-}
-
-.contact-form input {
-  height: 50px;
-}
-
-::placeholder {
-  font-family: var(--font-family-content);
-  color: var(--color-font);
-  transform: translateY(100%);
-}
-
-  `,
+    styleUrls: [`./contact.component.css`],
 })
 export class ContactComponent {
     private readonly fb = inject(FormBuilder);
