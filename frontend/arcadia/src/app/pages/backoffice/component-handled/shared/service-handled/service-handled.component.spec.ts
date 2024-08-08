@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ActivatedRoute, RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { ServiceHandledComponent } from "./service-handled.component";
-import { ServiceService } from "../../../../shared/services/service.service";
-import { OpeningService } from "../../../../shared/services/opening.service";
-import { ImageService } from "../../../../shared/services/image.service";
+import { ServiceService } from "../../../../../shared/services/service.service";
+import { OpeningService } from "../../../../../shared/services/opening.service";
+import { ImageService } from "../../../../../shared/services/image.service";
 
 describe("ServiceHandledComponent", () => {
     let component: ServiceHandledComponent;

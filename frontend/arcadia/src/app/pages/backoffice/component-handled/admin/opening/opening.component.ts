@@ -6,8 +6,8 @@ import {
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import { OpeningService } from "../../../../shared/services/opening.service";
-import { Opening } from "../../../../shared/models";
+import { OpeningService } from "../../../../../shared/services/opening.service";
+import { Opening } from "../../../../../shared/models";
 import { tap } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
@@ -70,7 +70,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <button [disabled]="updateForm.invalid">Valider</button>
         </form>
     `,
-    styleUrl: `../component-handled.component.css`,
+    styleUrl: `../../component-handled.component.css`,
 })
 export class OpeningComponent implements OnInit {
     private readonly openingService = inject(OpeningService);

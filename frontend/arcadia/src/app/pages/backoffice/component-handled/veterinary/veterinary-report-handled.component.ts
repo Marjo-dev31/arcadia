@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
-import { VeterinaryHabitatReportHandledComponent } from "./veterinary-habitat-report-handled.component";
-import { VeterinaryAnimalReportHandledComponent } from "./veterinary-animal-report-handled.component";
+import { VeterinaryHabitatReportHandledComponent } from "./veterinary-habitat-report/veterinary-habitat-report-handled.component";
+import { VeterinaryAnimalReportHandledComponent } from "./veterinary-animal-report/veterinary-animal-report-handled.component";
 
 @Component({
     selector: "app-veterinary-report-handled",

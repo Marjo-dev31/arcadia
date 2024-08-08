@@ -7,6 +7,6 @@ import { Component } from "@angular/core";
         <h3>Accès interdit</h3>
         <p>Vous n'avez pas accès à cette section</p>
     `,
-    styleUrl: `../component-handled.component.css`,
+    styleUrl: `../../component-handled.component.css`,
 })
 export class ForbiddenComponent {}

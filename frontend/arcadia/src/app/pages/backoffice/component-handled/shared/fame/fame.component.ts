@@ -5,8 +5,8 @@ import {
     ViewChild,
     inject,
 } from "@angular/core";
-import { ClickService } from "../../../../shared/services/click.service";
-import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../shared/models";
+import { ClickService } from "../../../../../shared/services/click.service";
+import { AnimalOnMongo, AnimalOnMongoCreate } from "../../../../../shared/models";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatSortModule, MatSort } from "@angular/material/sort";
 import { FormsModule } from "@angular/forms";
@@ -84,7 +84,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
         </form>
         }
     `,
-    styleUrl: `../component-handled.component.css`,
+    styleUrl: `../../component-handled.component.css`,
 })
 export class FameComponent implements OnInit {
     private readonly clickService = inject(ClickService);
