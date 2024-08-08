@@ -1,8 +1,8 @@
 const verifyRoles = (...allowedRoles) => {
     return (req, res, next) => {
-        const rolesArray = [...allowedRoles]
-        const role = req.role
-        const result = rolesArray.includes(role)
+        const rolesArray = [...allowedRoles];
+        const role = req.role;
+        const result = rolesArray.includes(role);
         if (!result) {
             res.status(httpStatus.BAD_REQUEST.code).send(
                 new Response(
@@ -10,10 +10,10 @@ const verifyRoles = (...allowedRoles) => {
                     httpStatus.BAD_REQUEST.status,
                     `Wrong role`
                 )
-            )
+            );
         }
-        next()
-    }
-}
+        next();
+    };
+};
 
-export default verifyRoles
+export default verifyRoles;

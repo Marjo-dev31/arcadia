@@ -1,21 +1,27 @@
-import express from 'express'
-import { addAnimalOnMongo, addCount, deleteAnimalOnMongo, getAnimals } from '../controller/click.controller.js';
-import authenticateToken from '../middleware/auth.js';
-import verifyRoles from '../middleware/verifyroles.js';
+import express from "express";
+import {
+    addAnimalOnMongo,
+    addCount,
+    deleteAnimalOnMongo,
+    getAnimals,
+} from "../controller/click.controller.js";
+import authenticateToken from "../middleware/auth.js";
+import verifyRoles from "../middleware/verifyroles.js";
 
+const clickRoutes = express.Router();
 
+clickRoutes
+    .route("/:firstname")
+    // .get(getAnimalByFirstname)
+    .put(addCount);
 
-const clickRoutes = express.Router()
+clickRoutes
+    .route("/")
+    .get(authenticateToken, verifyRoles("Admin", "Vétérinaire"), getAnimals)
+    .post(authenticateToken, verifyRoles("Admin"), addAnimalOnMongo);
 
-clickRoutes.route('/:firstname')
-// .get(getAnimalByFirstname)
-.put(addCount)
+clickRoutes
+    .route("/:id")
+    .delete(authenticateToken, verifyRoles("Admin"), deleteAnimalOnMongo);
 
-clickRoutes.route('/')
-.get(authenticateToken, verifyRoles('Admin', 'Vétérinaire'), getAnimals)
-.post(authenticateToken, verifyRoles('Admin'), addAnimalOnMongo)
-
-clickRoutes.route('/:id')
-.delete(authenticateToken,verifyRoles('Admin'), deleteAnimalOnMongo)
-
-export default clickRoutes
+export default clickRoutes;

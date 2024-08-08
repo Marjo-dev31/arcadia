@@ -1,15 +1,14 @@
-import logger from 'pino';
+import logger from "pino";
 
 const log = logger({
-    base: { pid: false},
+    base: { pid: false },
     transport: {
-        target: 'pino-pretty',
+        target: "pino-pretty",
         options: {
-            colorized: true
-        }
+            colorized: true,
+        },
     },
-    timestamp: () => `,"time": "${new Date().toLocaleString()}"`
+    timestamp: () => `,"time": "${new Date().toLocaleString()}"`,
 });
-
 
 export default log;
