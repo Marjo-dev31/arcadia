@@ -60,7 +60,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     <option
                         [ngValue]="animal.id"
                     >
-                        {{ animal.firstname }} ({{ animal.breed }})
+                        {{ animal.firstname | titlecase }} ({{ animal.breed }})
                     </option>
                 }
                 </select>

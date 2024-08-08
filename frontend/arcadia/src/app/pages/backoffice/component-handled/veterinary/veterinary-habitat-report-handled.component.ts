@@ -67,7 +67,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             >
                 <select name="habitats" id="habitat-selected" #habitatSelected>
                     <option>-- Choissisez un habitat --</option>
-                    @for(habitat of datasource; track habitat){
+                    @for(habitat of datasource; track habitat.id){
                     <option [value]="habitat.id">{{ habitat.title }}</option>
                     } @if(!habitatSelected){
                     <p class="alert">Un habitat est requis</p>
@@ -92,9 +92,11 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class VeterinaryHabitatReportHandledComponent implements OnInit {
-    displayColums: string[] = ["habitat", "comment", "actions"];
-
     private readonly fb = inject(FormBuilder);
+    private readonly habitatService = inject(HabitatsService);
+    private readonly destroyRef = inject(DestroyRef);
+
+    displayColums: string[] = ["habitat", "comment", "actions"];
 
     commentForm: FormGroup = this.fb.group({
         comment: new FormControl("", [Validators.required]),
@@ -103,9 +105,6 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
     datasource!: Habitat[];
     report!: string[];
     role: string = localStorage.getItem("role") || "";
-
-    private readonly habitatService = inject(HabitatsService);
-    private readonly destroyRef = inject(DestroyRef);
 
     addFormIsDisplay = signal(false);
 
