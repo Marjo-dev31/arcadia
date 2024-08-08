@@ -1,8 +1,8 @@
 import { Component, DestroyRef, OnInit, inject, signal } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
-import { HabitatsService } from "../../../../shared/services/habitat.service";
-import { Habitat } from "../../../../shared/models";
+import { HabitatsService } from "../../../../../shared/services/habitat.service";
+import { Habitat } from "../../../../../shared/models";
 import {
     FormBuilder,
     FormControl,
@@ -89,7 +89,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             </form>
         </section>
     `,
-    styleUrl: `../component-handled.component.css`,
+    styleUrl: `../../component-handled.component.css`,
 })
 export class VeterinaryHabitatReportHandledComponent implements OnInit {
     private readonly fb = inject(FormBuilder);
