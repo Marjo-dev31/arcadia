@@ -87,10 +87,10 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class FameComponent implements OnInit {
-    displayColums: string[] = ["firstname", "clickCount", "delete"];
-
     private readonly clickService = inject(ClickService);
     private readonly destroyRef = inject(DestroyRef);
+
+    displayColums: string[] = ["firstname", "clickCount", "delete"];
 
     animals!: AnimalOnMongo[];
     datasource = new MatTableDataSource(this.animals);

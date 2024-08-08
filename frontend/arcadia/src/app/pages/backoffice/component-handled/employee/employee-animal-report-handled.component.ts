@@ -208,22 +208,10 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 [formGroup]="updateForm"
                 (ngSubmit)="updateReport(selectedAnimalOption)"
             >
-                <label for="animal-update-employee"
-                    >Sélectionner un animal :
-                </label>
-                <select
-                    name="selected-animal"
-                    id="animal-update-employee"
-                    formControlName="id_animal"
-                >
-                    @for(animal of animals; track animal.id) {
-                    <option [value]="animal.id">{{ animal.firstname }}</option>
-                    }
-                </select>
-                @if(updateForm.controls['id_animal'].invalid &&
-                updateForm.controls['id_animal'].touched){
-                <div class="alert">Un animal est requis</div>
-                }
+                 @for(animal of animals; track animal.id) {
+                    @if(animal.id === this.selectedAnimalOption){
+                        <p>Animal selectionné : {{ animal.firstname | titlecase}}</p>
+                    }}
                 <label for="food-update-employee"
                     >Nourriture recommandée :</label
                 >

@@ -56,6 +56,9 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class ReviewHandledComponent implements OnInit {
+    private readonly reviewService = inject(ReviewsService);
+    private readonly destroyRef = inject(DestroyRef);
+
     displayColums: string[] = [
         "pseudo",
         "content",
@@ -65,9 +68,6 @@ export class ReviewHandledComponent implements OnInit {
     ];
     datasource: Review[] = [];
     responseMessage: string = "";
-
-    private readonly reviewService = inject(ReviewsService);
-    private readonly destroyRef = inject(DestroyRef);
 
     ngOnInit() {
         this.getReviews();
