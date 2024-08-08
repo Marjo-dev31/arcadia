@@ -121,7 +121,6 @@ export class FameComponent implements OnInit {
                     this.animals = response.data;
                     this.datasource = new MatTableDataSource(this.animals);
                     this.datasource.sort = this.sort;
-                    this.responseMessage = response.message;
                 } else {
                     this.responseMessage = response.message;
                 }
