@@ -1,15 +1,16 @@
-import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { Component, DestroyRef, inject } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 import { UserCreate, Role } from "../../../../shared/models";
-import { CommonModule } from "@angular/common";
+import { AsyncPipe, CommonModule } from "@angular/common";
 import { RoleService } from "../../../../shared/services/role.service";
 import { UserService } from "../../../../shared/services/user.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "app-account-handled",
     standalone: true,
-    imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, AsyncPipe],
     template: `
         <h3>Création de compte</h3>
         <div>
@@ -64,9 +65,11 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #role="ngModel"
                     required
                 >
-                    <option *ngFor="let role of roles" [ngValue]="role.id">
+                @for(role of roles$ | async ; track role) {
+                    <option [ngValue]="role.id">
                         {{ role.name }}
                     </option>
+                }
                 </select>
                 @if(role.invalid && role.touched){
                 <p class="alert">Un rôle est requis</p>
@@ -128,12 +131,12 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     `,
     styleUrl: `../component-handled.component.css`,
 })
-export class AccountHandledComponent implements OnInit {
+export class AccountHandledComponent {
     private readonly roleService = inject(RoleService);
     private readonly userService = inject(UserService);
     private readonly destroyRef = inject(DestroyRef);
 
-    roles: Role[] = [];
+    roles$: Observable<Role[]> = this.roleService.getRolesWithoutAdmin();
 
     newUser: UserCreate = {
         email: "",
@@ -142,19 +145,6 @@ export class AccountHandledComponent implements OnInit {
         password: "",
         id_role: "",
     };
-
-    ngOnInit() {
-        this.getRolesWithoutAdmin();
-    }
-
-    getRolesWithoutAdmin() {
-        this.roleService
-            .getRolesWithoutAdmin()
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((response) => {
-                this.roles = response;
-            });
-    }
 
     onSubmit(form: NgForm) {
         const alertOk = document.getElementById("alert-account-created");
