@@ -2,19 +2,19 @@ import mongoose from "mongoose";
 
 const openingSchema = new mongoose.Schema({
     openingTime: {
-        type: String
+        type: String,
     },
     closingTime: {
-        type: String
+        type: String,
     },
     openingDay: {
-        type: String
+        type: String,
     },
     closingDay: {
-        type: String
+        type: String,
     },
 });
 
-const openingModel = mongoose.model('opening', openingSchema, 'opening');
+const openingModel = mongoose.model("opening", openingSchema, "opening");
 
-export default openingModel
+export default openingModel;

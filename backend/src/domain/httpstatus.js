@@ -5,6 +5,6 @@ const httpStatus = {
     BAD_REQUEST: { code: 400, status: "BAD_REQUEST" },
     NOT_FOUND: { code: 404, status: "NOT_FOUND" },
     INTERNAL_SERVER_ERROR: { code: 500, status: "INTERNAL_SERVER_ERROR" },
-  };
+};
 
-  export default httpStatus
+export default httpStatus;

@@ -1,11 +1,11 @@
-import database from '../config/mysql.config.js'
-import Response from '../domain/response.js'
-import logger from '../util/logger.js'
-import QUERYVETERINARIES from '../query/veterinary.query.js'
-import httpStatus from '../domain/httpstatus.js'
+import database from "../config/mysql.config.js";
+import Response from "../domain/response.js";
+import logger from "../util/logger.js";
+import QUERYVETERINARIES from "../query/veterinary.query.js";
+import httpStatus from "../domain/httpstatus.js";
 
 export const getVeterinaryReports = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching reports by animal`)
+    logger.info(`${req.method} ${req.originalUrl}, fetching reports by animal`);
     database.query(
         QUERYVETERINARIES.SELECT_REPORTS,
         [req.params.id],
@@ -17,7 +17,7 @@ export const getVeterinaryReports = (req, res) => {
                         httpStatus.OK.status,
                         `No reports found`
                     )
-                )
+                );
             } else {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -26,29 +26,29 @@ export const getVeterinaryReports = (req, res) => {
                         `Reports retrieved`,
                         results
                     )
-                )
+                );
             }
         }
-    )
-}
+    );
+};
 
 export const addVeterinaryReport = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, creating report`)
+    logger.info(`${req.method} ${req.originalUrl}, creating report`);
     database.query(
         QUERYVETERINARIES.CREATE_REPORT,
         Object.values(req.body),
         (error, results) => {
             if (!results) {
-                logger.error(error.message)
+                logger.error(error.message);
                 res.status(httpStatus.INTERNAL_SERVER_ERROR.code).send(
                     new Response(
                         httpStatus.INTERNAL_SERVER_ERROR.code,
                         httpStatus.INTERNAL_SERVER_ERROR.status,
                         `Error occured`
                     )
-                )
+                );
             } else {
-                const report = { ...req.body }
+                const report = { ...req.body };
                 res.status(httpStatus.CREATED.code).send(
                     new Response(
                         httpStatus.CREATED.code,
@@ -56,14 +56,14 @@ export const addVeterinaryReport = (req, res) => {
                         `Habitat created`,
                         { report }
                     )
-                )
+                );
             }
         }
-    )
-}
+    );
+};
 
 export const updateVeterinaryReport = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, fetching report`)
+    logger.info(`${req.method} ${req.originalUrl}, fetching report`);
     database.query(
         QUERYVETERINARIES.SELECT_REPORT,
         [req.params.id],
@@ -75,9 +75,11 @@ export const updateVeterinaryReport = (req, res) => {
                         httpStatus.NOT_FOUND.status,
                         `Report by id ${req.params.id} was not found !`
                     )
-                )
+                );
             } else {
-                logger.info(`${req.method} ${req.originalUrl}, updating report`)
+                logger.info(
+                    `${req.method} ${req.originalUrl}, updating report`
+                );
                 database.query(
                     QUERYVETERINARIES.UPDATE_REPORT,
                     [...Object.values(req.body), req.params.id],
@@ -90,9 +92,9 @@ export const updateVeterinaryReport = (req, res) => {
                                     `Report updated`,
                                     { ...req.body }
                                 )
-                            )
+                            );
                         } else {
-                            logger.error(error.message)
+                            logger.error(error.message);
                             res.status(
                                 httpStatus.INTERNAL_SERVER_ERROR.code
                             ).send(
@@ -101,17 +103,17 @@ export const updateVeterinaryReport = (req, res) => {
                                     httpStatus.INTERNAL_SERVER_ERROR.status,
                                     `Error occured`
                                 )
-                            )
+                            );
                         }
                     }
-                )
+                );
             }
         }
-    )
-}
+    );
+};
 
 export const deleteVeterinaryReport = (req, res) => {
-    logger.info(`${req.method} ${req.originalUrl}, deleting report`)
+    logger.info(`${req.method} ${req.originalUrl}, deleting report`);
     database.query(
         QUERYVETERINARIES.DELETE_REPORT,
         [req.params.id],
@@ -124,7 +126,7 @@ export const deleteVeterinaryReport = (req, res) => {
                         `Report deleted`,
                         results[0]
                     )
-                )
+                );
             } else {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -132,8 +134,8 @@ export const deleteVeterinaryReport = (req, res) => {
                         httpStatus.NOT_FOUND.status,
                         `Report by id ${req.params.id} was not found !`
                     )
-                )
+                );
             }
         }
-    )
-}
+    );
+};

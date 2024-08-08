@@ -34,130 +34,113 @@ import animalModel from "../models/animals.js";
 // };
 
 export const addCount = async (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, updating count`);
-  try {
-    const animal = await animalModel.updateOne(
-      { firstname: req.params.firstname },
-      { $inc: { clickCount: 1 } }
-    );
-    res
-        .status(httpStatus.OK.code)
-        .send(
+    logger.info(`${req.method} ${req.originalUrl}, updating count`);
+    try {
+        const animal = await animalModel.updateOne(
+            { firstname: req.params.firstname },
+            { $inc: { clickCount: 1 } }
+        );
+        res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `Animal updated`,
-                { animal: animal}
+                { animal: animal }
             )
         );
-  } catch (error) {
-    logger.error(error.message);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-      .send(
-        new Response(
-          httpStatus.INTERNAL_SERVER_ERROR.code,
-          httpStatus.INTERNAL_SERVER_ERROR.status,
-          `Error occured`
-        )
-      );
-  }
+    } catch (error) {
+        logger.error(error.message);
+        res.status(httpStatus.INTERNAL_SERVER_ERROR.code).send(
+            new Response(
+                httpStatus.INTERNAL_SERVER_ERROR.code,
+                httpStatus.INTERNAL_SERVER_ERROR.status,
+                `Error occured`
+            )
+        );
+    }
 };
 
 export const getAnimals = async (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
-  try {
-    const animals = await animalModel.find();
-      if(!animals[0]){
-        res
-          .status(httpStatus.OK.code)
-          .send(
-            new Response(
-              httpStatus.OK.code,
-              httpStatus.OK.status,
-              `No animal found`
-            )
-          )
+    logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
+    try {
+        const animals = await animalModel.find();
+        if (!animals[0]) {
+            res.status(httpStatus.OK.code).send(
+                new Response(
+                    httpStatus.OK.code,
+                    httpStatus.OK.status,
+                    `No animal found`
+                )
+            );
         }
-      res
-        .status(httpStatus.OK.code)
-        .send(
+        res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `Animals retrieved`,
                 animals
             )
-        )
-} catch (error) {
-    logger.error(error.message);
-      res
-        .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-        .send(
-          new Response(
-            httpStatus.INTERNAL_SERVER_ERROR.code,
-            httpStatus.INTERNAL_SERVER_ERROR.status,
-            `Error occured`
-          )
-       );
-  }
+        );
+    } catch (error) {
+        logger.error(error.message);
+        res.status(httpStatus.INTERNAL_SERVER_ERROR.code).send(
+            new Response(
+                httpStatus.INTERNAL_SERVER_ERROR.code,
+                httpStatus.INTERNAL_SERVER_ERROR.status,
+                `Error occured`
+            )
+        );
+    }
 };
 
 export const addAnimalOnMongo = async (req, res) => {
-  logger.info(`${req.method} ${req.originalUrl}, creating animal`);
-  try {
-    const animal = await animalModel.create({
-      firstname: req.body.firstname,
-      clickCount: 0,
-    });
-    res
-        .status(httpStatus.OK.code)
-        .send(
+    logger.info(`${req.method} ${req.originalUrl}, creating animal`);
+    try {
+        const animal = await animalModel.create({
+            firstname: req.body.firstname,
+            clickCount: 0,
+        });
+        res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `Animal created`,
-                { animal: animal}
+                { animal: animal }
             )
         );
-  } catch (error) {
-    logger.error(error.message);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-      .send(
-        new Response(
-          httpStatus.INTERNAL_SERVER_ERROR.code,
-          httpStatus.INTERNAL_SERVER_ERROR.status,
-          `Error occured`
-        )
-      );
-  }
+    } catch (error) {
+        logger.error(error.message);
+        res.status(httpStatus.INTERNAL_SERVER_ERROR.code).send(
+            new Response(
+                httpStatus.INTERNAL_SERVER_ERROR.code,
+                httpStatus.INTERNAL_SERVER_ERROR.status,
+                `Error occured`
+            )
+        );
+    }
 };
 
-
-export const deleteAnimalOnMongo = async (req, res)=> {
-  logger.info(`${req.method} ${req.originalUrl}, deleting animal`);
-  try {
-    const animal = await animalModel.findByIdAndDelete({_id: req.params.id})
-    res
-        .status(httpStatus.OK.code)
-        .send(
+export const deleteAnimalOnMongo = async (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, deleting animal`);
+    try {
+        const animal = await animalModel.findByIdAndDelete({
+            _id: req.params.id,
+        });
+        res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `Animal deleted`
             )
         );
-  } catch(error) {
-    logger.error(error.message);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-      .send(
-        new Response(
-          httpStatus.INTERNAL_SERVER_ERROR.code,
-          httpStatus.INTERNAL_SERVER_ERROR.status,
-          `Error occured`
-        )
-      );
-  }
-}
+    } catch (error) {
+        logger.error(error.message);
+        res.status(httpStatus.INTERNAL_SERVER_ERROR.code).send(
+            new Response(
+                httpStatus.INTERNAL_SERVER_ERROR.code,
+                httpStatus.INTERNAL_SERVER_ERROR.status,
+                `Error occured`
+            )
+        );
+    }
+};
