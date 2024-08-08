@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { AsyncPipe, CommonModule } from "@angular/common";
 import {
     Component,
     DestroyRef,
@@ -28,7 +28,7 @@ import { AnimalService } from "../../../../shared/services/animal.service";
 import { EmployeeService } from "../../../../shared/services/employee.service";
 import { UserService } from "../../../../shared/services/user.service";
 import { MatSort, MatSortModule } from "@angular/material/sort";
-import { tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -40,7 +40,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSortModule,
+        MatSortModule, AsyncPipe
     ],
     template: `
         <h3>Rapport employé</h3>
@@ -56,12 +56,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     id="animal-employee"
                     [(ngModel)]="selectedAnimalOption"
                 >
+                @for(animal of animals; track animal.id){
                     <option
-                        *ngFor="let animal of animals"
                         [ngValue]="animal.id"
                     >
                         {{ animal.firstname }} ({{ animal.breed }})
                     </option>
+                }
                 </select>
                 <button>Filtrer</button>
             </form>
@@ -69,8 +70,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             @if(animalchoice.submitted && selectedAnimalOption &&
             !employeeReports.length){
             <p>Il n'y a pas de rapport associé à cet animal</p>
-            } @for(animal of animals; track animal) { @if (selectedAnimalOption
-            === animal.id) {
+            } @for(animal of animals; track animal.id) 
+                { @if (selectedAnimalOption === animal.id) {
             <table
                 mat-table
                 [dataSource]="datasource"
@@ -138,7 +139,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #animal="ngModel"
                     required
                 >
-                    @for(animal of animals; track animal) {
+                    @for(animal of animals; track animal.id) {
                     <option [ngValue]="animal.id">
                         {{ animal.firstname | titlecase }} ({{ animal.breed }})
                     </option>
@@ -184,7 +185,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #user="ngModel"
                     required
                 >
-                    @for(user of users; track user) {
+                    @for(user of users$ | async ; track user.id) {
                     <option [ngValue]="user.id">
                         {{ user.firstname | titlecase }}
                         {{ user.lastname | titlecase }}
@@ -215,7 +216,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     id="animal-update-employee"
                     formControlName="id_animal"
                 >
-                    @for(animal of animals; track animal) {
+                    @for(animal of animals; track animal.id) {
                     <option [value]="animal.id">{{ animal.firstname }}</option>
                     }
                 </select>
@@ -254,7 +255,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     id="selected-user-update-employee"
                     formControlName="id_user"
                 >
-                    @for(user of users; track user) {
+                    @for(user of users$ | async; track user.id) {
                     <option [value]="user.id">
                         {{ user.firstname | titlecase }}
                         {{ user.lastname | titlecase }}
@@ -277,9 +278,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class EmployeeReportHandledComponent implements OnInit {
-    displayColums: string[] = ["date", "food", "grammage", "actions"];
-
     private readonly fb = inject(FormBuilder);
+    private readonly animalService = inject(AnimalService);
+    private readonly employeeService = inject(EmployeeService);
+    private readonly userService = inject(UserService);
+    private readonly destroyRef = inject(DestroyRef);
+
+    displayColums: string[] = ["date", "food", "grammage", "actions"];
 
     updateForm: FormGroup = this.fb.group({
         food: new FormControl("", [Validators.required]),
@@ -290,17 +295,12 @@ export class EmployeeReportHandledComponent implements OnInit {
     });
 
     animals!: Animal[];
-    users!: User[];
     employeeReports: EmployeeReport[] = [];
-
     selectedAnimalOption!: string;
 
-    datasource = new MatTableDataSource(this.employeeReports);
+    users$: Observable<User[]> = this.userService.getUsers()
 
-    private readonly animalService = inject(AnimalService);
-    private readonly employeeService = inject(EmployeeService);
-    private readonly userService = inject(UserService);
-    private readonly destroyRef = inject(DestroyRef);
+    datasource = new MatTableDataSource(this.employeeReports);
 
     addFormIsDisplay = signal(false);
     updateFormIsDisplay = signal(false);
@@ -318,7 +318,6 @@ export class EmployeeReportHandledComponent implements OnInit {
 
     ngOnInit() {
         this.getAnimals();
-        this.getUsers();
     }
 
     ngAfterOnInit() {
@@ -329,15 +328,6 @@ export class EmployeeReportHandledComponent implements OnInit {
         this.animalService.getAnimals().then((response) => {
             this.animals = response;
         });
-    }
-
-    getUsers() {
-        this.userService
-            .getUsers()
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((response) => {
-                this.users = response;
-            });
     }
 
     getEmployeeReports(id: string) {

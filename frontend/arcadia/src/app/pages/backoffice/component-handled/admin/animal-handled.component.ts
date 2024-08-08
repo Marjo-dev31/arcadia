@@ -160,7 +160,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     required
                 >
                     <option value="null">--Choissisez un habitat--</option>
-                    @for(habitat of habitats; track habitat) {
+                    @for(habitat of habitats; track habitat.id) {
                     <option [value]="habitat.id">{{ habitat.title }}</option>
                     }
                 </select>
@@ -194,7 +194,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #selectedBreed
                     formControlName="breed"
                 >
-                    @for(animal of datasource; track animal) {
+                    @for(animal of datasource; track animal.id) {
                     <option [value]="animal.id_breed">
                         {{ animal.breed }}
                     </option>
@@ -209,7 +209,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     #selectedHabitat
                     formControlName="habitat"
                 >
-                    @for(habitat of habitats; track habitat) {
+                    @for(habitat of habitats; track habitat.id) {
                     <option [value]="habitat.id">{{ habitat.title }}</option>
                     }
                 </select>
@@ -243,6 +243,13 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class AnimalHandledComponent implements OnInit {
+    private readonly animalService = inject(AnimalService);
+    private readonly imageService = inject(ImageService);
+    private readonly habitatService = inject(HabitatsService);
+    private readonly breedService = inject(BreedService);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly fb = inject(FormBuilder);
+    
     displayColums: string[] = [
         "firstname",
         "race",
@@ -251,8 +258,6 @@ export class AnimalHandledComponent implements OnInit {
         "actions",
         "image",
     ];
-
-    private readonly fb = inject(FormBuilder);
 
     updateForm: FormGroup = this.fb.group({
         firstname: new FormControl("", [Validators.required]),
@@ -265,15 +270,10 @@ export class AnimalHandledComponent implements OnInit {
         name: new FormControl("", [Validators.required]),
     });
 
-    private readonly animalService = inject(AnimalService);
-    private readonly imageService = inject(ImageService);
-    private readonly habitatService = inject(HabitatsService);
-    private readonly breedService = inject(BreedService);
-    private readonly destroyRef = inject(DestroyRef);
-
     datasource!: Animal[] | undefined;
+    breeds!: Breed[];
+    
     habitats!: Habitat[];
-    breeds!: Breed[] | undefined;
 
     newAnimal: AnimalCreate = {
         firstname: "",
@@ -387,6 +387,7 @@ export class AnimalHandledComponent implements OnInit {
             .subscribe();
     }
 
+    // then required for exam
     getHabitat() {
         this.habitatService.getHabitats().then((response) => {
             this.habitats = response;

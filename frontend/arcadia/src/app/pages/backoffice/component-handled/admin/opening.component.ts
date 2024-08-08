@@ -73,7 +73,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class OpeningComponent implements OnInit {
-
+    private readonly openingService = inject(OpeningService);
+    private readonly destroyRef = inject(DestroyRef);
     private readonly fb = inject(FormBuilder);
 
     updateForm: FormGroup = this.fb.group({
@@ -82,9 +83,6 @@ export class OpeningComponent implements OnInit {
         openingDay: new FormControl("", [Validators.required]),
         closingDay: new FormControl("", [Validators.required]),
     });
-
-    private readonly openingService = inject(OpeningService);
-    private readonly destroyRef = inject(DestroyRef);
 
     openToPublic!: Opening;
 
