@@ -163,19 +163,18 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrl: `../component-handled.component.css`,
 })
 export class HabitatHandledComponent implements OnInit {
-    displayColums: string[] = ["title", "description", "actions", "image"];
-
     private readonly fb = inject(FormBuilder);
+    private readonly habitatService = inject(HabitatsService);
+    private readonly imageService = inject(ImageService);
+    private readonly destroyRef = inject(DestroyRef);
+
+    displayColums: string[] = ["title", "description", "actions", "image"];
 
     habitatForm: FormGroup = this.fb.group({
         title: new FormControl("", [Validators.required]),
         description: new FormControl("", [Validators.required]),
         id: new FormControl(""),
     });
-
-    private readonly habitatService = inject(HabitatsService);
-    private readonly imageService = inject(ImageService);
-    private readonly destroyRef = inject(DestroyRef);
 
     datasource!: Habitat[];
 
