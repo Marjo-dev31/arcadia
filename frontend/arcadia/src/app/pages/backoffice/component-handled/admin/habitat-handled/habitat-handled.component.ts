@@ -90,10 +90,6 @@ export class HabitatHandledComponent implements OnInit {
         this.updateFormIsDisplay.update((value)=> !value);
     }
 
-    toggleAddForm() {
-        this.addFormIsDisplay.update((value)=> !value);
-    }
-
     onSubmit() {
         this.habitatService
             .addHabitat(this.newHabitat)
@@ -149,6 +145,10 @@ export class HabitatHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
+    }
+
+    toggleAddForm() {
+        this.addFormIsDisplay.update((value)=> !value);
     }
 
     closeUpdateForm() {
