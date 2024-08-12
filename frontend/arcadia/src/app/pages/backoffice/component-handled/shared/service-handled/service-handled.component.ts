@@ -72,9 +72,6 @@ export class ServiceHandledComponent implements OnInit {
             });
     }
 
-    toggleAddForm() {
-        this.addFormIsDisplay.update((value) => !value);
-    }
 
     onSubmit(form: NgForm): void {
         this.serviceService
@@ -156,6 +153,10 @@ export class ServiceHandledComponent implements OnInit {
             .subscribe();
     }
 
+    toggleAddForm() {
+        this.addFormIsDisplay.update((value) => !value);
+    }
+    
     closeUpdateForm() {
         this.updateFormIsDisplay.update((value) => !value);
     }
