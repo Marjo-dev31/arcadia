@@ -67,7 +67,7 @@ export class AnimalHandledComponent implements OnInit {
         name: new FormControl("", [Validators.required]),
     });
 
-    datasource!: Animal[] | undefined;
+    datasource!: Animal[];
     breeds!: Breed[];
     
     habitats!: Habitat[];
