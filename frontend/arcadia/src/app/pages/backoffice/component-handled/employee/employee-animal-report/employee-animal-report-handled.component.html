@@ -25,8 +25,9 @@
             @if(animalchoice.submitted && selectedAnimalOption &&
             !employeeReports.length){
             <p>Il n'y a pas de rapport associé à cet animal</p>
-            } @for(animal of animals; track animal.id) 
-                { @if (selectedAnimalOption === animal.id) {
+            } 
+            <!-- @for(animal of animals; track animal.id) 
+                { @if (selectedAnimalOption === animal.id) { -->
             <table
                 mat-table
                 [dataSource]="datasource"
@@ -67,7 +68,8 @@
                 <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
             </table>
-            }} @if(role === 'Employé'){ 
+            <!-- }}  -->
+            @if(role === 'Employé'){ 
                 @if(!addFormIsDisplay()){
             <mat-icon class="add-icon" (click)="toggleAddForm()"
                 >add_circle_outline</mat-icon

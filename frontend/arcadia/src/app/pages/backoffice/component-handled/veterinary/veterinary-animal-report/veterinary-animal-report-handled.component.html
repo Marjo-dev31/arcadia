@@ -22,8 +22,9 @@
     @if(animalchoice.submitted && selectedAnimalOption &&
     !veterinaryReports.length){
     <p>Il n'y pas encore de rapport associé à cet animal !</p>
-    } @for(animal of animals; track animal.id){ @if (selectedAnimalOption
-    === animal.id) {
+    } 
+    <!-- @for(animal of animals; track animal.id){ @if (selectedAnimalOption
+    === animal.id) { -->
     <table
         mat-table
         [dataSource]="dataSource"
@@ -83,7 +84,8 @@
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
-    }} @if(role === 'Vétérinaire'){ 
+    <!-- }} -->
+     @if(role === 'Vétérinaire'){ 
     <mat-icon class="add-icon" (click)="toggleAddForm()"
         >{{addFormIsDisplay()? 'remove_circle_outline' : 'add_circle_outline'}}</mat-icon
     >
