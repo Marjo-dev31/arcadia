@@ -105,7 +105,7 @@
                     required
                 >
                     <option>--Choissisez une race--</option>
-                    @for(breed of breeds; track breed) {
+                    @for(breed of breeds; track breed.id) {
                     <option [value]="breed.id">
                         {{ breed.name | lowercase }}
                     </option>
