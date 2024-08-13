@@ -34,10 +34,12 @@ import animalModel from "../models/animals.js";
 // };
 
 export const addCount = async (req, res) => {
+    const firstname = req.params.firstname
+    const query =  { firstname: { $eq: firstname} }
     logger.info(`${req.method} ${req.originalUrl}, updating count`);
     try {
         const animal = await animalModel.updateOne(
-            { firstname: req.params.firstname },
+            query,
             { $inc: { clickCount: 1 } }
         );
         res.status(httpStatus.OK.code).send(
@@ -94,10 +96,11 @@ export const getAnimals = async (req, res) => {
 };
 
 export const addAnimalOnMongo = async (req, res) => {
+    const firstname = req.body.firstname
     logger.info(`${req.method} ${req.originalUrl}, creating animal`);
     try {
         const animal = await animalModel.create({
-            firstname: req.body.firstname,
+            firstname: firstname,
             clickCount: 0,
         });
         res.status(httpStatus.OK.code).send(
@@ -121,11 +124,12 @@ export const addAnimalOnMongo = async (req, res) => {
 };
 
 export const deleteAnimalOnMongo = async (req, res) => {
+    const id = req.params.id
     logger.info(`${req.method} ${req.originalUrl}, deleting animal`);
     try {
         const animal = await animalModel.findByIdAndDelete({
-            _id: req.params.id,
-        });
+            _id: id,
+        })
         res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
