@@ -36,6 +36,7 @@ export const addVeterinaryReport = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating report`);
     database.query(
         QUERYVETERINARIES.CREATE_REPORT,
+        // object.values() returns an array 
         Object.values(req.body),
         (error, results) => {
             if (!results) {

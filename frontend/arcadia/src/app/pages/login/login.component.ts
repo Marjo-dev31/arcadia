@@ -92,6 +92,8 @@ export class LoginComponent {
         password: "",
     };
 
+    currentUser!: CurrentUser;
+
     responseMessage!: string;
 
     onSubmit(form: NgForm): void {
@@ -106,9 +108,10 @@ export class LoginComponent {
 
     setLocalStorage(response: Response<CurrentUser>) {
         if (response.data) {
-            localStorage.setItem("accessToken", response.data[0].accessToken);
-            localStorage.setItem("role", response.data[0].name);
-            localStorage.setItem("firstname", response.data[0].firstname);
+            this.currentUser = response.data[0]
+            localStorage.setItem("accessToken", this.currentUser.accessToken);
+            localStorage.setItem("role", this.currentUser.name);
+            localStorage.setItem("firstname", this.currentUser.firstname);
             this.router.navigate(["/espacepersonnel"]);
         } else {
             this.responseMessage = response.message;

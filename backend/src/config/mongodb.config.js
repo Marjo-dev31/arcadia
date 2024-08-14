@@ -1,14 +1,15 @@
 import mongoose from 'mongoose';
+import logger from '../util/logger.js';
 
 const MONGODB_URI = process.env.MONGODB_URI
 
 const connectDB = async () => {
     try {
         await mongoose.connect(MONGODB_URI, {dbName: "arcadia"})
-        console.log(`MongoDb is connected! on ${MONGODB_URI}`)
+        logger.info(`MongoDb is connected! on ${MONGODB_URI}`)
     } catch(error) {
-        console.log(error);
-        // process.exit(1)
+        logger.info(error);
+        process.exit(1)
     }
 };
 
