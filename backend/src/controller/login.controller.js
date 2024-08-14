@@ -21,8 +21,8 @@ export const login = (req, res) => {
             return;
         }
 
-        const user = results[0];
-        const passwordIsValid = await bcrypt.compare(password, user.password);
+        const user = results;
+        const passwordIsValid = await bcrypt.compare(password, user[0].password);
         if (!passwordIsValid) {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -33,15 +33,14 @@ export const login = (req, res) => {
             );
             return;
         }
-
-        const accessToken = generatedAccessToken(user.email, user.name);
-        user.accessToken = accessToken;
+        const accessToken = generatedAccessToken(user[0].email, user[0].name);
+        user[0].accessToken = accessToken;
         res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `User is log in`,
-                [user]
+                user
             )
         );
     });
