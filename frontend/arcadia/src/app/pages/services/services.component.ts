@@ -1,12 +1,11 @@
-import { Component, DestroyRef, OnInit, inject } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ServiceService } from "../../shared/services/service.service";
 import { AsyncPipe, TitleCasePipe } from "@angular/common";
 import { Service, Opening } from "../../shared/models";
 import { OpeningService } from "../../shared/services/opening.service";
 import { ActivatedRoute } from "@angular/router";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { environment } from "../../environments/environment";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 
 @Component({
     selector: "app-services",
@@ -22,7 +21,8 @@ import { Observable } from "rxjs";
                 </h2>
                 <div class="schedule">
                     <p>Nous vous accueillons</p>
-                    @for (opening of openToPublic$ | async ; track opening._id) {
+                    @for (opening of openToPublic$ | async ; track opening._id)
+                    {
                     <p>
                         du {{ opening.openingDay }} au
                         {{ opening.closingDay }}
@@ -39,8 +39,8 @@ import { Observable } from "rxjs";
                 </div>
             </section>
             <section class="services">
-                @if(services && services.length) { @for (service of services;
-                track service) {
+                @if(services$) { @for (service of services$ | async; track
+                service) {
                 <div class="service-item">
                     <img
                         class="service-img"
@@ -64,25 +64,16 @@ import { Observable } from "rxjs";
     `,
     styleUrls: [`./services.component.css`],
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent {
     private readonly route = inject(ActivatedRoute);
     private readonly serviceService = inject(ServiceService);
     private readonly openingService = inject(OpeningService);
 
     title: string = this.route.snapshot.data["title"];
-    services!: Service[];
+
     url = `${environment.serverUrl}/upload/`;
 
-    openToPublic$: Observable<Opening[]> = this.openingService.getOpeningToPublic()
-
-    ngOnInit() {
-        this.getServices();
-    }
-
-    // then required for exam
-    getServices() {
-        this.serviceService.getServices().then((response) => {
-            this.services = response;
-        });
-    }
+    services$: Observable<Service[]> = from(this.serviceService.getServices());
+    openToPublic$: Observable<Opening[]> =
+        this.openingService.getOpeningToPublic();
 }
