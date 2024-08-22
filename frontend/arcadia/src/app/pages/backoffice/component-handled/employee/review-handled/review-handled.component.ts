@@ -4,6 +4,7 @@ import { MatTableModule } from "@angular/material/table";
 import { Review } from "../../../../../shared/models";
 import { ReviewsService } from "../../../../../shared/services/reviews.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { LoginService } from "../../../../../shared/services/login.service";
 
 @Component({
     selector: "app-review-handled",
@@ -58,6 +59,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 export class ReviewHandledComponent implements OnInit {
     private readonly reviewService = inject(ReviewsService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly loginService = inject(LoginService)
 
     displayColums: string[] = [
         "pseudo",
@@ -68,6 +70,7 @@ export class ReviewHandledComponent implements OnInit {
     ];
     datasource: Review[] = [];
     responseMessage: string = "";
+    currentUser = this.loginService.currentUser()
 
     ngOnInit() {
         this.getReviews();
@@ -91,7 +94,7 @@ export class ReviewHandledComponent implements OnInit {
         const reviewToPublish = this.datasource.find((el) => el.id === id);
         if (reviewToPublish) {
             reviewToPublish.status = true;
-            reviewToPublish.employee = localStorage.getItem("firstname") || "";
+            reviewToPublish.employee = this.currentUser.id;
             this.reviewService
                 .updateReview(reviewToPublish)
                 .pipe(takeUntilDestroyed(this.destroyRef))

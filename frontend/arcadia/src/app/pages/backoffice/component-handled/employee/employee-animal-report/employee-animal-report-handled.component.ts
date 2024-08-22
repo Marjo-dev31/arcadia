@@ -30,6 +30,7 @@ import { UserService } from "../../../../../shared/services/user.service";
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { Observable, tap } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { LoginService } from "../../../../../shared/services/login.service";
 
 @Component({
     selector: "app-veterinary-animal-report-handled",
@@ -51,6 +52,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     private readonly employeeService = inject(EmployeeService);
     private readonly userService = inject(UserService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly loginService = inject(LoginService)
 
     displayColums: string[] = ["date", "food", "grammage", "actions"];
 
@@ -66,14 +68,14 @@ export class EmployeeReportHandledComponent implements OnInit {
     employeeReports: EmployeeReport[] = [];
     selectedAnimalOption!: string;
 
-    users$: Observable<User[]> = this.userService.getUsers()
+    users$: Observable<User[]> = this.userService.getUsersEmployee()
 
     datasource = new MatTableDataSource(this.employeeReports);
 
     addFormIsDisplay = signal(false);
     updateFormIsDisplay = signal(false);
 
-    role: string = localStorage.getItem("role") || "";
+    role = this.loginService.currentUser().role
 
     newReport: EmployeeReportCreate = {
         food: "",

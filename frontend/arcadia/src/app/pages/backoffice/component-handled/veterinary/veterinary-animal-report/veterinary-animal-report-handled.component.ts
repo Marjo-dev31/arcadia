@@ -30,6 +30,7 @@ import { VeterinaryService } from "../../../../../shared/services/veterinary.ser
 import { Observable, tap } from "rxjs";
 import { UserService } from "../../../../../shared/services/user.service";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { LoginService } from "../../../../../shared/services/login.service";
 
 @Component({
     selector: "app-veterinary-animal-report-handled",
@@ -52,6 +53,8 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     private readonly veterinaryService = inject(VeterinaryService);
     private readonly userService = inject(UserService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly loginService = inject(LoginService);
+
 
     displayColums: string[] = [
         "date",
@@ -76,9 +79,9 @@ export class VeterinaryAnimalReportHandledComponent implements OnInit {
     veterinaryReports: VeterinaryReport[] = [];
     selectedAnimalOption!: string;
     dataSource = new MatTableDataSource(this.veterinaryReports);
-    role: string = localStorage.getItem("role") || "";
+    role = this.loginService.currentUser().role
 
-    users$: Observable<User[]> =  this.userService.getUsers();
+    users$: Observable<User[]> =  this.userService.getUsersVeterinary();
 
     addFormIsDisplay = signal(false);
     updateFormIsDisplay = signal(false);
