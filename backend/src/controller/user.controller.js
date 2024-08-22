@@ -5,9 +5,33 @@ import QUERYUSERS from "../query/user.query.js";
 import httpStatus from "../domain/httpstatus.js";
 import bcrypt from "bcrypt";
 
-export const getUsers = (req, res) => {
+export const getUsersVeterinary = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching users`);
-    database.query(QUERYUSERS.SELECT_USERS, (error, results) => {
+    database.query(QUERYUSERS.SELECT_USERS_VETERINARY, (error, results) => {
+        if (!results) {
+            res.status(httpStatus.OK.code).send(
+                new Response(
+                    httpStatus.OK.code,
+                    httpStatus.OK.status,
+                    `No users found`
+                )
+            );
+        } else {
+            res.status(httpStatus.OK.code).send(
+                new Response(
+                    httpStatus.OK.code,
+                    httpStatus.OK.status,
+                    `Users retrieved`,
+                    results
+                )
+            );
+        }
+    });
+};
+
+export const getUsersEmployee = (req, res) => {
+    logger.info(`${req.method} ${req.originalUrl}, fetching users`);
+    database.query(QUERYUSERS.SELECT_USERS_EMPLOYEE, (error, results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
                 new Response(

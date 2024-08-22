@@ -7,7 +7,7 @@ const QUERYREVIEWS = {
     CREATE_REVIEW:
         'INSERT INTO reviews(id, pseudo, content, date, status) VALUES (DEFAULT, ?, ?, CURDATE(), false)',
     UPDATE_REVIEW_STATUS:
-        'UPDATE reviews SET status = ?, id_employee = (SELECT id FROM users WHERE firstname = ?) WHERE id = ?',
+        'UPDATE reviews SET status = ?, id_employee = ? WHERE id = ?',
 }
 
 export default QUERYREVIEWS

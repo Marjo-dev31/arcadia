@@ -33,14 +33,21 @@ export const login = (req, res) => {
             );
             return;
         }
-        const accessToken = generatedAccessToken(user[0].email, user[0].name);
-        user[0].accessToken = accessToken;
+        const accessToken = generatedAccessToken(user[0].email, user[0].role);
+        const currentUser = {
+            id: user[0].id,
+            firstname: user[0].firstname,
+            lastname: user[0].lastname,
+            role: user[0].role,
+            accessToken: accessToken
+        }
+
         res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `User is log in`,
-                user
+                [currentUser]
             )
         );
     });

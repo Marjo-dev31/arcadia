@@ -3,7 +3,7 @@ export interface Review {
     pseudo: string,
     content: string,
     date: Date,
-    status: boolean;
+    status: boolean,
     employee: string
 }
 

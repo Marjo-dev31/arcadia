@@ -54,7 +54,7 @@ export const addVeterinaryReport = (req, res) => {
                     new Response(
                         httpStatus.CREATED.code,
                         httpStatus.CREATED.status,
-                        `Habitat created`,
+                        `Report created`,
                         { report }
                     )
                 );

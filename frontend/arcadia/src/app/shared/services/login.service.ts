@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject, signal } from "@angular/core";
 import { UserLogin, Response, CurrentUser } from "../models";
-import { Observable} from "rxjs";
+import { Observable, tap } from "rxjs";
 import { environment } from "../../environments/environment";
 
 
@@ -12,8 +12,20 @@ export class LoginService {
     
     isLoggin = signal(false);
 
+    currentUser = signal({
+        id: '',
+        firstname: '',
+        lastname: '',
+        role: '',
+        accessToken: ''
+    })
+
     login(user: UserLogin): Observable<Response<CurrentUser>> {
         this.isLoggin.set(true);
-        return this.http.post<Response<CurrentUser>>(this.url, user)
+        return this.http.post<Response<CurrentUser>>(this.url, user).pipe(tap((response)=>{
+            if(response.data){
+                this.currentUser.set(response.data[0])
+            }
+        }))
+        }
     }
-}

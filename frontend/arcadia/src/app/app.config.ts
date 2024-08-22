@@ -5,6 +5,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { authInterceptor } from './shared/interceptors/auth.interceptor'
 import { errorInterceptor } from './shared/interceptors/error.interceptor'
+import { LoginService } from './shared/services/login.service'
 
 export const appConfig: ApplicationConfig = {
     providers: [

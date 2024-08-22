@@ -3,7 +3,6 @@ export interface User {
     email: string,
     lastname: string,
     firstname: string,
-    password: string,
     id_role: string
 }
 
@@ -24,9 +23,6 @@ export interface CurrentUser {
     id: string,
     firstname: string,
     lastname: string,
-    email: string,
-    password: string,
-    id_role: string,
-    name: string,
+    role: string,
     accessToken: string
 }
