@@ -2,7 +2,7 @@ import { MailtrapClient } from "mailtrap";
 
 export const sendEmailToNewUser = (req, res, next) => {
     const email = req.body.email;
-    const message = `${req.body.firstname}, votre compte a été crée. Pour connaître votre mot de passe, veuillez vous rapprocher de José.`;
+    const message = `${req.body.firstname}, votre compte a été crée. Pour connaître votre mot de passe, veuillez vous rapprocher de José. Pour connaître notre politique de confidentialité rendez-vous sur notre site internet /politiquedeconfidentialite`;
 
     const TOKEN = "d508c20e9958a513857dcf7d7954bcce";
     const ENDPOINT = "https://send.api.mailtrap.io/";

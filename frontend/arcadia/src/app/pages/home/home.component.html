@@ -121,8 +121,8 @@
                         />
                     </div>
                     @if(pseudo.invalid && pseudo.touched){
-                    <div>
-                        <p>Un pseudo est obligatoire</p>
+                    <div style="background-color: white">
+                        <p class="alert">Un pseudo est obligatoire</p>
                     </div>
                     }
                     <textarea
@@ -136,13 +136,27 @@
                         required
                     ></textarea>
                     @if(content.invalid && content.touched){
-                    <div>
-                        <p>Un avis est obligatoire</p>
+                    <div style="background-color: white">
+                        <p class="alert">Un avis est obligatoire</p>
                     </div>
                     }
-                    <button class="form-review-btn" [disabled]="form.invalid">
-                        Envoyer
-                    </button>
+                    <label for="rgpd"
+                        ><input
+                            type="checkbox"
+                            name="rgpd"
+                            id="rgpd"
+                            [(ngModel)]="consent"
+                            #pseudo="ngModel"
+                            required
+                        />
+                        J'accepte que mes données soient collectées et utilisées
+                        conformément à la politique de confidentialité. Pour en
+                        savoir plus,
+                        <a [routerLink]="['/politiquedeconfidentialite']"
+                            >cliquez ici</a
+                        >
+                    </label>
+                    <button [disabled]="form.invalid">Envoyer</button>
                     @if(form.submitted){
                     <div>
                         <p class="alert">Votre avis a bien été soumis</p>

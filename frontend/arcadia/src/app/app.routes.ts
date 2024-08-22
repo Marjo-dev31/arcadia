@@ -20,6 +20,7 @@ import { ForbiddenComponent } from "./pages/backoffice/component-handled/shared/
 import { ErrorComponent } from "./shared/components/errors/error.component";
 import { PasswordForgotComponent } from "./pages/passwordforgot/passwordforgot.component";
 import { UpdatePasswordComponent } from "./pages/passwordforgot/update-password.component";
+import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
 
 export const routes: Routes = [
     { path: "", component: HomeComponent },
@@ -109,5 +110,6 @@ export const routes: Routes = [
         component: UpdatePasswordComponent,
         children: [{ path: "**", component: UpdatePasswordComponent }],
     },
+    { path: "politiquedeconfidentialite", component: PrivacyPolicyComponent},
     { path: "**", redirectTo: "" },
 ];
