@@ -13,6 +13,7 @@ import {
 import { tap } from "rxjs";
 import { NgStyle } from "@angular/common";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { LoginService } from "../../../../../shared/services/login.service";
 
 @Component({
     selector: "app-veterinary-habitat-report-handled",
@@ -95,6 +96,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
     private readonly fb = inject(FormBuilder);
     private readonly habitatService = inject(HabitatsService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly loginService = inject(LoginService)
 
     displayColums: string[] = ["habitat", "comment", "actions"];
 
@@ -104,7 +106,7 @@ export class VeterinaryHabitatReportHandledComponent implements OnInit {
 
     datasource!: Habitat[];
     report!: string[];
-    role: string = localStorage.getItem("role") || "";
+    role = this.loginService.currentUser().role
 
     addFormIsDisplay = signal(false);
 

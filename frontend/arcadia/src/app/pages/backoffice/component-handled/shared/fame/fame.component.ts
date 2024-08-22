@@ -13,6 +13,7 @@ import { FormsModule } from "@angular/forms";
 import { tap } from "rxjs";
 import { MatIconModule } from "@angular/material/icon";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { LoginService } from "../../../../../shared/services/login.service";
 
 @Component({
     selector: "app-fame",
@@ -89,6 +90,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 export class FameComponent implements OnInit {
     private readonly clickService = inject(ClickService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly loginService = inject(LoginService);
 
     displayColums: string[] = ["firstname", "clickCount", "delete"];
 
@@ -99,7 +101,8 @@ export class FameComponent implements OnInit {
         firstname: "",
     };
 
-    role: string = localStorage.getItem("role") || "";
+    role = this.loginService.currentUser().role
+
     responseMessage: string = "";
 
     @ViewChild(MatSort) sort!: MatSort;

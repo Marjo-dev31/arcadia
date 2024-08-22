@@ -2,6 +2,7 @@ import { Component, inject } from "@angular/core";
 import { SidenavComponent } from "./sidenav/sidenav.component";
 import { ActivatedRoute, RouterOutlet } from "@angular/router";
 
+
 @Component({
     selector: "app-backoffice",
     standalone: true,

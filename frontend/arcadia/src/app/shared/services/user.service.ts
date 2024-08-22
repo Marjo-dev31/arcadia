@@ -9,8 +9,20 @@ export class UserService {
     private readonly http = inject(HttpClient);
     private readonly url = `${environment.serverUrl}/users`;
 
-    getUsers(): Observable<User[]> {
-        return this.http.get<Response<User>>(this.url).pipe(
+    getUsersVeterinary(): Observable<User[]> {
+        return this.http.get<Response<User>>(`${this.url}/veterinary`).pipe(
+            map((response) => {
+                if (response.data) {
+                    return response.data;
+                } else {
+                    return [];
+                }
+            })
+        );
+    }
+
+    getUsersEmployee(): Observable<User[]> {
+        return this.http.get<Response<User>>(`${this.url}/employee`).pipe(
             map((response) => {
                 if (response.data) {
                     return response.data;
