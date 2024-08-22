@@ -41,11 +41,15 @@ import { LoginService } from "../../../../../shared/services/login.service";
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let review">
-                    <mat-icon (click)="publishReview(review.id)"
-                        >cloud_done</mat-icon
+                    <a  id="a-icon"
+                        (click)="publishReview(review.id)"
+                        [style]="{ display: review.status ? 'none' : 'block' }"
+                        ><mat-icon>cloud_done </mat-icon></a
                     >
-                    <mat-icon (click)="unpublishReview(review.id)"
-                        >cloud_off</mat-icon
+                    <a  id="a-icon"
+                        (click)="unpublishReview(review.id)"
+                        [style]="{ display: review.status ? 'block' : 'none' }"
+                        ><mat-icon>cloud_off</mat-icon></a
                     >
                 </td>
             </ng-container>
@@ -59,7 +63,7 @@ import { LoginService } from "../../../../../shared/services/login.service";
 export class ReviewHandledComponent implements OnInit {
     private readonly reviewService = inject(ReviewsService);
     private readonly destroyRef = inject(DestroyRef);
-    private readonly loginService = inject(LoginService)
+    private readonly loginService = inject(LoginService);
 
     displayColums: string[] = [
         "pseudo",
@@ -70,7 +74,7 @@ export class ReviewHandledComponent implements OnInit {
     ];
     datasource: Review[] = [];
     responseMessage: string = "";
-    currentUser = this.loginService.currentUser()
+    currentUser = this.loginService.currentUser();
 
     ngOnInit() {
         this.getReviews();

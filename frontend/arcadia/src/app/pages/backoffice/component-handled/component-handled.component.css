@@ -49,6 +49,10 @@ p {
     text-align: center;
 }
 
+#a-icon {
+    padding: 0;
+}
+
 /* style account creation form */
 
 .account-creation-form {
