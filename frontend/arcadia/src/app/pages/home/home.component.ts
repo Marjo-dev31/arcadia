@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     };
 
     result: number = 1;
+    consent: boolean = false
 
     ngOnInit() {
         this.getReviews();

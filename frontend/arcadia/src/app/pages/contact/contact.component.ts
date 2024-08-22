@@ -4,16 +4,17 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
+    FormsModule,
     ReactiveFormsModule,
     Validators,
 } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "app-contact",
     standalone: true,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, RouterLink, FormsModule],
     template: `
         <main>
             <div>
@@ -62,6 +63,21 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                 contactForm.controls['emailToResponse'].touched){
                 <p class="alert">Une adresse mail est requise</p>
                 }
+                <label for="rgpd-contact"
+                    ><input
+                        type="checkbox"
+                        name="rgpd"
+                        id="rgpd-contact"
+                        formControlName="consent"
+                        required
+                    />
+                    J'accepte que mes données soient collectées et utilisées
+                    conformément à la politique de confidentialité. Pour en
+                    savoir plus,
+                    <a [routerLink]="['/politiquedeconfidentialite']"
+                        >cliquez ici</a
+                    >
+                </label>
                 <button [disabled]="contactForm.invalid">Envoyer</button>
             </form>
         </main>
@@ -83,6 +99,7 @@ export class ContactComponent {
             Validators.required,
             Validators.email,
         ]),
+        consent: new FormControl(false, [Validators.required])
     });
 
     submitted = signal(false);
