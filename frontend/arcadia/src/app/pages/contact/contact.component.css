@@ -18,7 +18,8 @@ body {
   }
   
   .contact-form input,
-  .contact-form textarea {
+  .contact-form textarea,
+  .contact-form label {
     margin: 1rem;
     border: none;
     border-bottom: 2px solid var(--color-font);
@@ -35,4 +36,10 @@ body {
     font-family: var(--font-family-content);
     color: var(--color-font);
     transform: translateY(100%);
+  }
+
+  #rgpd-contact {
+    height: 1rem;
+    width: 1rem;
+    margin: 0;
   }
