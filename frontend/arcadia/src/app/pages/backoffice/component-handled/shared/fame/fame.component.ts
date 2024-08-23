@@ -81,7 +81,7 @@ import { LoginService } from "../../../../../shared/services/login.service";
             @if(firstname.invalid && firstname.touched && !form.submitted){
             <p class="alert">Un Prénom est requis</p>
             }
-            <button [disabled]="form.invalid">Ajouter</button>
+            <button type="submit" [disabled]="form.invalid">Ajouter</button>
         </form>
         }
     `,

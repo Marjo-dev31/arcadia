@@ -62,7 +62,7 @@ import { NgStyle } from "@angular/common";
                 @if(password.invalid && password.touched){
                 <p class="alert">Mot de passe invalide</p>
                 }
-                <button [disabled]="form.invalid">Se connecter</button>
+                <button type="submit" [disabled]="form.invalid">Se connecter</button>
                 <div class="password-forgot">
                     <a [routerLink]="['/mdpoublie']" id="password-forgot-link"
                         >Mot de passe oublié ?</a

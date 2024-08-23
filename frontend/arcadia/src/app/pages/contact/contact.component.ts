@@ -78,7 +78,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                         >cliquez ici</a
                     >
                 </label>
-                <button [disabled]="contactForm.invalid">Envoyer</button>
+                <button type="submit" [disabled]="contactForm.invalid">Envoyer</button>
             </form>
         </main>
     `,

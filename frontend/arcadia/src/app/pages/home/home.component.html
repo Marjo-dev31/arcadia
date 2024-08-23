@@ -91,7 +91,7 @@
                 <p class="review-name">{{ review.pseudo }}</p>
                 <p class="review-date">{{ review.date }}</p>
                 } }
-                <button
+                <button type="submit"
                     class="more-review-btn"
                     (click)="moreReview(1, reviews.length)"
                 >
@@ -156,7 +156,7 @@
                             >cliquez ici</a
                         >
                     </label>
-                    <button [disabled]="form.invalid">Envoyer</button>
+                    <button type="submit" [disabled]="form.invalid">Envoyer</button>
                     @if(form.submitted){
                     <div>
                         <p class="alert">Votre avis a bien été soumis</p>
