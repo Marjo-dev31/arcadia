@@ -23,31 +23,36 @@ import { UpdatePasswordComponent } from "./pages/passwordforgot/update-password.
 import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
 
 export const routes: Routes = [
-    { path: "", component: HomeComponent },
+    { path: "", component: HomeComponent, title: "Arcadia" },
     {
         path: "services",
         component: ServicesComponent,
         data: { title: "Services" },
+        title: 'Services'
     },
     {
         path: "contact",
         component: ContactComponent,
         data: { title: "Contact" },
+        title: 'Contact'
     },
     {
         path: "habitats",
         component: HabitatsComponent,
         data: { title: "Habitats" },
+        title: 'Habitats'
     },
     {
         path: "connexion",
         component: LoginComponent,
         data: { title: "Connexion" },
+        title: 'Connexion'
     },
     {
         path: "espacepersonnel",
         component: BackofficeComponent,
         data: { title: "Espace Personnel" },
+        title: 'Espace Personnel',
         canActivate: [AuthGuard],
         canActivateChild: [RoleGuard],
         children: [
@@ -103,13 +108,13 @@ export const routes: Routes = [
             },
         ],
     },
-    { path: "erreur", component: ErrorComponent },
-    { path: "mdpoublie", component: PasswordForgotComponent },
+    { path: "erreur", component: ErrorComponent, title: 'Erreur' },
+    { path: "mdpoublie", component: PasswordForgotComponent, title: 'Arcadia' },
     {
         path: "changermdp",
-        component: UpdatePasswordComponent,
+        component: UpdatePasswordComponent, title: 'Arcadia',
         children: [{ path: "**", component: UpdatePasswordComponent }],
     },
-    { path: "politiquedeconfidentialite", component: PrivacyPolicyComponent},
-    { path: "**", redirectTo: "" },
+    { path: "politiquedeconfidentialite", component: PrivacyPolicyComponent, title: 'Politique de confidentialité' },
+    { path: "**", redirectTo: "", pathMatch: 'full' },
 ];
