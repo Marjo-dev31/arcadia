@@ -24,7 +24,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             @if (emailToNewPassword.invalid && emailToNewPassword.touched) {
             <p class="alert">Un email est obligatoire</p>
             }
-            <button [disabled]="form.invalid">Envoyer</button>
+            <button type="submit" [disabled]="form.invalid">Envoyer</button>
             @if (form.submitted) {
             <p class="alert">Un email a été envoyé !</p>
             }

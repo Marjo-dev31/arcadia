@@ -76,7 +76,7 @@ import { LoginService } from "../../../shared/services/login.service";
             <mat-sidenav-content>
                 <h2>Bienvenue dans votre espace personnel</h2>
                 <mat-toolbar>
-                    <button
+                    <button  type="submit"
                         mat-icon-button
                         class="icon-btn"
                         (click)="drawer.toggle()"
