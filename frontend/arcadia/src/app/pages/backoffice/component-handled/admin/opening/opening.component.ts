@@ -67,7 +67,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <div class="alert">Un jour de fermeture est requis</div>
             }
             <button type="reset">Annuler</button>
-            <button [disabled]="updateForm.invalid">Valider</button>
+            <button type="submit" [disabled]="updateForm.invalid">Valider</button>
         </form>
     `,
     styleUrl: `../../component-handled.component.css`,

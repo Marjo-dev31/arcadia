@@ -47,7 +47,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     majuscule, une minuscule, un chiffre et un caractère spécial
                 </p>
                 } }
-                <button [disabled]="form.invalid">Envoyer</button>
+                <button type="submit" [disabled]="form.invalid">Envoyer</button>
                 @if (form.submitted) {
                 <p class="alert">Le mot de passe a été changé !</p>
                 }

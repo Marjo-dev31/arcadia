@@ -100,7 +100,7 @@
         @if(description.invalid && description.touched){
         <p class="alert">Une description est requise</p>
         }
-        <button class="add-btn" [disabled]="form.invalid">
+        <button type="submit" class="add-btn" [disabled]="form.invalid">
             Enregistrer nouvel habitat
         </button>
     </form>
@@ -121,7 +121,7 @@
         habitatForm.controls['description'].touched){
         <div class="alert">Une description est requise</div>
         }
-        <button class="add-btn" [disabled]="habitatForm.invalid">
+        <button type="submit" class="add-btn" [disabled]="habitatForm.invalid">
             Modifier habitat
         </button>
     </form>

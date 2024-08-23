@@ -17,7 +17,7 @@
             </option>
             }
         </select>
-        <button>Filtrer</button>
+        <button type="submit">Filtrer</button>
     </form>
     @if(animalchoice.submitted && selectedAnimalOption &&
     !veterinaryReports.length){
@@ -187,7 +187,7 @@
         @if(user.invalid && user.touched){
         <p class="alert">Un rapporteur est requis</p>
         }
-        <button class="add-btn" [disabled]="form.invalid">
+        <button type="submit" class="add-btn" [disabled]="form.invalid">
             Enregistrer nouveau rapport
         </button>
     </form>
@@ -266,7 +266,7 @@
         updateForm.controls['id_user'].touched){
         <div class="alert">Un rapporteur est requis</div>
         }
-        <button class="add-btn" [disabled]="updateForm.invalid">
+        <button type="submit" class="add-btn" [disabled]="updateForm.invalid">
             Modifier rapport
         </button>
     </form>
