@@ -113,7 +113,7 @@ export class HabitatsComponent implements OnInit {
 
     openDialog(animal: Animal) {
         this.matdialog.open(AnimalsComponent, {
-            width: "400px",
+            width: "25rem",
             data: { animal: animal },
         });
         this.addClick(animal.firstname);

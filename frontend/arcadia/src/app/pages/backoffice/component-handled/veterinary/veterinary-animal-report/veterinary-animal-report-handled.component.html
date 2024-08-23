@@ -23,8 +23,6 @@
     !veterinaryReports.length){
     <p>Il n'y pas encore de rapport associé à cet animal !</p>
     } 
-    <!-- @for(animal of animals; track animal.id){ @if (selectedAnimalOption
-    === animal.id) { -->
     <table
         mat-table
         [dataSource]="dataSource"
@@ -67,7 +65,7 @@
             </td>
         </ng-container>
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <th mat-header-cell *matHeaderCellDef>Modifier/Supprimer</th>
             <td mat-cell *matCellDef="let report">
                 @if(role === 'Vétérinaire'){
                 <mat-icon (click)="editReport(report.id)"
@@ -84,7 +82,6 @@
         <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
         <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
     </table>
-    <!-- }} -->
      @if(role === 'Vétérinaire'){ 
     <mat-icon class="add-icon" (click)="toggleAddForm()"
         >{{addFormIsDisplay()? 'remove_circle_outline' : 'add_circle_outline'}}</mat-icon
@@ -110,7 +107,7 @@
         >
             @for(animal of animals; track animal.id) {
             <option [ngValue]="animal.id">
-                {{ animal.firstname }} {{ animal.breed }}
+                {{ animal.firstname }} ({{ animal.breed }})
             </option>
             }
         </select>

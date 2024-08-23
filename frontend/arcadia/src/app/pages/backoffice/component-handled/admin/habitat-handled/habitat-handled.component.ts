@@ -35,7 +35,7 @@ export class HabitatHandledComponent implements OnInit {
     private readonly imageService = inject(ImageService);
     private readonly destroyRef = inject(DestroyRef);
 
-    displayColums: string[] = ["title", "description", "actions", "image"];
+    displayColums: string[] = ["title", "description", "actions", "image", "addImage"];
 
     habitatForm: FormGroup = this.fb.group({
         title: new FormControl("", [Validators.required]),

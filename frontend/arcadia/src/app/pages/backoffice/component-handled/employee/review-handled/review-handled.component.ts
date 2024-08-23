@@ -69,9 +69,10 @@ export class ReviewHandledComponent implements OnInit {
         "pseudo",
         "content",
         "date",
-        "actions",
         "status",
+        "actions",
     ];
+    
     datasource: Review[] = [];
     responseMessage: string = "";
     currentUser = this.loginService.currentUser();

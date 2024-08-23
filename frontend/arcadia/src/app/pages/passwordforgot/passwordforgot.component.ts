@@ -8,6 +8,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     standalone: true,
     imports: [FormsModule],
     template: `
+    <main>
+        <h1 class="title">Arcadia</h1>
         <h3>Mot de passe oublié ?</h3>
         <form (ngSubmit)="onSubmit(form)" #form="ngForm">
             <label for="emailToNewPassword">Votre email de connexion :</label>
@@ -27,13 +29,14 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
             <p class="alert">Un email a été envoyé !</p>
             }
         </form>
+    </main>
     `,
     styles: `
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        max-width: 300px;
+        max-width: 20rem;
         margin : auto;   
     }
 
