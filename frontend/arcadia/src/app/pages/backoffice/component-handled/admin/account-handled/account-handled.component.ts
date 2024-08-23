@@ -126,7 +126,7 @@ import { Observable } from "rxjs";
         </div>
         <p class="alert" id="alert-account-created">Le compte a été créé</p>
         <p class="alert" id="alert-account-already-exist">
-            Un compte existe déjà avec cet email
+            Un compte avec cet email existe déjà 
         </p>
     `,
     styleUrl: `../../component-handled.component.css`,
@@ -146,6 +146,7 @@ export class AccountHandledComponent {
         id_role: "",
     };
 
+    // Not angular Friendly but needed for exam, need a refacto
     onSubmit(form: NgForm) {
         const alertOk = document.getElementById("alert-account-created");
         const alertNotOk = document.getElementById(
