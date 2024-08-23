@@ -10,52 +10,56 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     standalone: true,
     imports: [FormsModule],
     template: `
-        <h3>Changer mon mot de passe ?</h3>
-        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-            <label for="emailForNewPassword">Email :</label>
-            <input
-                type="email"
-                id="emailForNewPassword"
-                name="emailForNewPassword"
-                #emailForNewPassword="ngModel"
-                [(ngModel)]="user.email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
-                required
-            />
-            @if (emailForNewPassword.invalid && emailForNewPassword.touched) {
-            <p class="alert">Un email est obligatoire</p>
-            }
-            <label for="newPassword">Nouveau mot de passe :</label>
-            <input
-                type="password"
-                id="newPassword"
-                name="newPassword"
-                #newPassword="ngModel"
-                [(ngModel)]="user.password"
-                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
-                required
-            />
-            @if (newPassword.invalid && newPassword.touched) { @if
-            (newPassword.errors?.['required']) {
-            <p class="alert">Un nouveau mot de passe est obligatoire</p>
-            } @if (newPassword.errors?.['pattern']) {
-            <p class="alert">
-                Le mot de passe doit contenir au moins 8 caractères dont une
-                majuscule, une minuscule, un chiffre et un caractère spécial
-            </p>
-            } }
-            <button [disabled]="form.invalid">Envoyer</button>
-            @if (form.submitted) {
-            <p class="alert">Le mot de passe a été changé !</p>
-            }
-        </form>
+        <main>
+            <h1 class="title">Arcadia</h1>
+            <h3>Changer mon mot de passe ?</h3>
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                <label for="emailForNewPassword">Email :</label>
+                <input
+                    type="email"
+                    id="emailForNewPassword"
+                    name="emailForNewPassword"
+                    #emailForNewPassword="ngModel"
+                    [(ngModel)]="user.email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
+                    required
+                />
+                @if (emailForNewPassword.invalid && emailForNewPassword.touched)
+                {
+                <p class="alert">Un email est obligatoire</p>
+                }
+                <label for="newPassword">Nouveau mot de passe :</label>
+                <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    #newPassword="ngModel"
+                    [(ngModel)]="user.password"
+                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+                    required
+                />
+                @if (newPassword.invalid && newPassword.touched) { @if
+                (newPassword.errors?.['required']) {
+                <p class="alert">Un nouveau mot de passe est obligatoire</p>
+                } @if (newPassword.errors?.['pattern']) {
+                <p class="alert">
+                    Le mot de passe doit contenir au moins 8 caractères dont une
+                    majuscule, une minuscule, un chiffre et un caractère spécial
+                </p>
+                } }
+                <button [disabled]="form.invalid">Envoyer</button>
+                @if (form.submitted) {
+                <p class="alert">Le mot de passe a été changé !</p>
+                }
+            </form>
+        </main>
     `,
     styles: `
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        max-width: 300px;
+        max-width: 20rem;
         margin : auto;   
     }
 

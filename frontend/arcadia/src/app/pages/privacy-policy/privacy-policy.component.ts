@@ -5,6 +5,7 @@ import { Component } from "@angular/core";
     standalone: true,
     imports: [],
     template: `
+    <main>
         <h1 class="title">ARCADIA</h1>
         <h2>Politique de Confidentialité</h2>
         <p>Dernière mise à jour : 22/08/2024</p>
@@ -96,6 +97,7 @@ import { Component } from "@angular/core";
             personnelles, vous pouvez nous contacter à l'adresse suivante :
         </p>
         <p>contact&#64;arcadia.com</p>
+    </main>
     `,
     styles: `
       * {

@@ -34,7 +34,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     styleUrls: [`../../component-handled.component.css`],
 })
 export class ServiceHandledComponent implements OnInit {
-    displayColums: string[] = ["title", "description", "actions", "image"];
+    displayColums: string[] = ["title", "description", "actions", "image", "addImage"];
 
     private readonly fb = inject(FormBuilder);
 

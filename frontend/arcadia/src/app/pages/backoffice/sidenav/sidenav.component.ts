@@ -73,7 +73,6 @@ import { LoginService } from "../../../shared/services/login.service";
                     </li>
                 </ul>
             </mat-sidenav>
-
             <mat-sidenav-content>
                 <h2>Bienvenue dans votre espace personnel</h2>
                 <mat-toolbar>

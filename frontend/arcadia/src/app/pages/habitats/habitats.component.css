@@ -15,14 +15,15 @@
     flex-wrap: wrap;
     justify-content: center;
     overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(70, 46, 1, 0.2);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(70, 46, 1, 0.2);
     margin: 4rem 0;
     cursor: default;
+    min-height: 15rem;
 }
 
 .habitat-img {
-    max-width: 325px;
+    max-width: 20rem;
     height: auto;
     object-fit: cover;
     object-position: right;
@@ -33,13 +34,13 @@
     flex-direction: column;
     text-align: justify;
     justify-content: center;
-    max-width: 325px;
+    max-width: 20rem;
     overflow: hidden;
 }
 
 .habitat-title:hover {
     border: solid 0.2rem var(--color-call-to-action);
-    border-radius: 20px;
+    border-radius: 1.25rem;
 }
 
 .habitat-content > * {
@@ -57,10 +58,3 @@ li {
     cursor: pointer;
 }
 
-/* responsive */
-
-/* @media screen and (max-width: 700px) {
-    .habitat-item {
-        width: 325px;
-    }
-} */

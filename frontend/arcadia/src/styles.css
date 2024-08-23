@@ -52,20 +52,20 @@ a {
   color: var(--color-background);
   text-decoration: none;
   transition: 0.3s;
-  text-shadow: 3px 3px 4px var(--color-font);
+  text-shadow: 0.25rem 0.25rem 0.25rem var(--color-font);
 }
 
 a:hover {
   color: var(--color-call-to-action);
-  box-shadow: 0 0 5px var(--color-call-to-action);
-  border-radius: 20px;
+  box-shadow: 0 0 0.25rem var(--color-call-to-action);
+  border-radius: 1.25rem;
 }
 
 h1 {
   font-family: var(--font-family-title);
   font-size: var(--font-size-big-title-h1);
   color: var(--color-background);
-  text-shadow: 3px 3px 4px var(--color-font);
+  text-shadow: 0.25rem 0.25rem 0.25rem var(--color-font);
 }
 
 h2 {
@@ -87,7 +87,7 @@ button {
   font-family: var(--font-family-title);
   width: 50%;
   padding: 0.5rem;
-  border-radius: 15px;
+  border-radius: 1rem;
 }
 
 button:hover {
