@@ -1,8 +1,8 @@
 # Arcadia
 
 A website of a Zoo in Britain for visitors, director and employees.
-For visitors, use to check habitats, services, animals and opening.
-For director, veterinaries and employees, use to manage habitats, services, animals, opening, meals, contact, and reviews.
+For visitors, use to check habitats, services, animals and opening, and leave review or send mail.
+For director, veterinaries and employees, use to manage habitats, services, animals, opening, meals, contact and reviews.
 
 # Prerequisites globally
 node.js v20.22.1
