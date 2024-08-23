@@ -54,6 +54,7 @@ export class AnimalHandledComponent implements OnInit {
         "condition",
         "actions",
         "image",
+        "addImage"
     ];
 
     updateForm: FormGroup = this.fb.group({

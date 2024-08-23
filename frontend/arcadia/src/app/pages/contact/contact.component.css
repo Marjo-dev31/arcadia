@@ -1,5 +1,5 @@
-body {
-    background-image: url("/images/feuilles volantes.png");
+main {
+    background-image: url("../../../assets/images/feuilles volantes.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 30%;
@@ -8,13 +8,14 @@ body {
   .contact-form {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 25rem;
     align-items: center;
     justify-content: center;
-    margin: 20px auto 50px;
+    margin: 1.25rem auto 3rem;
     padding: 2rem;
-    background-color: rgba(70, 46, 1, 0.2);
-    backdrop-filter: blur(2px);
+    background-color: rgba(70, 46, 1, 0.1);
+    backdrop-filter: blur(0.125rem);
+    border-radius: 1rem;
   }
   
   .contact-form input,
@@ -22,14 +23,14 @@ body {
   .contact-form label {
     margin: 1rem;
     border: none;
-    border-bottom: 2px solid var(--color-font);
+    border-bottom: 0.125rem solid var(--color-font);
     width: 100%;
     padding: 0 0.5rem;
     background-color: rgba(70, 46, 1, 0);
   }
   
   .contact-form input {
-    height: 50px;
+    height: 3rem;
   }
   
   ::placeholder {

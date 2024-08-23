@@ -53,7 +53,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
   
   .contact {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
     gap: 1rem;
     align-items: center;
     justify-items: center;

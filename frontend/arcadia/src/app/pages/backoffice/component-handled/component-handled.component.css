@@ -1,5 +1,5 @@
 img {
-    width: 100px;
+    width: 6.25rem;
 }
 
 mat-icon {
@@ -23,12 +23,11 @@ mat-icon {
 form {
     display: flex;
     flex-direction: column;
-    margin-top: 3rem;
-    max-width: 300px;
-    margin: auto;
+    max-width: 20rem;
+    margin: 3rem auto;
     align-items: center;
     border: solid 0.2rem var(--color-font);
-    border-radius: 10px;
+    border-radius: 0.75rem;
 }
 
 form > * {
@@ -36,7 +35,8 @@ form > * {
 }
 
 .delete-img,
-.add-img {
+.add-img,
+.image {
     display: flex;
     align-items: center;
 }
@@ -62,13 +62,13 @@ p {
 
 .account-creation-form input,
 .account-creation-form select {
-    border-radius: 15px;
+    border-radius: 1rem;
     margin: 0;
     padding: 0.5rem;
 }
 
 .btn-section {
-    width: 300px;
+    width: 20rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -76,7 +76,7 @@ p {
 }
 
 .btn {
-    width: 100px;
+    width: 6.25rem;
 }
 
 #alert-account-created,

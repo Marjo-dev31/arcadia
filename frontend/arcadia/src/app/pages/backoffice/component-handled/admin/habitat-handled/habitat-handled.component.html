@@ -1,132 +1,131 @@
 <h3>Habitats</h3>
-        <section>
-            @if(datasource && datasource.length === 0){
-            <p>Il n'y a pas d'habitat</p>
-            }
-            <table mat-table [dataSource]="datasource">
-                <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef>Titre</th>
-                    <td mat-cell *matCellDef="let habitat">
-                        {{ habitat.title }}
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef>Description</th>
-                    <td mat-cell *matCellDef="let habitat">
-                        {{ habitat.description }}
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="image">
-                    <th mat-header-cell *matHeaderCellDef>Photo</th>
-                    <td mat-cell *matCellDef="let habitat">
-                        @if(habitat.image_url) {
-                        <div class="delete-img">
-                            <div>{{ habitat.image_url }}</div>
-                            <mat-icon
-                                class="mat-icon-clear"
-                                (click)="deleteImage(habitat.image_id)"
-                                >clear</mat-icon
-                            >
-                        </div>
-                        } @else {
-                        <p>
-                            Il n'y a pas encore de photo associé à cet habitat
-                        </p>
-                        }
-                        <input
-                            type="file"
-                            class="file-input"
-                            (change)="onFileChange($event, habitat.id)"
-                        />
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>Actions</th>
-                    <td mat-cell *matCellDef="let habitat">
-                        <mat-icon (click)="editHabitat(habitat.id)"
-                            >create</mat-icon
-                        >
-                        <mat-icon (click)="deleteHabitat(habitat.id)"
-                            >delete</mat-icon
-                        >
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
-            </table>
-            @if(!addFormIsDisplay()){
-            <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >add_circle_outline</mat-icon
-            >
-            } @if(addFormIsDisplay()){
-            <mat-icon class="add-icon" (click)="toggleAddForm()"
-                >remove_circle_outline</mat-icon
-            >
-            }
-        </section>
-        <section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
-            <form
-                class="add-form"
-                #form="ngForm"
-                name="addform"
-                (ngSubmit)="onSubmit()"
-            >
+<section>
+    @if(datasource && datasource.length === 0){
+    <p>Il n'y a pas d'habitat</p>
+    }
+    <table mat-table [dataSource]="datasource">
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Titre</th>
+            <td mat-cell *matCellDef="let habitat">
+                {{ habitat.title }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let habitat">
+                {{ habitat.description }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Modifier/Supprimer</th>
+            <td mat-cell *matCellDef="let habitat">
+                <mat-icon (click)="editHabitat(habitat.id)">create</mat-icon>
+                <mat-icon (click)="deleteHabitat(habitat.id)">delete</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef>Photo</th>
+            <td mat-cell *matCellDef="let habitat">
+                @if(habitat.image_url) {
+                <div class="delete-img">
+                    <div>{{ habitat.image_url }}</div>
+                    <mat-icon
+                        class="mat-icon-clear"
+                        (click)="deleteImage(habitat.image_id)"
+                        >clear</mat-icon
+                    >
+                </div>
+                } @else {
+                <p>Il n'y a pas encore de photo associé à cet habitat</p>
+                }
                 <input
-                    type="text"
-                    placeholder="Titre"
-                    name="title"
-                    [(ngModel)]="newHabitat.title"
-                    #title="ngModel"
-                    required
+                    type="file"
+                    class="file-input"
+                    (change)="onFileChange($event, habitat.id)"
                 />
-                @if(title.invalid && title.touched){
-                <p class="alert">Un titre est requis</p>
-                }
-                <textarea
-                    name="description"
-                    placeholder="Description"
-                    cols="30"
-                    rows="10"
-                    [(ngModel)]="newHabitat.description"
-                    #description="ngModel"
-                    required
-                ></textarea>
-                @if(description.invalid && description.touched){
-                <p class="alert">Une description est requise</p>
-                }
-                <button class="add-btn" [disabled]="form.invalid">
-                    Enregistrer nouvel habitat
-                </button>
-            </form>
-        </section>
-        <section
-            [ngStyle]="{ display: updateFormIsDisplay() ? 'block' : 'none' }"
-        >
-            <form
-                class="update-form"
-                [formGroup]="habitatForm"
-                (ngSubmit)="updateHabitat()"
-            >
-                <input type="text" formControlName="title" />
-                @if(habitatForm.controls['title'].invalid &&
-                habitatForm.controls['title'].touched){
-                <div class="alert">Un titre est requis</div>
-                }
-                <textarea
-                    formControlName="description"
-                    cols="30"
-                    rows="10"
-                ></textarea>
-                @if(habitatForm.controls['description'].invalid &&
-                habitatForm.controls['description'].touched){
-                <div class="alert">Une description est requise</div>
-                }
-                <button class="add-btn" [disabled]="habitatForm.invalid">
-                    Modifier habitat
-                </button>
-            </form>
-            <mat-icon class="add-icon" (click)="closeUpdateForm()"
-                >remove_circle_outline</mat-icon
-            >
-        </section>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="addImage">
+            <th mat-header-cell *matHeaderCellDef>Ajouter une photo</th>
+            <td mat-cell *matCellDef="let habitat">
+                <div class="add-img">
+                    <input
+                        type="file"
+                        class="file-input"
+                        (change)="onFileChange($event, habitat.id)"
+                    />
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayColums"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColums"></tr>
+    </table>
+    @if(!addFormIsDisplay()){
+    <mat-icon class="add-icon" (click)="toggleAddForm()"
+        >add_circle_outline</mat-icon
+    >
+    } @if(addFormIsDisplay()){
+    <mat-icon class="add-icon" (click)="toggleAddForm()"
+        >remove_circle_outline</mat-icon
+    >
+    }
+</section>
+<section [ngStyle]="{ display: addFormIsDisplay() ? 'block' : 'none' }">
+    <form
+        class="add-form"
+        #form="ngForm"
+        name="addform"
+        (ngSubmit)="onSubmit()"
+    >
+        <input
+            type="text"
+            placeholder="Titre"
+            name="title"
+            [(ngModel)]="newHabitat.title"
+            #title="ngModel"
+            required
+        />
+        @if(title.invalid && title.touched){
+        <p class="alert">Un titre est requis</p>
+        }
+        <textarea
+            name="description"
+            placeholder="Description"
+            cols="30"
+            rows="10"
+            [(ngModel)]="newHabitat.description"
+            #description="ngModel"
+            required
+        ></textarea>
+        @if(description.invalid && description.touched){
+        <p class="alert">Une description est requise</p>
+        }
+        <button class="add-btn" [disabled]="form.invalid">
+            Enregistrer nouvel habitat
+        </button>
+    </form>
+</section>
+<section [ngStyle]="{ display: updateFormIsDisplay() ? 'block' : 'none' }">
+    <form
+        class="update-form"
+        [formGroup]="habitatForm"
+        (ngSubmit)="updateHabitat()"
+    >
+        <input type="text" formControlName="title" />
+        @if(habitatForm.controls['title'].invalid &&
+        habitatForm.controls['title'].touched){
+        <div class="alert">Un titre est requis</div>
+        }
+        <textarea formControlName="description" cols="30" rows="10"></textarea>
+        @if(habitatForm.controls['description'].invalid &&
+        habitatForm.controls['description'].touched){
+        <div class="alert">Une description est requise</div>
+        }
+        <button class="add-btn" [disabled]="habitatForm.invalid">
+            Modifier habitat
+        </button>
+    </form>
+    <mat-icon class="add-icon" (click)="closeUpdateForm()"
+        >remove_circle_outline</mat-icon
+    >
+</section>
