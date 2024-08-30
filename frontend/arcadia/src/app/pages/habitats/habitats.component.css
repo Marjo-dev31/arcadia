@@ -20,6 +20,7 @@
     margin: 4rem 0;
     cursor: default;
     min-height: 15rem;
+    cursor: pointer;
 }
 
 .habitat-img {
@@ -36,6 +37,10 @@
     justify-content: center;
     max-width: 20rem;
     overflow: hidden;
+}
+
+.habitat-title{
+    text-decoration: underline;
 }
 
 .habitat-title:hover {
