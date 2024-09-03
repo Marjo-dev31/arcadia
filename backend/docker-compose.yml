@@ -1,0 +1,72 @@
+services:
+  mysqldb:
+    container_name: mysqlcontainer
+    image: mysql:8.0.36
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: unless-stopped
+    volumes: 
+      - ./dbinit/init.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - $HOME/database:/var/lib/mysql1
+    ports:
+      - 3307:3306
+    expose:
+      - 3306
+    environment:
+      LANG: C.UTF-8
+      MYSQL_DATABASE: arcadiadb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: mamou31
+      MYSQL_ROOT_PASSWORD: letmeinmysql31
+      SERVICE_TAGS: prod
+      SERVICE_NAME: mysql
+    networks:
+      - internalnet
+
+  mongodb:
+    container_name: mongodbcontainer
+    image: mongo:7.0.8
+    restart: unless-stopped
+    volumes:
+      - ./dbinit/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - $HOME/database:/var/lib/mongodb1
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: arcadia 
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: arcadiamongodb
+    networks:
+      - internalnet
+
+  nodeapp:
+    container_name: nodeappcontainer
+    build: .
+    image: nodeapp:v1
+    ports:
+      - 8000:8000
+    expose:
+      - 8000
+    depends_on:
+      - mysqldb
+      - mongodb
+    environment:
+      DB_HOST: mysqldb
+      DB_USER: admin
+      DB_PASSWORD: 'mamou31'
+      DB_NAME: arcadiadb
+      DB_PORT: 3306
+      DB_CONNECTION_LIMIT: 20
+      MONGODB_URI: mongodb://admin:arcadiamongodb@mongodb:27017/?directConnection=true&authMechanism=DEFAULT
+      MONGO_INITDB_DATABASE: arcadia
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: arcadiamongodb
+      SERVICE_TAGS: prod
+      SERVICE_NAME: nodeappservice
+      SERVICE_PORT: 8000
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge
+
