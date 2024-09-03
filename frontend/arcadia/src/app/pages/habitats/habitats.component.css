@@ -1,0 +1,64 @@
+/* style habitat card */
+
+.habitats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: auto;
+}
+
+.habitat-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(70, 46, 1, 0.2);
+    margin: 4rem 0;
+    cursor: default;
+    min-height: 15rem;
+    cursor: pointer;
+}
+
+.habitat-img {
+    max-width: 20rem;
+    height: auto;
+    object-fit: cover;
+    object-position: right;
+}
+
+.habitat-content {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    justify-content: center;
+    max-width: 20rem;
+    overflow: hidden;
+}
+
+.habitat-title{
+    text-decoration: underline;
+}
+
+.habitat-title:hover {
+    border: solid 0.2rem var(--color-call-to-action);
+    border-radius: 1.25rem;
+}
+
+.habitat-content > * {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+li {
+    list-style: none;
+    padding: 0.5rem;
+}
+
+.animal-item {
+    text-decoration: underline;
+    cursor: pointer;
+}
