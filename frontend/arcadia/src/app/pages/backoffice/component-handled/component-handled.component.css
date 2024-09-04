@@ -34,15 +34,16 @@ form > * {
     margin: 0.5rem;
 }
 
-.delete-img,
 .add-img,
 .image {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
+
 }
 
 .mat-icon-clear {
     color: var(--color-secondary);
+    margin-left: 0;
 }
 
 p {

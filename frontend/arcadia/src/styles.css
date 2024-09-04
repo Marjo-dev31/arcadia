@@ -95,6 +95,10 @@ button:hover {
   color: var(--color-font);
 }
 
+abbr {
+  text-decoration: none;
+}
+
 .submit-btn {
   &:disabled {
       opacity: 0.6;

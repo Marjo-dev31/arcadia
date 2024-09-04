@@ -66,8 +66,8 @@ import { LoginService } from "../../../../../shared/services/login.service";
                 [formGroup]="commentForm"
                 (ngSubmit)="onSubmit(habitatSelected.value)"
             >
-                <select name="habitats" id="habitat-selected" #habitatSelected>
-                    <option>-- Choissisez un habitat --</option>
+                <select name="habitats" id="habitat-selected" #habitatSelected required>
+                    <option value="null">-- Choissisez un habitat --</option>
                     @for(habitat of datasource; track habitat.id){
                     <option [value]="habitat.id">{{ habitat.title }}</option>
                     } @if(!habitatSelected){
