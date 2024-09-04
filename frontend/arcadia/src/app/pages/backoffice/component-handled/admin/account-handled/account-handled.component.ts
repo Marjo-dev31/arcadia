@@ -118,7 +118,7 @@ import { Observable } from "rxjs";
                 } }
                 <div class="btn-section">
                     <button type="reset" class="btn">Annuler</button>
-                    <button type="submit" class="btn" [disabled]="form.invalid">
+                    <button type="submit" class="btn submit-btn" [disabled]="form.invalid">
                         Valider
                     </button>
                 </div>
