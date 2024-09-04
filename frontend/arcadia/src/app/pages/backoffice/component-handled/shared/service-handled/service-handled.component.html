@@ -89,7 +89,7 @@
         @if(description.invalid && description.touched){
         <p class="alert">Une description est requise</p>
         }
-        <button type="submit" class="add-btn" [disabled]="form.invalid">
+        <button type="submit" class=" submit-btn" [disabled]="form.invalid">
             Enregistrer nouveau service
         </button>
     </form>
@@ -110,7 +110,7 @@
         serviceForm.controls['description'].touched){
         <div class="alert">Une description est requise</div>
         }
-        <button type="submit" class="add-btn" [disabled]="serviceForm.invalid">
+        <button type="submit" class=" submit-btn" [disabled]="serviceForm.invalid">
             Modifier service
         </button>
     </form>

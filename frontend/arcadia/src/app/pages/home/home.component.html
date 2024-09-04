@@ -140,23 +140,23 @@
                         <p class="alert">Un avis est obligatoire</p>
                     </div>
                     }
-                    <label for="rgpd"
+                    <label for="rgpd-review"
                         ><input
                             type="checkbox"
-                            name="rgpd"
-                            id="rgpd"
+                            name="rgpd-review"
+                            id="rgpd-review"
                             [(ngModel)]="consent"
                             #pseudo="ngModel"
                             required
                         />
                         J'accepte que mes données soient collectées et utilisées
                         conformément à la politique de confidentialité. Pour en
-                        savoir plus,
-                        <a [routerLink]="['/politiquedeconfidentialite']"
+                        savoir plus
+                        <a id="rgpd-review-link" [routerLink]="['/politiquedeconfidentialite']"
                             >cliquez ici</a
                         >
                     </label>
-                    <button type="submit" [disabled]="form.invalid">Envoyer</button>
+                    <button type="submit" class="submit-btn" [disabled]="form.invalid">Envoyer</button>
                     @if(form.submitted){
                     <div>
                         <p class="alert">Votre avis a bien été soumis</p>

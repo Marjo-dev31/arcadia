@@ -73,12 +73,12 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     />
                     J'accepte que mes données soient collectées et utilisées
                     conformément à la politique de confidentialité. Pour en
-                    savoir plus,
-                    <a [routerLink]="['/politiquedeconfidentialite']"
+                    savoir plus
+                    <a id="rgpd-contact-link" [routerLink]="['/politiquedeconfidentialite']"
                         >cliquez ici</a
                     >
                 </label>
-                <button type="submit" [disabled]="contactForm.invalid">Envoyer</button>
+                <button type="submit" class="submit-btn" [disabled]="contactForm.invalid">Envoyer</button>
             </form>
         </main>
     `,

@@ -21,6 +21,16 @@
     z-index: 1;
 }
 
+.leaf {
+    position: absolute;
+    top: 25%;
+    right: 0;
+    width: 25rem;
+    /* Parallax ne fonctionne pas sur safari et firefox */
+    animation: parallax linear;
+    animation-timeline: scroll();
+}
+
 /* accordion style */
 
 .accordion {
@@ -185,6 +195,7 @@
     background-color: var(--color-call-to-action);
 }
 
+
 .form-review {
     display: flex;
     flex-direction: column;
@@ -209,15 +220,15 @@
     margin: 0.5rem;
 }
 
-.leaf {
-    position: absolute;
-    top: 30%;
-    right: 0;
-    width: 25rem;
-    /* Parallax ne fonctionne pas sur safari et firefox */
-    animation: parallax linear;
-    animation-timeline: scroll();
-}
+#rgpd-review-link {
+    padding-inline: 0;  
+  }
+  
+#rgpd-review-link:hover {
+      background-color: var(--color-call-to-action);
+      color: var(--color-font);
+    }
+
 
 @keyframes parallax {
     to {

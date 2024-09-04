@@ -84,7 +84,7 @@ import { LoginService } from "../../../../../shared/services/login.service";
                 commentForm.controls['comment'].touched){
                 <div class="alert">Un commentaire est requis</div>
                 }
-                <button type="submit" [disabled]="commentForm.invalid">
+                <button type="submit" class="submit-btn" [disabled]="commentForm.invalid">
                     Ajouter mon commentaire
                 </button>
             </form>

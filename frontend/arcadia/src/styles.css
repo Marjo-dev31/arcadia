@@ -95,6 +95,17 @@ button:hover {
   color: var(--color-font);
 }
 
+.submit-btn {
+  &:disabled {
+      opacity: 0.6;
+
+      &:hover {
+          background-color: var(--color-primary);
+          color: var(--color-background);
+      }
+  }
+}
+
 .alert {
   color: red;
   font-size: var(--font-size-footer);
