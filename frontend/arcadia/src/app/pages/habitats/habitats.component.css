@@ -23,10 +23,9 @@
 }
 
 .habitat-img {
-    max-width: 20rem;
+    max-width: 25rem;
     height: auto;
     object-fit: cover;
-    object-position: right;
 }
 
 .habitat-content {
@@ -34,13 +33,16 @@
     flex-direction: column;
     text-align: justify;
     justify-content: center;
-    max-width: 20rem;
+    max-width: 50%;
     overflow: hidden;
 }
 
-.habitat-title:hover {
+.habitat-title{
+    text-decoration: underline;
+&:hover {
     border: solid 0.2rem var(--color-call-to-action);
     border-radius: 1.25rem;
+}
 }
 
 .habitat-content > * {
