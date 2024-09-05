@@ -20,11 +20,12 @@
     margin: 4rem 0;
     cursor: default;
     min-height: 15rem;
+    max-width: 50rem;
 }
 
 .habitat-img {
-    max-width: 25rem;
-    height: auto;
+    max-width: 20rem;
+    max-height: 20rem;
     object-fit: cover;
 }
 
@@ -33,13 +34,13 @@
     flex-direction: column;
     text-align: justify;
     justify-content: center;
-    max-width: 50%;
+    max-width: 20rem;
     overflow: hidden;
 }
 
 .habitat-title{
     text-decoration: underline;
-&:hover {
+        &:hover {
     border: solid 0.2rem var(--color-call-to-action);
     border-radius: 1.25rem;
 }
@@ -53,10 +54,8 @@
 li {
     list-style: none;
     padding: 0.5rem;
-}
-
-.animal-item {
     text-decoration: underline;
     cursor: pointer;
 }
+
 
