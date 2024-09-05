@@ -18,8 +18,8 @@ import { AuthGuard } from "./shared/guards/auth.guard";
 import { RoleGuard } from "./shared/guards/role.guard";
 import { ForbiddenComponent } from "./pages/backoffice/component-handled/shared/forbidden/forbidden.component";
 import { ErrorComponent } from "./shared/components/errors/error.component";
-import { PasswordForgotComponent } from "./pages/passwordforgot/passwordforgot.component";
-import { UpdatePasswordComponent } from "./pages/passwordforgot/update-password.component";
+import { PasswordForgotComponent } from "./pages/password-forgot/password-forgot.component";
+import { UpdatePasswordComponent } from "./pages/password-forgot/update-password.component";
 import { PrivacyPolicyComponent } from "./pages/privacy-policy/privacy-policy.component";
 
 export const routes: Routes = [
