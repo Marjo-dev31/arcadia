@@ -46,7 +46,7 @@ import { environment } from "../../environments/environment";
                         <ul>
                             @for (animal of animals; track animal) {
                             <li
-                                class="animal-item"
+                                class="animal-list"
                                 (click)="openDialog(animal)"
                                 role="button"
                                 tabindex="0"

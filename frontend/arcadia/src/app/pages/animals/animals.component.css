@@ -18,7 +18,7 @@
 .id-card-animal img {
     overflow: hidden;
     max-height: 20rem;
-    max-width: 25rem;
+    max-width: 100%;
 }
 
 .id-card-animal-content {
