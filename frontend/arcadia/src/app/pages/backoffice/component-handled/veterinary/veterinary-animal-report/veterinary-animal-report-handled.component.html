@@ -10,6 +10,7 @@
             name="animal"
             id="animal-veterinary"
             [(ngModel)]="selectedAnimalOption"
+            required
         >
             @for(animal of animals; track animal.id) {
             <option [ngValue]="animal.id">
@@ -17,7 +18,7 @@
             </option>
             }
         </select>
-        <button type="submit">Filtrer</button>
+        <button type="submit" class="submit-btn" [disabled]="selectedAnimalOption === undefined">Filtrer</button>
     </form>
     @if(animalchoice.submitted && selectedAnimalOption &&
     !veterinaryReports.length){
@@ -176,6 +177,7 @@
             id="user-add-veterinary"
             [(ngModel)]="newReport.id_user"
             #user="ngModel"
+            required
         >
             @for(user of users$ | async; track user.id) {
             <option [ngValue]="user.id">
@@ -187,7 +189,7 @@
         @if(user.invalid && user.touched){
         <p class="alert">Un rapporteur est requis</p>
         }
-        <button type="submit" class="add-btn" [disabled]="form.invalid">
+        <button type="submit" class=" submit-btn" [disabled]="form.invalid">
             Enregistrer nouveau rapport
         </button>
     </form>
@@ -254,6 +256,7 @@
             name="selected-user"
             id="user-update-veterinary"
             formControlName="id_user"
+            required
         >
             @for(user of users$ | async ; track user.id) {
             <option [value]="user.id">
@@ -266,7 +269,7 @@
         updateForm.controls['id_user'].touched){
         <div class="alert">Un rapporteur est requis</div>
         }
-        <button type="submit" class="add-btn" [disabled]="updateForm.invalid">
+        <button type="submit" class=" submit-btn" [disabled]="updateForm.invalid">
             Modifier rapport
         </button>
     </form>

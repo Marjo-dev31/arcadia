@@ -41,16 +41,16 @@ import { LoginService } from "../../../../../shared/services/login.service";
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let review">
-                    <a  id="a-icon"
+                    <abbr title="Publier"><a  id="a-icon"
                         (click)="publishReview(review.id)"
                         [style]="{ display: review.status ? 'none' : 'block' }"
                         ><mat-icon>cloud_done </mat-icon></a
-                    >
-                    <a  id="a-icon"
+                    ></abbr>
+                    <abbr title="Refuser"><a  id="a-icon"
                         (click)="unpublishReview(review.id)"
                         [style]="{ display: review.status ? 'block' : 'none' }"
                         ><mat-icon>cloud_off</mat-icon></a
-                    >
+                    ></abbr>
                 </td>
             </ng-container>
 

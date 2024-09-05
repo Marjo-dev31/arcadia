@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    serverUrl: "http://localhost:8000",
+    serverUrl: "https://13.39.80.204.nip.io",
 };

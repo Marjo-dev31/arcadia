@@ -95,6 +95,21 @@ button:hover {
   color: var(--color-font);
 }
 
+abbr {
+  text-decoration: none;
+}
+
+.submit-btn {
+  &:disabled {
+      opacity: 0.6;
+
+      &:hover {
+          background-color: var(--color-primary);
+          color: var(--color-background);
+      }
+  }
+}
+
 .alert {
   color: red;
   font-size: var(--font-size-footer);
@@ -113,7 +128,7 @@ button:hover {
   margin-top: 0;
   padding: 2rem;
   position: absolute;
-  top: 20%;
+  top: 10rem;
   left: 50%;
   transform:translateX(-50%);
  }

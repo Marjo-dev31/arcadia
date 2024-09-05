@@ -44,3 +44,12 @@ main {
     width: 1rem;
     margin: 0;
   }
+
+  #rgpd-contact-link {
+    color: var(--color-font);
+    padding-inline: 0;  
+
+      &:hover {
+        background-color: var(--color-call-to-action);
+    }
+  }
