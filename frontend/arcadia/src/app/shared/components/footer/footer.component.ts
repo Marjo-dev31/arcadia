@@ -30,7 +30,12 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     </p>
                     }
                 </div>
-                <div><a [routerLink]="['/contact']">Nous contacter</a></div>
+                <div class="footer-links">
+                    <a [routerLink]="['/contact']">Nous contacter</a>
+                    <a [routerLink]="['/politiquedeconfidentialite']"
+                        >Notre politique de confidentialité</a
+                    >
+                </div>
             </div>
             <div id="copyright">by MB2024</div>
         </footer>
@@ -60,6 +65,12 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     padding: 1.5rem 1rem;
   }
   
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
+
   #copyright {
     text-align: center;
   }
