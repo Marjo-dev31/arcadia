@@ -5,6 +5,7 @@ import fileUpload from "express-fileupload";
 import Response from "./domain/response.js";
 import httpStatus from "./domain/httpstatus.js";
 import logger from "./util/logger.js";
+import cookieParser from "cookie-parser"
 import serviceRoutes from "./route/service.route.js";
 import imageRoutes from "./route/image.route.js";
 import habitatRoutes from "./route/habitat.route.js";
@@ -16,10 +17,10 @@ import userRoutes from "./route/user.route.js";
 import employeeRoutes from "./route/employee.route.js";
 import roleRoutes from "./route/role.route.js";
 import loginRoutes from "./route/login.route.js";
-import connectDB from "./config/mongodb.config.js";
 import clickRoutes from "./route/click.route.js";
 import openingRoutes from "./route/opening.route.js";
 import sendRoutes from "./route/send.route.js";
+import connectDB from "./config/mongodb.config.js";
 
 dotenv.config();
 const PORT = process.env.SERVER_PORT || 8000;
@@ -35,6 +36,7 @@ app.use(
 );
 app.use(express.json());
 app.use(fileUpload());
+app.use(cookieParser());
 
 app.use("/upload", express.static("src/upload"));
 

@@ -3,9 +3,11 @@ import httpStatus from "../domain/httpstatus.js";
 import Response from "../domain/response.js";
 
 const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers["authorization"];
+    // const authHeader = req.headers["authorization"];
     // get accesstoken in headers - authorization and split to get only token char
-    const token = authHeader && authHeader.split(" ")[1];
+    // const token = authHeader && authHeader.split(" ")[1];
+    const token = req.cookies.accessToken
+    console.log(token)
     if (!token) {
         res.status(httpStatus.BAD_REQUEST.code).send(
             new Response(
@@ -14,6 +16,7 @@ const authenticateToken = (req, res, next) => {
                 `Access denied! No token`
             )
         );
+        return
     }
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, response) => {
         if (err) {
@@ -26,8 +29,7 @@ const authenticateToken = (req, res, next) => {
             );
             return;
         }
-
-        const role = response.name;
+        const role = response.role;
         req["role"] = role;
         next();
     });

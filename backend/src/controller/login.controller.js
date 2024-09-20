@@ -21,8 +21,11 @@ export const login = (req, res) => {
             return;
         }
 
-        const user = results;
-        const passwordIsValid = await bcrypt.compare(password, user[0].password);
+        const user = results[0];
+        const passwordIsValid = await bcrypt.compare(
+            password,
+            user.password
+        );
         if (!passwordIsValid) {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -33,21 +36,23 @@ export const login = (req, res) => {
             );
             return;
         }
-        const accessToken = generatedAccessToken(user[0].email, user[0].role);
+        const accessToken = generatedAccessToken(user.email, user.role);
         const currentUser = {
-            id: user[0].id,
-            firstname: user[0].firstname,
-            lastname: user[0].lastname,
-            role: user[0].role,
-            accessToken: accessToken
-        }
-
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            role: user.role,
+        };
+        res.cookie("accessToken", accessToken, {
+            httpOnly: true,
+            sameSite: "strict",
+        });
         res.status(httpStatus.OK.code).send(
             new Response(
                 httpStatus.OK.code,
                 httpStatus.OK.status,
                 `User is log in`,
-                [currentUser]
+                currentUser
             )
         );
     });
