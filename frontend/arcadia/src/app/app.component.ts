@@ -49,15 +49,6 @@ import { MailService } from "./shared/services/mail.service";
         RouterOutlet,
         HeaderComponent,
         FooterComponent,
-        // MatDialogModule,
-        // FormsModule,
-        // MatSidenavModule,
-        // MatToolbarModule,
-        // MatIconModule,
-        // MatTableModule,
-        // SidenavComponent,
-        // MatFormFieldModule,
-        // MatInputModule,
     ],
     template: ` <!-- header -->
         <app-header />

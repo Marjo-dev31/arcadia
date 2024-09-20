@@ -6,7 +6,7 @@ import httpStatus from "../domain/httpstatus.js";
 
 export const getRolesWithoutAdmin = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching roles`);
-    database.query(QUERYROLES.SELECT_ROLES_WITHOUT_ADMIN, (error, results) => {
+    database.query(QUERYROLES.SELECT_ROLES_WITHOUT_ADMIN, (results) => {
         if (!results[0]) {
             res.status(httpStatus.OK.code).send(
                 new Response(

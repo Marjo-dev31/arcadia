@@ -6,7 +6,7 @@ import httpStatus from "../domain/httpstatus.js";
 
 export const getServices = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching services`);
-    database.query(QUERYSERVICES.SELECT_SERVICES, (error, results) => {
+    database.query(QUERYSERVICES.SELECT_SERVICES, (results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -27,34 +27,6 @@ export const getServices = (req, res) => {
         }
     });
 };
-
-// export const getService = (req, res) => {
-//     logger.info(`${req.method} ${req.originalUrl}, fetching service`);
-//     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
-//       if (!results[0]) {
-//         res
-//           .status(httpStatus.NOT_FOUND.code)
-//           .send(
-//             new Response(
-//               httpStatus.NOT_FOUND.code,
-//               httpStatus.NOT_FOUND.status,
-//               `Service by id ${req.params.id} was not found !`
-//             )
-//           );
-//       } else {
-//         res
-//           .status(httpStatus.OK.code)
-//           .send(
-//             new Response(
-//               httpStatus.OK.code,
-//               httpStatus.OK.status,
-//               `Service retrieved`,
-//               results[0]
-//             )
-//           );
-//       }
-//     });
-//   };
 
 export const addService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating service`);
@@ -91,7 +63,7 @@ export const updateService = (req, res) => {
     database.query(
         QUERYSERVICES.SELECT_SERVICE,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (!results) {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -107,7 +79,7 @@ export const updateService = (req, res) => {
                 database.query(
                     QUERYSERVICES.UPDATE_SERVICE,
                     [...Object.values(req.body), req.params.id],
-                    (error, results) => {
+                    (error) => {
                         if (!error) {
                             res.status(httpStatus.OK.code).send(
                                 new Response(
@@ -141,7 +113,7 @@ export const deleteService = (req, res) => {
     database.query(
         QUERYSERVICES.DELETE_SERVICE,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (results.affectedRows > 0) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -164,4 +136,3 @@ export const deleteService = (req, res) => {
     );
 };
 
-export default httpStatus;

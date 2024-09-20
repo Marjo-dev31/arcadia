@@ -6,7 +6,7 @@ import httpStatus from "../domain/httpstatus.js";
 
 export const getAnimals = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching animals`);
-    database.query(QUERYANIMALS.SELECT_ANIMALS, (error, results) => {
+    database.query(QUERYANIMALS.SELECT_ANIMALS, (results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -27,34 +27,6 @@ export const getAnimals = (req, res) => {
         }
     });
 };
-
-// export const getAnimal = (req, res) => {
-//   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
-//   database.query(QUERYANIMALS.SELECT_ANIMAL, [req.params.id], (error, results) => {
-//     if (!results[0]) {
-//       res
-//         .status(httpStatus.NOT_FOUND.code)
-//         .send(
-//           new Response(
-//             httpStatus.NOT_FOUND.code,
-//             httpStatus.NOT_FOUND.status,
-//             `Animal by id ${req.params.id} was not found !`
-//           )
-//         );
-//     } else {
-//       res
-//         .status(httpStatus.OK.code)
-//         .send(
-//           new Response(
-//             httpStatus.OK.code,
-//             httpStatus.OK.status,
-//             `Animal retrieved`,
-//             results[0]
-//           )
-//         );
-//     }
-//   });
-// };
 
 export const addAnimal = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating animal`);
@@ -91,7 +63,7 @@ export const deleteAnimal = (req, res) => {
     database.query(
         QUERYANIMALS.DELETE_ANIMAL,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (results.affectedRows > 0) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -119,7 +91,7 @@ export const updateAnimal = (req, res) => {
     database.query(
         QUERYANIMALS.SELECT_ANIMAL,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (!results) {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -135,7 +107,7 @@ export const updateAnimal = (req, res) => {
                 database.query(
                     QUERYANIMALS.UPDATE_ANIMAL,
                     [...Object.values(req.body), req.params.id],
-                    (error, results) => {
+                    (error) => {
                         if (!error) {
                             res.status(httpStatus.OK.code).send(
                                 new Response(
@@ -171,7 +143,7 @@ export const getAnimalsByHabitat = (req, res) => {
     database.query(
         QUERYANIMALS.SELECT_ANIMALS_HABITAT,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (!results) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -198,7 +170,7 @@ export const getAnimalsForFilter = (req, res) => {
     logger.info(
         `${req.method} ${req.originalUrl}, fetching animals by habitat`
     );
-    database.query(QUERYANIMALS.SELECT_ANIMALS_GROUP_BY, (error, results) => {
+    database.query(QUERYANIMALS.SELECT_ANIMALS_GROUP_BY, (results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
                 new Response(

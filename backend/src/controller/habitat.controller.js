@@ -6,7 +6,7 @@ import httpStatus from "../domain/httpstatus.js";
 
 export const getHabitats = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching habitats`);
-    database.query(QUERYHABITATS.SELECT_HABITATS, (error, results) => {
+    database.query(QUERYHABITATS.SELECT_HABITATS, (results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -27,34 +27,6 @@ export const getHabitats = (req, res) => {
         }
     });
 };
-
-// export const getHabitat = (req, res) => {
-//     logger.info(`${req.method} ${req.originalUrl}, fetching habitat`);
-//     database.query(QUERYHABITATS.SELECT_HABITAT, [req.params.id], (error, results) => {
-//       if (!results[0]) {
-//         res
-//           .status(httpStatus.NOT_FOUND.code)
-//           .send(
-//             new Response(
-//               httpStatus.NOT_FOUND.code,
-//               httpStatus.NOT_FOUND.status,
-//               `Habitat by id ${req.params.id} was not found !`
-//             )
-//           );
-//       } else {
-//         res
-//           .status(httpStatus.OK.code)
-//           .send(
-//             new Response(
-//               httpStatus.OK.code,
-//               httpStatus.OK.status,
-//               `Habitat retrieved`,
-//               results[0]
-//             )
-//           );
-//       }
-//     });
-// };
 
 export const addHabitat = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating habitat`);
@@ -91,7 +63,7 @@ export const updateHabitat = (req, res) => {
     database.query(
         QUERYHABITATS.SELECT_HABITAT,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (!results[0]) {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -107,7 +79,7 @@ export const updateHabitat = (req, res) => {
                 database.query(
                     QUERYHABITATS.UPDATE_HABITAT,
                     [...Object.values(req.body), req.params.id],
-                    (error, results) => {
+                    (error) => {
                         if (!error) {
                             res.status(httpStatus.OK.code).send(
                                 new Response(
@@ -141,7 +113,7 @@ export const deleteHabitat = (req, res) => {
     database.query(
         QUERYHABITATS.DELETE_HABITAT,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (results.affectedRows > 0) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -169,7 +141,7 @@ export const addComment = (req, res) => {
     database.query(
         QUERYHABITATS.SELECT_HABITAT,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (!results[0]) {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -185,7 +157,7 @@ export const addComment = (req, res) => {
                 database.query(
                     QUERYHABITATS.CREATE_COMMENT_HABITAT,
                     [...Object.values(req.body), req.params.id],
-                    (error, results) => {
+                    (error) => {
                         if (!error) {
                             res.status(httpStatus.OK.code).send(
                                 new Response(
@@ -219,7 +191,7 @@ export const deleteComment = (req, res) => {
     database.query(
         QUERYHABITATS.DELETE_COMMENT_HABITAT,
         [req.params.id],
-        (error, results) => {
+        (results) => {
             if (results.affectedRows > 0) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
