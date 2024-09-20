@@ -24,5 +24,4 @@ export interface CurrentUser {
     firstname: string,
     lastname: string,
     role: string,
-    accessToken: string
 }

@@ -92,7 +92,7 @@ export class LoginComponent {
         password: "",
     };
 
-    currentUser = this.loginService.currentUser();
+    // currentUser = this.loginService.currentUser();
 
     responseMessage!: string;
 
@@ -100,15 +100,15 @@ export class LoginComponent {
         this.loginService
             .login(this.user)
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((response) => {
-                this.setLocalStorage(response);
-                form.reset();
+            .subscribe((response)=>{
+                this.setLocalStorage(response)
             });
+            form.reset();
+            
     }
 
     setLocalStorage(response: Response<CurrentUser>) {
         if (response.data) {
-            localStorage.setItem("accessToken", response.data[0].accessToken);
             localStorage.setItem("role", response.data[0].role)
             this.router.navigate(["/espacepersonnel"]);
         } else {

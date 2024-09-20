@@ -37,12 +37,12 @@ export const login = (req, res) => {
             return;
         }
         const accessToken = generatedAccessToken(user.email, user.role);
-        const currentUser = {
+        const currentUser = [{
             id: user.id,
             firstname: user.firstname,
             lastname: user.lastname,
             role: user.role,
-        };
+        }];
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             sameSite: "strict",

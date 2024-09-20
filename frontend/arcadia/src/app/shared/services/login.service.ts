@@ -17,7 +17,6 @@ export class LoginService {
         firstname: '',
         lastname: '',
         role: '',
-        accessToken: ''
     })
 
     login(user: UserLogin): Observable<Response<CurrentUser>> {
@@ -28,4 +27,7 @@ export class LoginService {
             }
         }))
         }
+
+
+
     }

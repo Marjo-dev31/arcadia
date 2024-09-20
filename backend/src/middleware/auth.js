@@ -7,7 +7,6 @@ const authenticateToken = (req, res, next) => {
     // get accesstoken in headers - authorization and split to get only token char
     // const token = authHeader && authHeader.split(" ")[1];
     const token = req.cookies.accessToken
-    console.log(token)
     if (!token) {
         res.status(httpStatus.BAD_REQUEST.code).send(
             new Response(
