@@ -1,9 +1,13 @@
+import secrets from '../src/util/secretmanager.js'
+
+const secretsValues = await secrets()
+
 
 db = db.getSiblingDB('arcadia');
 
 db.createUser({
-    user: process.env.MONGO_INITDB_USERNAME,
-    pwd: process.env.MONGO_INITDB_PASSWORD,
+    user: secretsValues.MONGO_INITDB_USERNAME,
+    pwd: secretsValues.MONGO_INITDB_PASSWORD,
     roles: [{ role: 'readWrite', db: 'arcadia' }]
   });
 
