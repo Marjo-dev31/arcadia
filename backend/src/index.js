@@ -30,6 +30,7 @@ app.use(
         origin: [
             "http://localhost:4200",
             "http://myangularbucket31.s3-website.eu-north-1.amazonaws.com",
+            "https://d2bod1g79nbot5.cloudfront.net"
         ],
     })
 );
