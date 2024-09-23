@@ -4,7 +4,7 @@ import {
 } from "@aws-sdk/client-secrets-manager";
 
 // to prod environment IS_PRODUCTION= true
-const IS_PRODUCTION = false;
+const IS_PRODUCTION = true;
 
 const secrets = async () => {
     if (!IS_PRODUCTION) {
