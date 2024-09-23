@@ -30,7 +30,7 @@ const secrets = async () => {
             throw error;
         }
 
-        const secret = response.SecretString;
+        const secret = response;
         console.log(secret, 'titi')
         return {
             DB_HOST: secret.DB_HOST,
