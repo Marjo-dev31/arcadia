@@ -3,7 +3,7 @@ import {
     GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'prod';
+const IS_PRODUCTION = true;
 
 const secrets = async () => {
     if (!IS_PRODUCTION) {
@@ -31,7 +31,7 @@ const secrets = async () => {
         }
 
         const secret = response.SecretString;
-
+console.log(secret)
         return {
             DB_HOST: secret.DB_HOST,
         };
