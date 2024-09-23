@@ -5,6 +5,7 @@ import secrets from '../util/secretmanager.js'
 dotenv.config();
 
 const secretsValues = await secrets()
+console.log('toto', secretsValues)
 
 const pool = mysql.createPool({
     host: secretsValues.DB_HOST,
