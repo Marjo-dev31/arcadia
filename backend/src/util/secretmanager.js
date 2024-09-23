@@ -30,7 +30,8 @@ const secrets = async () => {
             throw error;
         }
 
-        const secret = response;
+        const secret = JSON.parse(response.SecretString);
+
         console.log(secret, 'titi')
         return {
             DB_HOST: secret.DB_HOST,
