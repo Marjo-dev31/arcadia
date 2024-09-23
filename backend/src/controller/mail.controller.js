@@ -49,7 +49,7 @@ export const sendEmailToNewPassword = (req, res) => {
     database.query(
         QUERYUSERS.SELECT_USER,
         [req.body.email],
-        (results) => {
+        (error, results) => {
             if (!results[0]) {
                 res.status(httpStatus.OK.code).send(
                     new Response(

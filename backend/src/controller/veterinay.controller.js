@@ -9,7 +9,7 @@ export const getVeterinaryReports = (req, res) => {
     database.query(
         QUERYVETERINARIES.SELECT_REPORTS,
         [req.params.id],
-        (results) => {
+        (error, results) => {
             if (!results[0]) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -68,7 +68,7 @@ export const updateVeterinaryReport = (req, res) => {
     database.query(
         QUERYVETERINARIES.SELECT_REPORT,
         [req.params.id],
-        (results) => {
+        (error, results) => {
             if (!results) {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -118,7 +118,7 @@ export const deleteVeterinaryReport = (req, res) => {
     database.query(
         QUERYVETERINARIES.DELETE_REPORT,
         [req.params.id],
-        (results) => {
+        (error, results) => {
             if (results.affectedRows > 0) {
                 res.status(httpStatus.OK.code).send(
                     new Response(

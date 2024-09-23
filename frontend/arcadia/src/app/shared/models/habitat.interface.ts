@@ -1,5 +1,5 @@
 import { Animal } from ".";
-// ./ redirect to index.ts
+// ./ renvois directement sur index.ts
 
 export interface Habitat {
     id: string,

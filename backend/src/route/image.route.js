@@ -11,8 +11,14 @@ import verifyRoles from "../middleware/verifyroles.js";
 
 const imageRoutes = express.Router();
 
+imageRoutes.route("/");
+// .get(getImages)
+// imageRoutes.route('/services')
+// .get(getServicesImages)
+
 imageRoutes
     .route("/service/:id")
+    // .put(updateServiceImage)
     .post(
         authenticateToken,
         verifyRoles("Admin", "Employé"),
@@ -20,9 +26,15 @@ imageRoutes
         addServiceImage
     );
 
+// imageRoutes.route('/habitats')
+// .get(getHabitatsImages)
+
 imageRoutes
     .route("/habitat/:id")
     .post(authenticateToken, verifyRoles("Admin"), fileupload, addHabitatImage);
+
+// imageRoutes.route('/animals')
+// .get(getAnimalsImages)
 
 imageRoutes
     .route("/animal/:id")
@@ -30,6 +42,7 @@ imageRoutes
 
 imageRoutes
     .route("/:id")
+    // .get(getImage)
     .delete(authenticateToken, verifyRoles("Admin", "Employé"), deleteImage);
 
 export default imageRoutes;

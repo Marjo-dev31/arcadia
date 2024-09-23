@@ -9,7 +9,7 @@ import generatedAccessToken from "../util/jwt.js";
 export const login = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}`);
     const { email, password } = req.body;
-    database.query(QUERYUSERS.SELECT_USER, [email], async (results) => {
+    database.query(QUERYUSERS.SELECT_USER, [email], async (error, results) => {
         if (results < 1) {
             res.status(httpStatus.OK.code).send(
                 new Response(

@@ -9,7 +9,7 @@ export const getEmployeeReportsByAnimal = (req, res) => {
     database.query(
         QUERYEMPLOYEES.SELECT_REPORTS,
         [req.params.id],
-        (results) => {
+        (error, results) => {
             if (!results[0]) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
@@ -67,7 +67,7 @@ export const updateEmployeeReport = (req, res) => {
     database.query(
         QUERYEMPLOYEES.SELECT_REPORT,
         [req.params.id],
-        (results) => {
+        (error, results) => {
             if (!results) {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(
@@ -117,7 +117,7 @@ export const deleteEmployeeReport = (req, res) => {
     database.query(
         QUERYEMPLOYEES.DELETE_REPORT,
         [req.params.id],
-        (results) => {
+        (error, results) => {
             if (results.affectedRows > 0) {
                 res.status(httpStatus.OK.code).send(
                     new Response(
