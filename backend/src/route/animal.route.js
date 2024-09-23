@@ -23,6 +23,7 @@ animalsRoutes
 
 animalsRoutes
     .route("/:id")
+    // .get(getAnimal)
     .delete(authenticateToken, verifyRoles("Admin"), deleteAnimal)
     .put(authenticateToken, verifyRoles("Admin"), updateAnimal);
 

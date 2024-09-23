@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 
 export const getUsersVeterinary = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching users`);
-    database.query(QUERYUSERS.SELECT_USERS_VETERINARY, (results) => {
+    database.query(QUERYUSERS.SELECT_USERS_VETERINARY, (error, results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -31,7 +31,7 @@ export const getUsersVeterinary = (req, res) => {
 
 export const getUsersEmployee = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching users`);
-    database.query(QUERYUSERS.SELECT_USERS_EMPLOYEE, (results) => {
+    database.query(QUERYUSERS.SELECT_USERS_EMPLOYEE, (error, results) => {
         if (!results) {
             res.status(httpStatus.OK.code).send(
                 new Response(
@@ -125,7 +125,7 @@ export const updatePassword = (req, res) => {
     database.query(
         QUERYUSERS.SELECT_USER,
         [req.body.email],
-        (results) => {
+        (error, results) => {
             if (!results) {
                 res.status(httpStatus.NOT_FOUND.code).send(
                     new Response(

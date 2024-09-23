@@ -6,7 +6,7 @@ import httpStatus from "../domain/httpstatus.js";
 
 export const getBreed = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching breeds`);
-    database.query(QUERYBREEDS.SELECT_BREEDS, (results) => {
+    database.query(QUERYBREEDS.SELECT_BREEDS, (error, results) => {
         if (!results[0]) {
             res.status(httpStatus.OK.code).send(
                 new Response(

@@ -12,6 +12,7 @@ const clickRoutes = express.Router();
 
 clickRoutes
     .route("/:firstname")
+    // .get(getAnimalByFirstname)
     .put(addCount);
 
 clickRoutes

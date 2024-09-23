@@ -23,6 +23,7 @@ habitatRoutes
 
 habitatRoutes
     .route("/:id")
+    // .get(getHabitat)
     .put(authenticateToken, verifyRoles("Admin"), updateHabitat)
     .delete(authenticateToken, verifyRoles("Admin"), deleteHabitat);
 
