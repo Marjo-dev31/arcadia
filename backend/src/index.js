@@ -20,9 +20,13 @@ import connectDB from "./config/mongodb.config.js";
 import clickRoutes from "./route/click.route.js";
 import openingRoutes from "./route/opening.route.js";
 import sendRoutes from "./route/send.route.js";
+import secrets from './util/secretmanager.js'
+
+
+const secretsValues = await secrets()
 
 dotenv.config();
-const PORT = process.env.SERVER_PORT || 8000;
+const PORT = secretsValues.SERVER_PORT || 8000;
 const app = express();
 
 app.use(

@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
 import logger from '../util/logger.js';
+import secrets from '../util/secretmanager.js'
 
-const MONGODB_URI = process.env.MONGODB_URI
+const secretsValues = await secrets()
+
+
+const MONGODB_URI = secretsValues.MONGODB_URI
 
 const connectDB = async () => {
     try {

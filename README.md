@@ -29,7 +29,7 @@ _frontend:_
     "uuidv4": "^6.2.13",
     "zone.js": "~0.14.3"
     }
-        "devDependencies": {
+    "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.2",
     "@angular/cli": "^17.3.2",
     "@angular/compiler-cli": "^17.3.0",
@@ -49,7 +49,6 @@ _backend:_
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-fileupload": "^1.5.0",
-    "ip": "^2.0.1",
     "jsonwebtoken": "^9.0.2",
     "mailtrap": "^3.3.0",
     "mongodb": "^6.6.2",
@@ -57,8 +56,6 @@ _backend:_
     "mysql": "^2.18.1",
     "pino": "^8.20.0",
     "pino-pretty": "^11.0.0",
-    "uuid": "^9.0.1",
-    "uuidv4": "^6.2.13"
 }
     "devDependencies": {
         "nodemon": "^3.1.0"
@@ -73,6 +70,20 @@ git clone https://github.com/Marjo-dev31/arcadia
 
 # Install prerequisites and run application
 ## API
+
+### env file
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+DB_CONNECTION_LIMIT=
+SERVER_PORT=
+MONGODB_URI=
+MONGO_INITDB_USERNAME=
+MONGO_INITDB_PASSWORD=
+ACCESS_TOKEN_SECRET=
+
 ### navigate
 `cd arcadia/backend`
 ### download and install Node.js
