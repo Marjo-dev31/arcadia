@@ -31,6 +31,7 @@ const secrets = async () => {
         }
 
         const secret = response.SecretString;
+        console.log(secret, 'titi')
         return {
             DB_HOST: secret.DB_HOST,
         };
