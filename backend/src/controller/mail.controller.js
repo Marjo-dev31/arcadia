@@ -62,7 +62,7 @@ export const sendEmailToNewPassword = (req, res) => {
                 const user = results[0];
                 const accessToken = generatedAccessToken(user.email, user.name);
 
-                const email = req.body.email;
+                // const email = req.body.email;
                 const message = `Vous avez demandé un nouveau mot de passe ? Pour changer de mot de passe cliquer sur le lien suivant :
             http://localhost:4200/changermdp/${accessToken} `;
 
@@ -81,7 +81,7 @@ export const sendEmailToNewPassword = (req, res) => {
 
                 const recipients = [
                     {
-                        email: email,
+                        email: "marjory.bravo.dev@gmail.com",
                     },
                 ];
 

@@ -57,7 +57,7 @@ describe("ServiceHandledComponent", () => {
     });
 
     it("should return a list when there is data", () => {
-        serviceServiceMock.getHandleServices.mockReturnValue([
+        const servicesMockValue = serviceServiceMock.getHandleServices.mockReturnValue([
             {
                 id: "un",
                 title: "restaurant",
@@ -67,14 +67,7 @@ describe("ServiceHandledComponent", () => {
         ]);
         fixture.whenStable().then(() => {
             const services = component.datasource;
-            expect(services).toEqual([
-                {
-                    id: "un",
-                    title: "restaurant",
-                    description: "plusieurs restaurants sur place",
-                    image_url: "restaurant.jpg",
-                },
-            ]);
+            expect(services).toEqual(servicesMockValue);
             expect(services.length).toEqual(1);
         });
     });

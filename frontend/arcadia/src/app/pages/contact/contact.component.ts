@@ -74,11 +74,19 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
                     J'accepte que mes données soient collectées et utilisées
                     conformément à la politique de confidentialité. Pour en
                     savoir plus
-                    <a id="rgpd-contact-link" [routerLink]="['/politiquedeconfidentialite']"
+                    <a
+                        id="rgpd-contact-link"
+                        [routerLink]="['/politiquedeconfidentialite']"
                         >cliquez ici</a
                     >
                 </label>
-                <button type="submit" class="submit-btn" [disabled]="contactForm.invalid">Envoyer</button>
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    [disabled]="contactForm.invalid"
+                >
+                    Envoyer
+                </button>
             </form>
         </main>
     `,
@@ -99,7 +107,7 @@ export class ContactComponent {
             Validators.required,
             Validators.email,
         ]),
-        consent: new FormControl(false, [Validators.required])
+        consent: new FormControl(false, [Validators.required]),
     });
 
     submitted = signal(false);

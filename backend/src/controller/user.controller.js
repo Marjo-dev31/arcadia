@@ -4,6 +4,7 @@ import logger from "../util/logger.js";
 import QUERYUSERS from "../query/user.query.js";
 import httpStatus from "../domain/httpstatus.js";
 import bcrypt from "bcrypt";
+import { sendEmailToNewUser } from "../util/send-mail.js";
 
 export const getUsersVeterinary = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, fetching users`);
@@ -103,6 +104,7 @@ export const addUser = (req, res) => {
                                 );
                             } else {
                                 const user = { ...req.body };
+                                sendEmailToNewUser();
                                 res.status(httpStatus.CREATED.code).send(
                                     new Response(
                                         httpStatus.CREATED.code,

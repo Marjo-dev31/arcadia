@@ -28,34 +28,6 @@ export const getServices = (req, res) => {
     });
 };
 
-// export const getService = (req, res) => {
-//     logger.info(`${req.method} ${req.originalUrl}, fetching service`);
-//     database.query(QUERYSERVICES.SELECT_SERVICE, [req.params.id], (error, results) => {
-//       if (!results[0]) {
-//         res
-//           .status(httpStatus.NOT_FOUND.code)
-//           .send(
-//             new Response(
-//               httpStatus.NOT_FOUND.code,
-//               httpStatus.NOT_FOUND.status,
-//               `Service by id ${req.params.id} was not found !`
-//             )
-//           );
-//       } else {
-//         res
-//           .status(httpStatus.OK.code)
-//           .send(
-//             new Response(
-//               httpStatus.OK.code,
-//               httpStatus.OK.status,
-//               `Service retrieved`,
-//               results[0]
-//             )
-//           );
-//       }
-//     });
-//   };
-
 export const addService = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating service`);
     database.query(

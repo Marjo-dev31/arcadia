@@ -15,7 +15,7 @@ export const sendEmailToNewUser = (req, res, next) => {
     };
     const recipients = [
         {
-            email: email,
+            email: "marjory.bravo.dev@gmail.com",
         },
     ];
 
