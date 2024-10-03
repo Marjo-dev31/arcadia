@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from "@angular/common";
+import { AsyncPipe, CommonModule, DatePipe } from "@angular/common";
 import {
     Component,
     DestroyRef,
@@ -41,7 +41,9 @@ import { LoginService } from "../../../../../shared/services/login.service";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSortModule, AsyncPipe
+        MatSortModule,
+        AsyncPipe,
+        DatePipe,
     ],
     templateUrl: `./employee-animal-report-handled.component.html`,
     styleUrl: `../../component-handled.component.css`,
@@ -52,7 +54,7 @@ export class EmployeeReportHandledComponent implements OnInit {
     private readonly employeeService = inject(EmployeeService);
     private readonly userService = inject(UserService);
     private readonly destroyRef = inject(DestroyRef);
-    private readonly loginService = inject(LoginService)
+    private readonly loginService = inject(LoginService);
 
     displayColums: string[] = ["date", "food", "grammage", "actions"];
 
@@ -68,14 +70,14 @@ export class EmployeeReportHandledComponent implements OnInit {
     employeeReports: EmployeeReport[] = [];
     selectedAnimalOption!: string;
 
-    users$: Observable<User[]> = this.userService.getUsersEmployee()
+    users$: Observable<User[]> = this.userService.getUsersEmployee();
 
     datasource = new MatTableDataSource(this.employeeReports);
 
     addFormIsDisplay = signal(false);
     updateFormIsDisplay = signal(false);
 
-    role = this.loginService.currentUser().role
+    role = this.loginService.currentUser().role;
 
     newReport: EmployeeReportCreate = {
         food: "",
@@ -151,7 +153,7 @@ export class EmployeeReportHandledComponent implements OnInit {
                 takeUntilDestroyed(this.destroyRef)
             )
             .subscribe();
-        this.updateFormIsDisplay.update((value)=> !value);
+        this.updateFormIsDisplay.update((value) => !value);
     }
 
     deleteReport(id: string) {
@@ -167,6 +169,6 @@ export class EmployeeReportHandledComponent implements OnInit {
     }
 
     closeUpdateForm() {
-        this.updateFormIsDisplay.update((value)=> !value);
+        this.updateFormIsDisplay.update((value) => !value);
     }
 }

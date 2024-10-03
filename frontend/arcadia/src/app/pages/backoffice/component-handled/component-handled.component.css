@@ -56,7 +56,7 @@ p {
 
 .mat-icon-cloud {
     display: flex;
-    justify-content: center;
+    margin: auto;
 }
 
 /* style account creation form */

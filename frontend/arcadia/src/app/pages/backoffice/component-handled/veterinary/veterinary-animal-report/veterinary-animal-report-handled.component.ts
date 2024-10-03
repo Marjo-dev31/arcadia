@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import {
     Component,
     DestroyRef,
@@ -42,7 +42,7 @@ import { LoginService } from "../../../../../shared/services/login.service";
         FormsModule,
         MatSortModule,
         MatSort,
-        ReactiveFormsModule,
+        ReactiveFormsModule, DatePipe
     ],
     templateUrl: `./veterinary-animal-report-handled.component.html`,
     styleUrl: `../../component-handled.component.css`,
