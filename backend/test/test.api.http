@@ -239,13 +239,13 @@ get http://localhost:8000/roles
 
 post http://localhost:8000/users
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VwYXNib3ZlQGFyY2FkaWEuY29tIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNzIyNTA1OTQ5LCJleHAiOjE3MjI1MTY3NDl9.rPqPsD4Wjc0szZAAz1DuV7qEubzMEPB0GXqOBR0vHi8
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VwYXNib3ZlQGFyY2FkaWEuY29tIiwibmFtZSI6IkFkbWluIiwiaWF0IjoxNzI3OTcxNjI3LCJleHAiOjE3Mjc5ODI0Mjd9.OhEMGqJz85f1QoRJJlnpbaMw76OgldtwdoZviw1mYJM
 
 {
     "firstname":"tes",
     "lastname":"test",
-    "email":"marjory.bravo.dev@gmail.com",
-    "password":"veto",
+    "email":"marjory@gmail.com",
+    "password":"Azerty&1",
     "id_role":"4df4dee1-1510-11ef-9b15-0654193ea06b"
 }
 

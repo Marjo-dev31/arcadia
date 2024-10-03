@@ -7,12 +7,13 @@ import {
 } from "../controller/user.controller.js";
 import authenticateToken from "../middleware/auth.js";
 import verifyRoles from "../middleware/verifyroles.js";
+import { checkPassword } from "../util/check-password.js";
 
 const userRoutes = express.Router();
 
 userRoutes
     .route("/")
-    .post(authenticateToken, verifyRoles("Admin"), addUser)
+    .post(authenticateToken, verifyRoles("Admin"), checkPassword, addUser)
     .put(authenticateToken, updatePassword);
 
 userRoutes

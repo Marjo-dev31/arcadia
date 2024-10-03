@@ -104,7 +104,7 @@ export const addUser = (req, res) => {
                                 );
                             } else {
                                 const user = { ...req.body };
-                                sendEmailToNewUser();
+                                sendEmailToNewUser(user);
                                 res.status(httpStatus.CREATED.code).send(
                                     new Response(
                                         httpStatus.CREATED.code,
