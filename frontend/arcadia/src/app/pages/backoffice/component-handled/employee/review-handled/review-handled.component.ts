@@ -44,12 +44,12 @@ import { LoginService } from "../../../../../shared/services/login.service";
                     <abbr title="Publier"><a  id="a-icon"
                         (click)="publishReview(review.id)"
                         [style]="{ display: review.status ? 'none' : 'block' }"
-                        ><mat-icon>cloud_done </mat-icon></a
+                        ><mat-icon class="mat-icon-cloud">cloud_done </mat-icon></a
                     ></abbr>
                     <abbr title="Refuser"><a  id="a-icon"
                         (click)="unpublishReview(review.id)"
                         [style]="{ display: review.status ? 'block' : 'none' }"
-                        ><mat-icon>cloud_off</mat-icon></a
+                        ><mat-icon class="mat-icon-cloud">cloud_off</mat-icon></a
                     ></abbr>
                 </td>
             </ng-container>
