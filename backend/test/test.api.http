@@ -257,7 +257,7 @@ Content-Type: application/json
 
 {
     "email":"josepasbove@arcadia.com",
-    "password":"Azerty&1"
+    "password":"Passwordtest31!"
 }
 
 ###
@@ -345,5 +345,5 @@ Content-Type: application/json
 
 {
     "email":"marjory.bravo.dev@gmail.com",
-    "password":"Azerty1&"
+    "password":"Passwordtest31!"
 }
