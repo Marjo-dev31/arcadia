@@ -14,17 +14,20 @@ ul {
 }
 
 li {
-    padding: 1rem;
+    padding: 0.5rem;
     list-style: none;
 }
 
 li:hover {
     background-color: var(--color-background);
     border-radius: 0.5rem;
+
 }
 
 a {
     text-shadow: none;
+    display: block;
+    width: 100%;
 }
 
 a:hover {

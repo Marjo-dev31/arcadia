@@ -7,14 +7,14 @@ import {
 } from "../controller/user.controller.js";
 import authenticateToken from "../middleware/auth.js";
 import verifyRoles from "../middleware/verifyroles.js";
-import { sendEmailToNewUser } from "../middleware/send-mail.js";
+import { checkPassword } from "../middleware/check-password.js";
 
 const userRoutes = express.Router();
 
 userRoutes
     .route("/")
-    .post(authenticateToken, verifyRoles("Admin"), sendEmailToNewUser, addUser)
-    .put(authenticateToken, updatePassword);
+    .post(authenticateToken, verifyRoles("Admin"), checkPassword, addUser)
+    .put(authenticateToken, checkPassword, updatePassword);
 
 userRoutes
 .route("/veterinary")

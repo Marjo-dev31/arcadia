@@ -62,12 +62,3 @@ export const updateOpening = async (req, res) => {
         );
     }
 };
-
-// export const getOne = async (req, res) => {
-//     try {
-//         const opening = await openingModel.findById(req.params.id)
-//         res.send(opening)
-//     } catch (error) {
-//         res.status(500).send({error})
-//     }
-// }

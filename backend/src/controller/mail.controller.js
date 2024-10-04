@@ -62,9 +62,9 @@ export const sendEmailToNewPassword = (req, res) => {
                 const user = results[0];
                 const accessToken = generatedAccessToken(user.email, user.name);
 
-                const email = req.body.email;
+                // const email = req.body.email;
                 const message = `Vous avez demandé un nouveau mot de passe ? Pour changer de mot de passe cliquer sur le lien suivant :
-            http://localhost:4200/changermdp/${accessToken} `;
+            https://d2bod1g79nbot5.cloudfront.net/changermdp/${accessToken} `;
 
                 const TOKEN = "d508c20e9958a513857dcf7d7954bcce";
                 const ENDPOINT = "https://send.api.mailtrap.io/";
@@ -81,7 +81,7 @@ export const sendEmailToNewPassword = (req, res) => {
 
                 const recipients = [
                     {
-                        email: email,
+                        email: "marjory.bravo.dev@gmail.com",
                     },
                 ];
 

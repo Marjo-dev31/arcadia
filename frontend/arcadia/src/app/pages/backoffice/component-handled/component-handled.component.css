@@ -54,6 +54,11 @@ p {
     padding: 0;
 }
 
+.mat-icon-cloud {
+    display: flex;
+    margin: auto;
+}
+
 /* style account creation form */
 
 .account-creation-form {

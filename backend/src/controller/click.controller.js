@@ -3,36 +3,6 @@ import logger from "../util/logger.js";
 import httpStatus from "../domain/httpstatus.js";
 import animalModel from "../models/animals.js";
 
-// export const getAnimalByFirstname = async (req, res) => {
-//   logger.info(`${req.method} ${req.originalUrl}, fetching animal`);
-//   try {
-//     const animal = await animalModel.findOne({
-//       firstname: req.params.firstname,
-//     });
-//     res
-//         .status(httpStatus.OK.code)
-//         .send(
-//             new Response(
-//                 httpStatus.OK.code,
-//                 httpStatus.OK.status,
-//                 `Animal retrieved`,
-//                 { animal: animal}
-//             )
-//         );
-//   } catch (error) {
-//     logger.error(error.message);
-//         res
-//           .status(httpStatus.INTERNAL_SERVER_ERROR.code)
-//           .send(
-//             new Response(
-//               httpStatus.INTERNAL_SERVER_ERROR.code,
-//               httpStatus.INTERNAL_SERVER_ERROR.status,
-//               `Error occured`
-//             )
-//           );
-//   }
-// };
-
 export const addCount = async (req, res) => {
     const firstname = req.params.firstname
     const query =  { firstname: { $eq: firstname} }

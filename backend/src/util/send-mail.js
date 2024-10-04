@@ -1,8 +1,8 @@
 import { MailtrapClient } from "mailtrap";
 
-export const sendEmailToNewUser = (req, res, next) => {
-    const email = req.body.email;
-    const message = `${req.body.firstname}, votre compte a été crée. Pour connaître votre mot de passe, veuillez vous rapprocher de José. Pour connaître notre politique de confidentialité rendez-vous sur notre site internet /politiquedeconfidentialite`;
+export const sendEmailToNewUser = (user) => {
+    // const email = req.body.email;
+    const message = `${user.firstname}, votre compte a été crée. Pour connaître votre mot de passe, veuillez vous rapprocher de José. Pour connaître notre politique de confidentialité rendez-vous sur notre site internet /politiquedeconfidentialite`;
 
     const TOKEN = "d508c20e9958a513857dcf7d7954bcce";
     const ENDPOINT = "https://send.api.mailtrap.io/";
@@ -15,7 +15,7 @@ export const sendEmailToNewUser = (req, res, next) => {
     };
     const recipients = [
         {
-            email: email,
+            email: "marjory.bravo.dev@gmail.com",
         },
     ];
 
@@ -27,6 +27,4 @@ export const sendEmailToNewUser = (req, res, next) => {
             text: message,
         })
         .then(console.log, console.error);
-
-    next();
 };

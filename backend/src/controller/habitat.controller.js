@@ -28,34 +28,6 @@ export const getHabitats = (req, res) => {
     });
 };
 
-// export const getHabitat = (req, res) => {
-//     logger.info(`${req.method} ${req.originalUrl}, fetching habitat`);
-//     database.query(QUERYHABITATS.SELECT_HABITAT, [req.params.id], (error, results) => {
-//       if (!results[0]) {
-//         res
-//           .status(httpStatus.NOT_FOUND.code)
-//           .send(
-//             new Response(
-//               httpStatus.NOT_FOUND.code,
-//               httpStatus.NOT_FOUND.status,
-//               `Habitat by id ${req.params.id} was not found !`
-//             )
-//           );
-//       } else {
-//         res
-//           .status(httpStatus.OK.code)
-//           .send(
-//             new Response(
-//               httpStatus.OK.code,
-//               httpStatus.OK.status,
-//               `Habitat retrieved`,
-//               results[0]
-//             )
-//           );
-//       }
-//     });
-// };
-
 export const addHabitat = (req, res) => {
     logger.info(`${req.method} ${req.originalUrl}, creating habitat`);
     database.query(

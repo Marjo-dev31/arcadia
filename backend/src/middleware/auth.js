@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken";
 import httpStatus from "../domain/httpstatus.js";
 import Response from "../domain/response.js";
+import secrets from "../util/secretmanager.js";
+
+const secretsValues = await secrets();
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
@@ -14,8 +17,9 @@ const authenticateToken = (req, res, next) => {
                 `Access denied! No token`
             )
         );
+        return;
     }
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, response) => {
+    jwt.verify(token, secretsValues.ACCESS_TOKEN_SECRET, (err, response) => {
         if (err) {
             res.status(httpStatus.BAD_REQUEST.code).send(
                 new Response(
@@ -26,7 +30,6 @@ const authenticateToken = (req, res, next) => {
             );
             return;
         }
-
         const role = response.name;
         req["role"] = role;
         next();

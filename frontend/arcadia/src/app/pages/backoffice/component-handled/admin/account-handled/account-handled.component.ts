@@ -82,14 +82,14 @@ import { Observable } from "rxjs";
                     [(ngModel)]="newUser.password"
                     #password="ngModel"
                     required
-                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$"
                 />
                 @if(password.invalid && (password.dirty || password.touched)){
                 @if(password.errors?.['required']){
                 <p class="alert">Un mot de passe est requis</p>
                 } @if(password.errors?.['pattern']){
                 <p class="alert">
-                    Le mot de passe doit contenir au moins 8 caractères dont une
+                    Le mot de passe doit contenir au moins 12 caractères dont une
                     majuscule, une minuscule, un chiffre et un caractère spécial
                 </p>
                 } }
@@ -102,8 +102,8 @@ import { Observable } from "rxjs";
                     id="confirm-password-addaccount-form"
                     ngModel
                     #confirmPassword="ngModel"
-                    required
-                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{12,}$"
+                    
                 />
                 @if(confirmPassword.touched){
                 @if(confirmPassword.errors?.['required']){
